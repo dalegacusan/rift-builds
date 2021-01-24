@@ -1,8 +1,14 @@
 const Build = require('../models/Build');
 
 const getAllBuilds = async (req, res, next) => {
+	const { page } = req.body;
+	console.log(page);
+
 	try {
-		const allBuilds = await Build.find({});
+
+		const allBuilds = await Build.find().skip(page - 5).limit(page > 5 ? page - 5 : page);
+
+		console.log(allBuilds.length);
 
 		res.status(200).json(allBuilds);
 	} catch (err) {
@@ -32,8 +38,6 @@ const getBuild = async (req, res, next) => {
 
 const saveBuild = (req, res, next) => {
 	const { username, champion, items } = req.body;
-
-	console.log(req.body);
 
 	// ===== Test for Duplicates ===== // 
 	// const duplicatedItems = [
@@ -70,32 +74,28 @@ const saveBuild = (req, res, next) => {
 	});
 
 	if (!isDuplicate) {
-		console.log('no duplicates');
+		console.log('No duplicates found');
 
-		console.log('Successful call to the backend');
+		const newBuild = new Build(req.body);
 
-		res.status(200).json({ message: 'Testing' });
+		newBuild.save()
+			.then((data) => {
+				const { username } = data;
+				console.log(`Successfully saved ${username} to the database.`);
 
-		// const newBuild = new Build(req.body);
+				res.status(200).json({
+					message: `Successfully saved ${username} to the database.`,
+				});
+			})
+			.catch((err) => {
+				console.log('Error: ', err);
 
-		// newBuild.save()
-		// 	.then((data) => {
-		// 		const { username } = data;
-		// 		console.log(`Successfully saved ${username} to the database.`);
+				res.status(400).json({
+					message: 'Failed to save build to the database.',
+				});
 
-		// 		res.status(200).json({
-		// 			message: `Successfully saved ${username} to the database.`,
-		// 		});
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log('Error: ', err);
-
-		// 		res.status(400).json({
-		// 			message: 'Failed to save build to the database.',
-		// 		});
-
-		// 		next(err);
-		// 	});
+				next(err);
+			});
 
 	} else {
 		console.log('duplicates');

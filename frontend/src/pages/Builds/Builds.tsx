@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 // MaterialUI
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface ItemInterface {
 	id: string;
 	itemName: string;
 	reason?: string;
+	type: string;
 	url: string;
 }
 
@@ -20,34 +23,61 @@ interface ChampionInterface {
 	url: string;
 }
 
+interface BuildInterface {
+	id: string;
+	username: string;
+	champion: ChampionInterface;
+	items: ItemInterface[];
+}
+
 // https://flaviocopes.com/typescript-object-destructuring/
+let page = 5;
 
 export default function Builds() {
-	const [builds, setBuilds] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [builds, setBuilds] = useState<Array<BuildInterface>>([]);
 
 	useEffect(() => {
-		axios.get('/api/build/all').then((res) => {
-			const { data } = res;
+		axios
+			.post('/api/build/all', {
+				page,
+			})
+			.then((res) => {
+				const { data } = res;
 
-			setBuilds(data.slice(0, 3));
-		});
+				setBuilds((prev: BuildInterface[]) => [...prev, ...data]);
+			});
 	}, []);
+
+	const getMoreBuilds = async () => {
+		page += 5;
+		const getBuilds = await axios
+			.post('/api/build/all', {
+				page,
+			})
+			.then((res) => {
+				const { data } = res;
+
+				setBuilds((prev: BuildInterface[]) => [...prev, ...data]);
+			});
+	};
 
 	return (
 		<>
-			{builds
-				? builds.map((build) => {
+			<InfiniteScroll
+				dataLength={builds.length}
+				next={getMoreBuilds}
+				hasMore={true}
+				loader={<h4>Loading...</h4>}
+			>
+				{builds.length !== 0 &&
+					builds.map((build) => {
 						const {
 							id: buildId,
 							username,
 							items,
 							champion,
-						}: {
-							id: string;
-							username: string;
-							items: ItemInterface[];
-							champion: ChampionInterface;
-						} = build;
+						}: BuildInterface = build;
 						const { id: championId, championName, url } = champion;
 
 						return (
@@ -76,9 +106,8 @@ export default function Builds() {
 								</CardContent>
 							</Card>
 						);
-				  })
-				: null}
-			<p>Builds</p>
+					})}
+			</InfiniteScroll>
 		</>
 	);
 }

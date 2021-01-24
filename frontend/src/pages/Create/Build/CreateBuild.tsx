@@ -92,6 +92,16 @@ export default function Landing() {
 
 	const classes = useStyles();
 
+	// Error Notifications
+	const errorNoUsername = () => toast.error('Please enter your username');
+	const errorNoItemsSelected = () =>
+		toast.error('Please add items to your build');
+	const errorItemDuplicate = () =>
+		toast.error('That item is already in your build!');
+	const errorBuildSaved = () => toast.error('Failed to save your build.');
+	const successBuildSaved = () =>
+		toast.success('Successfully saved your build!');
+
 	useEffect(() => {
 		const getChampions = axios.get('/api/champion/all');
 		const getItems = axios.get('/api/item/all');
@@ -144,14 +154,9 @@ export default function Landing() {
 
 		if (isDuplicate) {
 			setItemsConfirmed(filteredItemsConfirmed);
-			console.log('Duplicate!');
+			errorItemDuplicate();
 		}
 	}, [itemsConfirmed]);
-
-	// Error Notifications
-	const errorNoUsername = () => toast.error('Please enter your username');
-	const errorNoItemsSelected = () =>
-		toast.error('Please add items to your build');
 
 	const handleChampSelectChange = (e: any) => {
 		const getChampion = champions.find(
@@ -214,10 +219,11 @@ export default function Landing() {
 			const saveToDatabase = await axios
 				.post('/api/build/save', buildObject)
 				.then((res) => {
+					successBuildSaved();
 					setBuild(buildObject);
 				})
 				.catch((err) => {
-					console.log(err);
+					errorBuildSaved();
 				});
 		} else {
 			if (itemsConfirmed.length === 0) {
@@ -431,14 +437,14 @@ export default function Landing() {
 										value='primary'
 										control={<Radio color='primary' />}
 										label='Primary'
-										labelPlacement='start'
+										labelPlacement='end'
 										style={{ margin: '0' }}
 									/>
 									<FormControlLabel
 										value='optional'
 										control={<Radio color='primary' />}
 										label='Optional'
-										labelPlacement='start'
+										labelPlacement='end'
 										style={{ margin: '0' }}
 									/>
 								</RadioGroup>
