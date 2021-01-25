@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 // MaterialUI
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -41,6 +42,7 @@ interface RankInterface {
 }
 
 interface BuildInterface {
+	dateSubmitted: string;
 	username: string;
 	champion: ChampionInterface;
 	items: ItemInterface[];
@@ -96,7 +98,7 @@ export default withRouter((props) => {
 								</Typography>
 								<Typography variant='body1'>
 									<span style={{ color: '#949494' }}>by</span>{' '}
-									<span>{build.username}</span>
+									<span style={{ color: '#e9eaec' }}>{build.username}</span>
 								</Typography>
 							</Box>
 							<Box style={{ marginTop: '10px' }}>
@@ -158,6 +160,8 @@ export default withRouter((props) => {
 													<img
 														src={`/images/wildriftitems/${itemId}.png`}
 														style={{ width: '100%' }}
+														title={itemName}
+														alt={itemName}
 													/>
 												</Avatar>
 												{itemName}
@@ -206,6 +210,8 @@ export default withRouter((props) => {
 													<img
 														src={`/images/wildriftitems/${itemId}.png`}
 														style={{ width: '100%' }}
+														title={itemName}
+														alt={itemName}
 													/>
 												</Avatar>
 												{itemName}
@@ -218,6 +224,15 @@ export default withRouter((props) => {
 								})}
 						</Grid>
 					</Grid>
+					<Box display='flex' flexDirection='row-reverse' p={1} m={1}>
+						<Box p={1}>
+							<Typography variant='body2' style={{ color: '#B78F41' }}>
+								{build.dateSubmitted
+									? moment(build.dateSubmitted).format('dddd, MMMM Do YYYY')
+									: 'Unknown'}
+							</Typography>
+						</Box>
+					</Box>
 				</Box>
 			) : (
 				<CircularProgress />

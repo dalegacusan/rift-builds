@@ -254,7 +254,7 @@ export default function Builds() {
 													</Typography>
 													<Typography variant='body1'>
 														<span style={{ color: '#949494' }}>by</span>{' '}
-														<span>{username}</span>
+														<span style={{ color: '#e9eaec' }}>{username}</span>
 													</Typography>
 												</Box>
 												<Box>

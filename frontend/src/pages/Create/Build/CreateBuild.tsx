@@ -249,6 +249,7 @@ export default function Landing() {
 	const submitBuild = async () => {
 		if (itemsConfirmed.length !== 0 && username) {
 			const buildObject = {
+				dateSubmitted: new Date(),
 				username: username,
 				champion: championSelected,
 				items: itemsConfirmed,
@@ -666,7 +667,7 @@ export default function Landing() {
 						</Grid>
 					</Grid>
 					{/* Build Box */}
-					<Box>
+					<Box style={{ marginBottom: '40px' }}>
 						<Button variant='contained' color='primary' onClick={submitBuild}>
 							Submit Build
 						</Button>

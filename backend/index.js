@@ -38,6 +38,6 @@ require('./routes')(app);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
-app.listen(config.PORT, () => {
+app.listen(process.env.PORT || config.PORT, () => {
 	logger.info(`Server running on port ${config.PORT}`);
 });
