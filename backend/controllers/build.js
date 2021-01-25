@@ -7,6 +7,8 @@ const getAllBuilds = async (req, res, next) => {
 
 		const allBuilds = await Build.find().skip(page - 5).limit(5);
 
+		console.log("Response Length:", allBuilds.length);
+
 		res.status(200).json(allBuilds);
 	} catch (err) {
 		res.status(400).json({
@@ -109,6 +111,8 @@ const getBuildForHero = async (req, res, next) => {
 
 		const allBuilds = await Build.find({ 'champion.id': heroId }).skip(page - 5).limit(5);
 
+		console.log("Response Length:", allBuilds.length);
+
 		res.status(200).json(allBuilds);
 	} catch (err) {
 		res.status(400).json({
@@ -117,7 +121,6 @@ const getBuildForHero = async (req, res, next) => {
 
 		next(err);
 	}
-
 
 }
 
