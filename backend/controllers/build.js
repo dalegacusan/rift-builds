@@ -23,7 +23,7 @@ const getBuild = async (req, res, next) => {
 	const { buildId } = req.params;
 
 	try {
-		const oneBuild = await Farmer.findById(buildId);
+		const oneBuild = await Build.findById(buildId);
 
 		res.status(200).json(oneBuild);
 	} catch (err) {

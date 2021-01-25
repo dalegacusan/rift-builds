@@ -10,7 +10,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Grow from '@material-ui/core/Grow';
@@ -351,6 +350,7 @@ export default function Landing() {
 
 	return (
 		<>
+			<hr />
 			<Toaster />
 			<div className={classes.root}>
 				<Grid container>

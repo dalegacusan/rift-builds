@@ -7,6 +7,7 @@ import Layout from '../../components/Layout';
 import Landing from '../Landing/Landing';
 import Builds from '../Builds/Builds';
 import CreateBuild from '../Create/Build/CreateBuild';
+import SoloBuild from '../SoloBuild/SoloBuild';
 // CSS
 // Types
 
@@ -21,6 +22,8 @@ export default function App() {
 						<Route exact path='/builds' render={() => <Builds />} />
 
 						<Route exact path='/create' render={() => <CreateBuild />} />
+
+						<Route exact path='/build/:buildId' render={() => <SoloBuild />} />
 					</Switch>
 				</Router>
 			</Layout>

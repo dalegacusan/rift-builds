@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 		margin: `${theme.spacing(1)}px auto`,
 		padding: theme.spacing(2),
-		backgroundColor: '#f0f6ff',
+		backgroundColor: '#233248',
+		color: '#ffffff',
 	},
 	large: {
 		width: theme.spacing(7),
@@ -83,7 +84,6 @@ export default function Builds() {
 	const classes = useStyles();
 
 	useEffect(() => {
-		setLoading(true);
 		const getChampions = axios.get('/api/champion/all');
 		const getBuilds = axios.post('/api/build/all', {
 			page,
@@ -108,8 +108,6 @@ export default function Builds() {
 			setChampions(championsArray);
 
 			setBuilds((prev: BuildInterface[]) => [...prev, ...buildsArray]);
-
-			setLoading(false);
 		});
 	}, []);
 
@@ -119,7 +117,7 @@ export default function Builds() {
 	}, [championFilter]);
 
 	const getMoreBuilds = async () => {
-		setLoading(true);
+		console.log(championFilter.id);
 
 		if (championFilter.id === '') {
 			page += 5;
@@ -143,12 +141,9 @@ export default function Builds() {
 
 			setBuilds((prev: BuildInterface[]) => [...prev, ...data]);
 		}
-
-		setLoading(false);
 	};
 
 	const handleChampSelectChange = async (e: any) => {
-		setLoading(true);
 		page = 5;
 
 		const getChampion = champions.find(
@@ -183,12 +178,11 @@ export default function Builds() {
 
 			setBuilds((prev: BuildInterface[]) => [...data]);
 		}
-
-		setLoading(false);
 	};
 
 	return (
 		<>
+			<hr />
 			<Typography>Filter by:</Typography>
 			<FormControl className={classes.formControl}>
 				<InputLabel shrink htmlFor='champion-select'>
@@ -211,140 +205,139 @@ export default function Builds() {
 				<FormHelperText>Select a champion</FormHelperText>
 			</FormControl>
 
-			{loading ? (
+			{builds.length === 0 ? (
 				<Box>
 					<CircularProgress />
 				</Box>
-			) : null}
+			) : (
+				<InfiniteScroll
+					dataLength={builds.length}
+					next={getMoreBuilds}
+					hasMore={true}
+					loader={<h4>Loading...</h4>}
+				>
+					{builds.map((build, index) => {
+						const {
+							id: buildId,
+							username,
+							items,
+							champion,
+							rank,
+						}: BuildInterface = build;
+						const { id: championId, championName, url } = champion;
 
-			{!loading &&
-				(builds.length === 0 ? (
-					<Typography>No records found.</Typography>
-				) : (
-					<InfiniteScroll
-						dataLength={builds.length}
-						next={getMoreBuilds}
-						hasMore={true}
-						loader={<h4>Loading...</h4>}
-					>
-						{builds.map((build, index) => {
-							const {
-								id: buildId,
-								username,
-								items,
-								champion,
-								rank,
-							}: BuildInterface = build;
-							const { id: championId, championName, url } = champion;
-
-							return (
-								<div className={classes.root}>
-									<Paper className={classes.paper}>
-										<Grid container wrap='nowrap' spacing={2}>
-											<Grid item>
-												<Avatar className={classes.large}>
-													<img
-														src={`/images/wildriftchampions/${championId}.png`}
-														style={{ width: '100%' }}
-													/>
-												</Avatar>
-											</Grid>
-											<Grid item xs>
-												<Box display='flex'>
-													<Box flexGrow={1}>
-														<Typography variant='body1'>
-															<span
-																style={{
-																	color: '#517ebd',
-																	fontWeight: 'bold',
-																	fontSize: '20px',
-																}}
-															>
-																{championName}
-															</span>
-														</Typography>
-														<Typography variant='body1'>
-															<span style={{ color: '#949494' }}>by</span>{' '}
-															<span>{username}</span>
-														</Typography>
-													</Box>
-													<Box>
-														<Avatar className={classes.large}>
-															{rank ? (
-																<img
-																	src={`/images/wildriftranks/${rank.id}.png`}
-																	style={{
-																		width: '80%',
-																	}}
-																/>
-															) : (
-																<img
-																	src='/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png'
-																	style={{
-																		width: '80%',
-																	}}
-																/>
-															)}
-														</Avatar>
-													</Box>
-												</Box>
-											</Grid>
+						return (
+							<div className={classes.root}>
+								<Paper className={classes.paper}>
+									<Grid container wrap='nowrap' spacing={2}>
+										<Grid item>
+											<Avatar className={classes.large}>
+												<img
+													src={`/images/wildriftchampions/${championId}.png`}
+													style={{ width: '100%' }}
+												/>
+											</Avatar>
 										</Grid>
-										<Box>
-											<p>Primary</p>
-											{items
-												.filter((item) => item.type !== 'optional')
-												.map((item) => {
-													const { id: itemId } = item;
+										<Grid item xs>
+											<Box display='flex'>
+												<Box flexGrow={1}>
+													<Typography variant='body1'>
+														<span
+															style={{
+																color: '#517ebd',
+																fontWeight: 'bold',
+																fontSize: '20px',
+															}}
+														>
+															{championName}
+														</span>
+													</Typography>
+													<Typography variant='body1'>
+														<span style={{ color: '#949494' }}>by</span>{' '}
+														<span>{username}</span>
+													</Typography>
+												</Box>
+												<Box>
+													<Avatar
+														className={classes.large}
+														style={{ backgroundColor: '#38465a' }}
+													>
+														{rank ? (
+															<img
+																src={`/images/wildriftranks/${rank.id}.png`}
+																style={{
+																	width: '80%',
+																}}
+															/>
+														) : (
+															<img
+																src='/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png'
+																style={{
+																	width: '80%',
+																}}
+															/>
+														)}
+													</Avatar>
+												</Box>
+											</Box>
+										</Grid>
+									</Grid>
+									<Box style={{ marginTop: '30px' }}>
+										{items
+											.filter((item) => item.type !== 'optional')
+											.map((item) => {
+												const { id: itemId } = item;
 
-													return (
-														<>
-															<Box style={{ display: 'inline-block' }}>
-																<img
-																	src={`/images/wildriftitems/${itemId}.png`}
-																	alt={championName}
-																	style={{ width: '50px' }}
-																/>
-															</Box>
-														</>
-													);
-												})}
-										</Box>
-										{/* <Box>
-												<p>Optional</p>
-												{items
-													.filter((item) => item.type !== 'primary')
-													.map((item) => {
-														const { id: itemId } = item;
-					
-														return (
-															<>
-																<Box style={{ display: 'inline-block' }}>
-																	<img
-																		src={`/images/wildriftitems/${itemId}.png`}
-																		alt={championName}
-																		style={{ width: '50px' }}
-																	/>
-																</Box>
-															</>
-														);
-													})}
-											</Box> */}
-										<Box
-											display='flex'
-											flexDirection='row-reverse'
-											style={{ margin: '20px 0 0 0' }}
-										>
+												return (
+													<>
+														<Box style={{ display: 'inline-block' }}>
+															<img
+																src={`/images/wildriftitems/${itemId}.png`}
+																alt={championName}
+																style={{ width: '50px' }}
+															/>
+														</Box>
+													</>
+												);
+											})}
+									</Box>
+									{/* <Box>
+										<p>Optional</p>
+										{items
+											.filter((item) => item.type !== 'primary')
+											.map((item) => {
+												const { id: itemId } = item;
+			
+												return (
+													<>
+														<Box style={{ display: 'inline-block' }}>
+															<img
+																src={`/images/wildriftitems/${itemId}.png`}
+																alt={championName}
+																style={{ width: '50px' }}
+															/>
+														</Box>
+													</>
+												);
+											})}
+									</Box> */}
+									<Box
+										display='flex'
+										flexDirection='row-reverse'
+										style={{ margin: '20px 0 0 0' }}
+									>
+										<a href={`/build/${buildId}`}>
 											<Button variant='contained' color='primary'>
 												Learn more
 											</Button>
-										</Box>
-									</Paper>
-								</div>
-							);
-						})}
-					</InfiniteScroll>
-				))}
+										</a>
+									</Box>
+								</Paper>
+							</div>
+						);
+					})}
+				</InfiniteScroll>
+			)}
 		</>
 	);
 }

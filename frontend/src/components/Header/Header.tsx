@@ -46,7 +46,6 @@ export default function Header() {
 						</Box>
 					</Grid>
 				</Grid>
-				<hr />
 			</header>
 		</>
 	);
