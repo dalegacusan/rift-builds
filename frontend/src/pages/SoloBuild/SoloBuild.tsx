@@ -56,10 +56,14 @@ export default withRouter((props) => {
 	const classes = useStyles();
 
 	useEffect(() => {
-		axios.get(`/api/build/${match.params.buildId}`).then((res) => {
-			const { data } = res;
-			setBuild(data);
-		});
+		axios
+			.get(
+				`https://wildriftbuilds.herokuapp.com/api/build/${match.params.buildId}`
+			)
+			.then((res) => {
+				const { data } = res;
+				setBuild(data);
+			});
 	}, []);
 
 	console.log(build);

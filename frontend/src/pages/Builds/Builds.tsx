@@ -84,10 +84,15 @@ export default function Builds() {
 	const classes = useStyles();
 
 	useEffect(() => {
-		const getChampions = axios.get('/api/champion/all');
-		const getBuilds = axios.post('/api/build/all', {
-			page,
-		});
+		const getChampions = axios.get(
+			'https://wildriftbuilds.herokuapp.com/api/champion/all'
+		);
+		const getBuilds = axios.post(
+			'https://wildriftbuilds.herokuapp.com/api/build/all',
+			{
+				page,
+			}
+		);
 
 		Promise.all([getChampions, getBuilds]).then((values) => {
 			const [{ data: championsArray }, { data: buildsArray }] = values;
@@ -122,9 +127,12 @@ export default function Builds() {
 		if (championFilter.id === '') {
 			page += 5;
 
-			const getBuilds = await axios.post('/api/build/all', {
-				page,
-			});
+			const getBuilds = await axios.post(
+				'https://wildriftbuilds.herokuapp.com/api/build/all',
+				{
+					page,
+				}
+			);
 			const { data } = getBuilds;
 
 			setBuilds((prev: BuildInterface[]) => [...prev, ...data]);
@@ -132,7 +140,9 @@ export default function Builds() {
 			page += 5;
 
 			const getBuildsForHero = await axios.post(
-				`/api/build/all/${championFilter ? championFilter.id : ''}`,
+				`https://wildriftbuilds.herokuapp.com/api/build/all/${
+					championFilter ? championFilter.id : ''
+				}`,
 				{
 					page,
 				}
@@ -158,9 +168,12 @@ export default function Builds() {
 				url: '',
 			});
 
-			const getBuilds = await axios.post(`/api/build/all/`, {
-				page,
-			});
+			const getBuilds = await axios.post(
+				`https://wildriftbuilds.herokuapp.com/api/build/all/`,
+				{
+					page,
+				}
+			);
 			const { data } = getBuilds;
 
 			setBuilds((prev: BuildInterface[]) => [...data]);
@@ -169,7 +182,9 @@ export default function Builds() {
 			setChampionFilter(getChampion);
 
 			const getBuildsForHero = await axios.post(
-				`/api/build/all/${getChampion ? getChampion.id : ''}`,
+				`https://wildriftbuilds.herokuapp.com/api/build/all/${
+					getChampion ? getChampion.id : ''
+				}`,
 				{
 					page,
 				}
@@ -326,7 +341,9 @@ export default function Builds() {
 										flexDirection='row-reverse'
 										style={{ margin: '20px 0 0 0' }}
 									>
-										<a href={`/build/${buildId}`}>
+										<a
+											href={`https://wildriftbuilds.herokuapp.com/build/${buildId}`}
+										>
 											<Button variant='contained' color='primary'>
 												Learn more
 											</Button>

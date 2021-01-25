@@ -121,9 +121,15 @@ export default function Landing() {
 		toast.success('Successfully saved your build!');
 
 	useEffect(() => {
-		const getChampions = axios.get('/api/champion/all');
-		const getItems = axios.get('/api/item/all');
-		const getRanks = axios.get('/api/rank/all');
+		const getChampions = axios.get(
+			'https://wildriftbuilds.herokuapp.com/api/champion/all'
+		);
+		const getItems = axios.get(
+			'https://wildriftbuilds.herokuapp.com/api/item/all'
+		);
+		const getRanks = axios.get(
+			'https://wildriftbuilds.herokuapp.com/api/rank/all'
+		);
 
 		Promise.all([getChampions, getItems, getRanks]).then((values) => {
 			const [
@@ -257,7 +263,10 @@ export default function Landing() {
 			};
 
 			const saveToDatabase = await axios
-				.post('/api/build/save', buildObject)
+				.post(
+					'https://wildriftbuilds.herokuapp.com/api/build/save',
+					buildObject
+				)
 				.then((res) => {
 					successBuildSaved();
 					setBuild(buildObject);
