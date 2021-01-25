@@ -16,6 +16,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface ItemInterface {
 	id: string;
@@ -70,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Builds() {
+	const [loading, setLoading] = useState(true);
 	const [builds, setBuilds] = useState<Array<BuildInterface>>([]);
 	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
 	const [championFilter, setChampionFilter] = useState<ChampionInterface>({
@@ -81,6 +83,7 @@ export default function Builds() {
 	const classes = useStyles();
 
 	useEffect(() => {
+		setLoading(true);
 		const getChampions = axios.get('/api/champion/all');
 		const getBuilds = axios.post('/api/build/all', {
 			page,
@@ -105,6 +108,8 @@ export default function Builds() {
 			setChampions(championsArray);
 
 			setBuilds((prev: BuildInterface[]) => [...prev, ...buildsArray]);
+
+			setLoading(false);
 		});
 	}, []);
 
@@ -114,7 +119,7 @@ export default function Builds() {
 	}, [championFilter]);
 
 	const getMoreBuilds = async () => {
-		console.log(championFilter.id);
+		setLoading(true);
 
 		if (championFilter.id === '') {
 			page += 5;
@@ -138,9 +143,12 @@ export default function Builds() {
 
 			setBuilds((prev: BuildInterface[]) => [...prev, ...data]);
 		}
+
+		setLoading(false);
 	};
 
 	const handleChampSelectChange = async (e: any) => {
+		setLoading(true);
 		page = 5;
 
 		const getChampion = champions.find(
@@ -175,6 +183,8 @@ export default function Builds() {
 
 			setBuilds((prev: BuildInterface[]) => [...data]);
 		}
+
+		setLoading(false);
 	};
 
 	return (
@@ -201,131 +211,140 @@ export default function Builds() {
 				<FormHelperText>Select a champion</FormHelperText>
 			</FormControl>
 
-			<InfiniteScroll
-				dataLength={builds.length}
-				next={getMoreBuilds}
-				hasMore={true}
-				loader={<h4>Loading...</h4>}
-			>
-				{builds.map((build, index) => {
-					const {
-						id: buildId,
-						username,
-						items,
-						champion,
-						rank,
-					}: BuildInterface = build;
-					const { id: championId, championName, url } = champion;
+			{loading ? (
+				<Box>
+					<CircularProgress />
+				</Box>
+			) : null}
 
-					return (
-						<div className={classes.root}>
-							<Paper className={classes.paper}>
-								<Grid container wrap='nowrap' spacing={2}>
-									<Grid item>
-										<Avatar className={classes.large}>
-											<img
-												src={`/images/wildriftchampions/${championId}.png`}
-												style={{ width: '100%' }}
-											/>
-										</Avatar>
-									</Grid>
-									<Grid item xs>
-										<Box display='flex'>
-											<Box flexGrow={1}>
-												<Typography variant='body1'>
-													<span
-														style={{
-															color: '#517ebd',
-															fontWeight: 'bold',
-															fontSize: '20px',
-														}}
-													>
-														{championName}
-													</span>
-												</Typography>
-												<Typography variant='body1'>
-													<span style={{ color: '#949494' }}>by</span>{' '}
-													<span>{username}</span>
-												</Typography>
-											</Box>
-											<Box>
+			{!loading &&
+				(builds.length === 0 ? (
+					<Typography>No records found.</Typography>
+				) : (
+					<InfiniteScroll
+						dataLength={builds.length}
+						next={getMoreBuilds}
+						hasMore={true}
+						loader={<h4>Loading...</h4>}
+					>
+						{builds.map((build, index) => {
+							const {
+								id: buildId,
+								username,
+								items,
+								champion,
+								rank,
+							}: BuildInterface = build;
+							const { id: championId, championName, url } = champion;
+
+							return (
+								<div className={classes.root}>
+									<Paper className={classes.paper}>
+										<Grid container wrap='nowrap' spacing={2}>
+											<Grid item>
 												<Avatar className={classes.large}>
-													{rank ? (
-														<img
-															src={`/images/wildriftranks/${rank.id}.png`}
-															style={{
-																width: '80%',
-															}}
-														/>
-													) : (
-														<img
-															src='/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png'
-															style={{
-																width: '80%',
-															}}
-														/>
-													)}
+													<img
+														src={`/images/wildriftchampions/${championId}.png`}
+														style={{ width: '100%' }}
+													/>
 												</Avatar>
-											</Box>
-										</Box>
-									</Grid>
-								</Grid>
-								<Box>
-									<p>Primary</p>
-									{items
-										.filter((item) => item.type !== 'optional')
-										.map((item) => {
-											const { id: itemId } = item;
-
-											return (
-												<>
-													<Box style={{ display: 'inline-block' }}>
-														<img
-															src={`/images/wildriftitems/${itemId}.png`}
-															alt={championName}
-															style={{ width: '50px' }}
-														/>
+											</Grid>
+											<Grid item xs>
+												<Box display='flex'>
+													<Box flexGrow={1}>
+														<Typography variant='body1'>
+															<span
+																style={{
+																	color: '#517ebd',
+																	fontWeight: 'bold',
+																	fontSize: '20px',
+																}}
+															>
+																{championName}
+															</span>
+														</Typography>
+														<Typography variant='body1'>
+															<span style={{ color: '#949494' }}>by</span>{' '}
+															<span>{username}</span>
+														</Typography>
 													</Box>
-												</>
-											);
-										})}
-								</Box>
-								{/* <Box>
-										<p>Optional</p>
-										{items
-											.filter((item) => item.type !== 'primary')
-											.map((item) => {
-												const { id: itemId } = item;
-			
-												return (
-													<>
-														<Box style={{ display: 'inline-block' }}>
-															<img
-																src={`/images/wildriftitems/${itemId}.png`}
-																alt={championName}
-																style={{ width: '50px' }}
-															/>
-														</Box>
-													</>
-												);
-											})}
-									</Box> */}
-								<Box
-									display='flex'
-									flexDirection='row-reverse'
-									style={{ margin: '20px 0 0 0' }}
-								>
-									<Button variant='contained' color='primary'>
-										Learn more
-									</Button>
-								</Box>
-							</Paper>
-						</div>
-					);
-				})}
-			</InfiniteScroll>
+													<Box>
+														<Avatar className={classes.large}>
+															{rank ? (
+																<img
+																	src={`/images/wildriftranks/${rank.id}.png`}
+																	style={{
+																		width: '80%',
+																	}}
+																/>
+															) : (
+																<img
+																	src='/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png'
+																	style={{
+																		width: '80%',
+																	}}
+																/>
+															)}
+														</Avatar>
+													</Box>
+												</Box>
+											</Grid>
+										</Grid>
+										<Box>
+											<p>Primary</p>
+											{items
+												.filter((item) => item.type !== 'optional')
+												.map((item) => {
+													const { id: itemId } = item;
 
-			{/* <button onClick={getMoreBuilds}>Get more builds</button> */}
+													return (
+														<>
+															<Box style={{ display: 'inline-block' }}>
+																<img
+																	src={`/images/wildriftitems/${itemId}.png`}
+																	alt={championName}
+																	style={{ width: '50px' }}
+																/>
+															</Box>
+														</>
+													);
+												})}
+										</Box>
+										{/* <Box>
+												<p>Optional</p>
+												{items
+													.filter((item) => item.type !== 'primary')
+													.map((item) => {
+														const { id: itemId } = item;
+					
+														return (
+															<>
+																<Box style={{ display: 'inline-block' }}>
+																	<img
+																		src={`/images/wildriftitems/${itemId}.png`}
+																		alt={championName}
+																		style={{ width: '50px' }}
+																	/>
+																</Box>
+															</>
+														);
+													})}
+											</Box> */}
+										<Box
+											display='flex'
+											flexDirection='row-reverse'
+											style={{ margin: '20px 0 0 0' }}
+										>
+											<Button variant='contained' color='primary'>
+												Learn more
+											</Button>
+										</Box>
+									</Paper>
+								</div>
+							);
+						})}
+					</InfiniteScroll>
+				))}
 		</>
 	);
 }
