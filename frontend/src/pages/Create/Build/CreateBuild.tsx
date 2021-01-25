@@ -23,6 +23,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import Typography from '@material-ui/core/Typography';
 // Components
 import Layout from '../../../components/Layout';
 // CSS
@@ -49,15 +50,24 @@ interface ItemInterface {
 	type: string;
 	url: string;
 }
+
+interface RankInterface {
+	id: string;
+	rankName: string;
+	url: string;
+}
+
 interface BuildInterface {
 	username: string;
 	champion: ChampionInterface;
 	items: ItemInterface[];
+	rank: RankInterface;
 }
 
 export default function Landing() {
 	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
 	const [items, setItems] = useState<Array<ItemInterface>>([]);
+	const [ranks, setRanks] = useState<Array<RankInterface>>([]);
 	const [championSelected, setChampionSelected] = useState<ChampionInterface>(
 		// Defaults to Champion: 'Ahri' - which is the first option
 		{
@@ -75,6 +85,15 @@ export default function Landing() {
 			type: 'primary',
 			url:
 				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/abyssalmask_wild_rift.png',
+		}
+	);
+	const [rankSelected, setRankSelected] = useState<RankInterface>(
+		// Defaults to Item: 'Abyssal Mask' which is the first option
+		{
+			id: 'a4938a79-f11f-4ee1-9ec5-7741a12c4ef9',
+			rankName: 'Unranked',
+			url:
+				'https://static.wikia.nocookie.net/leagueoflegends/images/3/38/Season_2019_-_Unranked.png/revision/latest/scale-to-width-down/130?cb=20190908074432',
 		}
 	);
 	const [itemsConfirmed, setItemsConfirmed] = useState<Array<ItemInterface>>(
@@ -105,9 +124,14 @@ export default function Landing() {
 	useEffect(() => {
 		const getChampions = axios.get('/api/champion/all');
 		const getItems = axios.get('/api/item/all');
+		const getRanks = axios.get('/api/rank/all');
 
-		Promise.all([getChampions, getItems]).then((values) => {
-			const [{ data: championsArray }, { data: itemsArray }] = values;
+		Promise.all([getChampions, getItems, getRanks]).then((values) => {
+			const [
+				{ data: championsArray },
+				{ data: itemsArray },
+				{ data: ranksArray },
+			] = values;
 
 			// Sort Champions
 			championsArray.sort(function (
@@ -135,6 +159,8 @@ export default function Landing() {
 				return 0;
 			});
 			setItems(itemsArray);
+
+			setRanks(ranksArray);
 		});
 	}, []);
 
@@ -169,6 +195,19 @@ export default function Landing() {
 			setChampionSelected(getChampion);
 		}
 	};
+
+	const handleRankSelectChange = (e: any) => {
+		const getRank = ranks.find(
+			(rank: RankInterface) => rank.id === e.target.value
+		);
+
+		if (!getRank) {
+			return;
+		} else {
+			setRankSelected(getRank);
+		}
+	};
+
 	const handleItemSelectChange = (e: any) => {
 		const getItem = items.find(
 			(item: ItemInterface) => item.id === e.target.value
@@ -214,6 +253,7 @@ export default function Landing() {
 				username: username,
 				champion: championSelected,
 				items: itemsConfirmed,
+				rank: rankSelected,
 			};
 
 			const saveToDatabase = await axios
@@ -560,32 +600,77 @@ export default function Landing() {
 					</Grid>
 
 					{/* Other */}
-					<Grid item xs={12}>
-						<Box
-							style={{
-								padding: '10px 0',
-								// backgroundColor: 'green',
-							}}
-						>
-							<h3>Player Details</h3>
-							<TextField
-								id='username'
-								label='Username'
-								placeholder='Username'
-								value={username}
-								helperText='Please include your ID (ex: ABC#DEFGH)'
-								variant='outlined'
-								onChange={(e) => setUsername(e.target.value)}
-							/>
-						</Box>
+					<Grid container item xs={12}>
+						<Grid item xs={12} md={6}>
+							<Box
+								style={{
+									padding: '10px 0',
+								}}
+							>
+								<h3>Player Details</h3>
+								<p>Username</p>
+								<TextField
+									id='username'
+									label='Username'
+									placeholder='Username'
+									value={username}
+									helperText='Please include your ID (ex: ABC#DEFGH)'
+									variant='outlined'
+									onChange={(e) => setUsername(e.target.value)}
+								/>
+							</Box>
+						</Grid>
+						<Grid item xs={12} md={6}>
+							<Box
+								style={{
+									padding: '10px 0',
+								}}
+							>
+								<div>
+									<p>Rank</p>
+									{/* Display Champion Image */}
+									{rankSelected ? (
+										<img
+											src={`/images/wildriftranks/${rankSelected.id}.png`}
+											style={{ width: '100px' }}
+										/>
+									) : (
+										<img
+											src={`/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png`}
+										/>
+									)}
 
-						{/* Build Box */}
-						<Box>
-							<Button variant='contained' color='primary' onClick={submitBuild}>
-								Submit Build
-							</Button>
-						</Box>
+									{
+										<FormControl className={classes.formControl}>
+											<InputLabel shrink htmlFor='rank-select'>
+												Rank
+											</InputLabel>
+											<NativeSelect
+												onChange={handleRankSelectChange}
+												inputProps={{
+													name: 'rank',
+													id: 'rank-select',
+												}}
+											>
+												{ranks.map(
+													({ id, rankName, url }: RankInterface, index) => {
+														return <option value={id}>{rankName}</option>;
+													}
+												)}
+											</NativeSelect>
+											<FormHelperText>Select your rank</FormHelperText>
+										</FormControl>
+									}
+								</div>
+							</Box>
+						</Grid>
 					</Grid>
+					{/* Build Box */}
+					<Box>
+						<Button variant='contained' color='primary' onClick={submitBuild}>
+							Submit Build
+						</Button>
+					</Box>
 				</Grid>
 			</div>
 		</>

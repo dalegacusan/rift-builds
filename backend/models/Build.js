@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 
 const buildSchema = new mongoose.Schema({
 	username: String,
+	rank: Object,
 	champion: {
 		id: String,
 		championName: String,
 		url: String,
 	},
-	items: { type: Array, default: [] }
+	items: { type: Array, default: [] },
 });
 
 // buildSchema.plugin(uniqueValidator);

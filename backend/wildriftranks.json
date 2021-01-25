@@ -1,0 +1,62 @@
+[
+	{
+		"id": "a4938a79-f11f-4ee1-9ec5-7741a12c4ef9",
+		"rankName": "Unranked",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/3/38/Season_2019_-_Unranked.png/revision/latest/scale-to-width-down/130?cb=20190908074432"
+	},
+	{
+		"id": "bda1d510-08b1-4b48-a443-6d6599436856",
+		"rankName": "Provisional",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/5/5e/Season_2019_-_Provisional.png/revision/latest/scale-to-width-down/130?cb=20190908074433"
+	},
+	{
+		"id": "910e7a1c-e761-4e0b-8dd7-8da93ffa91a5",
+		"rankName": "Iron",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/0/03/Season_2019_-_Iron_1.png/revision/latest/scale-to-width-down/130?cb=20181229234926"
+	},
+	{
+		"id": "df893524-a51c-41ec-9c81-8f13147cd0f4",
+		"rankName": "Bronze",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/f/f4/Season_2019_-_Bronze_1.png/revision/latest/scale-to-width-down/130?cb=20181229234910"
+	},
+	{
+		"id": "80103cb0-4372-4198-b9c8-bc8023f74206",
+		"rankName": "Silver",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/7/70/Season_2019_-_Silver_1.png/revision/latest/scale-to-width-down/130?cb=20181229234936"
+	},
+	{
+		"id": "4c1c79ae-25f9-43ee-9786-7e3dc88922f8",
+		"rankName": "Gold",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/9/96/Season_2019_-_Gold_1.png/revision/latest/scale-to-width-down/130?cb=20181229234920"
+	},
+	{
+		"id": "21effcae-a056-45b1-aac0-38b8960fd301",
+		"rankName": "Platinum",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/7/74/Season_2019_-_Platinum_1.png/revision/latest/scale-to-width-down/130?cb=20181229234932"
+	},
+	{
+		"id": "c239417a-bd3a-4e13-963e-dcff2fa53b27",
+		"rankName": "Emerald",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/5/53/Wild_Rift_Emerald_rank.png/revision/latest/scale-to-width-down/130?cb=20200922063030"
+	},
+	{
+		"id": "5de35075-6090-4f95-91f6-8dd43d847fae",
+		"rankName": "Diamond",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/9/91/Season_2019_-_Diamond_1.png/revision/latest/scale-to-width-down/130?cb=20181229234917"
+	},
+	{
+		"id": "096d0a8c-9d27-400f-8aee-1a5570fe591b",
+		"rankName": "Master",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/1/11/Season_2019_-_Master_1.png/revision/latest/scale-to-width-down/130?cb=20181229234929"
+	},
+	{
+		"id": "891ded87-67bc-4ff4-a4fc-1c8446e039e1",
+		"rankName": "Grandmaster",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/7/76/Season_2019_-_Grandmaster_1.png/revision/latest/scale-to-width-down/130?cb=20181229234923"
+	},
+	{
+		"id": "0e62f6a2-1473-4885-a09f-ca0a59be0c8a",
+		"rankName": "Challenger",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/5/5f/Season_2019_-_Challenger_1.png/revision/latest/scale-to-width-down/130?cb=20181229234913"
+	}
+]

@@ -2,13 +2,10 @@ const Build = require('../models/Build');
 
 const getAllBuilds = async (req, res, next) => {
 	const { page } = req.body;
-	console.log(page);
 
 	try {
 
-		const allBuilds = await Build.find().skip(page - 5).limit(page > 5 ? page - 5 : page);
-
-		console.log(allBuilds.length);
+		const allBuilds = await Build.find().skip(page - 5).limit(5);
 
 		res.status(200).json(allBuilds);
 	} catch (err) {
@@ -37,7 +34,7 @@ const getBuild = async (req, res, next) => {
 };
 
 const saveBuild = (req, res, next) => {
-	const { username, champion, items } = req.body;
+	const { username, champion, items, rank } = req.body;
 
 	// ===== Test for Duplicates ===== // 
 	// const duplicatedItems = [
@@ -104,8 +101,29 @@ const saveBuild = (req, res, next) => {
 
 }
 
+const getBuildForHero = async (req, res, next) => {
+	const { page } = req.body;
+	const { heroId } = req.params;
+
+	try {
+
+		const allBuilds = await Build.find({ 'champion.id': heroId }).skip(page - 5).limit(5);
+
+		res.status(200).json(allBuilds);
+	} catch (err) {
+		res.status(400).json({
+			message: 'Failed to retrieve all builds.',
+		});
+
+		next(err);
+	}
+
+
+}
+
 module.exports = {
 	getAllBuilds,
 	getBuild,
-	saveBuild
+	saveBuild,
+	getBuildForHero
 }
