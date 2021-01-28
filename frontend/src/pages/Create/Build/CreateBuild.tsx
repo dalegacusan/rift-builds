@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Toaster } from 'react-hot-toast';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Redirect } from 'react-router-dom';
 
-// Alerts (react-hot-toast)
-import toast, { Toaster } from 'react-hot-toast';
+import {
+	errorNoUsername,
+	errorNoItemSelected,
+	errorItemDuplicate,
+	errorBuildSaved,
+	successBuildSaved,
+} from '../../../utils/errorPopups';
+
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -57,16 +66,70 @@ interface RankInterface {
 }
 
 interface BuildInterface {
+	id?: string;
 	username: string;
 	champion: ChampionInterface;
 	items: ItemInterface[];
 	rank: RankInterface;
+	runes: {
+		keystone: RuneInterface;
+		domination: RuneInterface;
+		resolve: RuneInterface;
+		inspiration: RuneInterface;
+	};
+}
+
+interface RuneInterface {
+	id: string;
+	runeName: string;
+	url: string;
+	type: string;
+	path?: string;
 }
 
 export default function Landing() {
+	const [hasSubmittedBuild, setHasSubmittedBuild] = useState(false);
+	const [username, setUsername] = useState('');
 	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
 	const [items, setItems] = useState<Array<ItemInterface>>([]);
 	const [ranks, setRanks] = useState<Array<RankInterface>>([]);
+	const [runes, setRunes] = useState<Array<RuneInterface>>([]);
+	const [runeKeystone, setRuneKeystone] = useState<RuneInterface>({
+		id: 'feadf691-c740-4e7d-a4e8-9c705a48ea6a',
+		runeName: 'Aery',
+		url:
+			'https://static.wikia.nocookie.net/leagueoflegends/images/c/ce/Aery_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114442',
+		type: 'keystone',
+	});
+	const [runeDomination, setRuneDomination] = useState<RuneInterface>({
+		id: '7a61f821-168c-4817-bbdd-daf3ce5439dc',
+		runeName: 'Brutal',
+		url:
+			'https://static.wikia.nocookie.net/leagueoflegends/images/c/ca/Brutal_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102514',
+		type: 'secondary',
+		path: 'domination',
+	});
+	const [runeResolve, setRuneResolve] = useState<RuneInterface>({
+		id: 'fc2532cb-e6d9-4577-a567-4f10fff13e0a',
+		runeName: 'Backbone',
+		url:
+			'https://static.wikia.nocookie.net/leagueoflegends/images/b/b2/Backbone_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102418',
+		type: 'secondary',
+		path: 'resolve',
+	});
+	const [runeInspiration, setRuneInspiration] = useState<RuneInterface>({
+		id: '80216900-b198-4195-ab1c-e6e309c28ff3',
+		runeName: 'Hunter - Genius',
+		url:
+			'https://static.wikia.nocookie.net/leagueoflegends/images/e/e7/Hunter_-_Genius_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102756',
+		type: 'secondary',
+		path: 'inspiration',
+	});
+
+	const [build, setBuild] = useState<BuildInterface>();
+
+	const [openItemDialog, setOpenItemDialog] = useState(false);
+
 	const [championSelected, setChampionSelected] = useState<ChampionInterface>(
 		// Defaults to Champion: 'Ahri' - which is the first option
 		{
@@ -98,8 +161,6 @@ export default function Landing() {
 	const [itemsConfirmed, setItemsConfirmed] = useState<Array<ItemInterface>>(
 		[]
 	);
-	const [build, setBuild] = useState<BuildInterface>();
-	const [username, setUsername] = useState('');
 	const [dialogItem, setDialogItem] = useState<ItemInterface>({
 		id: '',
 		itemName: '',
@@ -109,16 +170,6 @@ export default function Landing() {
 	const [itemType, setItemType] = useState('primary');
 
 	const classes = useStyles();
-
-	// Error Notifications
-	const errorNoUsername = () => toast.error('Please enter your username');
-	const errorNoItemsSelected = () =>
-		toast.error('Please add items to your build');
-	const errorItemDuplicate = () =>
-		toast.error('That item is already in your build!');
-	const errorBuildSaved = () => toast.error('Failed to save your build.');
-	const successBuildSaved = () =>
-		toast.success('Successfully saved your build!');
 
 	useEffect(() => {
 		const getChampions = axios.get(
@@ -130,12 +181,14 @@ export default function Landing() {
 		const getRanks = axios.get(
 			'https://wildriftbuilds.herokuapp.com/api/rank/all'
 		);
+		const getRunes = axios.get('/api/rune/all');
 
-		Promise.all([getChampions, getItems, getRanks]).then((values) => {
+		Promise.all([getChampions, getItems, getRanks, getRunes]).then((values) => {
 			const [
 				{ data: championsArray },
 				{ data: itemsArray },
 				{ data: ranksArray },
+				{ data: runesArray },
 			] = values;
 
 			// Sort Champions
@@ -166,6 +219,18 @@ export default function Landing() {
 			setItems(itemsArray);
 
 			setRanks(ranksArray);
+
+			// Sort Runes
+			runesArray.sort(function (a: RuneInterface, b: RuneInterface) {
+				if (a.runeName < b.runeName) {
+					return -1;
+				}
+				if (a.runeName > b.runeName) {
+					return 1;
+				}
+				return 0;
+			});
+			setRunes(runesArray);
 		});
 	}, []);
 
@@ -225,11 +290,6 @@ export default function Landing() {
 		}
 	};
 
-	const handleAddItemClick = () => {
-		// Pushes item to itemsConfirmed Array
-		setItemsConfirmed([...itemsConfirmed, { ...itemSelected, type: itemType }]);
-	};
-
 	const handleItemReasonChange = (e: any) => {
 		const dialogItemId = dialogItem ? dialogItem.id : null;
 		setItemsConfirmed((prevState) => {
@@ -252,6 +312,38 @@ export default function Landing() {
 		});
 	};
 
+	const handleRuneChange = (e: any, runeType: string, runePath?: string) => {
+		const getRune = runes.find(
+			(rune: RuneInterface) => rune.id === e.target.value
+		);
+
+		if (!getRune) {
+			return;
+		} else {
+			if (runeType === 'keystone') {
+				setRuneKeystone(getRune);
+			}
+			if (runeType === 'secondary') {
+				switch (runePath) {
+					case 'domination':
+						setRuneDomination(getRune);
+						break;
+					case 'resolve':
+						setRuneResolve(getRune);
+						break;
+					case 'inspiration':
+						setRuneInspiration(getRune);
+						break;
+				}
+			}
+		}
+	};
+
+	const handleAddItemClick = () => {
+		// Pushes item to itemsConfirmed Array
+		setItemsConfirmed([...itemsConfirmed, { ...itemSelected, type: itemType }]);
+	};
+
 	const submitBuild = async () => {
 		if (itemsConfirmed.length !== 0 && username) {
 			const buildObject = {
@@ -260,31 +352,45 @@ export default function Landing() {
 				champion: championSelected,
 				items: itemsConfirmed,
 				rank: rankSelected,
+				runes: {
+					keystone: runeKeystone,
+					domination: runeDomination,
+					resolve: runeResolve,
+					inspiration: runeInspiration,
+				},
 			};
 
 			const saveToDatabase = await axios
 				.post(
-					'https://wildriftbuilds.herokuapp.com/api/build/save',
+					// 'https://wildriftbuilds.herokuapp.com/api/build/save',
+					'/api/build/save',
 					buildObject
 				)
 				.then((res) => {
 					successBuildSaved();
-					setBuild(buildObject);
+					setBuild(res.data);
+					setHasSubmittedBuild(true);
 				})
 				.catch((err) => {
-					errorBuildSaved();
+					if (
+						err.response.status === 429 &&
+						err.response.data ===
+							"You're creating too many builds. Please try again after 5 minutes."
+					) {
+						errorBuildSaved(err.response.data);
+					} else {
+						errorBuildSaved('Something went wrong. Failed to save build.');
+					}
 				});
 		} else {
 			if (itemsConfirmed.length === 0) {
-				errorNoItemsSelected();
+				errorNoItemSelected();
 			} else if (!username) {
 				errorNoUsername();
 			}
 			return;
 		}
 	};
-
-	const [openItemDialog, setOpenItemDialog] = useState(false);
 
 	const handleClickOpen = (e: any, item: ItemInterface) => {
 		setDialogItem(item);
@@ -327,11 +433,6 @@ export default function Landing() {
 
 		setOpenItemDialog(false);
 	};
-	let dialogValue = openedDialogItem
-		? openedDialogItem.reason
-			? openedDialogItem.reason
-			: ''
-		: '';
 
 	const handleClear = () => {
 		setItemsConfirmed((prevState) => {
@@ -357,6 +458,18 @@ export default function Landing() {
 	const handleItemTypeChange = (e: any) => {
 		setItemType(e.target.value);
 	};
+
+	let dialogValue = openedDialogItem
+		? openedDialogItem.reason
+			? openedDialogItem.reason
+			: ''
+		: '';
+
+	if (hasSubmittedBuild) {
+		if (build) {
+			return <Redirect to={`/build/${build.id}`} />;
+		}
+	}
 
 	return (
 		<>
@@ -403,12 +516,12 @@ export default function Landing() {
 							<p>Select Champion</p>
 							{/* Display Champion Image */}
 							{championSelected ? (
-								<img
+								<LazyLoadImage
 									src={`/images/wildriftchampions/${championSelected.id}.png`}
 									style={{ width: '100px' }}
 								/>
 							) : (
-								<img
+								<LazyLoadImage
 									src={`/images/wildriftchampions/48ca031a-d92e-44e6-b7b6-f3eb1dbe644c.png`}
 								/>
 							)}
@@ -439,13 +552,15 @@ export default function Landing() {
 
 					{/* Select Item */}
 					<Grid item xs={6}>
-						<div>
+						<Box>
 							<p>Select Item</p>
 
 							{itemSelected ? (
-								<img src={`/images/wildriftitems/${itemSelected.id}.png`} />
+								<LazyLoadImage
+									src={`/images/wildriftitems/${itemSelected.id}.png`}
+								/>
 							) : (
-								<img
+								<LazyLoadImage
 									src={`/images/wildriftitems/a42bcabd-290c-47f2-ae68-258d412c6d8d.png`}
 								/>
 							)}
@@ -509,7 +624,176 @@ export default function Landing() {
 							>
 								Add Item
 							</Button>
-						</div>
+						</Box>
+					</Grid>
+
+					<Typography>Select Rune</Typography>
+					{/* Select Rune */}
+					<Grid container item xs={12}>
+						{/* KEYSTONE Rune */}
+						<Grid item xs={12} sm={3}>
+							{runeKeystone ? (
+								<LazyLoadImage
+									src={`/images/wildriftrunes/${runeKeystone.id}.png`}
+									style={{ width: '95px' }}
+								/>
+							) : (
+								<LazyLoadImage
+									src={`/images/wildriftrunes/feadf691-c740-4e7d-a4e8-9c705a48ea6a.png`}
+									style={{ width: '95px' }}
+								/>
+							)}
+
+							{
+								<FormControl className={classes.formControl}>
+									<InputLabel shrink htmlFor='rune-select'>
+										Keystone
+									</InputLabel>
+									<NativeSelect
+										onChange={(e) => handleRuneChange(e, 'keystone')}
+										inputProps={{
+											name: 'rune',
+											id: 'rune-select',
+										}}
+									>
+										{runes
+											.filter((rune) => rune.type === 'keystone')
+											.map(({ id, runeName, url }: RuneInterface, index) => {
+												return <option value={id}>{runeName}</option>;
+											})}
+									</NativeSelect>
+									<FormHelperText>Select a Keystone Rune</FormHelperText>
+								</FormControl>
+							}
+						</Grid>
+
+						{/* Secondary: Domination */}
+						<Grid item xs={12} sm={3}>
+							{runeDomination ? (
+								<LazyLoadImage
+									src={`/images/wildriftrunes/${runeDomination.id}.png`}
+									style={{ width: '95px' }}
+								/>
+							) : (
+								<LazyLoadImage
+									src={`/images/wildriftrunes/7a61f821-168c-4817-bbdd-daf3ce5439dc.png`}
+									style={{ width: '95px' }}
+								/>
+							)}
+
+							{
+								<FormControl className={classes.formControl}>
+									<InputLabel shrink htmlFor='rune-select'>
+										Domination (Slot 1)
+									</InputLabel>
+									<NativeSelect
+										onChange={(e) =>
+											handleRuneChange(e, 'secondary', 'domination')
+										}
+										inputProps={{
+											name: 'rune',
+											id: 'rune-select',
+										}}
+									>
+										{runes
+											.filter(
+												(rune) =>
+													rune.type === 'secondary' &&
+													rune.path === 'domination'
+											)
+											.map(({ id, runeName, url }: RuneInterface, index) => {
+												return <option value={id}>{runeName}</option>;
+											})}
+									</NativeSelect>
+									<FormHelperText>Select a Domination Rune</FormHelperText>
+								</FormControl>
+							}
+						</Grid>
+
+						{/* Secondary: Resolve */}
+						<Grid item xs={3}>
+							{runeResolve ? (
+								<LazyLoadImage
+									src={`/images/wildriftrunes/${runeResolve.id}.png`}
+									style={{ width: '95px' }}
+								/>
+							) : (
+								<LazyLoadImage
+									src={`/images/wildriftrunes/fc2532cb-e6d9-4577-a567-4f10fff13e0a.png`}
+									style={{ width: '95px' }}
+								/>
+							)}
+
+							{
+								<FormControl className={classes.formControl}>
+									<InputLabel shrink htmlFor='rune-select'>
+										Resolve (Slot 2)
+									</InputLabel>
+									<NativeSelect
+										onChange={(e) =>
+											handleRuneChange(e, 'secondary', 'resolve')
+										}
+										inputProps={{
+											name: 'rune',
+											id: 'rune-select',
+										}}
+									>
+										{runes
+											.filter(
+												(rune) =>
+													rune.type === 'secondary' && rune.path === 'resolve'
+											)
+											.map(({ id, runeName, url }: RuneInterface, index) => {
+												return <option value={id}>{runeName}</option>;
+											})}
+									</NativeSelect>
+									<FormHelperText>Select a Resolve Rune</FormHelperText>
+								</FormControl>
+							}
+						</Grid>
+
+						{/* Secondary: Inspiration */}
+						<Grid item xs={3}>
+							{runeResolve ? (
+								<LazyLoadImage
+									src={`/images/wildriftrunes/${runeInspiration.id}.png`}
+									style={{ width: '95px' }}
+								/>
+							) : (
+								<LazyLoadImage
+									src={`/images/wildriftrunes/80216900-b198-4195-ab1c-e6e309c28ff3.png`}
+									style={{ width: '95px' }}
+								/>
+							)}
+
+							{
+								<FormControl className={classes.formControl}>
+									<InputLabel shrink htmlFor='rune-select'>
+										Inspiration (Slot 3)
+									</InputLabel>
+									<NativeSelect
+										onChange={(e) =>
+											handleRuneChange(e, 'secondary', 'inspiration')
+										}
+										inputProps={{
+											name: 'rune',
+											id: 'rune-select',
+										}}
+									>
+										{runes
+											.filter(
+												(rune) =>
+													rune.type === 'secondary' &&
+													rune.path === 'inspiration'
+											)
+											.map(({ id, runeName, url }: RuneInterface, index) => {
+												return <option value={id}>{runeName}</option>;
+											})}
+									</NativeSelect>
+									<FormHelperText>Select a Inspiration Rune</FormHelperText>
+								</FormControl>
+							}
+						</Grid>
 					</Grid>
 
 					{/* Items List */}
@@ -546,7 +830,7 @@ export default function Landing() {
 																			justifyContent: 'center',
 																		}}
 																	>
-																		<img
+																		<LazyLoadImage
 																			title={currentItem.itemName}
 																			className={styles.itemHover}
 																			src={`/images/wildriftitems/${currentItem.id}.png`}
@@ -582,7 +866,7 @@ export default function Landing() {
 																				justifyContent: 'center',
 																			}}
 																		>
-																			<img
+																			<LazyLoadImage
 																				title={currentItem.itemName}
 																				className={styles.itemHover}
 																				src={`/images/wildriftitems/${currentItem.id}.png`}
@@ -640,12 +924,12 @@ export default function Landing() {
 									<p>Rank</p>
 									{/* Display Champion Image */}
 									{rankSelected ? (
-										<img
+										<LazyLoadImage
 											src={`/images/wildriftranks/${rankSelected.id}.png`}
 											style={{ width: '100px' }}
 										/>
 									) : (
-										<img
+										<LazyLoadImage
 											src={`/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png`}
 										/>
 									)}

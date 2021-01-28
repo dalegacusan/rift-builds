@@ -11,6 +11,7 @@ const buildSchema = new mongoose.Schema({
 		url: String,
 	},
 	items: { type: Array, default: [] },
+	runes: Object
 });
 
 // buildSchema.plugin(uniqueValidator);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -41,12 +42,26 @@ interface RankInterface {
 	url: string;
 }
 
+interface RuneInterface {
+	id: string;
+	runeName: string;
+	url: string;
+	type: string;
+	path?: string;
+}
+
 interface BuildInterface {
 	dateSubmitted: string;
 	username: string;
 	champion: ChampionInterface;
 	items: ItemInterface[];
 	rank: RankInterface;
+	runes: {
+		keystone: RuneInterface;
+		domination: RuneInterface;
+		resolve: RuneInterface;
+		inspiration: RuneInterface;
+	};
 }
 
 export default withRouter((props) => {
@@ -66,8 +81,6 @@ export default withRouter((props) => {
 			});
 	}, []);
 
-	console.log(build);
-
 	return (
 		<div className={classes.root}>
 			<hr />
@@ -81,7 +94,7 @@ export default withRouter((props) => {
 				>
 					<Grid container wrap='nowrap' spacing={2}>
 						<Grid item>
-							<img
+							<LazyLoadImage
 								src={`/images/wildriftchampions/${build.champion.id}.png`}
 								title={build.champion.championName}
 								style={{ width: '80%', float: 'left', marginRight: '20px' }}
@@ -108,7 +121,7 @@ export default withRouter((props) => {
 							<Box style={{ marginTop: '10px' }}>
 								<Avatar variant='square' style={{ backgroundColor: '#38465a' }}>
 									{build.rank ? (
-										<img
+										<LazyLoadImage
 											src={`/images/wildriftranks/${build.rank.id}.png`}
 											style={{
 												width: '80%',
@@ -116,7 +129,7 @@ export default withRouter((props) => {
 											title={build.rank.rankName}
 										/>
 									) : (
-										<img
+										<LazyLoadImage
 											src='/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png'
 											style={{
 												width: '80%',
@@ -161,7 +174,7 @@ export default withRouter((props) => {
 													className={classes.large}
 													style={{ float: 'left', marginRight: '10px' }}
 												>
-													<img
+													<LazyLoadImage
 														src={`/images/wildriftitems/${itemId}.png`}
 														style={{ width: '100%' }}
 														title={itemName}
@@ -211,7 +224,7 @@ export default withRouter((props) => {
 													className={classes.large}
 													style={{ float: 'left', marginRight: '10px' }}
 												>
-													<img
+													<LazyLoadImage
 														src={`/images/wildriftitems/${itemId}.png`}
 														style={{ width: '100%' }}
 														title={itemName}
@@ -228,6 +241,97 @@ export default withRouter((props) => {
 								})}
 						</Grid>
 					</Grid>
+
+					{/* RUNES */}
+					<Box
+						style={{
+							backgroundColor: '#656f7e',
+							color: 'black',
+							margin: '20px 0',
+							padding: '20px',
+						}}
+					>
+						<Typography
+							variant='subtitle1'
+							style={{ fontWeight: 'bolder', color: '#e9eaec' }}
+							gutterBottom
+						>
+							Runes
+						</Typography>
+					</Box>
+					<Grid container spacing={3}>
+						<Grid item xs={12}>
+							{/* KEYSTONE RUNE BOX */}
+							<Box p={1}>
+								<Avatar
+									variant='square'
+									className={classes.large}
+									style={{ marginRight: '10px' }}
+								>
+									<LazyLoadImage
+										src={`/images/wildriftrunes/${build.runes.keystone.id}.png`}
+										style={{ width: '100%' }}
+										title={build.runes.keystone.runeName}
+										alt={build.runes.keystone.runeName}
+									/>
+								</Avatar>
+								{build.runes.keystone.runeName}
+							</Box>
+
+							{/* DOMINATION RUNE BOX */}
+							<Box p={1}>
+								<Avatar
+									variant='square'
+									className={classes.large}
+									style={{ marginRight: '10px' }}
+								>
+									<LazyLoadImage
+										src={`/images/wildriftrunes/${build.runes.domination.id}.png`}
+										style={{ width: '100%' }}
+										title={build.runes.domination.runeName}
+										alt={build.runes.domination.runeName}
+									/>
+								</Avatar>
+								{build.runes.domination.runeName}
+							</Box>
+
+							{/* RESOLVE RUNE BOX */}
+							<Box p={1}>
+								<Avatar
+									variant='square'
+									className={classes.large}
+									style={{ marginRight: '10px' }}
+								>
+									<LazyLoadImage
+										src={`/images/wildriftrunes/${build.runes.resolve.id}.png`}
+										style={{ width: '100%' }}
+										title={build.runes.resolve.runeName}
+										alt={build.runes.resolve.runeName}
+									/>
+								</Avatar>
+								{build.runes.resolve.runeName}
+							</Box>
+
+							{/* INSPIRATION RUNE BOX */}
+							<Box p={1}>
+								<Avatar
+									variant='square'
+									className={classes.large}
+									style={{ marginRight: '10px' }}
+								>
+									<LazyLoadImage
+										src={`/images/wildriftrunes/${build.runes.inspiration.id}.png`}
+										style={{ width: '100%' }}
+										title={build.runes.inspiration.runeName}
+										alt={build.runes.inspiration.runeName}
+									/>
+								</Avatar>
+								{build.runes.inspiration.runeName}
+							</Box>
+						</Grid>
+					</Grid>
+
+					{/* Date/Time Submitted */}
 					<Box display='flex' flexDirection='row-reverse' p={1} m={1}>
 						<Box p={1}>
 							<Typography variant='body2' style={{ color: '#B78F41' }}>

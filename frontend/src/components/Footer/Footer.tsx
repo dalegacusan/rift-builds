@@ -22,9 +22,23 @@ export default function Header() {
 			<hr />
 			<footer className={classes.root}>
 				<Grid container>
-					<Grid item xs={12} md={6}>
-						<Box style={{ padding: '20px' }}>
-							<Typography gutterBottom>
+					<Grid item xs>
+						<Box>
+							<ul style={{ display: 'inline', listStyleType: 'none' }}>
+								<li>
+									<Typography variant='body2' gutterBottom>
+										created by ABC#DEFGH
+									</Typography>
+								</li>
+								<li>
+									<Typography variant='body2' gutterBottom>
+										Report a Bug
+									</Typography>
+								</li>
+							</ul>
+						</Box>
+						<Box>
+							{/* <Typography gutterBottom>
 								<b>FAQ</b>
 							</Typography>
 							<Typography>
@@ -40,13 +54,14 @@ export default function Header() {
 									Wild Rift?
 								</b>
 							</Typography>
-							<Typography>No.</Typography>
-						</Box>
-					</Grid>
-					<Grid item xs={12} md={6}>
-						<Box style={{ padding: '20px' }}>
-							<p>created by ABC#DEFGH</p>
-							<p>Report a Bug</p>
+							<Typography>No.</Typography> */}
+							<Typography variant='body2' gutterBottom>
+								© 2021 WR.CB. WR.CB isn’t endorsed by Riot Games and doesn’t
+								reflect the views or opinions of Riot Games or anyone officially
+								involved in producing or managing League of Legends. League of
+								Legends and Riot Games are trademarks or registered trademarks
+								of Riot Games, Inc. League of Legends © Riot Games, Inc.
+							</Typography>
 						</Box>
 					</Grid>
 				</Grid>

@@ -1,0 +1,176 @@
+[
+	{
+		"id": "171a636f-0a27-44d4-b7cb-252c6202b129",
+		"runeName": "Electrocute",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/2/20/Electrocute_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114559",
+		"type": "keystone"
+	},
+	{
+		"id": "feadf691-c740-4e7d-a4e8-9c705a48ea6a",
+		"runeName": "Aery",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/c/ce/Aery_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114442",
+		"type": "keystone"
+	},
+	{
+		"id": "65dff91e-0e3c-43b4-85ec-58e2335c9db8",
+		"runeName": "Conqueror",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/9/94/Conqueror_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114535",
+		"type": "keystone"
+	},
+	{
+		"id": "39957da0-3486-4081-a0ac-22225e1b9d05",
+		"runeName": "Fleet Footwork",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/3/36/Fleet_Footwork_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114621",
+		"type": "keystone"
+	},
+	{
+		"id": "da9fea50-b32c-4d47-94ab-3d9f25d3fbdc",
+		"runeName": "Grasp of the Undying",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/8/8e/Grasp_of_the_Undying_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114709",
+		"type": "keystone"
+	},
+	{
+		"id": "ad3e45f3-dbb6-45a6-8705-04f9db4cafe6",
+		"runeName": "Aftershock",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/a/aa/Aftershock_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114509",
+		"type": "keystone"
+	},
+	{
+		"id": "40217f50-4c63-43ec-8c85-7c9d213eb471",
+		"runeName": "Font of Life",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/5/52/Font_of_Life_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114646",
+		"type": "keystone"
+	},
+	{
+		"id": "06626adc-9223-4860-9164-c213e1e74a2a",
+		"runeName": "Kleptomancy",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/2/20/Kleptomancy_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114734",
+		"type": "keystone"
+	},
+	{
+		"id": "7a61f821-168c-4817-bbdd-daf3ce5439dc",
+		"runeName": "Brutal",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/c/ca/Brutal_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102514",
+		"type": "secondary",
+		"path": "domination"
+	},
+	{
+		"id": "fa329ee9-b89f-4291-99e2-867aec7e99f4",
+		"runeName": "Gathering Storm",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/2/2c/Gathering_Storm_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102733",
+		"type": "secondary",
+		"path": "domination"
+	},
+	{
+		"id": "d12e5ed2-2a98-4e0e-9115-b06f797b4d7a",
+		"runeName": "Hunter - Vampirism",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/f/f9/Hunter_-_Vampirism_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114033",
+		"type": "secondary",
+		"path": "domination"
+	},
+	{
+		"id": "1f695c34-4882-452e-b01b-8856442c54ec",
+		"runeName": "Triumph",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/5/56/Triumph_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114145",
+		"type": "secondary",
+		"path": "domination"
+	},
+	{
+		"id": "5fb0ae03-ff5e-48ce-85a0-0b3689fa3d0a",
+		"runeName": "Weakness",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/3/30/Weakness_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114049",
+		"type": "secondary",
+		"path": "domination"
+	},
+	{
+		"id": "d4361d7f-d1a4-4304-8837-ea1474315fe8",
+		"runeName": "Champion",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/7/76/Champion_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102535",
+		"type": "secondary",
+		"path": "domination"
+	},
+	{
+		"id": "fc2532cb-e6d9-4577-a567-4f10fff13e0a",
+		"runeName": "Backbone",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/b/b2/Backbone_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102418",
+		"type": "secondary",
+		"path": "resolve"
+	},
+	{
+		"id": "e7e60bb0-419c-4040-bba9-f90bce22f683",
+		"runeName": "Conditioning",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/8/81/Conditioning_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102652",
+		"type": "secondary",
+		"path": "resolve"
+	},
+	{
+		"id": "cf842d9d-6b77-4ead-90af-50466c780c58",
+		"runeName": "Hunter - Titan",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/2/25/Hunter_-_Titan_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102817",
+		"type": "secondary",
+		"path": "resolve"
+	},
+	{
+		"id": "c0d54b93-9b63-4ee4-82c9-4cbbb8b0d2ac",
+		"runeName": "Regeneration",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/8/86/Regeneration_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713103043",
+		"type": "secondary",
+		"path": "resolve"
+	},
+	{
+		"id": "c12b3b63-b588-4a91-8f55-87d9566b5371",
+		"runeName": "Loyalty",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/a/af/Loyalty_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102840",
+		"type": "secondary",
+		"path": "resolve"
+	},
+	{
+		"id": "aa5a9ac2-6ad9-40ab-b2f8-4e085d4731b1",
+		"runeName": "Spirit Walker",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/0/02/Spirit_Walker_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713103108",
+		"type": "secondary",
+		"path": "resolve"
+	},
+	{
+		"id": "f891730a-d80b-4c75-b8a0-98ce060fb0f8",
+		"runeName": "Pathfinder",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/8/87/Pathfinder_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713103015",
+		"type": "secondary",
+		"path": "inspiration"
+	},
+	{
+		"id": "0f2325d7-4907-46bc-bdc0-e46c2af8ac19",
+		"runeName": "Mastermind",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/5/5d/Mastermind_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102925",
+		"type": "secondary",
+		"path": "inspiration"
+	},
+	{
+		"id": "80216900-b198-4195-ab1c-e6e309c28ff3",
+		"runeName": "Hunter - Genius",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/e/e7/Hunter_-_Genius_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102756",
+		"type": "secondary",
+		"path": "inspiration"
+	},
+	{
+		"id": "e6912111-546d-42b1-91f0-6d592dcfce46",
+		"runeName": "Sweet Tooth",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/e/e1/Sweet_Tooth_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713103128",
+		"type": "secondary",
+		"path": "inspiration"
+	},
+	{
+		"id": "5ec26e3b-0a41-4d98-8bcc-4148b069f402",
+		"runeName": "Pack Hunter",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/c/cd/Pack_Hunter_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102951",
+		"type": "secondary",
+		"path": "inspiration"
+	},
+	{
+		"id": "20042a57-b277-4de8-a441-8f301091f0b1",
+		"runeName": "Manaflow Band",
+		"url": "https://static.wikia.nocookie.net/leagueoflegends/images/3/35/Manaflow_Band_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102907",
+		"type": "secondary",
+		"path": "inspiration"
+	}
+]

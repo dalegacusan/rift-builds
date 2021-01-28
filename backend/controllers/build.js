@@ -79,12 +79,7 @@ const saveBuild = (req, res, next) => {
 
 		newBuild.save()
 			.then((data) => {
-				const { username } = data;
-				console.log(`Successfully saved ${username} to the database.`);
-
-				res.status(200).json({
-					message: `Successfully saved ${username} to the database.`,
-				});
+				res.status(200).json(data);
 			})
 			.catch((err) => {
 				console.log('Error: ', err);
@@ -103,7 +98,7 @@ const saveBuild = (req, res, next) => {
 
 }
 
-const getBuildForHero = async (req, res, next) => {
+const getBuildsForHero = async (req, res, next) => {
 	const { page } = req.body;
 	const { heroId } = req.params;
 
@@ -128,5 +123,5 @@ module.exports = {
 	getAllBuilds,
 	getBuild,
 	saveBuild,
-	getBuildForHero
+	getBuildsForHero
 }

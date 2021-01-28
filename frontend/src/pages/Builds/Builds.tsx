@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -247,7 +248,7 @@ export default function Builds() {
 									<Grid container wrap='nowrap' spacing={2}>
 										<Grid item>
 											<Avatar className={classes.large}>
-												<img
+												<LazyLoadImage
 													src={`/images/wildriftchampions/${championId}.png`}
 													style={{ width: '100%' }}
 												/>
@@ -278,14 +279,14 @@ export default function Builds() {
 														style={{ backgroundColor: '#38465a' }}
 													>
 														{rank ? (
-															<img
+															<LazyLoadImage
 																src={`/images/wildriftranks/${rank.id}.png`}
 																style={{
 																	width: '80%',
 																}}
 															/>
 														) : (
-															<img
+															<LazyLoadImage
 																src='/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png'
 																style={{
 																	width: '80%',
@@ -306,7 +307,7 @@ export default function Builds() {
 												return (
 													<>
 														<Box style={{ display: 'inline-block' }}>
-															<img
+															<LazyLoadImage
 																src={`/images/wildriftitems/${itemId}.png`}
 																alt={championName}
 																style={{ width: '50px' }}
@@ -326,7 +327,7 @@ export default function Builds() {
 												return (
 													<>
 														<Box style={{ display: 'inline-block' }}>
-															<img
+															<LazyLoadImage
 																src={`/images/wildriftitems/${itemId}.png`}
 																alt={championName}
 																style={{ width: '50px' }}
@@ -342,7 +343,8 @@ export default function Builds() {
 										style={{ margin: '20px 0 0 0' }}
 									>
 										<a
-											href={`https://wildriftbuilds.herokuapp.com/build/${buildId}`}
+											// href={`https://wildriftbuilds.herokuapp.com/build/${buildId}`}
+											href={`/build/${buildId}`}
 										>
 											<Button variant='contained' color='primary'>
 												Learn more

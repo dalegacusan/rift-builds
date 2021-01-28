@@ -33,15 +33,15 @@ export default function Landing() {
 							gutterBottom
 							style={{ fontWeight: 'bold', margin: '0 0 25px 0' }}
 						>
-							Lorem ipsum dolor sit amet consectetur adipiscing elit
+							Showcase your builds
 						</Typography>
 						<Typography
 							variant='subtitle1'
 							gutterBottom
 							style={{ margin: '0 0 45px 0' }}
 						>
-							Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-							enim ad minim veniam quis nostrud exercitation ullamco
+							Wild Rift Community Builds provides builds by the community to
+							thousands of League of Legends: Wild Rift gamers worldwide.
 						</Typography>
 						<a href='/create'>
 							<Button variant='contained' color='primary'>

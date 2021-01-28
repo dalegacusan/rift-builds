@@ -27,10 +27,16 @@ mongoose.connect(
 		process.exit(1);
 	});
 
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
+app.set('trust proxy', 1);
 app.use(middleware.requestLogger);
+
+app.get('/', (req, res) => {
+	res.status(200).send('What are you doing here mate?');
+})
 
 // Set up routes
 require('./routes')(app);
