@@ -66,6 +66,20 @@ interface RankInterface {
 	url: string;
 }
 
+interface RuneInterface {
+	id: string;
+	runeName: string;
+	url: string;
+	type: string;
+	path?: string;
+}
+
+interface SpellInterface {
+	id: string;
+	spellName: string;
+	url: string;
+}
+
 interface BuildInterface {
 	id?: string;
 	username: string;
@@ -78,14 +92,10 @@ interface BuildInterface {
 		resolve: RuneInterface;
 		inspiration: RuneInterface;
 	};
-}
-
-interface RuneInterface {
-	id: string;
-	runeName: string;
-	url: string;
-	type: string;
-	path?: string;
+	spells: {
+		spellOne: SpellInterface;
+		spellTwo: SpellInterface;
+	};
 }
 
 export default function Landing() {
@@ -94,6 +104,7 @@ export default function Landing() {
 	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
 	const [items, setItems] = useState<Array<ItemInterface>>([]);
 	const [ranks, setRanks] = useState<Array<RankInterface>>([]);
+
 	const [runes, setRunes] = useState<Array<RuneInterface>>([]);
 	const [runeKeystone, setRuneKeystone] = useState<RuneInterface>({
 		id: 'feadf691-c740-4e7d-a4e8-9c705a48ea6a',
@@ -126,6 +137,21 @@ export default function Landing() {
 		type: 'secondary',
 		path: 'inspiration',
 	});
+
+	const [spells, setSpells] = useState<Array<SpellInterface>>([]);
+	const [spellOne, setSpellOne] = useState<SpellInterface>({
+		id: 'edbd4a33-514a-4334-8e61-01c296b8a767',
+		spellName: 'Barrier',
+		url:
+			'/uploads/league-of-legends-wild-rift/images/summoner-spells/shield.jpg',
+	});
+	const [spellTwo, setSpellTwo] = useState<SpellInterface>({
+		id: 'edbd4a33-514a-4334-8e61-01c296b8a767',
+		spellName: 'Barrier',
+		url:
+			'/uploads/league-of-legends-wild-rift/images/summoner-spells/shield.jpg',
+	});
+
 	const [itemsConfirmed, setItemsConfirmed] = useState<Array<ItemInterface>>(
 		[]
 	);
@@ -185,56 +211,74 @@ export default function Landing() {
 		const getRunes = axios.get(
 			'https://wildriftbuilds.herokuapp.com/api/rune/all'
 		);
+		const getSpells = axios.get(
+			'https://wildriftbuilds.herokuapp.com/api/spell/all'
+		);
 
-		Promise.all([getChampions, getItems, getRanks, getRunes]).then((values) => {
-			const [
-				{ data: championsArray },
-				{ data: itemsArray },
-				{ data: ranksArray },
-				{ data: runesArray },
-			] = values;
+		Promise.all([getChampions, getItems, getRanks, getRunes, getSpells]).then(
+			(values) => {
+				const [
+					{ data: championsArray },
+					{ data: itemsArray },
+					{ data: ranksArray },
+					{ data: runesArray },
+					{ data: spellsArray },
+				] = values;
 
-			// Sort Champions
-			championsArray.sort(function (
-				a: ChampionInterface,
-				b: ChampionInterface
-			) {
-				if (a.championName < b.championName) {
-					return -1;
-				}
-				if (a.championName > b.championName) {
-					return 1;
-				}
-				return 0;
-			});
-			setChampions(championsArray);
+				// Sort Champions
+				championsArray.sort(function (
+					a: ChampionInterface,
+					b: ChampionInterface
+				) {
+					if (a.championName < b.championName) {
+						return -1;
+					}
+					if (a.championName > b.championName) {
+						return 1;
+					}
+					return 0;
+				});
+				setChampions(championsArray);
 
-			// Sort Items
-			itemsArray.sort(function (a: ItemInterface, b: ItemInterface) {
-				if (a.itemName < b.itemName) {
-					return -1;
-				}
-				if (a.itemName > b.itemName) {
-					return 1;
-				}
-				return 0;
-			});
-			setItems(itemsArray);
+				// Sort Items
+				itemsArray.sort(function (a: ItemInterface, b: ItemInterface) {
+					if (a.itemName < b.itemName) {
+						return -1;
+					}
+					if (a.itemName > b.itemName) {
+						return 1;
+					}
+					return 0;
+				});
+				setItems(itemsArray);
 
-			setRanks(ranksArray);
+				setRanks(ranksArray);
 
-			// Sort Runes
-			runesArray.sort(function (a: RuneInterface, b: RuneInterface) {
-				if (a.runeName < b.runeName) {
-					return -1;
-				}
-				if (a.runeName > b.runeName) {
-					return 1;
-				}
-				return 0;
-			});
-			setRunes(runesArray);
-		});
+				// Sort Runes
+				runesArray.sort(function (a: RuneInterface, b: RuneInterface) {
+					if (a.runeName < b.runeName) {
+						return -1;
+					}
+					if (a.runeName > b.runeName) {
+						return 1;
+					}
+					return 0;
+				});
+				setRunes(runesArray);
+
+				// Sort Spells
+				spellsArray.sort(function (a: SpellInterface, b: SpellInterface) {
+					if (a.spellName < b.spellName) {
+						return -1;
+					}
+					if (a.spellName > b.spellName) {
+						return 1;
+					}
+					return 0;
+				});
+				setSpells(spellsArray);
+			}
+		);
 	}, []);
 
 	// Check for duplicate items selected
@@ -359,54 +403,6 @@ export default function Landing() {
 		setItemsConfirmed([...itemsConfirmed, { ...itemSelected, type: itemType }]);
 	};
 
-	const submitBuild = async () => {
-		if (itemsConfirmed.length !== 0 && username) {
-			const buildObject = {
-				dateSubmitted: new Date(),
-				username: username,
-				champion: championSelected,
-				items: itemsConfirmed,
-				rank: rankSelected,
-				runes: {
-					keystone: runeKeystone,
-					domination: runeDomination,
-					resolve: runeResolve,
-					inspiration: runeInspiration,
-				},
-			};
-
-			const saveToDatabase = await axios
-				.post(
-					'https://wildriftbuilds.herokuapp.com/api/build/save',
-					// '/api/build/save',
-					buildObject
-				)
-				.then((res) => {
-					successBuildSaved();
-					setBuild(res.data);
-					setHasSubmittedBuild(true);
-				})
-				.catch((err) => {
-					if (
-						err.response.status === 429 &&
-						err.response.data ===
-							"You're creating too many builds. Please try again after 5 minutes."
-					) {
-						errorBuildSaved(err.response.data);
-					} else {
-						errorBuildSaved('Something went wrong. Failed to save build.');
-					}
-				});
-		} else {
-			if (itemsConfirmed.length === 0) {
-				errorNoItemSelected();
-			} else if (!username) {
-				errorNoUsername();
-			}
-			return;
-		}
-	};
-
 	const handleClickOpen = (e: any, item: ItemInterface) => {
 		setDialogItem(item);
 		setOpenItemDialog(true);
@@ -472,6 +468,80 @@ export default function Landing() {
 
 	const handleItemTypeChange = (e: any) => {
 		setItemType(e.target.value);
+	};
+
+	const handleSpellChange = (e: any, spellNumber: string) => {
+		const { value } = e.target;
+
+		const getSpell = spells.find((spell: SpellInterface) => spell.id === value);
+
+		if (!getSpell) {
+			return;
+		} else {
+			switch (spellNumber) {
+				case 'spellOne':
+					setSpellOne(getSpell);
+
+					break;
+				case 'spellTwo':
+					setSpellTwo(getSpell);
+					break;
+				default:
+					return;
+			}
+		}
+	};
+
+	const submitBuild = async () => {
+		if (itemsConfirmed.length !== 0 && username) {
+			const buildObject = {
+				dateSubmitted: new Date(),
+				username: username,
+				champion: championSelected,
+				items: itemsConfirmed,
+				rank: rankSelected,
+				runes: {
+					keystone: runeKeystone,
+					domination: runeDomination,
+					resolve: runeResolve,
+					inspiration: runeInspiration,
+				},
+				spells: {
+					spellOne,
+					spellTwo,
+				},
+			};
+
+			const saveToDatabase = await axios
+				.post(
+					'https://wildriftbuilds.herokuapp.com/api/build/save',
+					// '/api/build/save',
+					buildObject
+				)
+				.then((res) => {
+					successBuildSaved();
+					setBuild(res.data);
+					setHasSubmittedBuild(true);
+				})
+				.catch((err) => {
+					if (
+						err.response.status === 429 &&
+						err.response.data ===
+							"You're creating too many builds. Please try again after 5 minutes."
+					) {
+						errorBuildSaved(err.response.data);
+					} else {
+						errorBuildSaved('Something went wrong. Failed to save build.');
+					}
+				});
+		} else {
+			if (itemsConfirmed.length === 0) {
+				errorNoItemSelected();
+			} else if (!username) {
+				errorNoUsername();
+			}
+			return;
+		}
 	};
 
 	let dialogValue = openedDialogItem
@@ -726,7 +796,7 @@ export default function Landing() {
 						</Grid>
 
 						{/* Secondary: Resolve */}
-						<Grid item xs={3}>
+						<Grid item xs={12} sm={3}>
 							{runeResolve ? (
 								<LazyLoadImage
 									src={`/images/wildriftrunes/${runeResolve.id}.png`}
@@ -768,7 +838,7 @@ export default function Landing() {
 						</Grid>
 
 						{/* Secondary: Inspiration */}
-						<Grid item xs={3}>
+						<Grid item xs={12} sm={3}>
 							{runeResolve ? (
 								<LazyLoadImage
 									src={`/images/wildriftrunes/${runeInspiration.id}.png`}
@@ -806,6 +876,82 @@ export default function Landing() {
 											})}
 									</NativeSelect>
 									<FormHelperText>Select a Inspiration Rune</FormHelperText>
+								</FormControl>
+							}
+						</Grid>
+					</Grid>
+
+					<Typography>Select Summoner Spells</Typography>
+					<Grid container item xs={12}>
+						{/* Spell One */}
+						<Grid item xs={12} sm={3}>
+							{spells ? (
+								<LazyLoadImage
+									src={`/images/wildriftspells/${spellOne.id}.jpg`}
+									style={{ width: '90px' }}
+								/>
+							) : (
+								<LazyLoadImage
+									src={`/images/wildriftspells/edbd4a33-514a-4334-8e61-01c296b8a767.jpg`}
+									style={{ width: '90px' }}
+								/>
+							)}
+
+							{
+								<FormControl className={classes.formControl}>
+									<InputLabel shrink htmlFor='spell-select'>
+										Spell One
+									</InputLabel>
+									<NativeSelect
+										onChange={(e) => handleSpellChange(e, 'spellOne')}
+										inputProps={{
+											name: 'spell',
+											id: 'spell-select',
+										}}
+									>
+										{spells.map(
+											({ id, spellName, url }: SpellInterface, index) => {
+												return <option value={id}>{spellName}</option>;
+											}
+										)}
+									</NativeSelect>
+									<FormHelperText>Select a Spell</FormHelperText>
+								</FormControl>
+							}
+						</Grid>
+						{/* Spell Two */}
+						<Grid item xs={12} sm={3}>
+							{spells ? (
+								<LazyLoadImage
+									src={`/images/wildriftspells/${spellTwo.id}.jpg`}
+									style={{ width: '90px' }}
+								/>
+							) : (
+								<LazyLoadImage
+									src={`/images/wildriftspells/edbd4a33-514a-4334-8e61-01c296b8a767.jpg`}
+									style={{ width: '90px' }}
+								/>
+							)}
+
+							{
+								<FormControl className={classes.formControl}>
+									<InputLabel shrink htmlFor='spell-select'>
+										Spell Two
+									</InputLabel>
+									<NativeSelect
+										onChange={(e) => handleSpellChange(e, 'spellTwo')}
+										inputProps={{
+											name: 'spell',
+											id: 'spell-select',
+										}}
+									>
+										{spells.map(
+											({ id, spellName, url }: SpellInterface, index) => {
+												return <option value={id}>{spellName}</option>;
+											}
+										)}
+									</NativeSelect>
+									<FormHelperText>Select a Spell</FormHelperText>
 								</FormControl>
 							}
 						</Grid>
@@ -908,7 +1054,7 @@ export default function Landing() {
 						</div>
 					</Grid>
 
-					{/* Other */}
+					{/* Player Details */}
 					<Grid container item xs={12}>
 						<Grid item xs={12} md={6}>
 							<Box

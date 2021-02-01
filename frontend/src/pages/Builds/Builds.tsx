@@ -251,6 +251,8 @@ export default function Builds() {
 												<LazyLoadImage
 													src={`/images/wildriftchampions/${championId}.png`}
 													style={{ width: '100%' }}
+													title={championName}
+													alt={championName}
 												/>
 											</Avatar>
 										</Grid>
@@ -284,6 +286,8 @@ export default function Builds() {
 																style={{
 																	width: '80%',
 																}}
+																title={rank.rankName}
+																alt={rank.rankName}
 															/>
 														) : (
 															<LazyLoadImage
@@ -291,6 +295,8 @@ export default function Builds() {
 																style={{
 																	width: '80%',
 																}}
+																title='Unranked'
+																alt='Unranked'
 															/>
 														)}
 													</Avatar>
@@ -302,41 +308,22 @@ export default function Builds() {
 										{items
 											.filter((item) => item.type !== 'optional')
 											.map((item) => {
-												const { id: itemId } = item;
+												const { id: itemId, itemName } = item;
 
 												return (
 													<>
 														<Box style={{ display: 'inline-block' }}>
 															<LazyLoadImage
 																src={`/images/wildriftitems/${itemId}.png`}
-																alt={championName}
 																style={{ width: '50px' }}
+																alt={itemName}
+																title={itemName}
 															/>
 														</Box>
 													</>
 												);
 											})}
 									</Box>
-									{/* <Box>
-										<p>Optional</p>
-										{items
-											.filter((item) => item.type !== 'primary')
-											.map((item) => {
-												const { id: itemId } = item;
-			
-												return (
-													<>
-														<Box style={{ display: 'inline-block' }}>
-															<LazyLoadImage
-																src={`/images/wildriftitems/${itemId}.png`}
-																alt={championName}
-																style={{ width: '50px' }}
-															/>
-														</Box>
-													</>
-												);
-											})}
-									</Box> */}
 									<Box
 										display='flex'
 										flexDirection='row-reverse'

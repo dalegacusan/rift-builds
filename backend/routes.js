@@ -3,6 +3,7 @@ const championRouter = require('./routes/champion');
 const itemRouter = require('./routes/item');
 const rankRouter = require('./routes/rank');
 const runeRouter = require('./routes/rune');
+const spellRouter = require('./routes/spell');
 
 module.exports = (app) => {
 	app.use('/api/build', buildRouter);
@@ -10,4 +11,5 @@ module.exports = (app) => {
 	app.use('/api/item', itemRouter);
 	app.use('/api/rank', rankRouter);
 	app.use('/api/rune', runeRouter);
+	app.use('/api/spell', spellRouter);
 };

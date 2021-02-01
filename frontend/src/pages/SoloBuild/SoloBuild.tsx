@@ -50,6 +50,11 @@ interface RuneInterface {
 	path?: string;
 }
 
+interface SpellInterface {
+	id: string;
+	spellName: string;
+	url: string;
+}
 interface BuildInterface {
 	dateSubmitted: string;
 	username: string;
@@ -61,6 +66,10 @@ interface BuildInterface {
 		domination: RuneInterface;
 		resolve: RuneInterface;
 		inspiration: RuneInterface;
+	};
+	spells: {
+		spellOne: SpellInterface;
+		spellTwo: SpellInterface;
 	};
 }
 
@@ -74,6 +83,7 @@ export default withRouter((props) => {
 		axios
 			.get(
 				`https://wildriftbuilds.herokuapp.com/api/build/${match.params.buildId}`
+				// `/api/build/${match.params.buildId}`
 			)
 			.then((res) => {
 				const { data } = res;
@@ -327,6 +337,58 @@ export default withRouter((props) => {
 									/>
 								</Avatar>
 								{build.runes.inspiration.runeName}
+							</Box>
+						</Grid>
+					</Grid>
+
+					{/* SPELLS */}
+					<Box
+						style={{
+							backgroundColor: '#656f7e',
+							color: 'black',
+							margin: '20px 0',
+							padding: '20px',
+						}}
+					>
+						<Typography
+							variant='subtitle1'
+							style={{ fontWeight: 'bolder', color: '#e9eaec' }}
+							gutterBottom
+						>
+							Summoner Spells
+						</Typography>
+					</Box>
+					<Grid container spacing={3}>
+						<Grid item xs={12}>
+							<Box p={1}>
+								<Avatar
+									variant='square'
+									className={classes.large}
+									style={{ marginRight: '10px' }}
+								>
+									<LazyLoadImage
+										src={`/images/wildriftspells/${build.spells.spellOne.id}.jpg`}
+										style={{ width: '100%' }}
+										title={build.spells.spellOne.spellName}
+										alt={build.spells.spellOne.spellName}
+									/>
+								</Avatar>
+								{build.spells.spellOne.spellName}
+							</Box>
+							<Box p={1}>
+								<Avatar
+									variant='square'
+									className={classes.large}
+									style={{ marginRight: '10px' }}
+								>
+									<LazyLoadImage
+										src={`/images/wildriftspells/${build.spells.spellTwo.id}.jpg`}
+										style={{ width: '100%' }}
+										title={build.spells.spellTwo.spellName}
+										alt={build.spells.spellTwo.spellName}
+									/>
+								</Avatar>
+								{build.spells.spellTwo.spellName}
 							</Box>
 						</Grid>
 					</Grid>
