@@ -40,8 +40,8 @@ export default function Landing() {
 							gutterBottom
 							style={{ margin: '0 0 45px 0' }}
 						>
-							Wild Rift Community Builds provides builds by the community to
-							thousands of League of Legends: Wild Rift gamers worldwide.
+							Rift Builds provides builds by the community to thousands of
+							League of Legends: Wild Rift gamers worldwide.
 						</Typography>
 						<a href='/create'>
 							<Button variant='contained' color='primary'>

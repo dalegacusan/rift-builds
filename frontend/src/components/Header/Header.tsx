@@ -23,7 +23,7 @@ export default function Header() {
 								style={{ color: '#000000', textDecoration: 'none' }}
 								gutterBottom
 							>
-								WR:CB
+								Rift Builds
 							</Typography>
 							<Box
 								style={{

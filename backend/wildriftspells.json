@@ -1,0 +1,37 @@
+[
+	{
+		"id": "dd6ff556-3b07-4be0-bd1f-c2dd9c9ce1dd",
+		"spellName": "Flash",
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/flash.jpg"
+	},
+	{
+		"id": "aeb37ecd-ccb5-41fc-ad9c-c9b6bef39e34",
+		"spellName": "Ignite",
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/ignite.jpg"
+	},
+	{
+		"id": "edbd4a33-514a-4334-8e61-01c296b8a767",
+		"spellName": "Barrier",
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/shield.jpg"
+	},
+	{
+		"id": "7d210b90-b9bb-401d-a68b-e9ee0d083be7",
+		"spellName": "Heal",
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/heal.jpg"
+	},
+	{
+		"id": "13e5a25d-0de7-4481-bf75-381c013e73b9",
+		"spellName": "Exhaust",
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/exhaust.jpg"
+	},
+	{
+		"id": "282c2518-01a7-47e3-9960-a4926985b128",
+		"spellName": "Ghost Walk",
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/ghost-walk.jpg"
+	},
+	{
+		"id": "59f6067c-68e9-4468-9c19-cef2205e1c6a",
+		"spellName": "Smite",
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/smite.jpg"
+	}
+]

@@ -36,7 +36,7 @@ const getBuild = async (req, res, next) => {
 };
 
 const saveBuild = (req, res, next) => {
-	const { username, champion, items, rank } = req.body;
+	const { username, champion, items, rank, runes } = req.body;
 
 	// ===== Test for Duplicates ===== // 
 	// const duplicatedItems = [
@@ -93,7 +93,7 @@ const saveBuild = (req, res, next) => {
 
 	} else {
 		console.log('duplicates');
-		res.status(400).json({ message: 'Duplicates!' });
+		res.status(400).json({ message: 'There are duplicate items that made it through!' });
 	}
 
 }

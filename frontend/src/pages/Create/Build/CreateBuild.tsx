@@ -9,6 +9,7 @@ import {
 	errorNoItemSelected,
 	errorItemDuplicate,
 	errorBuildSaved,
+	errorPrimaryItemsLimit,
 	successBuildSaved,
 } from '../../../utils/errorPopups';
 
@@ -125,6 +126,9 @@ export default function Landing() {
 		type: 'secondary',
 		path: 'inspiration',
 	});
+	const [itemsConfirmed, setItemsConfirmed] = useState<Array<ItemInterface>>(
+		[]
+	);
 
 	const [build, setBuild] = useState<BuildInterface>();
 
@@ -158,9 +162,6 @@ export default function Landing() {
 				'https://static.wikia.nocookie.net/leagueoflegends/images/3/38/Season_2019_-_Unranked.png/revision/latest/scale-to-width-down/130?cb=20190908074432',
 		}
 	);
-	const [itemsConfirmed, setItemsConfirmed] = useState<Array<ItemInterface>>(
-		[]
-	);
 	const [dialogItem, setDialogItem] = useState<ItemInterface>({
 		id: '',
 		itemName: '',
@@ -181,7 +182,9 @@ export default function Landing() {
 		const getRanks = axios.get(
 			'https://wildriftbuilds.herokuapp.com/api/rank/all'
 		);
-		const getRunes = axios.get('/api/rune/all');
+		const getRunes = axios.get(
+			'https://wildriftbuilds.herokuapp.com/api/rune/all'
+		);
 
 		Promise.all([getChampions, getItems, getRanks, getRunes]).then((values) => {
 			const [
@@ -236,6 +239,9 @@ export default function Landing() {
 
 	// Check for duplicate items selected
 	useEffect(() => {
+		const primaryItems = itemsConfirmed.filter(
+			(item) => item.type === 'primary'
+		);
 		var itemArray = itemsConfirmed.map((item) => {
 			return item.id;
 		});
@@ -251,6 +257,15 @@ export default function Landing() {
 		if (isDuplicate) {
 			setItemsConfirmed(filteredItemsConfirmed);
 			errorItemDuplicate();
+		} else if (primaryItems.length > 6) {
+			errorPrimaryItemsLimit();
+			setItemsConfirmed((prev) => {
+				const itemsConfirmedCopy = [...prev];
+
+				itemsConfirmedCopy.pop();
+
+				return itemsConfirmedCopy;
+			});
 		}
 	}, [itemsConfirmed]);
 
@@ -362,8 +377,8 @@ export default function Landing() {
 
 			const saveToDatabase = await axios
 				.post(
-					// 'https://wildriftbuilds.herokuapp.com/api/build/save',
-					'/api/build/save',
+					'https://wildriftbuilds.herokuapp.com/api/build/save',
+					// '/api/build/save',
 					buildObject
 				)
 				.then((res) => {
