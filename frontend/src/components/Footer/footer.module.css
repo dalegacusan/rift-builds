@@ -1,0 +1,11 @@
+.footerLink {
+	color: #353535;
+	text-decoration: none;
+	display: inline-block;
+	margin-right: 8px;
+	font-weight: bold;
+}
+
+.footerLink:hover {
+	text-decoration: underline;
+}

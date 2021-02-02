@@ -2,7 +2,6 @@ import React from 'react';
 
 // MaterialUi
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 // Components
 import Footer from './Footer/Footer';
@@ -17,11 +16,9 @@ export default function Layout(props: { children: React.ReactNode }) {
 		<>
 			<React.Fragment>
 				<CssBaseline />
+				<Header />
 				<Container maxWidth='lg'>
-					<Header />
-
 					<section>{children}</section>
-
 					<Footer />
 				</Container>
 			</React.Fragment>

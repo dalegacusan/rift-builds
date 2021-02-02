@@ -14,19 +14,18 @@ import SoloBuild from '../SoloBuild/SoloBuild';
 export default function App() {
 	return (
 		<div className='App'>
-			<Layout>
-				<Router>
-					<Switch>
-						<Route exact path='/' render={() => <Landing />} />
-
+			<Router>
+				<Switch>
+					<Route exact path='/' render={() => <Landing />} />
+					<Layout>
 						<Route exact path='/builds' render={() => <Builds />} />
 
 						<Route exact path='/create' render={() => <CreateBuild />} />
 
 						<Route exact path='/build/:buildId' render={() => <SoloBuild />} />
-					</Switch>
-				</Router>
-			</Layout>
+					</Layout>
+				</Switch>
+			</Router>
 		</div>
 	);
 }

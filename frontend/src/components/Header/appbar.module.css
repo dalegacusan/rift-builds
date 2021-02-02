@@ -1,0 +1,12 @@
+.header {
+	background-color: #111111 !important;
+}
+
+.headerLink {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.headerLink:hover {
+	color: #d4d4d4;
+}
