@@ -31,7 +31,11 @@ interface ChampionInterface {
 
 export default function Landing() {
 	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
+	const [filteredChampions, setFilteredChampions] = useState<
+		Array<ChampionInterface>
+	>([]);
 	const [championSearch, setChampionSearch] = useState('');
+	const [roleFilter, setRoleFilter] = useState('all');
 
 	// Get All Champions
 	useEffect(() => {
@@ -51,6 +55,7 @@ export default function Landing() {
 				});
 
 				setChampions(data);
+				setFilteredChampions(data);
 			})
 			.catch((err) => {
 				console.error('Something went wrong');
@@ -62,9 +67,33 @@ export default function Landing() {
 		setChampionSearch(e.target.value);
 	};
 
-	const filteredChampions = champions.filter((champion) =>
-		champion.championName.toLocaleLowerCase().includes(championSearch)
-	);
+	useEffect(() => {
+		const filterChampions = champions.filter((champion) =>
+			champion.championName.toLocaleLowerCase().includes(championSearch)
+		);
+
+		setFilteredChampions(filterChampions);
+	}, [championSearch]);
+
+	useEffect(() => {
+		const filterRoles = champions.filter((champion) => {
+			const { lane } = champion;
+
+			if (lane) {
+				if (roleFilter === 'all') {
+					return champion;
+				} else {
+					for (let i = 0; i < lane.length; i++) {
+						if (lane[i].toLocaleLowerCase() === roleFilter) {
+							return champion;
+						}
+					}
+				}
+			}
+		});
+
+		setFilteredChampions(filterRoles);
+	}, [roleFilter]);
 
 	return (
 		<div>
@@ -100,12 +129,16 @@ export default function Landing() {
 						<Grid item xs={12} sm={10}>
 							<Box style={{ marginTop: '5px' }}>
 								<ul className={styles.rolesList}>
-									<li>All</li>
-									<li>Top</li>
-									<li>Jungle</li>
-									<li>Middle</li>
-									<li>Bottom</li>
-									<li>Support</li>
+									<li>
+										<span onClick={() => setRoleFilter('all')}>All</span>
+									</li>
+									<li>
+										<span onClick={() => setRoleFilter('top')}>Top</span>
+									</li>
+									<li onClick={() => setRoleFilter('jungle')}>Jungle</li>
+									<li onClick={() => setRoleFilter('middle')}>Middle</li>
+									<li onClick={() => setRoleFilter('bottom')}>Bottom</li>
+									<li onClick={() => setRoleFilter('support')}>Support</li>
 								</ul>
 							</Box>
 						</Grid>

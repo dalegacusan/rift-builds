@@ -29,6 +29,11 @@
 	font-size: 16px;
 }
 
+.rolesList li:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 .heroesContainer {
 	padding: 10px 0;
 }
