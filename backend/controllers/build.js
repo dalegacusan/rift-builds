@@ -100,15 +100,18 @@ const saveBuild = (req, res, next) => {
 
 const getBuildsForHero = async (req, res, next) => {
 	const { page } = req.body;
-	const { heroId } = req.params;
+	const { championId } = req.params;
 
 	try {
-
-		const allBuilds = await Build.find({ 'champion.id': heroId }).skip(page - 5).limit(5);
+		const buildsCount = await Build.countDocuments({ 'champion.id': championId });
+		const allBuilds = await Build.find({ 'champion.id': championId }).skip(page - 5).limit(5);
 
 		console.log("Response Length:", allBuilds.length);
 
-		res.status(200).json(allBuilds);
+		res.status(200).json({
+			builds: allBuilds,
+			count: buildsCount
+		});
 	} catch (err) {
 		res.status(400).json({
 			message: 'Failed to retrieve all builds.',

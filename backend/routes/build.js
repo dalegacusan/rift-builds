@@ -13,7 +13,7 @@ const createBuildLimiter = rateLimit({
 router.post('/all', BuildController.getAllBuilds);
 
 // Individual Hero
-router.post('/all/:heroId', BuildController.getBuildsForHero);
+router.post('/all/:championId', BuildController.getBuildsForHero);
 
 // Individual Build
 router.get('/:buildId', BuildController.getBuild);

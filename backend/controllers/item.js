@@ -1,4 +1,4 @@
-const items = require('../wildriftitems.json');
+const items = require('../data/wildriftitems.json');
 
 const getAllItems = (req, res, next) => {
 	res.status(200).json(items);

@@ -55,6 +55,7 @@ interface SpellInterface {
 	spellName: string;
 	url: string;
 }
+
 interface BuildInterface {
 	dateSubmitted: string;
 	username: string;

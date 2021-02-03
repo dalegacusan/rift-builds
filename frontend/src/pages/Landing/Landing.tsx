@@ -27,8 +27,6 @@ interface ChampionInterface {
 	lane?: string;
 }
 
-// https://material-ui.com/customization/breakpoints/
-
 export default function Landing() {
 	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
 	const [filteredChampions, setFilteredChampions] = useState<
@@ -127,7 +125,7 @@ export default function Landing() {
 				<Box className={styles.filterContainer}>
 					<Grid container>
 						<Grid item xs={12} sm={10}>
-							<Box style={{ marginTop: '5px' }}>
+							<Box style={{ marginTop: '15px' }}>
 								<ul className={styles.rolesList}>
 									<li>
 										<span onClick={() => setRoleFilter('all')}>All</span>
@@ -143,7 +141,7 @@ export default function Landing() {
 							</Box>
 						</Grid>
 						<Grid item xs={12} sm={2}>
-							<Box>
+							<Box style={{ marginTop: '10px' }}>
 								<TextField
 									value={championSearch}
 									onChange={handleChampionSearchChange}
@@ -163,7 +161,7 @@ export default function Landing() {
 				>
 					{champions && champions.length !== 0 ? (
 						filteredChampions.map((champion) => {
-							const { id, championName } = champion;
+							const { id: championId, championName } = champion;
 
 							return (
 								<Box
@@ -171,9 +169,9 @@ export default function Landing() {
 										margin: '15px 20px 0 0',
 									}}
 								>
-									<a href={`/builds/`}>
+									<a href={`/builds/${championId}`}>
 										<LazyLoadImage
-											src={`/images/wildriftchampions/${id}.png`}
+											src={`/images/wildriftchampions/${championId}.png`}
 											style={{ width: '90px' }}
 											title={championName}
 											alt={championName}

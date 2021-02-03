@@ -5,9 +5,9 @@ import axios from 'axios';
 // Components
 import Layout from '../../components/Layout';
 import Landing from '../Landing/Landing';
-import Builds from '../Builds/Builds';
+import HeroBuilds from '../HeroBuilds/HeroBuilds';
 import CreateBuild from '../Create/Build/CreateBuild';
-import SoloBuild from '../SoloBuild/SoloBuild';
+import PlayerBuild from '../PlayerBuild/PlayerBuild';
 // CSS
 // Types
 
@@ -18,11 +18,19 @@ export default function App() {
 				<Switch>
 					<Route exact path='/' render={() => <Landing />} />
 					<Layout>
-						<Route exact path='/builds' render={() => <Builds />} />
+						<Route
+							exact
+							path='/builds/:championId'
+							render={() => <HeroBuilds />}
+						/>
 
 						<Route exact path='/create' render={() => <CreateBuild />} />
 
-						<Route exact path='/build/:buildId' render={() => <SoloBuild />} />
+						<Route
+							exact
+							path='/build/:buildId'
+							render={() => <PlayerBuild />}
+						/>
 					</Layout>
 				</Switch>
 			</Router>
