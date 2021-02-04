@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 
 interface ItemInterface {
 	id: string;
@@ -178,8 +179,7 @@ export default withRouter((props) => {
 								</Grid>
 							</Grid>
 
-							<br />
-							<hr />
+							<Divider variant='middle' />
 
 							{/* Builds List Container */}
 							<Box style={{ padding: '20px 0' }}>
@@ -327,7 +327,7 @@ export default withRouter((props) => {
 													}}
 												/>
 												<Typography gutterBottom>
-													There are no builds for this hero yet.{' '}
+													There are no builds for this champion yet.{' '}
 													<a
 														href='/create'
 														style={{ color: '#517ebd', textDecoration: 'none' }}

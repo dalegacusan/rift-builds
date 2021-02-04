@@ -33,6 +33,8 @@ import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Typography from '@material-ui/core/Typography';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 // Components
 import Layout from '../../../components/Layout';
 // CSS
@@ -44,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
 	formControl: {
 		margin: theme.spacing(1),
 		minWidth: 120,
+	},
+	backdrop: {
+		zIndex: theme.zIndex.drawer + 1,
+		color: '#fff',
 	},
 }));
 // Types
@@ -101,6 +107,7 @@ interface BuildInterface {
 }
 
 export default function Landing() {
+	const [openBackdrop, setOpenBackdrop] = useState(false);
 	const [hasSubmittedBuild, setHasSubmittedBuild] = useState(false);
 	const [username, setUsername] = useState('');
 	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
@@ -498,6 +505,7 @@ export default function Landing() {
 
 	const submitBuild = async () => {
 		if (itemsConfirmed.length !== 0 && username) {
+			setOpenBackdrop(!openBackdrop);
 			const buildObject = {
 				dateSubmitted: new Date(),
 				username: username,
@@ -518,8 +526,8 @@ export default function Landing() {
 
 			const saveToDatabase = await axios
 				.post(
-					'https://wildriftbuilds.herokuapp.com/api/build/save',
-					// '/api/build/save',
+					// 'https://wildriftbuilds.herokuapp.com/api/build/save',
+					'/api/build/save',
 					buildObject
 				)
 				.then((res) => {
@@ -564,8 +572,16 @@ export default function Landing() {
 		<>
 			<hr />
 			<Toaster />
+
 			<div className={classes.root}>
 				<Grid container>
+					<Backdrop
+						className={classes.backdrop}
+						open={openBackdrop}
+						onClick={() => setOpenBackdrop(false)}
+					>
+						<CircularProgress color='inherit' />
+					</Backdrop>
 					<Dialog
 						open={openItemDialog}
 						onClose={() => handleClose()}
