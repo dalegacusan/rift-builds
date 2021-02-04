@@ -51,6 +51,8 @@ interface ChampionInterface {
 	id: string;
 	championName: string;
 	url: string;
+	lane: Array<String>;
+	title: string;
 }
 interface ItemInterface {
 	id: string;
@@ -167,6 +169,8 @@ export default function Landing() {
 			championName: 'Ahri',
 			url:
 				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/Ahri_wild_rift.png',
+			lane: ['Middle'],
+			title: 'Nine-Tailed Fox',
 		}
 	);
 	const [itemSelected, setItemSelected] = useState<ItemInterface>(

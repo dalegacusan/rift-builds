@@ -12,7 +12,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 
 interface ItemInterface {
 	id: string;
@@ -27,6 +26,7 @@ interface ChampionInterface {
 	championName: string;
 	url: string;
 	lane: Array<String>;
+	title: string;
 }
 
 interface RankInterface {
@@ -93,6 +93,7 @@ export default withRouter((props) => {
 		championName: '',
 		url: '',
 		lane: [],
+		title: '',
 	});
 	const [championBuilds, setChampionBuilds] = useState({
 		builds: [],
@@ -154,7 +155,9 @@ export default withRouter((props) => {
 											</span>
 										</Typography>
 										<Typography variant='body1'>
-											<span style={{ color: '#949494' }}>The Blind Monk</span>
+											<span style={{ color: '#949494' }}>
+												The {championData.title}
+											</span>
 										</Typography>
 									</Box>
 									<Box
@@ -163,7 +166,13 @@ export default withRouter((props) => {
 										}}
 									>
 										{championData.lane.map((lane) => {
-											return <Chip label={lane} color='primary' />;
+											return (
+												<Chip
+													label={lane}
+													color='primary'
+													style={{ marginRight: '4px' }}
+												/>
+											);
 										})}
 									</Box>
 								</Grid>
@@ -176,124 +185,159 @@ export default withRouter((props) => {
 							<Box style={{ padding: '20px 0' }}>
 								<Typography variant='body1'>
 									<span style={{ fontWeight: 'bold', fontSize: '18px' }}>
-										<DirectionsRunIcon />
 										{championBuilds.count} {championData.championName} builds
 									</span>
 								</Typography>
 
 								<Box>
-									{championBuilds.builds.map((build, index) => {
-										const {
-											id: buildId,
-											username,
-											items,
-											champion,
-											rank,
-										}: BuildInterface = build;
-										const { id: championId, championName, url } = champion;
+									{championBuilds.builds.length !== 0 ? (
+										championBuilds.builds.map((build, index) => {
+											const {
+												id: buildId,
+												username,
+												items,
+												champion,
+												rank,
+											}: BuildInterface = build;
+											const { id: championId, championName, url } = champion;
 
-										return (
-											<div className={classes.root}>
-												<Paper className={classes.paper}>
-													<Grid container wrap='nowrap' spacing={2}>
-														<Grid item>
-															<Avatar className={classes.large}>
-																<LazyLoadImage
-																	src={`/images/wildriftchampions/${championId}.png`}
-																	style={{ width: '100%' }}
-																	title={championName}
-																	alt={championName}
-																/>
-															</Avatar>
-														</Grid>
-														<Grid item xs>
-															<Box display='flex'>
-																<Box flexGrow={1}>
-																	<Typography variant='body1'>
-																		<span
-																			style={{
-																				color: '#517ebd',
-																				fontWeight: 'bold',
-																				fontSize: '20px',
-																			}}
+											return (
+												<div className={classes.root}>
+													<Paper className={classes.paper}>
+														<Grid container wrap='nowrap' spacing={2}>
+															<Grid item>
+																<Avatar className={classes.large}>
+																	<LazyLoadImage
+																		src={`/images/wildriftchampions/${championId}.png`}
+																		style={{ width: '100%' }}
+																		title={championName}
+																		alt={championName}
+																	/>
+																</Avatar>
+															</Grid>
+															<Grid item xs>
+																<Box display='flex'>
+																	<Box flexGrow={1}>
+																		<Typography variant='body1'>
+																			<span
+																				style={{
+																					color: '#517ebd',
+																					fontWeight: 'bold',
+																					fontSize: '20px',
+																				}}
+																			>
+																				{championName}
+																			</span>
+																		</Typography>
+																		<Typography variant='body1'>
+																			<span style={{ color: '#949494' }}>
+																				by
+																			</span>{' '}
+																			<span style={{ color: '#e9eaec' }}>
+																				{username}
+																			</span>
+																		</Typography>
+																	</Box>
+																	<Box>
+																		<Avatar
+																			className={classes.large}
+																			style={{ backgroundColor: '#38465a' }}
 																		>
-																			{championName}
-																		</span>
-																	</Typography>
-																	<Typography variant='body1'>
-																		<span style={{ color: '#949494' }}>by</span>{' '}
-																		<span style={{ color: '#e9eaec' }}>
-																			{username}
-																		</span>
-																	</Typography>
+																			{rank ? (
+																				<LazyLoadImage
+																					src={`/images/wildriftranks/${rank.id}.png`}
+																					style={{
+																						width: '80%',
+																					}}
+																					title={rank.rankName}
+																					alt={rank.rankName}
+																				/>
+																			) : (
+																				<LazyLoadImage
+																					src='/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png'
+																					style={{
+																						width: '80%',
+																					}}
+																					title='Unranked'
+																					alt='Unranked'
+																				/>
+																			)}
+																		</Avatar>
+																	</Box>
 																</Box>
-																<Box>
-																	<Avatar
-																		className={classes.large}
-																		style={{ backgroundColor: '#38465a' }}
-																	>
-																		{rank ? (
-																			<LazyLoadImage
-																				src={`/images/wildriftranks/${rank.id}.png`}
-																				style={{
-																					width: '80%',
-																				}}
-																				title={rank.rankName}
-																				alt={rank.rankName}
-																			/>
-																		) : (
-																			<LazyLoadImage
-																				src='/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png'
-																				style={{
-																					width: '80%',
-																				}}
-																				title='Unranked'
-																				alt='Unranked'
-																			/>
-																		)}
-																	</Avatar>
-																</Box>
-															</Box>
+															</Grid>
 														</Grid>
-													</Grid>
-													<Box style={{ marginTop: '30px' }}>
-														{items
-															.filter((item) => item.type !== 'optional')
-															.map((item) => {
-																const { id: itemId, itemName } = item;
+														<Box style={{ marginTop: '30px' }}>
+															{items
+																.filter((item) => item.type !== 'optional')
+																.map((item) => {
+																	const { id: itemId, itemName } = item;
 
-																return (
-																	<>
-																		<Box style={{ display: 'inline-block' }}>
-																			<LazyLoadImage
-																				src={`/images/wildriftitems/${itemId}.png`}
-																				style={{ width: '50px' }}
-																				alt={itemName}
-																				title={itemName}
-																			/>
-																		</Box>
-																	</>
-																);
-															})}
-													</Box>
-													<Box
-														display='flex'
-														flexDirection='row-reverse'
-														style={{ margin: '20px 0 0 0' }}
-													>
-														<a
-															// href={`https://wildriftbuilds.herokuapp.com/build/${buildId}`}
-															href={`/build/${buildId}`}
+																	return (
+																		<>
+																			<Box style={{ display: 'inline-block' }}>
+																				<LazyLoadImage
+																					src={`/images/wildriftitems/${itemId}.png`}
+																					style={{ width: '50px' }}
+																					alt={itemName}
+																					title={itemName}
+																				/>
+																			</Box>
+																		</>
+																	);
+																})}
+														</Box>
+														<Box
+															display='flex'
+															flexDirection='row-reverse'
+															style={{ margin: '20px 0 0 0' }}
 														>
-															<Button variant='contained' color='primary'>
-																Learn more
-															</Button>
-														</a>
-													</Box>
-												</Paper>
-											</div>
-										);
-									})}
+															<a
+																// href={`https://wildriftbuilds.herokuapp.com/build/${buildId}`}
+																href={`/build/${buildId}`}
+															>
+																<Button variant='contained' color='primary'>
+																	Learn more
+																</Button>
+															</a>
+														</Box>
+													</Paper>
+												</div>
+											);
+										})
+									) : (
+										<Box
+											style={{
+												backgroundColor: '#f5f5f5',
+												padding: '40px',
+												margin: '20px 0',
+											}}
+											display='flex'
+											justifyContent='center'
+										>
+											<Box>
+												<LazyLoadImage
+													src='/images/no_data.svg'
+													width='120'
+													style={{
+														display: 'block',
+														marginLeft: 'auto',
+														marginRight: 'auto',
+														margin: '0 auto 30px auto',
+													}}
+												/>
+												<Typography gutterBottom>
+													There are no builds for this hero yet.{' '}
+													<a
+														href='/create'
+														style={{ color: '#517ebd', textDecoration: 'none' }}
+													>
+														Create a build
+													</a>
+												</Typography>
+											</Box>
+										</Box>
+									)}
 								</Box>
 							</Box>
 						</>

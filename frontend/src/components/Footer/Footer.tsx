@@ -26,6 +26,9 @@ export default function Header() {
 						<Box style={{ padding: '80px 0' }}>
 							<Box style={{ paddingBottom: '20px' }}>
 								<a href='/' className={styles.footerLink}>
+									FAQ
+								</a>
+								<a href='/' className={styles.footerLink}>
 									Feedback
 								</a>
 								<a href='/create' className={styles.footerLink}>

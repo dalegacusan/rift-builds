@@ -27,6 +27,8 @@ interface ChampionInterface {
 	id: string;
 	championName: string;
 	url: string;
+	lane: Array<String>;
+	title: string;
 }
 interface ItemInterface {
 	id: string;

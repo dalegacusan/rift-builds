@@ -24,7 +24,8 @@ interface ChampionInterface {
 	id: string;
 	championName: string;
 	url: string;
-	lane?: string;
+	lane: Array<String>;
+	title: string;
 }
 
 export default function Landing() {
@@ -160,11 +161,12 @@ export default function Landing() {
 					className={styles.heroesContainer}
 				>
 					{champions && champions.length !== 0 ? (
-						filteredChampions.map((champion) => {
+						filteredChampions.map((champion, index) => {
 							const { id: championId, championName } = champion;
 
 							return (
 								<Box
+									key={index}
 									style={{
 										margin: '15px 20px 0 0',
 									}}
