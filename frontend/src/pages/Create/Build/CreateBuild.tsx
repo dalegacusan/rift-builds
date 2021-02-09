@@ -35,8 +35,22 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Typography from '@material-ui/core/Typography';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Divider from '@material-ui/core/Divider';
 // Components
 import Layout from '../../../components/Layout';
+// Types
+import {
+	ItemInterface,
+	CountersInterface,
+	ChampionInterface,
+	RankInterface,
+	RuneInterface,
+	SpellInterface,
+	BuildInterface,
+} from '../../../utils/interfaces';
 // CSS
 import styles from './CreateBuild.module.css';
 const useStyles = makeStyles((theme) => ({
@@ -52,63 +66,12 @@ const useStyles = makeStyles((theme) => ({
 		color: '#fff',
 	},
 }));
-// Types
-interface ChampionInterface {
-	id: string;
-	championName: string;
-	url: string;
-	lane: Array<String>;
-	title: string;
-}
-interface ItemInterface {
-	id: string;
-	itemName: string;
-	reason?: string;
-	type: string;
-	url: string;
-}
-
-interface RankInterface {
-	id: string;
-	rankName: string;
-	url: string;
-}
-
-interface RuneInterface {
-	id: string;
-	runeName: string;
-	url: string;
-	type: string;
-	path?: string;
-}
-
-interface SpellInterface {
-	id: string;
-	spellName: string;
-	url: string;
-}
-
-interface BuildInterface {
-	id?: string;
-	username: string;
-	champion: ChampionInterface;
-	items: ItemInterface[];
-	rank: RankInterface;
-	runes: {
-		keystone: RuneInterface;
-		domination: RuneInterface;
-		resolve: RuneInterface;
-		inspiration: RuneInterface;
-	};
-	spells: {
-		spellOne: SpellInterface;
-		spellTwo: SpellInterface;
-	};
-}
 
 export default function Landing() {
+	const [tabValue, setTabValue] = useState(0);
 	const [openBackdrop, setOpenBackdrop] = useState(false);
 	const [hasSubmittedBuild, setHasSubmittedBuild] = useState(false);
+
 	const [username, setUsername] = useState('');
 	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
 	const [items, setItems] = useState<Array<ItemInterface>>([]);
@@ -121,6 +84,11 @@ export default function Landing() {
 		url:
 			'https://static.wikia.nocookie.net/leagueoflegends/images/c/ce/Aery_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114442',
 		type: 'keystone',
+		description: [
+			'Basic attacks and abilities against an enemy champion signals Aery to dash to them, dealing 10 - 60 (based on level) (+ 20% bonus AD) (+ 10% AP) Adaptive damage. Healing, shielding, or buffing an ally signals Aery to dash to them, shielding them for 20 - 120 (based on level) (+ 40% bonus AD) (+ 20% AP) for 2 seconds.',
+			'Aery lingers on the target for 2 seconds before flying back to the user, and cannot be sent out again until she returns. Aery is initially very slow, but gradually accelerates, and can be picked up by moving near her.',
+			'Adaptive Damage: Deals either physical or magic damage depending on your bonus stats, defaulting based on the origin of the effect.',
+		],
 	});
 	const [runeDomination, setRuneDomination] = useState<RuneInterface>({
 		id: '7a61f821-168c-4817-bbdd-daf3ce5439dc',
@@ -129,6 +97,9 @@ export default function Landing() {
 			'https://static.wikia.nocookie.net/leagueoflegends/images/c/ca/Brutal_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102514',
 		type: 'secondary',
 		path: 'domination',
+		description: [
+			'Gain 7 AD and 2% armor penetration, or 14 AP and 2% magic penetration. (Adaptive)',
+		],
 	});
 	const [runeResolve, setRuneResolve] = useState<RuneInterface>({
 		id: 'fc2532cb-e6d9-4577-a567-4f10fff13e0a',
@@ -137,6 +108,9 @@ export default function Landing() {
 			'https://static.wikia.nocookie.net/leagueoflegends/images/b/b2/Backbone_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102418',
 		type: 'secondary',
 		path: 'resolve',
+		description: [
+			'Gain 10 AR or 10 MR, based on whichever stat you have less of.',
+		],
 	});
 	const [runeInspiration, setRuneInspiration] = useState<RuneInterface>({
 		id: '80216900-b198-4195-ab1c-e6e309c28ff3',
@@ -145,6 +119,10 @@ export default function Landing() {
 			'https://static.wikia.nocookie.net/leagueoflegends/images/e/e7/Hunter_-_Genius_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102756',
 		type: 'secondary',
 		path: 'inspiration',
+		description: [
+			'Gain 2.5 Ability Haste.',
+			'Unique champion takedowns grant 2.5 Ability Haste. (Max Ability Haste 15)',
+		],
 	});
 
 	const [spells, setSpells] = useState<Array<SpellInterface>>([]);
@@ -153,12 +131,20 @@ export default function Landing() {
 		spellName: 'Barrier',
 		url:
 			'/uploads/league-of-legends-wild-rift/images/summoner-spells/shield.jpg',
+		description: [
+			'Gain a shield that absorbs 115−465 (based on level) damage for 2 seconds.',
+		],
+		cooldown: '90',
 	});
 	const [spellTwo, setSpellTwo] = useState<SpellInterface>({
 		id: 'edbd4a33-514a-4334-8e61-01c296b8a767',
 		spellName: 'Barrier',
 		url:
 			'/uploads/league-of-legends-wild-rift/images/summoner-spells/shield.jpg',
+		description: [
+			'Gain a shield that absorbs 115−465 (based on level) damage for 2 seconds.',
+		],
+		cooldown: '90',
 	});
 
 	const [itemsConfirmed, setItemsConfirmed] = useState<Array<ItemInterface>>(
@@ -178,6 +164,36 @@ export default function Landing() {
 				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/Ahri_wild_rift.png',
 			lane: ['Middle'],
 			title: 'Nine-Tailed Fox',
+			counters: {
+				weakAgainst: [
+					{
+						championName: 'Twisted Fate',
+						id: '85f2909d-e3c1-425b-8398-5c8b9c145633',
+					},
+					{
+						championName: 'Fizz',
+						id: '96a64b1c-5a70-4b6c-a8ba-cf82d474a928',
+					},
+					{
+						championName: 'Yasuo',
+						id: 'e9759479-e2b8-45d4-84ce-6711c7371591',
+					},
+				],
+				strongAgainst: [
+					{
+						championName: 'Akali',
+						id: '5a05e0d6-9c06-44af-9df9-a1fad5a2e427',
+					},
+					{
+						championName: 'Twisted Fate',
+						id: '85f2909d-e3c1-425b-8398-5c8b9c145633',
+					},
+					{
+						championName: 'Lux',
+						id: 'fd23d139-1fb4-4dd7-860b-ef261bf13431',
+					},
+				],
+			},
 		}
 	);
 	const [itemSelected, setItemSelected] = useState<ItemInterface>(
@@ -185,13 +201,24 @@ export default function Landing() {
 		{
 			id: 'a42bcabd-290c-47f2-ae68-258d412c6d8d',
 			itemName: 'Abyssal Mask',
-			type: 'primary',
 			url:
 				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/abyssalmask_wild_rift.png',
+			category: 'defense',
+			tier: 'upgraded',
+			statistics: [
+				'+300 Max Health',
+				'+40 Magic Resistance',
+				'+300 Max Mana',
+				'+10 Ability Haste',
+			],
+			description: [
+				'Eternity: Restore Mana equal to 15% of the damage taken from champions. Regen Health equal to 20% of Mana spent. Capped at 25 Health per cast.',
+				'Abyssal: Nearby enemy champions take 15% bonus magic damage.',
+			],
 		}
 	);
 	const [rankSelected, setRankSelected] = useState<RankInterface>(
-		// Defaults to Item: 'Abyssal Mask' which is the first option
+		// Defaults to Rank: 'Unranked' which is the first option
 		{
 			id: 'a4938a79-f11f-4ee1-9ec5-7741a12c4ef9',
 			rankName: 'Unranked',
@@ -201,8 +228,13 @@ export default function Landing() {
 	);
 	const [dialogItem, setDialogItem] = useState<ItemInterface>({
 		id: '',
+		category: '',
+		description: [],
 		itemName: '',
-		type: 'primary',
+		reason: '',
+		statistics: [],
+		tier: '',
+		type: '',
 		url: '',
 	});
 	const [itemType, setItemType] = useState('primary');
@@ -211,19 +243,24 @@ export default function Landing() {
 
 	useEffect(() => {
 		const getChampions = axios.get(
-			'https://wildriftbuilds.herokuapp.com/api/champion/all'
+			// 'https://wildriftbuilds.herokuapp.com/api/champion/all'
+			'/api/champion/all'
 		);
 		const getItems = axios.get(
-			'https://wildriftbuilds.herokuapp.com/api/item/all'
+			// 'https://wildriftbuilds.herokuapp.com/api/item/all'
+			'/api/item/all'
 		);
 		const getRanks = axios.get(
-			'https://wildriftbuilds.herokuapp.com/api/rank/all'
+			// 'https://wildriftbuilds.herokuapp.com/api/rank/all'
+			'/api/rank/all'
 		);
 		const getRunes = axios.get(
-			'https://wildriftbuilds.herokuapp.com/api/rune/all'
+			// 'https://wildriftbuilds.herokuapp.com/api/rune/all'
+			'/api/rune/all'
 		);
 		const getSpells = axios.get(
-			'https://wildriftbuilds.herokuapp.com/api/spell/all'
+			// 'https://wildriftbuilds.herokuapp.com/api/spell/all'
+			'/api/spell/all'
 		);
 
 		Promise.all([getChampions, getItems, getRanks, getRunes, getSpells]).then(
@@ -332,6 +369,7 @@ export default function Landing() {
 		if (!getChampion) {
 			return;
 		} else {
+			console.log(getChampion);
 			setChampionSelected(getChampion);
 		}
 	};
@@ -422,6 +460,7 @@ export default function Landing() {
 	const openedDialogItem = itemsConfirmed.filter(
 		(item) => item.id === dialogItem.id
 	)[0];
+	// Handle Dialog Close
 	const handleClose = (buttonClicked?: string) => {
 		if (buttonClicked === 'confirm') {
 			// If input value is empty, remove reason property from item object
@@ -518,10 +557,7 @@ export default function Landing() {
 					resolve: runeResolve,
 					inspiration: runeInspiration,
 				},
-				spells: {
-					spellOne,
-					spellTwo,
-				},
+				spells: [{ ...spellOne }, { ...spellTwo }],
 			};
 
 			const saveToDatabase = await axios
@@ -539,7 +575,7 @@ export default function Landing() {
 					if (
 						err.response.status === 429 &&
 						err.response.data ===
-							"You're creating too many builds. Please try again after 5 minutes."
+							"You're creating too many builds. Please try again after 30 minutes."
 					) {
 						errorBuildSaved(err.response.data);
 					} else {
@@ -568,436 +604,781 @@ export default function Landing() {
 		}
 	}
 
+	// =============================
+
+	const handleTabValueChange = (
+		event: React.ChangeEvent<{}>,
+		newValue: number
+	) => {
+		setTabValue(newValue);
+	};
+
+	interface TabPanelProps {
+		children?: React.ReactNode;
+		index: any;
+		value: any;
+	}
+
+	function TabPanel(props: TabPanelProps) {
+		const { children, value, index, ...other } = props;
+
+		return (
+			<Grid
+				style={{ padding: '0 20px' }}
+				container
+				role='tabpanel'
+				hidden={value !== index}
+				id={`scrollable-auto-tabpanel-${index}`}
+				aria-labelledby={`scrollable-auto-tab-${index}`}
+				{...other}
+			>
+				{value === index && <>{children}</>}
+			</Grid>
+		);
+	}
+
+	function a11yProps(index: any) {
+		return {
+			id: `scrollable-auto-tab-${index}`,
+			'aria-controls': `scrollable-auto-tabpanel-${index}`,
+		};
+	}
+	// =============================
+
 	return (
 		<>
-			<hr />
+			<Backdrop className={classes.backdrop} open={openBackdrop}>
+				<CircularProgress color='inherit' />
+			</Backdrop>
 			<Toaster />
+			<Dialog
+				open={openItemDialog}
+				onClose={() => handleClose()}
+				aria-labelledby='form-dialog-title'
+			>
+				<DialogTitle id='form-dialog-title'>
+					{dialogItem ? dialogItem.itemName : null}
+				</DialogTitle>
+				<DialogContent>
+					<DialogContentText>
+						Let others know why you chose this item by giving an explanation
+						below.
+					</DialogContentText>
+					<TextField
+						autoFocus
+						margin='dense'
+						id='name'
+						label='Explanation'
+						multiline
+						fullWidth
+						value={dialogValue}
+						onChange={(e) => handleItemReasonChange(e)}
+					/>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleClear} color='primary'>
+						Clear
+					</Button>
+					<Button onClick={() => handleClose('confirm')} color='primary'>
+						Confirm
+					</Button>
+				</DialogActions>
+			</Dialog>
 
 			<div className={classes.root}>
 				<Grid container>
-					<Backdrop
-						className={classes.backdrop}
-						open={openBackdrop}
-						onClick={() => setOpenBackdrop(false)}
-					>
-						<CircularProgress color='inherit' />
-					</Backdrop>
-					<Dialog
-						open={openItemDialog}
-						onClose={() => handleClose()}
-						aria-labelledby='form-dialog-title'
-					>
-						<DialogTitle id='form-dialog-title'>
-							{dialogItem ? dialogItem.itemName : null}
-						</DialogTitle>
-						<DialogContent>
-							<DialogContentText>
-								Let others know why you chose this item by giving an explanation
-								below.
-							</DialogContentText>
-							<TextField
-								autoFocus
-								margin='dense'
-								id='name'
-								label='Explanation'
-								multiline
-								fullWidth
-								value={dialogValue}
-								onChange={(e) => handleItemReasonChange(e)}
-							/>
-						</DialogContent>
-						<DialogActions>
-							<Button onClick={handleClear} color='primary'>
-								Clear
-							</Button>
-							<Button onClick={() => handleClose('confirm')} color='primary'>
-								Confirm
-							</Button>
-						</DialogActions>
-					</Dialog>
-					{/* Select Champion */}
-					<Grid item xs={6}>
-						<div>
-							<p>Select Champion</p>
-							{/* Display Champion Image */}
-							{championSelected ? (
-								<LazyLoadImage
-									src={`/images/wildriftchampions/${championSelected.id}.png`}
-									style={{ width: '100px' }}
-								/>
-							) : (
-								<LazyLoadImage
-									src={`/images/wildriftchampions/48ca031a-d92e-44e6-b7b6-f3eb1dbe644c.png`}
-								/>
-							)}
-
-							{
-								<FormControl className={classes.formControl}>
-									<InputLabel shrink htmlFor='champion-select'>
-										Champion
-									</InputLabel>
-									<NativeSelect
-										onChange={handleChampSelectChange}
-										inputProps={{
-											name: 'champion',
-											id: 'champion-select',
-										}}
-									>
-										{champions.map(
-											({ id, championName, url }: ChampionInterface, index) => {
-												return <option value={id}>{championName}</option>;
-											}
-										)}
-									</NativeSelect>
-									<FormHelperText>Select a champion</FormHelperText>
-								</FormControl>
-							}
-						</div>
-					</Grid>
-
-					{/* Select Item */}
-					<Grid item xs={6}>
-						<Box>
-							<p>Select Item</p>
-
-							{itemSelected ? (
-								<LazyLoadImage
-									src={`/images/wildriftitems/${itemSelected.id}.png`}
-								/>
-							) : (
-								<LazyLoadImage
-									src={`/images/wildriftitems/a42bcabd-290c-47f2-ae68-258d412c6d8d.png`}
-								/>
-							)}
-
-							{
-								<FormControl className={classes.formControl}>
-									<InputLabel shrink htmlFor='item-select'>
-										Item
-									</InputLabel>
-									<NativeSelect
-										onChange={handleItemSelectChange}
-										inputProps={{
-											name: 'item',
-											id: 'item-select',
-										}}
-									>
-										{items.map(
-											({ id, itemName, url }: ItemInterface, index) => {
-												return <option value={id}>{itemName}</option>;
-											}
-										)}
-									</NativeSelect>
-									<FormHelperText>Add an item to your build</FormHelperText>
-								</FormControl>
-							}
-
-							<Box>
-								<p>Item Type</p>
-								<RadioGroup
-									row
-									name='position'
-									defaultValue='primary'
-									style={{
-										display: 'inline-block',
-									}}
-									onChange={(e) => handleItemTypeChange(e)}
-								>
-									<FormControlLabel
-										value='primary'
-										control={<Radio color='primary' />}
-										label='Primary'
-										labelPlacement='end'
-										style={{ margin: '0' }}
-									/>
-									<FormControlLabel
-										value='optional'
-										control={<Radio color='primary' />}
-										label='Optional'
-										labelPlacement='end'
-										style={{ margin: '0' }}
-									/>
-								</RadioGroup>
-							</Box>
-
-							<br />
-
-							<Button
-								variant='contained'
-								color='secondary'
-								onClick={handleAddItemClick}
+					<Grid item xs={12}>
+						<Box style={{ padding: '20px 0', marginTop: '20px' }}>
+							<Typography variant='h6' gutterBottom>
+								Create your build
+							</Typography>
+							<Typography
+								variant='body2'
+								style={{ color: '#666666' }}
+								gutterBottom
 							>
-								Add Item
-							</Button>
+								Please note that you can only create up to 5 builds every 30
+								minutes.
+							</Typography>
 						</Box>
 					</Grid>
 
-					<Typography>Select Rune</Typography>
-					{/* Select Rune */}
-					<Grid container item xs={12}>
-						{/* KEYSTONE Rune */}
-						<Grid item xs={12} sm={3}>
-							{runeKeystone ? (
-								<LazyLoadImage
-									src={`/images/wildriftrunes/${runeKeystone.id}.png`}
-									style={{ width: '95px' }}
-								/>
-							) : (
-								<LazyLoadImage
-									src={`/images/wildriftrunes/feadf691-c740-4e7d-a4e8-9c705a48ea6a.png`}
-									style={{ width: '95px' }}
-								/>
-							)}
+					<AppBar
+						position='static'
+						style={{
+							margin: '20px 0',
+							color: 'inherit',
+							boxShadow: 'none',
+							borderStyle: 'none',
+							backgroundColor: '#f7f7f7',
+						}}
+					>
+						<Tabs
+							value={tabValue}
+							onChange={handleTabValueChange}
+							indicatorColor='primary'
+							variant='scrollable'
+							scrollButtons='auto'
+							aria-label='scrollable auto tabs example'
+							// style={{ color: '#ffffff' }}
+						>
+							<Tab label='Champion' {...a11yProps(0)} />
+							<Tab label='Items' {...a11yProps(1)} />
+							<Tab label='Runes' {...a11yProps(2)} />
+							<Tab label='Spells' {...a11yProps(3)} />
+							<Tab label='Player Details' {...a11yProps(4)} />
+						</Tabs>
+					</AppBar>
 
-							{
-								<FormControl className={classes.formControl}>
-									<InputLabel shrink htmlFor='rune-select'>
-										Keystone
-									</InputLabel>
-									<NativeSelect
-										onChange={(e) => handleRuneChange(e, 'keystone')}
-										inputProps={{
-											name: 'rune',
-											id: 'rune-select',
-										}}
-									>
-										{runes
-											.filter((rune) => rune.type === 'keystone')
-											.map(({ id, runeName, url }: RuneInterface, index) => {
-												return <option value={id}>{runeName}</option>;
-											})}
-									</NativeSelect>
-									<FormHelperText>Select a Keystone Rune</FormHelperText>
-								</FormControl>
-							}
+					{/* Select Champion */}
+					<TabPanel value={tabValue} index={0}>
+						<Grid item xs={12} style={{ marginTop: '30px' }}>
+							<Typography
+								style={{ fontSize: '18px', fontWeight: 'bold' }}
+								gutterBottom
+							>
+								Select a Champion
+							</Typography>
+							<Typography variant='body1'>
+								Get started by selecting a champion your build is for.
+							</Typography>
+							<Divider style={{ margin: '15px 0 10px 0' }} />
 						</Grid>
+						<Grid item xs={12} sm={6}>
+							<Box style={{ marginTop: '16px' }}>
+								{/* Display Champion Image */}
+								{championSelected ? (
+									<LazyLoadImage
+										src={`/images/wildriftchampions/${championSelected.id}.png`}
+										style={{ width: '100px', marginRight: '10px' }}
+									/>
+								) : (
+									<LazyLoadImage
+										src={`/images/wildriftchampions/48ca031a-d92e-44e6-b7b6-f3eb1dbe644c.png`}
+										style={{ width: '100px', marginRight: '10px' }}
+									/>
+								)}
 
-						{/* Secondary: Domination */}
-						<Grid item xs={12} sm={3}>
-							{runeDomination ? (
-								<LazyLoadImage
-									src={`/images/wildriftrunes/${runeDomination.id}.png`}
-									style={{ width: '95px' }}
-								/>
-							) : (
-								<LazyLoadImage
-									src={`/images/wildriftrunes/7a61f821-168c-4817-bbdd-daf3ce5439dc.png`}
-									style={{ width: '95px' }}
-								/>
-							)}
-
-							{
-								<FormControl className={classes.formControl}>
-									<InputLabel shrink htmlFor='rune-select'>
-										Domination (Slot 1)
-									</InputLabel>
-									<NativeSelect
-										onChange={(e) =>
-											handleRuneChange(e, 'secondary', 'domination')
-										}
-										inputProps={{
-											name: 'rune',
-											id: 'rune-select',
-										}}
-									>
-										{runes
-											.filter(
-												(rune) =>
-													rune.type === 'secondary' &&
-													rune.path === 'domination'
-											)
-											.map(({ id, runeName, url }: RuneInterface, index) => {
-												return <option value={id}>{runeName}</option>;
-											})}
-									</NativeSelect>
-									<FormHelperText>Select a Domination Rune</FormHelperText>
-								</FormControl>
-							}
+								{
+									<FormControl className={classes.formControl}>
+										<InputLabel shrink htmlFor='champion-select'>
+											Champion
+										</InputLabel>
+										<NativeSelect
+											value={championSelected.id}
+											onChange={handleChampSelectChange}
+											inputProps={{
+												name: 'champion',
+												id: 'champion-select',
+											}}
+										>
+											{champions.map(
+												(
+													{ id, championName, url }: ChampionInterface,
+													index
+												) => {
+													return (
+														<option key={index} value={id}>
+															{championName}
+														</option>
+													);
+												}
+											)}
+										</NativeSelect>
+										<FormHelperText>Select a champion</FormHelperText>
+									</FormControl>
+								}
+							</Box>
 						</Grid>
+						<Grid item xs={12} sm={6}>
+							<Box style={{ marginTop: '10px' }}>
+								<Typography style={{ fontSize: '18px', fontWeight: 'bold' }}>
+									{championSelected.championName}
+								</Typography>
+								<Typography gutterBottom>
+									is <span style={{ color: '#cc1f1f' }}>weak against</span>
+								</Typography>
+								{championSelected.counters.weakAgainst.map((champion) => {
+									const { id: weakAgainstChampionId, championName } = champion;
 
-						{/* Secondary: Resolve */}
-						<Grid item xs={12} sm={3}>
-							{runeResolve ? (
-								<LazyLoadImage
-									src={`/images/wildriftrunes/${runeResolve.id}.png`}
-									style={{ width: '95px' }}
-								/>
-							) : (
-								<LazyLoadImage
-									src={`/images/wildriftrunes/fc2532cb-e6d9-4577-a567-4f10fff13e0a.png`}
-									style={{ width: '95px' }}
-								/>
-							)}
+									return (
+										<Box style={{ display: 'inline-block' }}>
+											<a href={`/builds/${weakAgainstChampionId}`}>
+												<LazyLoadImage
+													src={`/images/wildriftchampions/${weakAgainstChampionId}.png`}
+													alt={championName}
+													title={championName}
+													width='60'
+													style={{ marginRight: '6px' }}
+												/>
+											</a>
+										</Box>
+									);
+								})}
+								<Typography gutterBottom>
+									but <span style={{ color: '#3b9c3f' }}>strong against</span>
+								</Typography>
+								{championSelected.counters.strongAgainst.map((champion) => {
+									const {
+										id: strongAgainstChampionId,
+										championName,
+									} = champion;
+									console.log(champion);
 
-							{
-								<FormControl className={classes.formControl}>
-									<InputLabel shrink htmlFor='rune-select'>
-										Resolve (Slot 2)
-									</InputLabel>
-									<NativeSelect
-										onChange={(e) =>
-											handleRuneChange(e, 'secondary', 'resolve')
-										}
-										inputProps={{
-											name: 'rune',
-											id: 'rune-select',
-										}}
-									>
-										{runes
-											.filter(
-												(rune) =>
-													rune.type === 'secondary' && rune.path === 'resolve'
-											)
-											.map(({ id, runeName, url }: RuneInterface, index) => {
-												return <option value={id}>{runeName}</option>;
-											})}
-									</NativeSelect>
-									<FormHelperText>Select a Resolve Rune</FormHelperText>
-								</FormControl>
-							}
+									return (
+										<Box style={{ display: 'inline-block' }}>
+											<a href={`/builds/${strongAgainstChampionId}`}>
+												<LazyLoadImage
+													src={`/images/wildriftchampions/${strongAgainstChampionId}.png`}
+													alt={championName}
+													title={championName}
+													width='60'
+													style={{ marginRight: '6px' }}
+												/>
+											</a>
+										</Box>
+									);
+								})}
+							</Box>
 						</Grid>
+					</TabPanel>
 
-						{/* Secondary: Inspiration */}
-						<Grid item xs={12} sm={3}>
-							{runeResolve ? (
-								<LazyLoadImage
-									src={`/images/wildriftrunes/${runeInspiration.id}.png`}
-									style={{ width: '95px' }}
-								/>
-							) : (
-								<LazyLoadImage
-									src={`/images/wildriftrunes/80216900-b198-4195-ab1c-e6e309c28ff3.png`}
-									style={{ width: '95px' }}
-								/>
-							)}
-
-							{
-								<FormControl className={classes.formControl}>
-									<InputLabel shrink htmlFor='rune-select'>
-										Inspiration (Slot 3)
-									</InputLabel>
-									<NativeSelect
-										onChange={(e) =>
-											handleRuneChange(e, 'secondary', 'inspiration')
-										}
-										inputProps={{
-											name: 'rune',
-											id: 'rune-select',
-										}}
-									>
-										{runes
-											.filter(
-												(rune) =>
-													rune.type === 'secondary' &&
-													rune.path === 'inspiration'
-											)
-											.map(({ id, runeName, url }: RuneInterface, index) => {
-												return <option value={id}>{runeName}</option>;
-											})}
-									</NativeSelect>
-									<FormHelperText>Select a Inspiration Rune</FormHelperText>
-								</FormControl>
-							}
+					{/* Select Item */}
+					<TabPanel value={tabValue} index={1}>
+						<Grid item xs={12} style={{ marginTop: '30px' }}>
+							<Typography
+								style={{ fontSize: '18px', fontWeight: 'bold' }}
+								gutterBottom
+							>
+								Select Items
+							</Typography>
+							<Typography variant='body1'>
+								Please note that you can only select up to 6 primary items.
+							</Typography>
+							<Divider style={{ margin: '15px 0 10px 0' }} />
 						</Grid>
-					</Grid>
+						<Grid item xs={12} sm={6}>
+							<Box style={{ marginTop: '16px' }}>
+								{itemSelected ? (
+									<LazyLoadImage
+										src={`/images/wildriftitems/${itemSelected.id}.png`}
+										style={{ width: '100px', marginRight: '10px' }}
+									/>
+								) : (
+									<LazyLoadImage
+										src={`/images/wildriftitems/a42bcabd-290c-47f2-ae68-258d412c6d8d.png`}
+										style={{ width: '100px', marginRight: '10px' }}
+									/>
+								)}
 
-					<Typography>Select Summoner Spells</Typography>
-					<Grid container item xs={12}>
-						{/* Spell One */}
-						<Grid item xs={12} sm={3}>
-							{spells ? (
-								<LazyLoadImage
-									src={`/images/wildriftspells/${spellOne.id}.jpg`}
-									style={{ width: '90px' }}
-								/>
-							) : (
-								<LazyLoadImage
-									src={`/images/wildriftspells/edbd4a33-514a-4334-8e61-01c296b8a767.jpg`}
-									style={{ width: '90px' }}
-								/>
-							)}
+								{
+									<FormControl className={classes.formControl}>
+										<InputLabel shrink htmlFor='item-select'>
+											Item
+										</InputLabel>
+										<NativeSelect
+											onChange={handleItemSelectChange}
+											inputProps={{
+												name: 'item',
+												id: 'item-select',
+											}}
+										>
+											{items.map(
+												({ id, itemName, url }: ItemInterface, index) => {
+													return <option value={id}>{itemName}</option>;
+												}
+											)}
+										</NativeSelect>
+										<FormHelperText>Add an item to your build</FormHelperText>
+									</FormControl>
+								}
 
-							{
-								<FormControl className={classes.formControl}>
-									<InputLabel shrink htmlFor='spell-select'>
-										Spell One
-									</InputLabel>
-									<NativeSelect
-										onChange={(e) => handleSpellChange(e, 'spellOne')}
-										inputProps={{
-											name: 'spell',
-											id: 'spell-select',
+								<Box>
+									<Typography>Item Type</Typography>
+									<RadioGroup
+										row
+										name='position'
+										defaultValue='primary'
+										style={{
+											display: 'inline-block',
 										}}
+										onChange={(e) => handleItemTypeChange(e)}
 									>
-										{spells.map(
-											({ id, spellName, url }: SpellInterface, index) => {
-												return <option value={id}>{spellName}</option>;
-											}
-										)}
-									</NativeSelect>
-									<FormHelperText>Select a Spell</FormHelperText>
-								</FormControl>
-							}
-						</Grid>
-						{/* Spell Two */}
-						<Grid item xs={12} sm={3}>
-							{spells ? (
-								<LazyLoadImage
-									src={`/images/wildriftspells/${spellTwo.id}.jpg`}
-									style={{ width: '90px' }}
-								/>
-							) : (
-								<LazyLoadImage
-									src={`/images/wildriftspells/edbd4a33-514a-4334-8e61-01c296b8a767.jpg`}
-									style={{ width: '90px' }}
-								/>
-							)}
+										<FormControlLabel
+											value='primary'
+											control={<Radio color='primary' />}
+											label='Primary'
+											labelPlacement='end'
+											style={{ margin: '0', display: 'block' }}
+										/>
+										<FormControlLabel
+											value='optional'
+											control={<Radio color='primary' />}
+											label='Optional'
+											labelPlacement='end'
+											style={{ margin: '0', display: 'block' }}
+										/>
+									</RadioGroup>
+								</Box>
 
-							{
-								<FormControl className={classes.formControl}>
-									<InputLabel shrink htmlFor='spell-select'>
-										Spell Two
-									</InputLabel>
-									<NativeSelect
-										onChange={(e) => handleSpellChange(e, 'spellTwo')}
-										inputProps={{
-											name: 'spell',
-											id: 'spell-select',
-										}}
-									>
-										{spells.map(
-											({ id, spellName, url }: SpellInterface, index) => {
-												return <option value={id}>{spellName}</option>;
-											}
-										)}
-									</NativeSelect>
-									<FormHelperText>Select a Spell</FormHelperText>
-								</FormControl>
-							}
+								<Button
+									variant='contained'
+									color='primary'
+									onClick={handleAddItemClick}
+								>
+									Add Item
+								</Button>
+							</Box>
 						</Grid>
-					</Grid>
-
-					{/* Items List */}
-					<Grid item xs={12}>
-						<div>
-							<div>
-								<h3>Items List</h3>
+						<Grid item xs={12} sm={6}>
+							<Box style={{ marginTop: '10px' }}>
+								<Typography
+									style={{ fontSize: '18px', fontWeight: 'bold' }}
+									gutterBottom
+								>
+									<span style={{ color: '#517ebd' }}>
+										{itemSelected.itemName}
+									</span>{' '}
+									Statistics
+								</Typography>
 
 								<Box
 									style={{
-										backgroundColor: '#e6e6e6',
-										padding: '20px',
+										width: '40px',
+										height: '5px',
+										margin: '10px 0 20px 0',
+										backgroundColor: '#517ebd',
 									}}
 								>
-									{itemsConfirmed.length !== 0 ? (
-										<>
-											{/* TYPE: MAIN */}
-											<p>Primary Items</p>
-											<Grid item xs={12}>
-												{itemsConfirmed
-													.filter((item) => item.type !== 'optional')
-													.map((currentItem) => {
-														return (
+									&nbsp;
+								</Box>
+
+								<Box>
+									{itemSelected.statistics.map((stat) => {
+										return (
+											<Typography style={{ color: '#3b9c3f' }} gutterBottom>
+												{stat}
+											</Typography>
+										);
+									})}
+								</Box>
+							</Box>
+						</Grid>
+					</TabPanel>
+
+					{/* Select Runes */}
+					<TabPanel value={tabValue} index={2}>
+						<Grid item xs={12} style={{ marginTop: '30px' }}>
+							<Typography
+								style={{ fontSize: '18px', fontWeight: 'bold' }}
+								gutterBottom
+							>
+								Select Runes
+							</Typography>
+							<Typography variant='body1'>
+								Select the runes that best fit each category.
+							</Typography>
+							<Divider style={{ margin: '15px 0 10px 0' }} />
+						</Grid>
+						<Grid container item xs={12}>
+							{/* KEYSTONE Rune */}
+							<Grid item xs={12} sm={3} style={{ marginTop: '10px' }}>
+								{runeKeystone ? (
+									<LazyLoadImage
+										src={`/images/wildriftrunes/${runeKeystone.id}.png`}
+										style={{ width: '95px' }}
+									/>
+								) : (
+									<LazyLoadImage
+										src={`/images/wildriftrunes/feadf691-c740-4e7d-a4e8-9c705a48ea6a.png`}
+										style={{ width: '95px' }}
+									/>
+								)}
+
+								{
+									<FormControl className={classes.formControl}>
+										<InputLabel shrink htmlFor='rune-select'>
+											Keystone
+										</InputLabel>
+										<NativeSelect
+											onChange={(e) => handleRuneChange(e, 'keystone')}
+											inputProps={{
+												name: 'rune',
+												id: 'rune-select',
+											}}
+										>
+											{runes
+												.filter((rune) => rune.type === 'keystone')
+												.map(({ id, runeName, url }: RuneInterface, index) => {
+													return <option value={id}>{runeName}</option>;
+												})}
+										</NativeSelect>
+										<FormHelperText>Select a Keystone Rune</FormHelperText>
+									</FormControl>
+								}
+							</Grid>
+
+							{/* Secondary: Domination */}
+							<Grid item xs={12} sm={3} style={{ marginTop: '10px' }}>
+								{runeDomination ? (
+									<LazyLoadImage
+										src={`/images/wildriftrunes/${runeDomination.id}.png`}
+										style={{ width: '95px' }}
+									/>
+								) : (
+									<LazyLoadImage
+										src={`/images/wildriftrunes/7a61f821-168c-4817-bbdd-daf3ce5439dc.png`}
+										style={{ width: '95px' }}
+									/>
+								)}
+
+								{
+									<FormControl className={classes.formControl}>
+										<InputLabel shrink htmlFor='rune-select'>
+											Domination (Slot 1)
+										</InputLabel>
+										<NativeSelect
+											onChange={(e) =>
+												handleRuneChange(e, 'secondary', 'domination')
+											}
+											inputProps={{
+												name: 'rune',
+												id: 'rune-select',
+											}}
+										>
+											{runes
+												.filter(
+													(rune) =>
+														rune.type === 'secondary' &&
+														rune.path === 'domination'
+												)
+												.map(({ id, runeName, url }: RuneInterface, index) => {
+													return <option value={id}>{runeName}</option>;
+												})}
+										</NativeSelect>
+										<FormHelperText>Select a Domination Rune</FormHelperText>
+									</FormControl>
+								}
+							</Grid>
+
+							{/* Secondary: Resolve */}
+							<Grid item xs={12} sm={3} style={{ marginTop: '10px' }}>
+								{runeResolve ? (
+									<LazyLoadImage
+										src={`/images/wildriftrunes/${runeResolve.id}.png`}
+										style={{ width: '95px' }}
+									/>
+								) : (
+									<LazyLoadImage
+										src={`/images/wildriftrunes/fc2532cb-e6d9-4577-a567-4f10fff13e0a.png`}
+										style={{ width: '95px' }}
+									/>
+								)}
+
+								{
+									<FormControl className={classes.formControl}>
+										<InputLabel shrink htmlFor='rune-select'>
+											Resolve (Slot 2)
+										</InputLabel>
+										<NativeSelect
+											onChange={(e) =>
+												handleRuneChange(e, 'secondary', 'resolve')
+											}
+											inputProps={{
+												name: 'rune',
+												id: 'rune-select',
+											}}
+										>
+											{runes
+												.filter(
+													(rune) =>
+														rune.type === 'secondary' && rune.path === 'resolve'
+												)
+												.map(({ id, runeName, url }: RuneInterface, index) => {
+													return <option value={id}>{runeName}</option>;
+												})}
+										</NativeSelect>
+										<FormHelperText>Select a Resolve Rune</FormHelperText>
+									</FormControl>
+								}
+							</Grid>
+
+							{/* Secondary: Inspiration */}
+							<Grid item xs={12} sm={3} style={{ marginTop: '10px' }}>
+								{runeResolve ? (
+									<LazyLoadImage
+										src={`/images/wildriftrunes/${runeInspiration.id}.png`}
+										style={{ width: '95px' }}
+									/>
+								) : (
+									<LazyLoadImage
+										src={`/images/wildriftrunes/80216900-b198-4195-ab1c-e6e309c28ff3.png`}
+										style={{ width: '95px' }}
+									/>
+								)}
+
+								{
+									<FormControl className={classes.formControl}>
+										<InputLabel shrink htmlFor='rune-select'>
+											Inspiration (Slot 3)
+										</InputLabel>
+										<NativeSelect
+											onChange={(e) =>
+												handleRuneChange(e, 'secondary', 'inspiration')
+											}
+											inputProps={{
+												name: 'rune',
+												id: 'rune-select',
+											}}
+										>
+											{runes
+												.filter(
+													(rune) =>
+														rune.type === 'secondary' &&
+														rune.path === 'inspiration'
+												)
+												.map(({ id, runeName, url }: RuneInterface, index) => {
+													return <option value={id}>{runeName}</option>;
+												})}
+										</NativeSelect>
+										<FormHelperText>Select a Inspiration Rune</FormHelperText>
+									</FormControl>
+								}
+							</Grid>
+						</Grid>
+					</TabPanel>
+
+					{/* Select Spells */}
+					<TabPanel value={tabValue} index={3}>
+						<Grid item xs={12} style={{ marginTop: '30px' }}>
+							<Typography
+								style={{ fontSize: '18px', fontWeight: 'bold' }}
+								gutterBottom
+							>
+								Select Summoner Spells
+							</Typography>
+							<Typography variant='body1'>
+								Select the summoner spells that best fit this build.
+							</Typography>
+							<Divider style={{ margin: '15px 0 10px 0' }} />
+						</Grid>
+						<Grid container item xs={12}>
+							{/* Spell One */}
+							<Grid item xs={12} sm={3} style={{ marginTop: '10px' }}>
+								{spells ? (
+									<LazyLoadImage
+										src={`/images/wildriftspells/${spellOne.id}.jpg`}
+										style={{ width: '90px' }}
+									/>
+								) : (
+									<LazyLoadImage
+										src={`/images/wildriftspells/edbd4a33-514a-4334-8e61-01c296b8a767.jpg`}
+										style={{ width: '90px' }}
+									/>
+								)}
+
+								{
+									<FormControl className={classes.formControl}>
+										<InputLabel shrink htmlFor='spell-select'>
+											Spell One
+										</InputLabel>
+										<NativeSelect
+											onChange={(e) => handleSpellChange(e, 'spellOne')}
+											inputProps={{
+												name: 'spell',
+												id: 'spell-select',
+											}}
+										>
+											{spells.map(
+												({ id, spellName, url }: SpellInterface, index) => {
+													return <option value={id}>{spellName}</option>;
+												}
+											)}
+										</NativeSelect>
+										<FormHelperText>Select a Spell</FormHelperText>
+									</FormControl>
+								}
+							</Grid>
+							{/* Spell Two */}
+							<Grid item xs={12} sm={3} style={{ marginTop: '10px' }}>
+								{spells ? (
+									<LazyLoadImage
+										src={`/images/wildriftspells/${spellTwo.id}.jpg`}
+										style={{ width: '90px' }}
+									/>
+								) : (
+									<LazyLoadImage
+										src={`/images/wildriftspells/edbd4a33-514a-4334-8e61-01c296b8a767.jpg`}
+										style={{ width: '90px' }}
+									/>
+								)}
+
+								{
+									<FormControl className={classes.formControl}>
+										<InputLabel shrink htmlFor='spell-select'>
+											Spell Two
+										</InputLabel>
+										<NativeSelect
+											onChange={(e) => handleSpellChange(e, 'spellTwo')}
+											inputProps={{
+												name: 'spell',
+												id: 'spell-select',
+											}}
+										>
+											{spells.map(
+												({ id, spellName, url }: SpellInterface, index) => {
+													return <option value={id}>{spellName}</option>;
+												}
+											)}
+										</NativeSelect>
+										<FormHelperText>Select a Spell</FormHelperText>
+									</FormControl>
+								}
+							</Grid>
+						</Grid>
+					</TabPanel>
+
+					{/* Player Details */}
+					<TabPanel value={tabValue} index={4}>
+						<Grid item xs={12} style={{ marginTop: '30px' }}>
+							<Typography
+								style={{ fontSize: '18px', fontWeight: 'bold' }}
+								gutterBottom
+							>
+								Player Details
+							</Typography>
+							<Typography variant='body1'>
+								Fill in the necessary information to have the build credited as
+								yours.
+							</Typography>
+							<Divider style={{ margin: '15px 0 10px 0' }} />
+						</Grid>
+						<Grid container item xs={12}>
+							<Grid item xs={12} md={6} style={{ marginTop: '10px' }}>
+								<Box
+									style={{
+										padding: '10px 0',
+									}}
+								>
+									<Typography gutterBottom style={{ fontWeight: 'bold' }}>
+										Username
+									</Typography>
+									<TextField
+										id='username'
+										label='Username'
+										placeholder='Username'
+										value={username}
+										helperText='Please include your ID (ex: ABC#DEFGH)'
+										variant='outlined'
+										onChange={(e) => setUsername(e.target.value)}
+									/>
+								</Box>
+							</Grid>
+							<Grid item xs={12} md={6} style={{ marginTop: '10px' }}>
+								<Box
+									style={{
+										padding: '10px 0',
+									}}
+								>
+									<div>
+										<Typography gutterBottom style={{ fontWeight: 'bold' }}>
+											Rank
+										</Typography>
+										{/* Display Champion Image */}
+										{rankSelected ? (
+											<LazyLoadImage
+												src={`/images/wildriftranks/${rankSelected.id}.png`}
+												style={{ width: '100px' }}
+											/>
+										) : (
+											<LazyLoadImage
+												src={`/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png`}
+											/>
+										)}
+
+										{
+											<FormControl className={classes.formControl}>
+												<InputLabel shrink htmlFor='rank-select'>
+													Rank
+												</InputLabel>
+												<NativeSelect
+													onChange={handleRankSelectChange}
+													inputProps={{
+														name: 'rank',
+														id: 'rank-select',
+													}}
+												>
+													{ranks.map(
+														({ id, rankName, url }: RankInterface, index) => {
+															return <option value={id}>{rankName}</option>;
+														}
+													)}
+												</NativeSelect>
+												<FormHelperText>Select your rank</FormHelperText>
+											</FormControl>
+										}
+									</div>
+								</Box>
+							</Grid>
+						</Grid>
+					</TabPanel>
+
+					{/* Items List */}
+					<Grid item xs={12}>
+						<Box style={{ margin: '60px 0' }}>
+							<Typography gutterBottom>Items List</Typography>
+
+							<Box
+								style={{
+									backgroundColor: '#e6e6e6',
+									padding: '20px',
+								}}
+							>
+								{itemsConfirmed.length !== 0 ? (
+									<>
+										{/* TYPE: MAIN */}
+										<p>Primary Items</p>
+										<Grid item xs={12}>
+											{itemsConfirmed
+												.filter((item) => item.type !== 'optional')
+												.map((currentItem) => {
+													return (
+														<Grow in={true}>
+															<Box
+																style={{
+																	display: 'inline-block',
+																	margin: '0px 3px',
+																}}
+															>
+																<Box
+																	style={{
+																		display: 'flex',
+																		justifyContent: 'center',
+																	}}
+																>
+																	<LazyLoadImage
+																		title={currentItem.itemName}
+																		className={styles.itemHover}
+																		src={`/images/wildriftitems/${currentItem.id}.png`}
+																		onClick={(e) =>
+																			handleClickOpen(e, currentItem)
+																		}
+																	/>
+																</Box>
+															</Box>
+														</Grow>
+													);
+												})}
+										</Grid>
+
+										<p>Optional Items</p>
+										{/* TYPE: OPTIONAL */}
+										<Grid item xs={12}>
+											{itemsConfirmed
+												.filter((item) => item.type !== 'primary')
+												.map((currentItem: ItemInterface) => {
+													return (
+														<>
 															<Grow in={true}>
 																<Box
 																	style={{
@@ -1022,124 +1403,21 @@ export default function Landing() {
 																	</Box>
 																</Box>
 															</Grow>
-														);
-													})}
-											</Grid>
-
-											<p>Optional Items</p>
-											{/* TYPE: OPTIONAL */}
-											<Grid item xs={12}>
-												{itemsConfirmed
-													.filter((item) => item.type !== 'primary')
-													.map((currentItem: ItemInterface) => {
-														return (
-															<>
-																<Grow in={true}>
-																	<Box
-																		style={{
-																			display: 'inline-block',
-																			margin: '0px 3px',
-																		}}
-																	>
-																		<Box
-																			style={{
-																				display: 'flex',
-																				justifyContent: 'center',
-																			}}
-																		>
-																			<LazyLoadImage
-																				title={currentItem.itemName}
-																				className={styles.itemHover}
-																				src={`/images/wildriftitems/${currentItem.id}.png`}
-																				onClick={(e) =>
-																					handleClickOpen(e, currentItem)
-																				}
-																			/>
-																		</Box>
-																	</Box>
-																</Grow>
-															</>
-														);
-													})}
-											</Grid>
-										</>
-									) : (
-										<p>You haven't added any items to your build yet.</p>
-									)}
-								</Box>
-								<label>
-									Click an item to explain why it's a part of your build
-								</label>
-							</div>
-						</div>
+														</>
+													);
+												})}
+										</Grid>
+									</>
+								) : (
+									<p>You haven't added any items to your build yet.</p>
+								)}
+							</Box>
+							<label>
+								Click an item to explain why it's a part of your build
+							</label>
+						</Box>
 					</Grid>
 
-					{/* Player Details */}
-					<Grid container item xs={12}>
-						<Grid item xs={12} md={6}>
-							<Box
-								style={{
-									padding: '10px 0',
-								}}
-							>
-								<h3>Player Details</h3>
-								<p>Username</p>
-								<TextField
-									id='username'
-									label='Username'
-									placeholder='Username'
-									value={username}
-									helperText='Please include your ID (ex: ABC#DEFGH)'
-									variant='outlined'
-									onChange={(e) => setUsername(e.target.value)}
-								/>
-							</Box>
-						</Grid>
-						<Grid item xs={12} md={6}>
-							<Box
-								style={{
-									padding: '10px 0',
-								}}
-							>
-								<div>
-									<p>Rank</p>
-									{/* Display Champion Image */}
-									{rankSelected ? (
-										<LazyLoadImage
-											src={`/images/wildriftranks/${rankSelected.id}.png`}
-											style={{ width: '100px' }}
-										/>
-									) : (
-										<LazyLoadImage
-											src={`/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png`}
-										/>
-									)}
-
-									{
-										<FormControl className={classes.formControl}>
-											<InputLabel shrink htmlFor='rank-select'>
-												Rank
-											</InputLabel>
-											<NativeSelect
-												onChange={handleRankSelectChange}
-												inputProps={{
-													name: 'rank',
-													id: 'rank-select',
-												}}
-											>
-												{ranks.map(
-													({ id, rankName, url }: RankInterface, index) => {
-														return <option value={id}>{rankName}</option>;
-													}
-												)}
-											</NativeSelect>
-											<FormHelperText>Select your rank</FormHelperText>
-										</FormControl>
-									}
-								</div>
-							</Box>
-						</Grid>
-					</Grid>
 					{/* Build Box */}
 					<Box style={{ marginBottom: '40px' }}>
 						<Button variant='contained' color='primary' onClick={submitBuild}>

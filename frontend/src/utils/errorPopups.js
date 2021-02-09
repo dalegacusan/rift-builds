@@ -9,7 +9,8 @@ const errorItemDuplicate = () =>
 
 const errorBuildSaved = (message) => toast.error(message);
 
-const errorPrimaryItemsLimit = () => toast.error('A build must only have 6 primary items');
+const errorPrimaryItemsLimit = () =>
+	toast.error('A build must only have 6 primary items');
 
 const successBuildSaved = () => toast.success('Successfully saved your build!');
 

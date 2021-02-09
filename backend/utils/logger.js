@@ -1,5 +1,8 @@
 const info = (...message) => {
-	console.log(...message);
+	// The middleware that outputs information about the HTTP requests is obstructing the test execution output. 
+	if (process.env.NODE_ENV !== 'test') {
+		console.log(...message);
+	}
 };
 
 const error = (...message) => {

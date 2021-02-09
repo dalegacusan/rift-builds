@@ -4,19 +4,20 @@ const rateLimit = require("express-rate-limit");
 const BuildController = require('../controllers/build');
 
 const createBuildLimiter = rateLimit({
-	windowMs: 5 * 60 * 1000, // 5 minute window
+	windowMs: 30 * 60 * 1000, // 30 minute window - in milliseconds(ms)
 	max: 5, // start blocking after 5 requests
 	message:
-		"You're creating too many builds. Please try again after 5 minutes."
+		"You're creating too many builds. Please try again after 30 minutes."
 });
 
+// Returns 5 documents every time
 router.post('/all', BuildController.getAllBuilds);
 
-// Individual Hero
-router.post('/all/:championId', BuildController.getBuildsForHero);
+// Get one build
+router.get('/:buildId', BuildController.getOneBuild);
 
-// Individual Build
-router.get('/:buildId', BuildController.getBuild);
+// Get builds for one champion
+router.post('/all/:championId', BuildController.getAllBuildsForChampion);
 
 router.post('/save', createBuildLimiter, BuildController.saveBuild);
 

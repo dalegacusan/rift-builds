@@ -1,0 +1,30 @@
+.filterContainer {
+	padding: 5px 0 10px 0;
+	margin-top: 10px;
+	border-bottom: 2px solid #cccccc;
+}
+
+.rolesListContainer {
+	margin-top: 15px;
+}
+
+.rolesList {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.rolesList li {
+	display: inline-block;
+	margin-right: 6px;
+	font-size: 16px;
+}
+
+.rolesList li:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.searchForChampionContainer {
+	margin-top: 10px;
+}

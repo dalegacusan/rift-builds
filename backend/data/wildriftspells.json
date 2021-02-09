@@ -2,36 +2,69 @@
 	{
 		"id": "dd6ff556-3b07-4be0-bd1f-c2dd9c9ce1dd",
 		"spellName": "Flash",
-		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/flash.jpg"
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/flash.jpg",
+		"description": [
+			"Teleport a short distance forward or towards the aimed direction."
+		],
+		"cooldown": "150"
 	},
 	{
 		"id": "aeb37ecd-ccb5-41fc-ad9c-c9b6bef39e34",
 		"spellName": "Ignite",
-		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/ignite.jpg"
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/ignite.jpg",
+		"description": [
+			"Ignites target enemy champion, dealing 60−410 (based on level) true damage over 5 seconds and inflincting them with Grievous Wounds.",
+			"Grievous Wounds reduces healing effects by 50%"
+		],
+		"cooldown": "90"
 	},
 	{
 		"id": "edbd4a33-514a-4334-8e61-01c296b8a767",
 		"spellName": "Barrier",
-		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/shield.jpg"
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/shield.jpg",
+		"description": [
+			"Gain a shield that absorbs 115−465 (based on level) damage for 2 seconds."
+		],
+		"cooldown": "90"
 	},
 	{
 		"id": "7d210b90-b9bb-401d-a68b-e9ee0d083be7",
 		"spellName": "Heal",
-		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/heal.jpg"
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/heal.jpg",
+		"description": [
+			"Restore 80−360 (based on level) health and grants 30% bonus movement speed for 1 second to you and the most wounded nearby ally champion.",
+			"Healing is halved for champions recently affected by Heal."
+		],
+		"cooldown": "120"
 	},
 	{
 		"id": "13e5a25d-0de7-4481-bf75-381c013e73b9",
 		"spellName": "Exhaust",
-		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/exhaust.jpg"
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/exhaust.jpg",
+		"description": [
+			"Exhausts target enemy champion, reducing their movement speed by 20% and their damage dealt by 40% for 2.5 seconds."
+		],
+		"cooldown": "105"
 	},
 	{
 		"id": "282c2518-01a7-47e3-9960-a4926985b128",
-		"spellName": "Ghost Walk",
-		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/ghost-walk.jpg"
+		"spellName": "Ghost",
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/ghost-walk.jpg",
+		"description": [
+			"Gain a large burst of movement speed that decays to 25% bonus movement speed for 6 seconds."
+		],
+		"cooldown": "90"
 	},
 	{
 		"id": "59f6067c-68e9-4468-9c19-cef2205e1c6a",
 		"spellName": "Smite",
-		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/smite.jpg"
+		"url": "/uploads/league-of-legends-wild-rift/images/summoner-spells/smite.jpg",
+		"description": [
+			"Deal 440−1000 (based on level) true damage to a large or epic monster or minion. Smiting monsters restore 70 (+ 10% maximum health) health. Slaying 4 large monsters upgrades Smite to Chilling Smite or Challenging Smite which can target enemy champions.",
+			"Hunting License: Permanently earn 20% bonus experience from jungle monsters but temporarily earn 20% less gold and XP from minions.",
+			" Tooth And Nail: Deal 10% more damage to jungle monsters. Monsters you damage burn for 30 magic damage and restore 30 health to you over 5 seconds.",
+			"Gain one charge every 45 seconds."
+		],
+		"cooldown": "10"
 	}
 ]

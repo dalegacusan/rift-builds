@@ -3,63 +3,24 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Chip from '@material-ui/core/Chip';
-import Typography from '@material-ui/core/Typography';
+// MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
-
-interface ItemInterface {
-	id: string;
-	itemName: string;
-	reason?: string;
-	type: string;
-	url: string;
-}
-
-interface ChampionInterface {
-	id: string;
-	championName: string;
-	url: string;
-	lane: Array<String>;
-	title: string;
-}
-
-interface RankInterface {
-	id: string;
-	rankName: string;
-	url: string;
-}
-
-interface RuneInterface {
-	id: string;
-	runeName: string;
-	url: string;
-	type: string;
-	path?: string;
-}
-
-interface SpellInterface {
-	id: string;
-	spellName: string;
-	url: string;
-}
-
-interface BuildInterface {
-	id: string;
-	username: string;
-	champion: ChampionInterface;
-	items: ItemInterface[];
-	rank: RankInterface;
-	runes: RuneInterface;
-	spells: SpellInterface;
-}
-
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+// Components
+import BuildBox from './components/BuildBox';
+import LoadingText from '../../components/LoadingText';
+// Types
+import { ChampionInterface, BuildInterface } from '../../utils/interfaces';
+// CSS
+import styles from './herobuilds.module.css';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -68,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
 	paper: {
 		width: '100%',
 		margin: `${theme.spacing(1)}px auto`,
-		padding: theme.spacing(2),
-		backgroundColor: '#233248',
+		padding: '10px',
+		backgroundColor: '#292E38',
 		color: '#ffffff',
 	},
 	large: {
@@ -89,16 +50,20 @@ export default withRouter((props) => {
 	const classes = useStyles();
 
 	const [isLoading, setIsLoading] = useState(true);
+	const [championBuilds, setChampionBuilds] = useState({
+		builds: [],
+		buildsCount: 0,
+	});
 	const [championData, setChampionData] = useState<ChampionInterface>({
 		id: '',
 		championName: '',
-		url: '',
 		lane: [],
 		title: '',
-	});
-	const [championBuilds, setChampionBuilds] = useState({
-		builds: [],
-		count: 0,
+		counters: {
+			weakAgainst: [],
+			strongAgainst: [],
+		},
+		url: '',
 	});
 
 	useEffect(() => {
@@ -107,245 +72,95 @@ export default withRouter((props) => {
 			`/api/build/all/${championId}`,
 			{ page: 5 }
 		);
+		const getOneChampion = axios.get(`/api/champion/${championId}`);
 
-		const getChampionData = axios.get(`/api/champion/${championId}`);
+		Promise.all([getAllBuildsForChampion, getOneChampion]).then((values) => {
+			const [{ data: buildsForChampion }, { data: dataForChampion }] = values;
+			const { buildsCount, builds } = buildsForChampion;
 
-		Promise.all([getAllBuildsForChampion, getChampionData]).then((values) => {
-			const [{ data: championBuildsResponse }, { data: championData }] = values;
-			const { count, builds } = championBuildsResponse;
-
-			setChampionBuilds({ builds, count });
-			setChampionData(championData[0]);
+			setChampionBuilds({ builds, buildsCount });
+			setChampionData(dataForChampion[0]);
 
 			setIsLoading(false);
 		});
 	}, []);
 
 	return (
-		<div>
-			<Container>
-				<Box
-					style={{
-						// backgroundColor: '#cccccc',
-						margin: '30px 0',
-						padding: '20px 0',
-					}}
-				>
-					{!isLoading ? (
-						<>
-							<Grid container wrap='nowrap' spacing={2}>
-								<Grid item>
-									<LazyLoadImage
-										src={`/images/wildriftchampions/${championData.id}.png`}
-										alt={championData.championName}
-										title={championData.championName}
-										style={{ float: 'left' }}
-									/>
-								</Grid>
-								<Grid item xs>
-									<Box style={{ padding: '5px 0' }}>
-										<Typography variant='body1'>
-											<span
-												style={{
-													color: '#517ebd',
-													fontWeight: 'bold',
-													fontSize: '20px',
-												}}
-											>
-												{championData.championName}
-											</span>
-										</Typography>
-										<Typography variant='body1'>
-											<span style={{ color: '#949494' }}>
-												The {championData.title}
-											</span>
-										</Typography>
-									</Box>
-									<Box
-										style={{
-											marginTop: '17px',
-										}}
-									>
-										{championData.lane.map((lane) => {
-											return (
-												<Chip
-													label={lane}
-													color='primary'
-													style={{ marginRight: '4px' }}
-												/>
-											);
-										})}
-									</Box>
-								</Grid>
+		<Container>
+			<Box
+				style={{
+					margin: '30px 0',
+					padding: '20px 0',
+				}}
+			>
+				<Typography variant='body1'>
+					<span style={{ fontWeight: 'bold', fontSize: '18px' }}>
+						{championBuilds.buildsCount} {championData.championName} builds
+					</span>
+				</Typography>
+
+				{!isLoading ? (
+					<>
+						{/* Champion Data HEADER */}
+						<Grid container wrap='nowrap' spacing={2}>
+							<Grid item>
+								<LazyLoadImage
+									src={`/images/wildriftchampions/${championData.id}.png`}
+									alt={championData.championName}
+									title={championData.championName}
+									style={{ float: 'left' }}
+								/>
 							</Grid>
-
-							<Divider variant='middle' />
-
-							{/* Builds List Container */}
-							<Box style={{ padding: '20px 0' }}>
-								<Typography variant='body1'>
-									<span style={{ fontWeight: 'bold', fontSize: '18px' }}>
-										{championBuilds.count} {championData.championName} builds
-									</span>
-								</Typography>
-
-								<Box>
-									{championBuilds.builds.length !== 0 ? (
-										championBuilds.builds.map((build, index) => {
-											const {
-												id: buildId,
-												username,
-												items,
-												champion,
-												rank,
-											}: BuildInterface = build;
-											const { id: championId, championName, url } = champion;
-
-											return (
-												<div className={classes.root}>
-													<Paper className={classes.paper}>
-														<Grid container wrap='nowrap' spacing={2}>
-															<Grid item>
-																<Avatar className={classes.large}>
-																	<LazyLoadImage
-																		src={`/images/wildriftchampions/${championId}.png`}
-																		style={{ width: '100%' }}
-																		title={championName}
-																		alt={championName}
-																	/>
-																</Avatar>
-															</Grid>
-															<Grid item xs>
-																<Box display='flex'>
-																	<Box flexGrow={1}>
-																		<Typography variant='body1'>
-																			<span
-																				style={{
-																					color: '#517ebd',
-																					fontWeight: 'bold',
-																					fontSize: '20px',
-																				}}
-																			>
-																				{championName}
-																			</span>
-																		</Typography>
-																		<Typography variant='body1'>
-																			<span style={{ color: '#949494' }}>
-																				by
-																			</span>{' '}
-																			<span style={{ color: '#e9eaec' }}>
-																				{username}
-																			</span>
-																		</Typography>
-																	</Box>
-																	<Box>
-																		<Avatar
-																			className={classes.large}
-																			style={{ backgroundColor: '#38465a' }}
-																		>
-																			{rank ? (
-																				<LazyLoadImage
-																					src={`/images/wildriftranks/${rank.id}.png`}
-																					style={{
-																						width: '80%',
-																					}}
-																					title={rank.rankName}
-																					alt={rank.rankName}
-																				/>
-																			) : (
-																				<LazyLoadImage
-																					src='/images/wildriftranks/a4938a79-f11f-4ee1-9ec5-7741a12c4ef9.png'
-																					style={{
-																						width: '80%',
-																					}}
-																					title='Unranked'
-																					alt='Unranked'
-																				/>
-																			)}
-																		</Avatar>
-																	</Box>
-																</Box>
-															</Grid>
-														</Grid>
-														<Box style={{ marginTop: '30px' }}>
-															{items
-																.filter((item) => item.type !== 'optional')
-																.map((item) => {
-																	const { id: itemId, itemName } = item;
-
-																	return (
-																		<>
-																			<Box style={{ display: 'inline-block' }}>
-																				<LazyLoadImage
-																					src={`/images/wildriftitems/${itemId}.png`}
-																					style={{ width: '50px' }}
-																					alt={itemName}
-																					title={itemName}
-																				/>
-																			</Box>
-																		</>
-																	);
-																})}
-														</Box>
-														<Box
-															display='flex'
-															flexDirection='row-reverse'
-															style={{ margin: '20px 0 0 0' }}
-														>
-															<a
-																// href={`https://wildriftbuilds.herokuapp.com/build/${buildId}`}
-																href={`/build/${buildId}`}
-															>
-																<Button variant='contained' color='primary'>
-																	Learn more
-																</Button>
-															</a>
-														</Box>
-													</Paper>
-												</div>
-											);
-										})
-									) : (
-										<Box
+							<Grid item xs>
+								<Box style={{ padding: '5px 0' }}>
+									<Typography variant='body1'>
+										<span
 											style={{
-												backgroundColor: '#f5f5f5',
-												padding: '40px',
-												margin: '20px 0',
+												color: '#517ebd',
+												fontWeight: 'bold',
+												fontSize: '20px',
 											}}
-											display='flex'
-											justifyContent='center'
 										>
-											<Box>
-												<LazyLoadImage
-													src='/images/no_data.svg'
-													width='120'
-													style={{
-														display: 'block',
-														marginLeft: 'auto',
-														marginRight: 'auto',
-														margin: '0 auto 30px auto',
-													}}
-												/>
-												<Typography gutterBottom>
-													There are no builds for this champion yet.{' '}
-													<a
-														href='/create'
-														style={{ color: '#517ebd', textDecoration: 'none' }}
-													>
-														Create a build
-													</a>
-												</Typography>
-											</Box>
-										</Box>
-									)}
+											{championData.championName}
+										</span>
+									</Typography>
+									<Typography variant='body1'>
+										<span style={{ color: '#949494' }}>
+											The {championData.title}
+										</span>
+									</Typography>
 								</Box>
-							</Box>
-						</>
-					) : (
-						<p>Loading</p>
-					)}
-				</Box>
-			</Container>
-		</div>
+								<Box
+									style={{
+										marginTop: '17px',
+									}}
+								>
+									{championData.lane.map((lane) => {
+										return (
+											<Chip
+												label={lane}
+												color='primary'
+												style={{ marginRight: '4px' }}
+											/>
+										);
+									})}
+								</Box>
+							</Grid>
+						</Grid>
+
+						<Divider variant='middle' />
+
+						{/* Builds List Container */}
+						<BuildBox
+							championBuilds={championBuilds}
+							championData={championData}
+							classes={classes}
+						/>
+					</>
+				) : (
+					<LoadingText />
+				)}
+			</Box>
+		</Container>
 	);
 });
