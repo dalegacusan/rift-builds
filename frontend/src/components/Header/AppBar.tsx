@@ -1,15 +1,12 @@
 import React from 'react';
 
 // MaterialUI
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
-import { makeStyles } from '@material-ui/core/styles';
 // Components
 // CSS
 import styles from './appbar.module.css';
@@ -49,7 +46,7 @@ HideOnScroll.propTypes = {
 	window: PropTypes.func,
 };
 
-export default function AppBarComponent(props: any) {
+const AppBarComponent = (props: any) => {
 	const classes = useStyles();
 
 	return (
@@ -58,7 +55,7 @@ export default function AppBarComponent(props: any) {
 				<AppBar className={styles.header}>
 					<Toolbar>
 						<a href='/' className={classes.title}>
-							<img src='/images/riftbuilds.png' style={{ width: '100px' }} />
+							<img src='/images/riftbuilds.png' className={styles.headerLogo} />
 						</a>
 						<a href='/' className={styles.headerLink}>
 							<p className={classes.menuLinks}>Home</p>
@@ -72,4 +69,6 @@ export default function AppBarComponent(props: any) {
 			<Toolbar />
 		</div>
 	);
-}
+};
+
+export default AppBarComponent;

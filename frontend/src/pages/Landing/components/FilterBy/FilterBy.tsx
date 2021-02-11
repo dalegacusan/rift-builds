@@ -1,23 +1,23 @@
 import React from 'react';
 
 // MaterialUI
+import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+// Components
 // Types
 // CSS
-import styles from './filter.module.css';
+import styles from './filterby.module.css';
 
-export default function Filter(props: any) {
-	const { setRoleFilter, championSearch, handleChampionSearchChange } = props;
-
+const FilterBy = () => {
 	return (
 		<Box className={styles.filterContainer}>
 			<Grid container>
 				<Grid item xs={12} sm={10}>
 					<Box className={styles.rolesListContainer}>
 						<ul className={styles.rolesList}>
-							<li>
+							{/* <li>
 								<span onClick={() => setRoleFilter('all')}>All</span>
 							</li>
 							<li>
@@ -26,15 +26,33 @@ export default function Filter(props: any) {
 							<li onClick={() => setRoleFilter('jungle')}>Jungle</li>
 							<li onClick={() => setRoleFilter('middle')}>Middle</li>
 							<li onClick={() => setRoleFilter('bottom')}>Bottom</li>
-							<li onClick={() => setRoleFilter('support')}>Support</li>
+							<li onClick={() => setRoleFilter('support')}>Support</li> */}
+							<li>
+								<span>All</span>
+							</li>
+							<li>
+								<span>Top</span>
+							</li>
+							<li>
+								<span>Jungle</span>
+							</li>
+							<li>
+								<span>Middle</span>
+							</li>
+							<li>
+								<span>Bottom</span>
+							</li>
+							<li>
+								<span>Support</span>
+							</li>
 						</ul>
 					</Box>
 				</Grid>
 				<Grid item xs={12} sm={2}>
 					<Box className={styles.searchForChampionContainer}>
 						<TextField
-							value={championSearch}
-							onChange={handleChampionSearchChange}
+							// value={championSearch}
+							// onChange={handleChampionSearchChange}
 							label='Search a Champion'
 							variant='outlined'
 							size='small'
@@ -44,4 +62,6 @@ export default function Filter(props: any) {
 			</Grid>
 		</Box>
 	);
-}
+};
+
+export default FilterBy;

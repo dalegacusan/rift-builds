@@ -1992,6 +1992,10 @@
 				{
 					"championName": "Yasuo",
 					"id": "e9759479-e2b8-45d4-84ce-6711c7371591"
+				},
+				{
+					"championName": "Malphite",
+					"id": "11c699fd-a0e9-4e1c-bf66-ce99b4ad0768"
 				}
 			],
 			"strongAgainst": [

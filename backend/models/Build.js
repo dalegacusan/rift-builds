@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 // const uniqueValidator = require('mongoose-unique-validator');
 
 const buildSchema = new mongoose.Schema({
-	dateSubmitted: Date,
-	username: String,
-	rank: Object,
 	champion: {
 		id: String,
 		championName: String,
 		url: String,
 	},
+	dateSubmitted: Date,
 	items: { type: Array, default: [] },
+	rank: Object,
 	runes: Object,
-	spells: { type: Array, default: [] }
+	spells: { type: Array, default: [] },
+	username: String,
 });
 
 // buildSchema.plugin(uniqueValidator);

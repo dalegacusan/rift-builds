@@ -1,13 +1,17 @@
-export interface ItemInterface {
+export interface BuildInterface {
 	id: string;
-	category: string;
-	description: Array<string>;
-	itemName: string;
-	reason?: string;
-	statistics: Array<string>;
-	tier: string;
-	type?: string;
-	url: string;
+	champion: ChampionInterface;
+	dateSubmitted?: string;
+	items: ItemInterface[];
+	rank: RankInterface;
+	runes: {
+		keystone: RuneInterface;
+		domination: RuneInterface;
+		resolve: RuneInterface;
+		inspiration: RuneInterface;
+	};
+	spells: Array<SpellInterface>;
+	username: string;
 }
 
 export interface CountersInterface {
@@ -24,6 +28,18 @@ export interface ChampionInterface {
 	};
 	lane: Array<String>;
 	title: string;
+	url: string;
+}
+
+export interface ItemInterface {
+	id: string;
+	category: string;
+	description: Array<string>;
+	itemName: string;
+	reason?: string;
+	statistics: Array<string>;
+	tier: string;
+	type?: string;
 	url: string;
 }
 
@@ -49,15 +65,4 @@ export interface SpellInterface {
 	description: Array<String>;
 	spellName: string;
 	url: string;
-}
-
-export interface BuildInterface {
-	id: string;
-	champion: ChampionInterface;
-	dateSubmitted?: string;
-	items: ItemInterface[];
-	rank: RankInterface;
-	runes: RuneInterface;
-	spells: Array<SpellInterface>;
-	username: string;
 }

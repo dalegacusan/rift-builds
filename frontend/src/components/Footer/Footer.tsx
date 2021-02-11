@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 //Types
 
-export default function Header() {
+const Footer = () => {
 	const classes = useStyles();
 
 	return (
@@ -51,4 +51,6 @@ export default function Header() {
 			</footer>
 		</>
 	);
-}
+};
+
+export default Footer;

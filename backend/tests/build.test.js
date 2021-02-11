@@ -8,6 +8,15 @@ const api = supertest(app);
 
 const Build = require('../models/Build');
 
+// To run tests for THIS FILE ONLY,
+// npm test -- tests/build.test.js
+
+// To run a SPECIFIC TEST ONLY, 
+// npm test -- -t 'There should be 5 items returned'
+
+// To run a DESCRIBE BLOCK ONLY
+// npm test -- -t 'Check for DUPLICATED items'
+
 const initialBuilds = [
 	{
 		items: [
@@ -849,21 +858,13 @@ const initialBuilds = [
 // Doing this, we ENSURE that the database is in the SAME STATE before every test is run.
 beforeEach(async () => {
 	await Build.deleteMany({});
+	console.log('Cleared Database');
 
-	let buildObject = new Build(initialBuilds[0]);
-	await buildObject.save();
+	const buildObjects = initialBuilds.map(build => new Build(build));
+	const promiseArray = buildObjects.map(build => build.save());
 
-	buildObject = new Build(initialBuilds[1]);
-	await buildObject.save();
+	await Promise.all(promiseArray);
 
-	buildObject = new Build(initialBuilds[2]);
-	await buildObject.save();
-
-	buildObject = new Build(initialBuilds[3]);
-	await buildObject.save();
-
-	buildObject = new Build(initialBuilds[4]);
-	await buildObject.save();
 });
 
 describe('Check for DUPLICATED items', () => {
@@ -957,14 +958,227 @@ describe('Check for DUPLICATED items', () => {
 	});
 });
 
-describe('Check if returning 5 items', () => {
-	test('There are two builds', async () => {
+// test('A valid build can be added', async () => {
+// 	const newBuild = {
+// 		items: [
+// 			{
+// 				id: 'a42bcabd-290c-47f2-ae68-258d412c6d8d',
+// 				itemName: 'Abyssal Mask',
+// 				url:
+// 					'https://lolwildriftbuild.com/wp-content/uploads/2020/10/abyssalmask_wild_rift.png',
+// 				category: 'defense',
+// 				tier: 'upgraded',
+// 				statistics: [
+// 					'+300 Max Health',
+// 					'+40 Magic Resistance',
+// 					'+300 Max Mana',
+// 					'+10 Ability Haste',
+// 				],
+// 				description: [
+// 					'Eternity: Restore Mana equal to 15% of the damage taken from champions. Regen Health equal to 20% of Mana spent. Capped at 25 Health per cast.',
+// 					'Abyssal: Nearby enemy champions take 15% bonus magic damage.',
+// 				],
+// 				type: 'primary',
+// 			},
+// 			{
+// 				id: '736b4258-0328-4912-b5cb-ac5c03b289dd',
+// 				itemName: "Archangel's Staff",
+// 				url:
+// 					'https://lolwildriftbuild.com/wp-content/uploads/2020/10/archangelsstaff_wild_rift.png',
+// 				category: 'magic',
+// 				tier: 'upgraded',
+// 				statistics: ['+35 Ability Power', '+500 Max Mana', '+25 Ability Haste'],
+// 				description: [
+// 					'Awe: Grants Ability Power equal to 1% of max Mana and refunds 25% of all Mana spent.',
+// 					'Mana Charge: Increases max Mana by 12 every time mana is spent. Caps at 700 bonus Mana, transforming Archangel’s Staff into Seraph’s Embrace. Triggers up to 3 times every 12 seconds. You may only carry one Tears of the Goddess item at a time.',
+// 					'Lifeline: (additional passve granted when the item transform into Seraph’s embrace.) Damage that puts you under 35% Health consumes 15% of your current Mana to grant a shield equal to that amount +150 for 2 seconds. (90s Cooldown)',
+// 				],
+// 				type: 'primary',
+// 			},
+// 			{
+// 				id: 'ff11137c-d8bc-4363-b01e-fa1ed781fef7',
+// 				itemName: 'Blasting Wand',
+// 				url:
+// 					'https://lolwildriftbuild.com/wp-content/uploads/2020/10/blastingwand_wild_rift.png',
+// 				category: 'magic',
+// 				tier: 'mid',
+// 				statistics: ['+45 Ability Power'],
+// 				type: 'primary',
+// 			},
+// 			{
+// 				id: 'b64ce612-424e-483c-8c5e-ea381a55f638',
+// 				itemName: 'Black Cleaver',
+// 				url:
+// 					'https://lolwildriftbuild.com/wp-content/uploads/2020/10/blackcleaver.png',
+// 				category: 'physical',
+// 				tier: 'upgraded',
+// 				statistics: [
+// 					'+350 Max Health',
+// 					'+30 Attack Damage',
+// 					'+25 Ability Haste',
+// 				],
+// 				description: [
+// 					'Sunder: Dealing physical damage to a champion reduces their Armor by 4% for 6 seconds, stacking 6 times for 24% reduction.',
+// 					'Rage: Attacks grant 20 Move Speed and kills grant 60 Move Speed for 2 seconds. Bonuses do not stack. Ranged champions gain halved values.',
+// 				],
+// 				type: 'primary',
+// 			},
+// 			{
+// 				id: 'ed4cb95a-f5f3-46bc-a5cb-2c89e18922ab',
+// 				itemName: 'Haunting Guise',
+// 				url:
+// 					'https://lolwildriftbuild.com/wp-content/uploads/2020/10/hauntingguise_wild_rift.png',
+// 				category: 'magic',
+// 				tier: 'mid',
+// 				statistics: ['+200 Max Health', '+35 Ability Power'],
+// 				description: [
+// 					'Madness: Deal 2% more damage for each secon in combat against champions, capped at 10% after 5 seconds.',
+// 				],
+// 				type: 'primary',
+// 			},
+// 			{
+// 				id: '5b28a218-06f0-41f1-a05b-3a539beaa091',
+// 				itemName: 'Lich Bane',
+// 				url:
+// 					'https://lolwildriftbuild.com/wp-content/uploads/2020/10/lichbane.png',
+// 				category: 'magic',
+// 				tier: 'upgraded',
+// 				statistics: ['+80 Ability Power', '+300 Max Mana', '+10 Ability Haste'],
+// 				description: [
+// 					'Spellblade: Using an ability causes the next attack used within 10 seconds to deal bonus magic damage equal to 75% base AD + 50% AP. (1.5s Cooldown) Damage is reduced vs. structures.',
+// 					'Bane: +5% Move Speed',
+// 				],
+// 				type: 'primary',
+// 			},
+// 			{
+// 				id: '28759de0-3f55-4afe-b31a-3ce6e8e38532',
+// 				itemName: "Rylai's Crystal Scepter",
+// 				url:
+// 					'https://lolwildriftbuild.com/wp-content/uploads/2020/10/rylaiscrystalscepter_wild_rift.png',
+// 				category: 'magic',
+// 				tier: 'upgraded',
+// 				statistics: ['+350 Max Health', '+70 Ability Power'],
+// 				description: [
+// 					'Icy: Damaging active abilities and empowered attacks slow enemies by 20% for 1 second.',
+// 				],
+// 				type: 'optional',
+// 			},
+// 		],
+// 		spells: [
+// 			{
+// 				id: '13e5a25d-0de7-4481-bf75-381c013e73b9',
+// 				spellName: 'Exhaust',
+// 				url:
+// 					'/uploads/league-of-legends-wild-rift/images/summoner-spells/exhaust.jpg',
+// 				description: [
+// 					'Exhausts target enemy champion, reducing their movement speed by 20% and their damage dealt by 40% for 2.5 seconds.',
+// 				],
+// 				cooldown: '105',
+// 			},
+// 			{
+// 				id: 'dd6ff556-3b07-4be0-bd1f-c2dd9c9ce1dd',
+// 				spellName: 'Flash',
+// 				url:
+// 					'/uploads/league-of-legends-wild-rift/images/summoner-spells/flash.jpg',
+// 				description: [
+// 					'Teleport a short distance forward or towards the aimed direction.',
+// 				],
+// 				cooldown: '150',
+// 			},
+// 		],
+// 		dateSubmitted: '2021-02-09T09:11:36.126+00:00',
+// 		username: 'Michael',
+// 		champion: {
+// 			id: '5a05e0d6-9c06-44af-9df9-a1fad5a2e427',
+// 			championName: 'Akali',
+// 			url:
+// 				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/Akali_wild_rift.png',
+// 		},
+// 		rank: {
+// 			id: '0e62f6a2-1473-4885-a09f-ca0a59be0c8a',
+// 			rankName: 'Challenger',
+// 			url:
+// 				'https://static.wikia.nocookie.net/leagueoflegends/images/5/5f/Season_2019_-_Challenger_1.png/revision/latest/scale-to-width-down/130?cb=20181229234913',
+// 		},
+// 		runes: {
+// 			keystone: {
+// 				id: 'feadf691-c740-4e7d-a4e8-9c705a48ea6a',
+// 				runeName: 'Aery',
+// 				url:
+// 					'https://static.wikia.nocookie.net/leagueoflegends/images/c/ce/Aery_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713114442',
+// 				type: 'keystone',
+// 				description: [
+// 					'Basic attacks and abilities against an enemy champion signals Aery to dash to them, dealing 10 - 60 (based on level) (+ 20% bonus AD) (+ 10% AP) Adaptive damage. Healing, shielding, or buffing an ally signals Aery to dash to them, shielding them for 20 - 120 (based on level) (+ 40% bonus AD) (+ 20% AP) for 2 seconds.',
+// 					'Aery lingers on the target for 2 seconds before flying back to the user, and cannot be sent out again until she returns. Aery is initially very slow, but gradually accelerates, and can be picked up by moving near her.',
+// 					'Adaptive Damage: Deals either physical or magic damage depending on your bonus stats, defaulting based on the origin of the effect.',
+// 				],
+// 			},
+// 			domination: {
+// 				id: '7a61f821-168c-4817-bbdd-daf3ce5439dc',
+// 				runeName: 'Brutal',
+// 				url:
+// 					'https://static.wikia.nocookie.net/leagueoflegends/images/c/ca/Brutal_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102514',
+// 				type: 'secondary',
+// 				path: 'domination',
+// 				description: [
+// 					'Gain 7 AD and 2% armor penetration, or 14 AP and 2% magic penetration. (Adaptive)',
+// 				],
+// 			},
+// 			resolve: {
+// 				id: 'fc2532cb-e6d9-4577-a567-4f10fff13e0a',
+// 				runeName: 'Backbone',
+// 				url:
+// 					'https://static.wikia.nocookie.net/leagueoflegends/images/b/b2/Backbone_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102418',
+// 				type: 'secondary',
+// 				path: 'resolve',
+// 				description: [
+// 					'Gain 10 AR or 10 MR, based on whichever stat you have less of.',
+// 				],
+// 			},
+// 			inspiration: {
+// 				id: '80216900-b198-4195-ab1c-e6e309c28ff3',
+// 				runeName: 'Hunter - Genius',
+// 				url:
+// 					'https://static.wikia.nocookie.net/leagueoflegends/images/e/e7/Hunter_-_Genius_%28Wild_Rift%29_rune.png/revision/latest/scale-to-width-down/52?cb=20200713102756',
+// 				type: 'secondary',
+// 				path: 'inspiration',
+// 				description: [
+// 					'Gain 2.5 Ability Haste.',
+// 					'Unique champion takedowns grant 2.5 Ability Haste. (Max Ability Haste 15)',
+// 				],
+// 			},
+// 		},
+// 	}
+
+// 	await api
+// 		.post('/api/build/save')
+// 		.send(newBuild)
+// 		.expect(200)
+// 		.expect('Content-Type', /application\/json/);
+
+// 	const response = await api.post('/api/build/all', { page: 10 });
+
+// 	expect(response.body).toHaveLength(1);
+// })
+
+describe('Check for returned data', () => {
+	test('There should be 5 items returned', async () => {
+		console.log('Entered test: There should be 5 items returned');
 		const response = await api.post('/api/build/all', { page: 5 });
 
-		expect(response.body).toHaveLength(5);
+		expect(response.body)
+			.toHaveLength(5);
 	});
 
-	afterAll(() => {
-		mongoose.connection.close();
-	});
-});
+	test('Response Body should be type JSON', async () => {
+		console.log('Entered test: Response Body should be type JSON');
+		const response = await api.post('/api/build/all', { page: 5 })
+			.expect(200)
+			.expect('Content-Type', /application\/json/)
+	})
+
+})
+
+afterAll(async () => {
+	await mongoose.connection.close();
+})

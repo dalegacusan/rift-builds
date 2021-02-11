@@ -10,3 +10,7 @@
 .headerLink:hover {
 	color: #d4d4d4;
 }
+
+.headerLogo {
+	width: 100px;
+}

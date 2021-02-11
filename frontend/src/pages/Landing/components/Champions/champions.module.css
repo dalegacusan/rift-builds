@@ -1,0 +1,21 @@
+.heroesContainer {
+	padding: 10px 0;
+	background-color: pink;
+}
+
+.heroesContainer::after {
+	content: '';
+	width: 110px;
+}
+
+.championImageContainer {
+	margin: 15px 15px 0 0;
+}
+
+.championImage {
+	width: 90px;
+}
+
+.championName {
+	margin: 0;
+}
