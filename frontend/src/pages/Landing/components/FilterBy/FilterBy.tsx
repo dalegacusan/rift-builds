@@ -6,44 +6,41 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 // Components
-// Types
 // CSS
 import styles from './filterby.module.css';
+// Types
+type FilterByProps = {
+	championSearch: string;
+	handleChampionSearchChange(e: React.ChangeEvent<HTMLInputElement>): void;
+	setRoleFilter(role: string): void;
+};
 
-const FilterBy = () => {
+const FilterBy = (props: FilterByProps) => {
+	const { championSearch, handleChampionSearchChange, setRoleFilter } = props;
+
 	return (
 		<Box className={styles.filterContainer}>
 			<Grid container>
 				<Grid item xs={12} sm={10}>
 					<Box className={styles.rolesListContainer}>
 						<ul className={styles.rolesList}>
-							{/* <li>
+							<li>
 								<span onClick={() => setRoleFilter('all')}>All</span>
 							</li>
 							<li>
 								<span onClick={() => setRoleFilter('top')}>Top</span>
 							</li>
-							<li onClick={() => setRoleFilter('jungle')}>Jungle</li>
-							<li onClick={() => setRoleFilter('middle')}>Middle</li>
-							<li onClick={() => setRoleFilter('bottom')}>Bottom</li>
-							<li onClick={() => setRoleFilter('support')}>Support</li> */}
 							<li>
-								<span>All</span>
+								<span onClick={() => setRoleFilter('jungle')}>Jungle</span>
 							</li>
 							<li>
-								<span>Top</span>
+								<span onClick={() => setRoleFilter('middle')}>Middle</span>
 							</li>
 							<li>
-								<span>Jungle</span>
+								<span onClick={() => setRoleFilter('bottom')}>Bottom</span>
 							</li>
 							<li>
-								<span>Middle</span>
-							</li>
-							<li>
-								<span>Bottom</span>
-							</li>
-							<li>
-								<span>Support</span>
+								<span onClick={() => setRoleFilter('support')}>Support</span>
 							</li>
 						</ul>
 					</Box>
@@ -51,8 +48,8 @@ const FilterBy = () => {
 				<Grid item xs={12} sm={2}>
 					<Box className={styles.searchForChampionContainer}>
 						<TextField
-							// value={championSearch}
-							// onChange={handleChampionSearchChange}
+							value={championSearch}
+							onChange={handleChampionSearchChange}
 							label='Search a Champion'
 							variant='outlined'
 							size='small'

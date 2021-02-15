@@ -3,7 +3,7 @@ import React from 'react';
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
 // Components
-import AppBar from './AppBar';
+import AppBar from './components/AppBar';
 // CSS
 //Types
 

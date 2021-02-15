@@ -6,8 +6,10 @@ import { ThemeProvider } from '@material-ui/styles';
 // MaterialUI
 import CssBaseline from '@material-ui/core/CssBaseline';
 // Components
+import CreateBuild from '../pages/Create/Build/CreateBuild';
 import Layout from '../components/Layout';
 import Landing from '../pages/Landing/Landing';
+import PageNotFound from '../components/Error/404/PageNotFound';
 // Types
 // CSS
 const theme = createMuiTheme({
@@ -36,7 +38,11 @@ const App = () => {
 				<Layout>
 					<Router>
 						<Switch>
-							<Route exact path='/' render={() => <Landing />} />
+							<Route exact path='/' component={Landing} />
+							<Route exact path='/create' component={CreateBuild} />
+
+							{/* 404 - Page not found */}
+							<Route component={PageNotFound} />
 						</Switch>
 					</Router>
 				</Layout>

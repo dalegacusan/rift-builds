@@ -11,28 +11,28 @@ import { ChampionInterface } from '../../../../utils/interfaces';
 import styles from './champions.module.css';
 
 type ChampionsProps = {
-	champions: Array<ChampionInterface>;
+	filteredChampions: Array<ChampionInterface>;
 };
 
-const Champions: FunctionComponent<ChampionsProps> = ({ champions }) => {
+const Champions: FunctionComponent<ChampionsProps> = (props) => {
+	const { filteredChampions } = props;
+
 	return (
-		<Box display='flex' flexWrap='wrap' className={styles.heroesContainer}>
-			{champions.map((champion: ChampionInterface) => {
+		<Box display='flex' flexWrap='wrap' className={styles.championsContainer}>
+			{filteredChampions.map((champion: ChampionInterface, index) => {
 				const { id: championId, championName } = champion;
 
 				return (
-					<Box className={styles.championImageContainer}>
-						<a href={`/builds/${championId}`}>
+					<Box key={index} className={styles.championImageContainer}>
+						<a href={`/builds/${championId}`} className={styles.championLink}>
 							<LazyLoadImage
 								src={`/images/wildriftchampions/${championId}.png`}
 								className={styles.championImage}
 								title={championName}
 								alt={championName}
 							/>
+							<p className={styles.championName}>{championName}</p>
 						</a>
-						<Typography className={styles.championName}>
-							{championName}
-						</Typography>
 					</Box>
 				);
 			})}

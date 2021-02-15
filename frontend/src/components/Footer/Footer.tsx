@@ -36,7 +36,11 @@ const Footer = () => {
 								</a>
 							</Box>
 							<Box>
-								<Typography variant='body2' gutterBottom>
+								<Typography
+									variant='body2'
+									gutterBottom
+									className={styles.footerDescription}
+								>
 									© 2021 Rift Builds. Rift Builds isn’t endorsed by Riot Games
 									and doesn’t reflect the views or opinions of Riot Games or
 									anyone officially involved in producing or managing League of

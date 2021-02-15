@@ -1,6 +1,6 @@
 .filterContainer {
-	background-color: green;
-	padding: 5px 0 10px 0;
+	/* background-color: green; */
+	padding: 5px 10px 10px 10px;
 	margin-top: 10px;
 	border-bottom: 2px solid #cccccc;
 }
