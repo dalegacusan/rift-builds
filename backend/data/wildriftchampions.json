@@ -4,6 +4,7 @@
 		"championName": "Wukong",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/12/MonkeyKing.png",
 		"lane": ["Top", "Jungle"],
+		"tier": { "Top": "B", "Jungle": "S" },
 		"title": "Monkey King",
 		"counters": {
 			"weakAgainst": [
@@ -41,6 +42,7 @@
 		"championName": "Darius",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Darius_wild_rift.png",
 		"lane": ["Top"],
+		"tier": { "Top": "A" },
 		"title": "Hand of Noxus",
 		"counters": {
 			"weakAgainst": [
@@ -78,6 +80,7 @@
 		"championName": "Xin Zhao",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/XinZhao_wild_rift.png",
 		"lane": ["Jungle"],
+		"tier": { "Jungle": "A" },
 		"title": "Seneschal of Demacia",
 		"counters": {
 			"weakAgainst": [
@@ -115,6 +118,7 @@
 		"championName": "Vi",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Vi_wild_rift.png",
 		"lane": ["Jungle"],
+		"tier": { "Jungle": "S" },
 		"title": "Piltover Enforcer",
 		"counters": {
 			"weakAgainst": [
@@ -151,7 +155,8 @@
 		"id": "8982398d-30e5-4d5d-98d0-ebc7b1ede802",
 		"championName": "Tryndamere",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Tryndamere_wild_rift.png",
-		"lane": ["Top"],
+		"lane": ["Top", "Jungle"],
+		"tier": { "Top": "C", "Jungle": "B" },
 		"title": "Barbarian King",
 		"counters": {
 			"weakAgainst": [
@@ -189,6 +194,7 @@
 		"championName": "Shyvana",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Shyvana_wild_rift.png",
 		"lane": ["Jungle"],
+		"tier": { "Jungle": "S" },
 		"title": "Half-Dragon",
 		"counters": {
 			"weakAgainst": [
@@ -225,7 +231,8 @@
 		"id": "a293b9ad-5280-434d-a160-415cadefce90",
 		"championName": "Olaf",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Olaf_wild_rift.png",
-		"lane": ["Jungle"],
+		"lane": ["Top", "Jungle"],
+		"tier": { "Top": "S", "Jungle": "S+" },
 		"title": "Berserker",
 		"counters": {
 			"weakAgainst": [
@@ -262,7 +269,8 @@
 		"id": "f7a42f6d-6fef-4d4c-b773-8fb213ec7001",
 		"championName": "Jax",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Jax_wild_rift.png",
-		"lane": ["Top"],
+		"lane": ["Top", "Jungle"],
+		"tier": { "Top": "B", "Jungle": "B" },
 		"title": "Grandmaster at Arms",
 		"counters": {
 			"weakAgainst": [
@@ -300,6 +308,7 @@
 		"championName": "Yasuo",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Yasuo_wild_rift.png",
 		"lane": ["Top", "Middle"],
+		"tier": { "Top": "A", "Middle": "A" },
 		"title": "Unforgiven",
 		"counters": {
 			"weakAgainst": [
@@ -337,6 +346,7 @@
 		"championName": "Lee Sin",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/LeeSin_wild_rift.png",
 		"lane": ["Jungle"],
+		"tier": { "Jungle": "S" },
 		"title": "Blind Monk",
 		"counters": {
 			"weakAgainst": [
@@ -374,6 +384,7 @@
 		"championName": "Nasus",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Nasus_wild_rift.png",
 		"lane": ["Top"],
+		"tier": { "Top": "A" },
 		"title": "Curator of the Sands",
 		"counters": {
 			"weakAgainst": [
@@ -411,6 +422,7 @@
 		"championName": "Graves",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Graves_wild_rift.png",
 		"lane": ["Jungle"],
+		"tier": { "Jungle": "S+" },
 		"title": "Outlaw",
 		"counters": {
 			"weakAgainst": [
@@ -447,7 +459,8 @@
 		"id": "2ee575b7-3b5c-4a91-a9b6-b5622f047bcf",
 		"championName": "Garen",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Garen_wild_rift.png",
-		"lane": ["Top", "Middle"],
+		"lane": ["Top"],
+		"tier": { "Top": "S" },
 		"title": "Might of Demacia",
 		"counters": {
 			"weakAgainst": [
@@ -484,7 +497,8 @@
 		"id": "202d9a61-4a68-4d51-a4bf-9ff7fc7cdbbe",
 		"championName": "Fiora",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Fiora_wild_rift.png",
-		"lane": ["Top"],
+		"lane": ["Top", "Middle"],
+		"tier": { "Top": "A", "Middle": "C" },
 		"title": "Grand Duelist",
 		"counters": {
 			"weakAgainst": [
@@ -521,7 +535,8 @@
 		"id": "bd5d0745-df0a-49bf-a59d-e3f3d225b728",
 		"championName": "Dr. Mundo",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/DrMundo_wild_rift.png",
-		"lane": ["Top", "Jungle"],
+		"lane": ["Top"],
+		"tier": { "Top": "A" },
 		"title": "Madman of Zaun",
 		"counters": {
 			"weakAgainst": [
@@ -558,7 +573,8 @@
 		"id": "2ba943e8-b6e5-4de2-ae9b-5120c21cb799",
 		"championName": "Camille",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Camille_wild_rift.png",
-		"lane": ["Top"],
+		"lane": ["Top", "Jungle"],
+		"tier": { "Top": "S", "Jungle": "A" },
 		"title": "Steel Shadow",
 		"counters": {
 			"weakAgainst": [
@@ -595,7 +611,8 @@
 		"id": "25200d23-cc4d-4e93-b951-4d2ccb434b34",
 		"championName": "Kennen",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2021/01/kennen-portrait.png",
-		"lane": ["Top"],
+		"lane": ["Top", "Middle"],
+		"tier": { "Top": "A", "Middle": "A" },
 		"title": "Heart of the Tempest",
 		"counters": {
 			"weakAgainst": [
@@ -632,7 +649,8 @@
 		"id": "1a91c53a-1462-4cdb-b36e-6467558ee25b",
 		"championName": "Seraphine",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/seraphine_square_wild_rift.png",
-		"lane": ["Support"],
+		"lane": ["Middle", "Support"],
+		"tier": { "Middle": "B", "Support": "A" },
 		"title": "Starry-eyed Songstress",
 		"counters": {
 			"weakAgainst": [
@@ -669,7 +687,8 @@
 		"id": "fd101349-0721-4ef3-bf45-b3db66ac67c2",
 		"championName": "Ziggs",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Ziggs_wild_rift.png",
-		"lane": ["Middle"],
+		"lane": ["Middle", "Bottom"],
+		"tier": { "Middle": "A", "Bottom": "C" },
 		"title": "Hexplosives Expert",
 		"counters": {
 			"weakAgainst": [
@@ -703,6 +722,7 @@
 		"championName": "Aurelion Sol",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/AurelionSol_wild_rift.png",
 		"lane": ["Middle"],
+		"tier": { "Middle": "S+" },
 		"title": "Star Forger",
 		"counters": {
 			"weakAgainst": [
@@ -739,7 +759,8 @@
 		"id": "1288001a-15b1-4ab9-b78e-c70eaac4ac57",
 		"championName": "Annie",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Annie_wild_rift.png",
-		"lane": ["Middle"],
+		"lane": ["Middle", "Support"],
+		"tier": { "Middle": "A", "Support": "B" },
 		"title": "Dark Child",
 		"counters": {
 			"weakAgainst": [
@@ -777,6 +798,7 @@
 		"championName": "Ahri",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Ahri_wild_rift.png",
 		"lane": ["Middle"],
+		"tier": { "Middle": "A" },
 		"title": "Nine-Tailed Fox",
 		"counters": {
 			"weakAgainst": [
@@ -814,6 +836,7 @@
 		"championName": "Fizz",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Fizz_wild_rift.png",
 		"lane": ["Middle"],
+		"tier": { "Middle": "A" },
 		"title": "Tidal Trickster",
 		"counters": {
 			"weakAgainst": [
@@ -847,6 +870,7 @@
 		"championName": "Twisted Fate",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/TwistedFate_wild_rift.png",
 		"lane": ["Middle"],
+		"tier": { "Middle": "A" },
 		"title": "Card Master",
 		"counters": {
 			"weakAgainst": [
@@ -879,7 +903,8 @@
 		"id": "b45556f7-44c2-4e32-bdf3-a185bc85d358",
 		"championName": "Corki",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2021/01/CorkiSquare.png",
-		"lane": ["Middle"],
+		"lane": ["Middle", "Bottom"],
+		"tier": { "Middle": "S", "Bottom": "S" },
 		"title": "Daring Bombardier",
 		"counters": {
 			"weakAgainst": [
@@ -916,7 +941,8 @@
 		"id": "72d3aea1-d16f-4464-ad2f-24de0468aa6a",
 		"championName": "Tristana",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2021/01/TristanaSquare.png",
-		"lane": ["Middle", "Bottom"],
+		"lane": ["Bottom"],
+		"tier": { "Bottom": "B" },
 		"title": "Yordle Gunner",
 		"counters": {
 			"weakAgainst": [
@@ -954,6 +980,7 @@
 		"championName": "Draven",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Draven_wild_rift.png",
 		"lane": ["Bottom"],
+		"tier": { "Bottom": "A" },
 		"title": "Glorious Executioner",
 		"counters": {
 			"weakAgainst": [
@@ -991,6 +1018,7 @@
 		"championName": "Kai'sa",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Kaisa_wild_rift.png",
 		"lane": ["Bottom"],
+		"tier": { "Bottom": "S" },
 		"title": "Daughter of the Void",
 		"counters": {
 			"weakAgainst": [
@@ -1027,7 +1055,8 @@
 		"id": "a2e61d30-e781-414a-b10f-a9338e10a379",
 		"championName": "Vayne",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Vayne_wild_rift.png",
-		"lane": ["Bottom", "Top"],
+		"lane": ["Top", "Bottom"],
+		"tier": { "Top": "B", "Bottom": "B" },
 		"title": "Night Hunter",
 		"counters": {
 			"weakAgainst": [
@@ -1065,6 +1094,7 @@
 		"championName": "Jhin",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Jhin_wild_rift.png",
 		"lane": ["Bottom"],
+		"tier": { "Bottom": "S" },
 		"title": "Virtuoso",
 		"counters": {
 			"weakAgainst": [
@@ -1102,6 +1132,7 @@
 		"championName": "Miss Fortune",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/MissFortune_wild_rift.png",
 		"lane": ["Bottom"],
+		"tier": { "Bottom": "S+" },
 		"title": "Bounty Hunter",
 		"counters": {
 			"weakAgainst": [
@@ -1139,6 +1170,7 @@
 		"championName": "Varus",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Varus_wild_rift.png",
 		"lane": ["Bottom"],
+		"tier": { "Bottom": "A" },
 		"title": "Arrow of Retribution",
 		"counters": {
 			"weakAgainst": [
@@ -1176,6 +1208,7 @@
 		"championName": "Ezreal",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Ezreal_wild_rift.png",
 		"lane": ["Bottom"],
+		"tier": { "Bottom": "A" },
 		"title": "Prodigal Explorer",
 		"counters": {
 			"weakAgainst": [
@@ -1213,6 +1246,7 @@
 		"championName": "Jinx",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Jinx_wild_rift.png",
 		"lane": ["Bottom"],
+		"tier": { "Bottom": "S" },
 		"title": "Loose Cannon",
 		"counters": {
 			"weakAgainst": [
@@ -1250,6 +1284,7 @@
 		"championName": "Ashe",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Ashe_wild_rift.png",
 		"lane": ["Bottom", "Support"],
+		"tier": { "Bottom": "A", "Support": "C" },
 		"title": "Frost Archer",
 		"counters": {
 			"weakAgainst": [
@@ -1287,6 +1322,7 @@
 		"championName": "Zed",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Zed_wild_rift.png",
 		"lane": ["Middle"],
+		"tier": { "Middle": "S" },
 		"title": "Master of Shadows",
 		"counters": {
 			"weakAgainst": [
@@ -1320,6 +1356,7 @@
 		"championName": "Master Yi",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/MasterYi_wild_rift.png",
 		"lane": ["Jungle"],
+		"tier": { "Jungle": "B" },
 		"title": "Wuju Bladesman",
 		"counters": {
 			"weakAgainst": [
@@ -1356,7 +1393,8 @@
 		"id": "0c10367c-21d3-43d5-9a76-156b8e594e8a",
 		"championName": "Evelynn",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Evelynn_wild_rift.png",
-		"lane": ["Jungle"],
+		"lane": ["Jungle", "Middle"],
+		"tier": { "Jungle": "A", "Middle": "B" },
 		"title": "Agony's Embrace",
 		"counters": {
 			"weakAgainst": [
@@ -1394,6 +1432,7 @@
 		"championName": "Akali",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Akali_wild_rift.png",
 		"lane": ["Top", "Middle"],
+		"tier": { "Top": "S+", "Middle": "A" },
 		"title": "Rogue Assassin",
 		"counters": {
 			"weakAgainst": [
@@ -1430,7 +1469,8 @@
 		"id": "11c699fd-a0e9-4e1c-bf66-ce99b4ad0768",
 		"championName": "Malphite",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Malphite_wild_rift.png",
-		"lane": ["Top", "Middle"],
+		"lane": ["Top", "Support"],
+		"tier": { "Top": "A", "Support": "B" },
 		"title": "Shard of the Monolith",
 		"counters": {
 			"weakAgainst": [
@@ -1467,7 +1507,8 @@
 		"id": "84bb6ab0-d275-46d1-950a-89b928ef975e",
 		"championName": "Gragas",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Gragas_wild_rift.png",
-		"lane": ["Top", "Jungle", "Support"],
+		"lane": ["Top", "Jungle", "Middle", "Support"],
+		"tier": { "Top": "A", "Jungle": "B", "Middle": "S", "Support": "B" },
 		"title": "Rabble Rouser",
 		"counters": {
 			"weakAgainst": [
@@ -1505,6 +1546,7 @@
 		"championName": "Singed",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Singed_wild_rift.png",
 		"lane": ["Top"],
+		"tier": { "Top": "A" },
 		"title": "Mad Chemist",
 		"counters": {
 			"weakAgainst": [
@@ -1542,6 +1584,7 @@
 		"championName": "Jarvan IV",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/JarvanIV_wild_rift.png",
 		"lane": ["Jungle", "Support"],
+		"tier": { "Jungle": "S", "Support": "C" },
 		"title": "Exemplar of Demacia",
 		"counters": {
 			"weakAgainst": [
@@ -1575,6 +1618,7 @@
 		"championName": "Braum",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Braum_wild_rift.png",
 		"lane": ["Support"],
+		"tier": { "Support": "S" },
 		"title": "Heart of the Freljord",
 		"counters": {
 			"weakAgainst": [
@@ -1612,6 +1656,7 @@
 		"championName": "Alistar",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Alistar_Wild_rift.png",
 		"lane": ["Support"],
+		"tier": { "Support": "S+" },
 		"title": "Minotaur",
 		"counters": {
 			"weakAgainst": [
@@ -1649,6 +1694,7 @@
 		"championName": "Amumu",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Amumu_wild_rift.png",
 		"lane": ["Jungle"],
+		"tier": { "Jungle": "A" },
 		"title": "Sad Mummy",
 		"counters": {
 			"weakAgainst": [
@@ -1686,6 +1732,7 @@
 		"championName": "Lulu",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Lulu.png",
 		"lane": ["Support"],
+		"tier": { "Support": "S+" },
 		"title": "Fae Sorceress",
 		"counters": {
 			"weakAgainst": [
@@ -1723,6 +1770,7 @@
 		"championName": "Nami",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Nami_wild_rift.png",
 		"lane": ["Support"],
+		"tier": { "Support": "A" },
 		"title": "Tidecaller",
 		"counters": {
 			"weakAgainst": [
@@ -1760,6 +1808,7 @@
 		"championName": "Soraka",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Soraka_wild_rift.png",
 		"lane": ["Support"],
+		"tier": { "Support": "A" },
 		"title": "Starchild",
 		"counters": {
 			"weakAgainst": [
@@ -1797,6 +1846,7 @@
 		"championName": "Orianna",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Orianna_wild_rift.png",
 		"lane": ["Middle"],
+		"tier": { "Middle": "S" },
 		"title": "Lady of the Clockwork",
 		"counters": {
 			"weakAgainst": [
@@ -1833,7 +1883,8 @@
 		"id": "947158bb-6214-43f0-9cc0-45dba1494dd3",
 		"championName": "Sona",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Sona_wild_rift.png",
-		"lane": ["Support"],
+		"lane": ["Middle", "Support"],
+		"tier": { "Middle": "C", "Support": "A" },
 		"title": "Maven of the Strings",
 		"counters": {
 			"weakAgainst": [
@@ -1871,6 +1922,7 @@
 		"championName": "Janna",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Janna_wild_rift.png",
 		"lane": ["Support"],
+		"tier": { "Support": "S" },
 		"title": "Storm's Fury",
 		"counters": {
 			"weakAgainst": [
@@ -1908,6 +1960,7 @@
 		"championName": "Lux",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Lux_wild_rift.png",
 		"lane": ["Middle", "Support"],
+		"tier": { "Middle": "A", "Support": "B" },
 		"title": "Lady of Luminosity",
 		"counters": {
 			"weakAgainst": [
@@ -1945,6 +1998,7 @@
 		"championName": "Blitzcrank",
 		"url": "https://lolwildriftbuild.com/wp-content/uploads/2020/10/Blitzcrank_wild_rift.png",
 		"lane": ["Support"],
+		"tier": { "Support": "A" },
 		"title": "Great Steam Golem",
 		"counters": {
 			"weakAgainst": [
@@ -1981,7 +2035,8 @@
 		"id": "6f2dc24a-1824-4e5b-8a0b-8c65858f2ce6",
 		"championName": "Teemo",
 		"url": "N/A",
-		"lane": ["Top"],
+		"lane": ["Top", "Middle"],
+		"tier": { "Top": "B", "Middle": "B" },
 		"title": "Swift Scout",
 		"counters": {
 			"weakAgainst": [
@@ -2019,6 +2074,7 @@
 		"championName": "Rakan",
 		"url": "N/A",
 		"lane": ["Support"],
+		"tier": { "Support": "S" },
 		"title": "Charmer",
 		"counters": {
 			"weakAgainst": [
@@ -2056,6 +2112,7 @@
 		"championName": "Xayah",
 		"url": "N/A",
 		"lane": ["Bottom"],
+		"tier": { "Bottom": "A" },
 		"title": "Rebel",
 		"counters": {
 			"weakAgainst": [

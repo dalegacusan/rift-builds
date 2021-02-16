@@ -1,0 +1,16 @@
+.itemImage {
+	width: 100px;
+	margin-right: 10px;
+}
+
+.radioGroup {
+	display: inline-block;
+}
+
+.radioButton {
+	margin: 0;
+}
+
+.explanationTextArea {
+	width: 100%;
+}

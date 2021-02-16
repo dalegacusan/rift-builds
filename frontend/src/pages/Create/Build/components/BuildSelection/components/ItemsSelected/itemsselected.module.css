@@ -1,0 +1,19 @@
+.itemsSelectedContainer {
+	background-color: #e6e6e6;
+	padding: 20px;
+}
+
+.itemContainer {
+	display: inline-block;
+	margin: 0px 3px;
+}
+
+.itemImageContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.itemHover:hover {
+	cursor: pointer;
+	box-shadow: 0px 0px 23px -1px rgba(140, 140, 140, 0.76);
+}

@@ -27,6 +27,13 @@ export interface ChampionInterface {
 		strongAgainst: Array<CountersInterface>;
 	};
 	lane: Array<String>;
+	tier: {
+		Top?: string;
+		Jungle?: string;
+		Middle?: string;
+		Bottom?: string;
+		Support?: string;
+	};
 	title: string;
 	url: string;
 }

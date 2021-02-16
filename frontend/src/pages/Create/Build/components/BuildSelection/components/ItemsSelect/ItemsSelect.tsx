@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
@@ -8,13 +8,12 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import Grow from '@material-ui/core/Grow';
 import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import Typography from '@material-ui/core/Typography';
 // Components
+import ItemsSelected from '../ItemsSelected/ItemsSelected';
 // CSS
 import styles from './itemsselect.module.css';
 // Types
@@ -24,6 +23,9 @@ type ItemsSelectProps = {
 	items: Array<ItemInterface>;
 	itemsConfirmed: Array<ItemInterface>;
 	itemSelected: ItemInterface;
+	handleAddItemClick(): void;
+	handleDeleteItemClick(itemId: string): void;
+	handleItemExplanationChange(e: React.ChangeEvent<HTMLTextAreaElement>): void;
 	handleItemSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void;
 	handleItemTypeChange(e: React.ChangeEvent<HTMLInputElement>): void;
 };
@@ -34,6 +36,9 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 		items,
 		itemsConfirmed,
 		itemSelected,
+		handleAddItemClick,
+		handleDeleteItemClick,
+		handleItemExplanationChange,
 		handleItemSelectChange,
 		handleItemTypeChange,
 	} = props;
@@ -46,19 +51,21 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={6}>
 						<Box>
+							{/* ITEM IMAGE */}
 							{itemSelected ? (
 								<LazyLoadImage
 									src={`/images/wildriftitems/${itemSelected.id}.png`}
-									style={{ width: '100px', marginRight: '10px' }}
+									className={styles.itemImage}
 								/>
 							) : (
-								// Defaults to "Abyssal Mask" image if no item selected
+								// Defaults to "Abyssal Mask" image if no item is selected
 								<LazyLoadImage
 									src={`/images/wildriftitems/a42bcabd-290c-47f2-ae68-258d412c6d8d.png`}
-									style={{ width: '100px', marginRight: '10px' }}
+									className={styles.itemImage}
 								/>
 							)}
 
+							{/* <SELECT> */}
 							{
 								<FormControl className={formControl}>
 									<InputLabel shrink htmlFor='item-select'>
@@ -85,15 +92,14 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								</FormControl>
 							}
 
+							{/* ITEM TYPE */}
 							<Box>
 								<span>Item Type</span>
 								<RadioGroup
 									row
 									name='position'
 									defaultValue='primary'
-									style={{
-										display: 'inline-block',
-									}}
+									className={styles.radioGroup}
 									onChange={handleItemTypeChange}
 								>
 									<FormControlLabel
@@ -101,14 +107,14 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 										control={<Radio color='primary' />}
 										label='Primary'
 										labelPlacement='end'
-										style={{ margin: '0' }}
+										className={styles.radioButton}
 									/>
 									<FormControlLabel
 										value='optional'
 										control={<Radio color='primary' />}
 										label='Optional'
 										labelPlacement='end'
-										style={{ margin: '0' }}
+										className={styles.radioButton}
 									/>
 								</RadioGroup>
 							</Box>
@@ -121,14 +127,16 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								name='w3review'
 								rows={6}
 								placeholder='Add an explanation for this item'
-								style={{ width: '100%' }}
+								className={styles.explanationTextArea}
+								// value={dialogValue}
+								onChange={(e) => handleItemExplanationChange(e)}
 							></textarea>
 							<Box display='flex' flexDirection='row-reverse'>
 								<Box>
 									<Button
 										variant='contained'
 										color='primary'
-										// onClick={handleAddItemClick}
+										onClick={handleAddItemClick}
 									>
 										Add Item
 									</Button>
@@ -139,88 +147,10 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 
 					{/* Items List */}
 					<Grid item xs={12}>
-						<Box>
-							<Typography gutterBottom>Items List</Typography>
-
-							<Box
-								style={{
-									backgroundColor: '#e6e6e6',
-									padding: '20px',
-								}}
-							>
-								{itemsConfirmed.length !== 0 ? (
-									<>
-										{/* TYPE: MAIN */}
-										<p>Primary Items</p>
-										<Grid item xs={12}>
-											{itemsConfirmed
-												.filter((item) => item.type !== 'optional')
-												.map((currentItem) => {
-													return (
-														<Grow in={true}>
-															<Box
-																style={{
-																	display: 'inline-block',
-																	margin: '0px 3px',
-																}}
-															>
-																<Box
-																	style={{
-																		display: 'flex',
-																		justifyContent: 'center',
-																	}}
-																>
-																	<LazyLoadImage
-																		title={currentItem.itemName}
-																		className={styles.itemHover}
-																		src={`/images/wildriftitems/${currentItem.id}.png`}
-																	/>
-																</Box>
-															</Box>
-														</Grow>
-													);
-												})}
-										</Grid>
-
-										<p>Optional Items</p>
-										{/* TYPE: OPTIONAL */}
-										<Grid item xs={12}>
-											{itemsConfirmed
-												.filter((item) => item.type !== 'primary')
-												.map((currentItem: ItemInterface) => {
-													return (
-														<>
-															<Grow in={true}>
-																<Box
-																	style={{
-																		display: 'inline-block',
-																		margin: '0px 3px',
-																	}}
-																>
-																	<Box
-																		style={{
-																			display: 'flex',
-																			justifyContent: 'center',
-																		}}
-																	>
-																		<LazyLoadImage
-																			title={currentItem.itemName}
-																			className={styles.itemHover}
-																			src={`/images/wildriftitems/${currentItem.id}.png`}
-																		/>
-																	</Box>
-																</Box>
-															</Grow>
-														</>
-													);
-												})}
-										</Grid>
-									</>
-								) : (
-									<p>You haven't added any items to your build yet.</p>
-								)}
-							</Box>
-						</Box>
+						<ItemsSelected
+							itemsConfirmed={itemsConfirmed}
+							handleDeleteItemClick={handleDeleteItemClick}
+						/>
 					</Grid>
 				</Grid>
 			</Box>

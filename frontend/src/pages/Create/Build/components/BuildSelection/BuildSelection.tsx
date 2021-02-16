@@ -40,6 +40,11 @@ const BuildSelection = (props: BuildSelectionProps) => {
 		{
 			id: '48ca031a-d92e-44e6-b7b6-f3eb1dbe644c',
 			championName: 'Ahri',
+			url:
+				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/Ahri_wild_rift.png',
+			lane: ['Middle'],
+			tier: { Middle: 'A' },
+			title: 'Nine-Tailed Fox',
 			counters: {
 				weakAgainst: [
 					{
@@ -70,10 +75,6 @@ const BuildSelection = (props: BuildSelectionProps) => {
 					},
 				],
 			},
-			lane: ['Middle'],
-			title: 'Nine-Tailed Fox',
-			url:
-				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/Ahri_wild_rift.png',
 		}
 	);
 	const [itemSelected, setItemSelected] = useState<ItemInterface>(
@@ -97,14 +98,18 @@ const BuildSelection = (props: BuildSelectionProps) => {
 				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/abyssalmask_wild_rift.png',
 		}
 	);
+	const [itemType, setItemType] = useState('primary');
+	const [itemReason, setItemReason] = useState('');
 
 	const [itemsConfirmed, setItemsConfirmed] = useState<Array<ItemInterface>>(
 		[]
 	);
 
 	const handleChampSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const { value: championId } = e.target;
+
 		const getChampion = champions.find(
-			(champ: ChampionInterface) => champ.id === e.target.value
+			(champ: ChampionInterface) => champ.id === championId
 		);
 
 		if (getChampion) {
@@ -112,22 +117,77 @@ const BuildSelection = (props: BuildSelectionProps) => {
 		}
 	};
 	const handleItemSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const getItem = items.find(
-			(item: ItemInterface) => item.id === e.target.value
-		);
+		const { value: itemId } = e.target;
+
+		const getItem = items.find((item: ItemInterface) => item.id === itemId);
 
 		if (getItem) {
 			setItemSelected(getItem);
 		}
 	};
-	// itemSelected has no 'type' property by default
-	// A 'type' property is only added when a user clicks on the "Optional" Radio Button
-	// TODO: On "Add Item" button click, if there's no 'type' property, add a 'type' property with value of 'primary'
 	const handleItemTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setItemSelected((prev: ItemInterface) => {
-			return { ...prev, type: e.target.value };
-		});
+		setItemType(e.target.value);
 	};
+	const handleItemExplanationChange = (
+		e: React.ChangeEvent<HTMLTextAreaElement>
+	) => {
+		setItemReason(e.target.value);
+	};
+
+	const handleAddItemClick = () => {
+		// Pushes item to itemsConfirmed Array
+		setItemsConfirmed([
+			...itemsConfirmed,
+			{ ...itemSelected, type: itemType, reason: itemReason },
+		]);
+	};
+	const handleDeleteItemClick = (itemId: string) => {
+		const filteredItems = itemsConfirmed.filter(
+			(item: ItemInterface) => item.id !== itemId
+		);
+
+		if (filteredItems) {
+			setItemsConfirmed([...filteredItems]);
+		}
+	};
+
+	// Check for duplicate items selected
+	// Check for primary items limit
+	useEffect(() => {
+		const primaryItems = itemsConfirmed.filter(
+			(item) => item.type === 'primary'
+		);
+
+		var itemArray = itemsConfirmed.map((item) => {
+			return item.id;
+		});
+		var isDuplicate = itemArray.some((item, index) => {
+			return itemArray.indexOf(item) != index;
+		});
+
+		// Remove duplicates from itemsConfirmed Array
+		const filteredItemsConfirmed = itemsConfirmed.filter(
+			(item, index, arr) => arr.findIndex((t) => t.id === item.id) === index
+		);
+
+		if (isDuplicate) {
+			alert('Duplicate');
+			setItemsConfirmed(filteredItemsConfirmed);
+			// errorItemDuplicate();
+		} else if (primaryItems.length > 6) {
+			// errorPrimaryItemsLimit();
+			alert('Limit');
+			setItemsConfirmed((prev) => {
+				const itemsConfirmedCopy = [...prev];
+
+				itemsConfirmedCopy.pop();
+
+				return itemsConfirmedCopy;
+			});
+		}
+	}, [itemsConfirmed]);
+
+	console.log(itemsConfirmed);
 
 	return (
 		<Grid container spacing={3}>
@@ -143,6 +203,9 @@ const BuildSelection = (props: BuildSelectionProps) => {
 				<ItemsSelect
 					items={items}
 					itemSelected={itemSelected}
+					handleAddItemClick={handleAddItemClick}
+					handleDeleteItemClick={handleDeleteItemClick}
+					handleItemExplanationChange={handleItemExplanationChange}
 					handleItemSelectChange={handleItemSelectChange}
 					handleItemTypeChange={handleItemTypeChange}
 					formControl={classes.formControl}
