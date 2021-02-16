@@ -28,10 +28,13 @@ const Footer = () => {
 								<a href='/' className={styles.footerLink}>
 									FAQ
 								</a>
-								<a href='/' className={styles.footerLink}>
+								<a
+									href='mailto:abcwildrift@gmail.com'
+									className={styles.footerLink}
+								>
 									Feedback
 								</a>
-								<a href='/create' className={styles.footerLink}>
+								<a href='/' className={styles.footerLink}>
 									Report a Bug
 								</a>
 							</Box>

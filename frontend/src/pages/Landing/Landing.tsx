@@ -6,13 +6,17 @@ import Box from '@material-ui/core/Box';
 // Components
 import FilterBy from './components/FilterBy/FilterBy';
 import Champions from './components/Champions/Champions';
-// Types
-import { ChampionInterface } from '../../utils/interfaces';
 // CSS
 import styles from './landing.module.css';
+// Types
+import { ChampionInterface } from '../../utils/interfaces';
+type LandingProps = {
+	champions: Array<ChampionInterface>;
+	setChampions(champs: Array<ChampionInterface>): void;
+};
 
-const Landing = () => {
-	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
+const Landing = (props: LandingProps) => {
+	const { champions, setChampions } = props;
 	const [championSearch, setChampionSearch] = useState('');
 	const [filteredChampions, setFilteredChampions] = useState<
 		Array<ChampionInterface>
@@ -84,6 +88,8 @@ const Landing = () => {
 		const { value } = e.target;
 		setChampionSearch(value);
 	};
+
+	console.log(champions.length);
 
 	return (
 		<>

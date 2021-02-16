@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -11,6 +12,7 @@ import Layout from '../components/Layout';
 import Landing from '../pages/Landing/Landing';
 import PageNotFound from '../components/Error/404/PageNotFound';
 // Types
+import { ChampionInterface, ItemInterface } from '../utils/interfaces';
 // CSS
 const theme = createMuiTheme({
 	typography: {
@@ -31,6 +33,58 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
+	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
+	const [items, setItems] = useState<Array<ItemInterface>>([]);
+
+	// Get all Champions
+	useEffect(() => {
+		const getChampions = axios.get(
+			// 'https://wildriftbuilds.herokuapp.com/api/champion/all'
+			'/api/champion/all'
+		);
+		const getItems = axios.get(
+			// 'https://wildriftbuilds.herokuapp.com/api/item/all'
+			'/api/item/all'
+		);
+
+		Promise.all([getChampions, getItems])
+			.then((values) => {
+				const [{ data: championsArray }, { data: itemsArray }] = values;
+
+				// Sort Champions Alphabetically
+				championsArray.sort(function (
+					a: ChampionInterface,
+					b: ChampionInterface
+				) {
+					if (a.championName < b.championName) {
+						return -1;
+					}
+					if (a.championName > b.championName) {
+						return 1;
+					}
+					return 0;
+				});
+
+				// Sort Items Alphabetically
+				itemsArray.sort(function (a: ItemInterface, b: ItemInterface) {
+					if (a.itemName < b.itemName) {
+						return -1;
+					}
+					if (a.itemName > b.itemName) {
+						return 1;
+					}
+					return 0;
+				});
+
+				setItems(itemsArray);
+				setChampions(championsArray);
+			})
+			.catch((err) => {
+				console.error('Something went wrong');
+				console.error(err);
+			});
+	}, []);
+
 	return (
 		<ThemeProvider theme={theme}>
 			<div className='App'>
@@ -38,8 +92,12 @@ const App = () => {
 				<Layout>
 					<Router>
 						<Switch>
-							<Route exact path='/' component={Landing} />
-							<Route exact path='/create' component={CreateBuild} />
+							<Route exact path='/'>
+								<Landing champions={champions} setChampions={setChampions} />
+							</Route>
+							<Route exact path='/create'>
+								<CreateBuild champions={champions} items={items} />
+							</Route>
 
 							{/* 404 - Page not found */}
 							<Route component={PageNotFound} />

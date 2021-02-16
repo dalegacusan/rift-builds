@@ -8,6 +8,8 @@ import BuildInformation from './components/BuildInformation/BuildInformation';
 import BuildSelection from './components/BuildSelection/BuildSelection';
 import CreateBuildHeader from './components/CreateBuildHeader/CreateBuildHeader';
 import PlayerInformation from './components/PlayerInformation/PlayerInformation';
+// CSS
+import styles from './createbuild.module.css';
 // Types
 import {
 	BuildInterface,
@@ -18,18 +20,20 @@ import {
 	RuneInterface,
 	SpellInterface,
 } from '../../../utils/interfaces';
-// CSS
-import styles from './createbuild.module.css';
+type CreateBuildProps = {
+	champions: Array<ChampionInterface>;
+	items: Array<ItemInterface>;
+};
 
-const CreateBuild = () => {
+const CreateBuild = (props: CreateBuildProps) => {
+	const { champions, items } = props;
 	const [activeStep, setActiveStep] = useState(0);
 
 	let componentToDisplay;
-
 	if (activeStep === 0) {
 		componentToDisplay = <BuildInformation />;
 	} else if (activeStep === 1) {
-		componentToDisplay = <BuildSelection />;
+		componentToDisplay = <BuildSelection champions={champions} items={items} />;
 	} else if (activeStep === 2) {
 		componentToDisplay = <PlayerInformation />;
 	}

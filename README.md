@@ -1,3 +1,3 @@
-# Wild Rift Community Builds
+# Rift Builds
 
-A website where the community can share their builds
+Rift Builds is a platform where players can share their builds and look at what other people are building for each hero.

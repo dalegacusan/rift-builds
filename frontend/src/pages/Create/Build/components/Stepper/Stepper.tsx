@@ -61,8 +61,11 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 					</div>
 				) : (
 					<div>
-						<Box>{componentToDisplay}</Box>
-						<div>
+						<Box style={{ padding: '10px 0' }}>{componentToDisplay}</Box>
+						<Box display='flex' flexDirection='row-reverse' p={1} m={1}>
+							<Button variant='contained' color='primary' onClick={handleNext}>
+								{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+							</Button>
 							<Button
 								disabled={activeStep === 0}
 								onClick={handleBack}
@@ -70,10 +73,7 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 							>
 								Back
 							</Button>
-							<Button variant='contained' color='primary' onClick={handleNext}>
-								{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-							</Button>
-						</div>
+						</Box>
 					</div>
 				)}
 			</div>
