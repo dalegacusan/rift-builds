@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 
 // MaterialUI
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 // Components
@@ -24,22 +23,16 @@ import {
 	SpellsSelectedType,
 } from '../../../../../utils/interfaces';
 type BuildSelectionProps = {
+	formControl: string;
 	champions: Array<ChampionInterface>;
 	items: Array<ItemInterface>;
 	runes: Array<RuneInterface>;
 	spells: Array<SpellInterface>;
+	setBuild: (newBuild: object) => void;
 };
 
-const useStyles = makeStyles((theme) => ({
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 120,
-	},
-}));
-
 const BuildSelection = (props: BuildSelectionProps) => {
-	const classes = useStyles();
-	const { champions, items, runes, spells } = props;
+	const { formControl, champions, items, runes, spells, setBuild } = props;
 
 	// =============== Champions =============== //
 	const [championSelected, setChampionSelected] = useState<ChampionInterface>(
@@ -363,6 +356,19 @@ const BuildSelection = (props: BuildSelectionProps) => {
 		}
 	}, [itemsConfirmed]);
 
+	// Handler for setBuild()
+	useEffect(() => {
+		setBuild((prev: object) => {
+			return {
+				...prev,
+				champion: championSelected,
+				items: itemsConfirmed,
+				runes: runesSelected,
+				spells: spellsSelected,
+			};
+		});
+	}, [championSelected, itemsConfirmed, runesSelected, spellsSelected]);
+
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
@@ -370,12 +376,12 @@ const BuildSelection = (props: BuildSelectionProps) => {
 					champions={champions}
 					championSelected={championSelected}
 					handleChampSelectChange={handleChampSelectChange}
-					formControl={classes.formControl}
+					formControl={formControl}
 				/>
 			</Grid>
 			<Grid item xs={12}>
 				<ItemsSelect
-					formControl={classes.formControl}
+					formControl={formControl}
 					items={items}
 					itemsConfirmed={itemsConfirmed}
 					itemReason={itemReason}
@@ -389,7 +395,7 @@ const BuildSelection = (props: BuildSelectionProps) => {
 			</Grid>
 			<Grid item xs={12}>
 				<RunesSelect
-					formControl={classes.formControl}
+					formControl={formControl}
 					runes={runes}
 					runesSelected={runesSelected}
 					handleRuneSelectChange={handleRuneSelectChange}
@@ -398,7 +404,7 @@ const BuildSelection = (props: BuildSelectionProps) => {
 			</Grid>
 			<Grid item xs={12}>
 				<SpellsSelect
-					formControl={classes.formControl}
+					formControl={formControl}
 					spells={spells}
 					spellsSelected={spellsSelected}
 					handleSpellSelectChange={handleSpellSelectChange}

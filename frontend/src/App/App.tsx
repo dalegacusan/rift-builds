@@ -17,6 +17,7 @@ import {
 	ItemInterface,
 	RuneInterface,
 	SpellInterface,
+	RankInterface,
 } from '../utils/interfaces';
 // CSS
 const theme = createMuiTheme({
@@ -42,6 +43,7 @@ const App = () => {
 	const [items, setItems] = useState<Array<ItemInterface>>([]);
 	const [runes, setRunes] = useState<Array<RuneInterface>>([]);
 	const [spells, setSpells] = useState<Array<SpellInterface>>([]);
+	const [ranks, setRanks] = useState<Array<RankInterface>>([]);
 
 	// Get DATA
 	useEffect(() => {
@@ -61,14 +63,19 @@ const App = () => {
 			// 'https://wildriftbuilds.herokuapp.com/api/spell/all'
 			'/api/spell/all'
 		);
+		const getRanks = axios.get(
+			// 'https://wildriftbuilds.herokuapp.com/api/rank/all'
+			'/api/rank/all'
+		);
 
-		Promise.all([getChampions, getItems, getRunes, getSpells])
+		Promise.all([getChampions, getItems, getRunes, getSpells, getRanks])
 			.then((values) => {
 				const [
 					{ data: championsArray },
 					{ data: itemsArray },
 					{ data: runesArray },
 					{ data: spellsArray },
+					{ data: ranksArray },
 				] = values;
 
 				// Sort Champions Alphabetically
@@ -122,6 +129,7 @@ const App = () => {
 				setChampions(championsArray);
 				setRunes(runesArray);
 				setSpells(spellsArray);
+				setRanks(ranksArray);
 			})
 			.catch((err) => {
 				console.error('Something went wrong');
@@ -145,6 +153,7 @@ const App = () => {
 									items={items}
 									runes={runes}
 									spells={spells}
+									ranks={ranks}
 								/>
 							</Route>
 

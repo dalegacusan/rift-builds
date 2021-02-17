@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 // MaterialUI
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 // Components
 import Stepper from './components/Stepper/Stepper';
@@ -25,26 +26,57 @@ type CreateBuildProps = {
 	items: Array<ItemInterface>;
 	runes: Array<RuneInterface>;
 	spells: Array<SpellInterface>;
+	ranks: Array<RankInterface>;
 };
 
+const useStyles = makeStyles((theme) => ({
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 120,
+	},
+}));
+
 const CreateBuild = (props: CreateBuildProps) => {
-	const { champions, items, runes, spells } = props;
+	const classes = useStyles();
+	const { champions, items, runes, spells, ranks } = props;
 	const [activeStep, setActiveStep] = useState(0);
+	const [build, setBuild] = useState({});
+
+	console.log(build);
 
 	let componentToDisplay;
 	if (activeStep === 0) {
-		componentToDisplay = <BuildInformation />;
+		componentToDisplay = (
+			<BuildInformation
+				formControl={classes.formControl}
+				setBuild={(newBuild: object) => {
+					setBuild(newBuild);
+				}}
+			/>
+		);
 	} else if (activeStep === 1) {
 		componentToDisplay = (
 			<BuildSelection
+				formControl={classes.formControl}
 				champions={champions}
 				items={items}
 				runes={runes}
 				spells={spells}
+				setBuild={(newBuild: object) => {
+					setBuild(newBuild);
+				}}
 			/>
 		);
 	} else if (activeStep === 2) {
-		componentToDisplay = <PlayerInformation />;
+		componentToDisplay = (
+			<PlayerInformation
+				formControl={classes.formControl}
+				ranks={ranks}
+				setBuild={(newBuild: object) => {
+					setBuild(newBuild);
+				}}
+			/>
+		);
 	}
 
 	return (
