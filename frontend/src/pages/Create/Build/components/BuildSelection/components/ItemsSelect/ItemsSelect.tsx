@@ -22,6 +22,7 @@ type ItemsSelectProps = {
 	formControl: string;
 	items: Array<ItemInterface>;
 	itemsConfirmed: Array<ItemInterface>;
+	itemReason: string;
 	itemSelected: ItemInterface;
 	handleAddItemClick(): void;
 	handleDeleteItemClick(itemId: string): void;
@@ -35,6 +36,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 		formControl,
 		items,
 		itemsConfirmed,
+		itemReason,
 		itemSelected,
 		handleAddItemClick,
 		handleDeleteItemClick,
@@ -123,12 +125,12 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 					<Grid item xs={12} sm={6}>
 						<Box>
 							<textarea
-								id='w3review'
-								name='w3review'
+								id='itemReason'
+								name='itemReason'
 								rows={6}
 								placeholder='Add an explanation for this item'
 								className={styles.explanationTextArea}
-								// value={dialogValue}
+								value={itemReason}
 								onChange={(e) => handleItemExplanationChange(e)}
 							></textarea>
 							<Box display='flex' flexDirection='row-reverse'>

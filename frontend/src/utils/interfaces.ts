@@ -61,6 +61,7 @@ export interface RuneInterface {
 	cooldown?: string;
 	description: Array<String>;
 	path?: string;
+	reason?: string;
 	runeName: string;
 	type: string;
 	url: string;
@@ -73,3 +74,11 @@ export interface SpellInterface {
 	spellName: string;
 	url: string;
 }
+
+export type RunesSelectedType = {
+	[key: string]: RuneInterface;
+};
+
+export type SpellsSelectedType = {
+	[key: string]: SpellInterface;
+};

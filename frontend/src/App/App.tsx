@@ -12,7 +12,12 @@ import Layout from '../components/Layout';
 import Landing from '../pages/Landing/Landing';
 import PageNotFound from '../components/Error/404/PageNotFound';
 // Types
-import { ChampionInterface, ItemInterface } from '../utils/interfaces';
+import {
+	ChampionInterface,
+	ItemInterface,
+	RuneInterface,
+	SpellInterface,
+} from '../utils/interfaces';
 // CSS
 const theme = createMuiTheme({
 	typography: {
@@ -35,8 +40,10 @@ const theme = createMuiTheme({
 const App = () => {
 	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
 	const [items, setItems] = useState<Array<ItemInterface>>([]);
+	const [runes, setRunes] = useState<Array<RuneInterface>>([]);
+	const [spells, setSpells] = useState<Array<SpellInterface>>([]);
 
-	// Get all Champions
+	// Get DATA
 	useEffect(() => {
 		const getChampions = axios.get(
 			// 'https://wildriftbuilds.herokuapp.com/api/champion/all'
@@ -46,10 +53,23 @@ const App = () => {
 			// 'https://wildriftbuilds.herokuapp.com/api/item/all'
 			'/api/item/all'
 		);
+		const getRunes = axios.get(
+			// 'https://wildriftbuilds.herokuapp.com/api/rune/all'
+			'/api/rune/all'
+		);
+		const getSpells = axios.get(
+			// 'https://wildriftbuilds.herokuapp.com/api/spell/all'
+			'/api/spell/all'
+		);
 
-		Promise.all([getChampions, getItems])
+		Promise.all([getChampions, getItems, getRunes, getSpells])
 			.then((values) => {
-				const [{ data: championsArray }, { data: itemsArray }] = values;
+				const [
+					{ data: championsArray },
+					{ data: itemsArray },
+					{ data: runesArray },
+					{ data: spellsArray },
+				] = values;
 
 				// Sort Champions Alphabetically
 				championsArray.sort(function (
@@ -76,8 +96,32 @@ const App = () => {
 					return 0;
 				});
 
+				// Sort Runes
+				runesArray.sort(function (a: RuneInterface, b: RuneInterface) {
+					if (a.runeName < b.runeName) {
+						return -1;
+					}
+					if (a.runeName > b.runeName) {
+						return 1;
+					}
+					return 0;
+				});
+
+				// Sort Spells
+				spellsArray.sort(function (a: SpellInterface, b: SpellInterface) {
+					if (a.spellName < b.spellName) {
+						return -1;
+					}
+					if (a.spellName > b.spellName) {
+						return 1;
+					}
+					return 0;
+				});
+
 				setItems(itemsArray);
 				setChampions(championsArray);
+				setRunes(runesArray);
+				setSpells(spellsArray);
 			})
 			.catch((err) => {
 				console.error('Something went wrong');
@@ -96,7 +140,12 @@ const App = () => {
 								<Landing champions={champions} setChampions={setChampions} />
 							</Route>
 							<Route exact path='/create'>
-								<CreateBuild champions={champions} items={items} />
+								<CreateBuild
+									champions={champions}
+									items={items}
+									runes={runes}
+									spells={spells}
+								/>
 							</Route>
 
 							{/* 404 - Page not found */}

@@ -23,17 +23,26 @@ import {
 type CreateBuildProps = {
 	champions: Array<ChampionInterface>;
 	items: Array<ItemInterface>;
+	runes: Array<RuneInterface>;
+	spells: Array<SpellInterface>;
 };
 
 const CreateBuild = (props: CreateBuildProps) => {
-	const { champions, items } = props;
+	const { champions, items, runes, spells } = props;
 	const [activeStep, setActiveStep] = useState(0);
 
 	let componentToDisplay;
 	if (activeStep === 0) {
 		componentToDisplay = <BuildInformation />;
 	} else if (activeStep === 1) {
-		componentToDisplay = <BuildSelection champions={champions} items={items} />;
+		componentToDisplay = (
+			<BuildSelection
+				champions={champions}
+				items={items}
+				runes={runes}
+				spells={spells}
+			/>
+		);
 	} else if (activeStep === 2) {
 		componentToDisplay = <PlayerInformation />;
 	}

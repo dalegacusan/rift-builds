@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -44,12 +45,12 @@ const Footer = () => {
 									gutterBottom
 									className={styles.footerDescription}
 								>
-									© 2021 Rift Builds. Rift Builds isn’t endorsed by Riot Games
-									and doesn’t reflect the views or opinions of Riot Games or
-									anyone officially involved in producing or managing League of
-									Legends. League of Legends and Riot Games are trademarks or
-									registered trademarks of Riot Games, Inc. League of Legends ©
-									Riot Games, Inc.
+									© {moment().year()} Rift Builds. Rift Builds isn’t endorsed by
+									Riot Games and doesn’t reflect the views or opinions of Riot
+									Games or anyone officially involved in producing or managing
+									League of Legends. League of Legends and Riot Games are
+									trademarks or registered trademarks of Riot Games, Inc. League
+									of Legends © Riot Games, Inc.
 								</Typography>
 							</Box>
 						</Box>
