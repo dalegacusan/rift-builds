@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 // const uniqueValidator = require('mongoose-unique-validator');
 
 const buildSchema = new mongoose.Schema({
+	buildTitle: String,
+	buildRole: String,
 	champion: {
 		id: String,
 		championName: String,

@@ -10,13 +10,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 // Types
-import { RankInterface } from '../../../../../utils/interfaces';
+import { BuildInterface, RankInterface } from '../../../../../utils/interfaces';
 // CSS
 import styles from './playerinformation.module.css';
 type PlayerInformationProps = {
 	formControl: string;
 	ranks: Array<RankInterface>;
-	setBuild: (newBuild: object) => void;
+	setBuild: (newBuild: any) => void;
 };
 
 const PlayerInformation = (props: PlayerInformationProps) => {
@@ -54,7 +54,7 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 
 	// Handler for setBuild()
 	useEffect(() => {
-		setBuild((prev: object) => {
+		setBuild((prev: any) => {
 			return { ...prev, username, rank: rankSelected };
 		});
 	}, [username, rankSelected]);

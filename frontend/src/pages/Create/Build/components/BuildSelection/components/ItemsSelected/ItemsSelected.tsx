@@ -23,6 +23,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 	return (
 		<Box>
 			<Typography gutterBottom>Items List</Typography>
+			<i>Click on an item to delete it from your list</i>
 
 			<Box className={styles.itemsSelectedContainer}>
 				{itemsConfirmed.length !== 0 ? (

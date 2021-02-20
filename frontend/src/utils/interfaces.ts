@@ -1,5 +1,6 @@
 export interface BuildInterface {
-	id: string;
+	buildTitle: string;
+	buildRole: string;
 	champion: ChampionInterface;
 	dateSubmitted?: string;
 	items: ItemInterface[];

@@ -24,7 +24,7 @@ import {
 } from '../../../../../utils/interfaces';
 type BuildInformationProps = {
 	formControl: string;
-	setBuild: (newBuild: object) => void;
+	setBuild: (newBuild: any) => void;
 };
 
 const BuildInformation = (props: BuildInformationProps) => {
@@ -50,7 +50,7 @@ const BuildInformation = (props: BuildInformationProps) => {
 
 	// Handler for setBuild()
 	useEffect(() => {
-		setBuild((prev: object) => {
+		setBuild((prev: any) => {
 			return { ...prev, buildTitle, buildRole };
 		});
 	}, [buildTitle, buildRole]);

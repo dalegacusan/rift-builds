@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 // Components
 import Stepper from './components/Stepper/Stepper';
+import BackdropLoading from '../../../components/Loading/Backdrop';
 import BuildInformation from './components/BuildInformation/BuildInformation';
 import BuildSelection from './components/BuildSelection/BuildSelection';
 import CreateBuildHeader from './components/CreateBuildHeader/CreateBuildHeader';
@@ -40,7 +43,19 @@ const CreateBuild = (props: CreateBuildProps) => {
 	const classes = useStyles();
 	const { champions, items, runes, spells, ranks } = props;
 	const [activeStep, setActiveStep] = useState(0);
-	const [build, setBuild] = useState({});
+	const [build, setBuild] = useState<any>({
+		buildTitle: '',
+		buildRole: '',
+		champion: {},
+		dateSubmitted: '',
+		items: [],
+		rank: {},
+		runes: {},
+		spells: [],
+		username: '',
+	});
+	const [openBackdrop, setOpenBackdrop] = useState<boolean>(false);
+	const [hasSubmittedBuild, setHasSubmittedBuild] = useState(false);
 
 	console.log(build);
 
@@ -49,7 +64,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 		componentToDisplay = (
 			<BuildInformation
 				formControl={classes.formControl}
-				setBuild={(newBuild: object) => {
+				setBuild={(newBuild: any) => {
 					setBuild(newBuild);
 				}}
 			/>
@@ -72,21 +87,71 @@ const CreateBuild = (props: CreateBuildProps) => {
 			<PlayerInformation
 				formControl={classes.formControl}
 				ranks={ranks}
-				setBuild={(newBuild: object) => {
+				setBuild={(newBuild: any) => {
 					setBuild(newBuild);
 				}}
 			/>
 		);
 	}
 
+	const submitBuild = async () => {
+		if (build.items.length !== 0 && build.username) {
+			// setOpenBackdrop(!openBackdrop);
+			const saveToDatabase = await axios
+				.post(
+					// 'https://wildriftbuilds.herokuapp.com/api/build/save',
+					'/api/build/save',
+					build
+				)
+				.then((res) => {
+					// successBuildSaved();
+					setBuild(res.data);
+					setHasSubmittedBuild(true);
+					console.log('Successfully saved build');
+				})
+				.catch((err) => {
+					if (
+						err.response.status === 429 &&
+						err.response.data ===
+							"You're creating too many builds. Please try again after 30 minutes."
+					) {
+						// errorBuildSaved(err.response.data);
+						console.log("You're creating too many builds");
+					} else {
+						// errorBuildSaved('Something went wrong. Failed to save build.');
+						console.log('Something went wrong. Failed to save build.');
+					}
+				});
+		} else {
+			if (build.items.length === 0) {
+				// errorNoItemSelected();
+				console.log('No items selected');
+			} else if (!build.username) {
+				// errorNoUsername();
+				console.log('No username');
+			}
+			return;
+		}
+	};
+
+	if (activeStep === 3) {
+		submitBuild();
+	}
+
+	if (hasSubmittedBuild) {
+		return <Redirect to={`/build/${build.id}`} />;
+	}
+
 	return (
 		<Box>
+			<BackdropLoading openBackdrop={openBackdrop} />
 			<CreateBuildHeader />
 
 			<Stepper
 				activeStep={activeStep}
 				setActiveStep={setActiveStep}
 				componentToDisplay={componentToDisplay}
+				setOpenBackdrop={setOpenBackdrop}
 			/>
 		</Box>
 	);

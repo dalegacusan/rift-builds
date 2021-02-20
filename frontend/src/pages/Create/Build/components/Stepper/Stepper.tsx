@@ -10,6 +10,7 @@ type StepperProps = {
 	activeStep: number;
 	setActiveStep(step: any): void;
 	componentToDisplay: React.ReactNode;
+	setOpenBackdrop(toOpen: boolean): void;
 };
 // CSS
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +33,12 @@ function getSteps() {
 }
 
 const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
-	const { activeStep, setActiveStep, componentToDisplay } = props;
+	const {
+		activeStep,
+		setActiveStep,
+		componentToDisplay,
+		setOpenBackdrop,
+	} = props;
 
 	const classes = useStyles();
 	const steps = getSteps();
@@ -49,33 +55,28 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 		setActiveStep(0);
 	};
 
+	if (activeStep === steps.length) {
+		setOpenBackdrop(true);
+	}
+
 	return (
 		<div className={classes.root}>
 			<div>
-				{activeStep === steps.length ? (
-					<div>
-						<Typography className={classes.instructions}>
-							All steps completed
-						</Typography>
-						<Button onClick={handleReset}>Reset</Button>
-					</div>
-				) : (
-					<div>
-						<Box style={{ padding: '10px 0' }}>{componentToDisplay}</Box>
-						<Box display='flex' flexDirection='row-reverse'>
-							<Button variant='contained' color='primary' onClick={handleNext}>
-								{activeStep === steps.length - 1 ? 'Create Build' : 'Next'}
-							</Button>
-							<Button
-								disabled={activeStep === 0}
-								onClick={handleBack}
-								className={classes.backButton}
-							>
-								Back
-							</Button>
-						</Box>
-					</div>
-				)}
+				<div>
+					<Box style={{ padding: '10px 0' }}>{componentToDisplay}</Box>
+					<Box display='flex' flexDirection='row-reverse'>
+						<Button variant='contained' color='primary' onClick={handleNext}>
+							{activeStep === steps.length - 1 ? 'Create Build' : 'Next'}
+						</Button>
+						<Button
+							disabled={activeStep === 0}
+							onClick={handleBack}
+							className={classes.backButton}
+						>
+							Back
+						</Button>
+					</Box>
+				</div>
 			</div>
 		</div>
 	);
