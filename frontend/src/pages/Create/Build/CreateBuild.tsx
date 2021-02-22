@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../../store/actions';
+
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -15,22 +19,7 @@ import PlayerInformation from './components/PlayerInformation/PlayerInformation'
 // CSS
 import styles from './createbuild.module.css';
 // Types
-import {
-	BuildInterface,
-	CountersInterface,
-	ChampionInterface,
-	ItemInterface,
-	RankInterface,
-	RuneInterface,
-	SpellInterface,
-} from '../../../utils/interfaces';
-type CreateBuildProps = {
-	champions: Array<ChampionInterface>;
-	items: Array<ItemInterface>;
-	runes: Array<RuneInterface>;
-	spells: Array<SpellInterface>;
-	ranks: Array<RankInterface>;
-};
+import { RootState } from '../../../utils/interfaces';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -41,71 +30,42 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateBuild = (props: CreateBuildProps) => {
 	const classes = useStyles();
-	const { champions, items, runes, spells, ranks } = props;
-	const [activeStep, setActiveStep] = useState(0);
-	const [build, setBuild] = useState<any>({
-		buildTitle: '',
-		buildRole: '',
-		champion: {},
-		dateSubmitted: '',
-		items: [],
-		rank: {},
-		runes: {},
-		spells: [],
-		username: '',
+	// Build PROPS
+	const { completeBuild } = props;
+
+	const [savedBuild, setSavedBuild] = useState({
+		id: '',
 	});
+	const [activeStep, setActiveStep] = useState(0);
 	const [openBackdrop, setOpenBackdrop] = useState<boolean>(false);
 	const [hasSubmittedBuild, setHasSubmittedBuild] = useState(false);
 
-	console.log(build);
-
 	let componentToDisplay;
 	if (activeStep === 0) {
-		componentToDisplay = (
-			<BuildInformation
-				formControl={classes.formControl}
-				setBuild={(newBuild: any) => {
-					setBuild(newBuild);
-				}}
-			/>
-		);
+		componentToDisplay = <BuildInformation />;
 	} else if (activeStep === 1) {
-		componentToDisplay = (
-			<BuildSelection
-				formControl={classes.formControl}
-				champions={champions}
-				items={items}
-				runes={runes}
-				spells={spells}
-				setBuild={(newBuild: object) => {
-					setBuild(newBuild);
-				}}
-			/>
-		);
+		componentToDisplay = <BuildSelection formControl={classes.formControl} />;
 	} else if (activeStep === 2) {
 		componentToDisplay = (
-			<PlayerInformation
-				formControl={classes.formControl}
-				ranks={ranks}
-				setBuild={(newBuild: any) => {
-					setBuild(newBuild);
-				}}
-			/>
+			<PlayerInformation formControl={classes.formControl} />
 		);
 	}
 
 	const submitBuild = async () => {
-		if (build.items.length !== 0 && build.username) {
-			// setOpenBackdrop(!openBackdrop);
+		if (completeBuild.itemsConfirmed.length !== 0 && completeBuild.username) {
+			setOpenBackdrop(true);
 			const saveToDatabase = await axios
 				.post(
 					// 'https://wildriftbuilds.herokuapp.com/api/build/save',
 					'/api/build/save',
-					build
+					{
+						...completeBuild,
+						dateSubmitted: new Date(),
+					}
 				)
 				.then((res) => {
 					// successBuildSaved();
-					setBuild(res.data);
+					setSavedBuild(res.data);
 					setHasSubmittedBuild(true);
 					console.log('Successfully saved build');
 				})
@@ -123,10 +83,10 @@ const CreateBuild = (props: CreateBuildProps) => {
 					}
 				});
 		} else {
-			if (build.items.length === 0) {
+			if (completeBuild.itemsConfirmed.length === 0) {
 				// errorNoItemSelected();
 				console.log('No items selected');
-			} else if (!build.username) {
+			} else if (!completeBuild.username) {
 				// errorNoUsername();
 				console.log('No username');
 			}
@@ -134,12 +94,9 @@ const CreateBuild = (props: CreateBuildProps) => {
 		}
 	};
 
-	if (activeStep === 3) {
-		submitBuild();
-	}
-
 	if (hasSubmittedBuild) {
-		return <Redirect to={`/build/${build.id}`} />;
+		console.log(savedBuild);
+		return <Redirect to={`/build/${savedBuild.id}`} />;
 	}
 
 	return (
@@ -149,12 +106,24 @@ const CreateBuild = (props: CreateBuildProps) => {
 
 			<Stepper
 				activeStep={activeStep}
-				setActiveStep={setActiveStep}
 				componentToDisplay={componentToDisplay}
-				setOpenBackdrop={setOpenBackdrop}
+				setActiveStep={setActiveStep}
+				submitBuild={submitBuild}
 			/>
 		</Box>
 	);
 };
 
-export default CreateBuild;
+const mapStateToProps = (state: RootState) => {
+	return {
+		completeBuild: state.build,
+	};
+};
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type CreateBuildProps = PropsFromRedux;
+
+export default connector(CreateBuild);

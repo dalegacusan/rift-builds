@@ -1,5 +1,9 @@
 import React from 'react';
+// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -14,37 +18,25 @@ import styles from './rune.module.css';
 // Types
 import {
 	RuneInterface,
-	RunesSelectedType,
+	RootState,
 } from '../../../../../../../../utils/interfaces';
-type ResolveProps = {
-	formControl: string;
-	runes: Array<RuneInterface>;
-	runesSelected: RunesSelectedType;
-	handleRuneSelectChange(
-		e: React.ChangeEvent<HTMLSelectElement>,
-		runeType: string,
-		runePath?: string
-	): void;
-	handleRuneExplanationChange(
-		e: React.ChangeEvent<HTMLTextAreaElement>,
-		runeType: string
-	): void;
-};
 
 const Resolve = (props: ResolveProps) => {
 	const {
 		formControl,
-		runes,
-		runesSelected,
 		handleRuneSelectChange,
 		handleRuneExplanationChange,
 	} = props;
+	// Game Data PROPS
+	const { runes } = props;
+	// Build PROPS
+	const { runeResolve } = props;
 
 	return (
 		<>
 			<Grid item xs={12} sm={6}>
 				<LazyLoadImage
-					src={`/images/wildriftrunes/${runesSelected.resolve.id}.png`}
+					src={`/images/wildriftrunes/${runeResolve.id}.png`}
 					className={styles.runeImage}
 				/>
 
@@ -93,4 +85,28 @@ const Resolve = (props: ResolveProps) => {
 	);
 };
 
-export default Resolve;
+const mapStateToProps = (state: RootState) => {
+	return {
+		runeResolve: state.build.runes.resolve,
+		runes: state.gameData.runes,
+	};
+};
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type ResolveProps = PropsFromRedux & {
+	formControl: string;
+	handleRuneSelectChange: (
+		e: React.ChangeEvent<HTMLSelectElement>,
+		runeType: string,
+		runePath?: string
+	) => void;
+	handleRuneExplanationChange: (
+		e: React.ChangeEvent<HTMLTextAreaElement>,
+		runeName: string
+	) => void;
+};
+
+export default connector(Resolve);

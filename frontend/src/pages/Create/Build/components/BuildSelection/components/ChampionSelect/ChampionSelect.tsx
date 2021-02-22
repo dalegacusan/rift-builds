@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-// MaterialUI
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../../../../../../store/actions';
 
+// MaterialUI
 import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -12,21 +16,29 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 // CSS
 import styles from './championselect.module.css';
 // Types
-import { ChampionInterface } from '../../../../../../../utils/interfaces';
-type ChampionSelectProps = {
-	champions: Array<ChampionInterface>;
-	championSelected: ChampionInterface;
-	handleChampSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void;
-	formControl: string;
-};
+import {
+	ChampionInterface,
+	RootState,
+} from '../../../../../../../utils/interfaces';
 
 const ChampionSelect = (props: ChampionSelectProps) => {
-	const {
-		champions,
-		championSelected,
-		handleChampSelectChange,
-		formControl,
-	} = props;
+	const { formControl } = props;
+	// Game Data PROPS
+	const { champions } = props;
+	// Build PROPS
+	const { championSelected, setChampionSelected } = props;
+
+	const handleChampSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const { value: championId } = e.target;
+
+		const getChampion = champions.find(
+			(champ: ChampionInterface) => champ.id === championId
+		);
+
+		if (getChampion) {
+			setChampionSelected(getChampion);
+		}
+	};
 
 	return (
 		<Box>
@@ -34,18 +46,10 @@ const ChampionSelect = (props: ChampionSelectProps) => {
 
 			<Box className={styles.championSelectContainer}>
 				{/* Display Champion Image */}
-				{championSelected ? (
-					<LazyLoadImage
-						src={`/images/wildriftchampions/${championSelected.id}.png`}
-						className={styles.championImage}
-					/>
-				) : (
-					// Defaults to "Ahri"'s image if no champion selected
-					<LazyLoadImage
-						src={`/images/wildriftchampions/48ca031a-d92e-44e6-b7b6-f3eb1dbe644c.png`}
-						className={styles.championImage}
-					/>
-				)}
+				<LazyLoadImage
+					src={`/images/wildriftchampions/${championSelected.id}.png`}
+					className={styles.championImage}
+				/>
 
 				{
 					<FormControl className={formControl}>
@@ -78,4 +82,29 @@ const ChampionSelect = (props: ChampionSelectProps) => {
 	);
 };
 
-export default ChampionSelect;
+const mapStateToProps = (state: RootState) => {
+	return {
+		championSelected: state.build.champion,
+		champions: state.gameData.champions,
+	};
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+	return {
+		setChampionSelected: (champion: ChampionInterface) =>
+			dispatch({
+				type: actionTypes.BUILD_SET_CHAMPIONSELECTED,
+				data: champion,
+			}),
+	};
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type ChampionSelectProps = PropsFromRedux & {
+	formControl: string;
+};
+
+export default connector(ChampionSelect);

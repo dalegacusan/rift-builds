@@ -1,5 +1,8 @@
 import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../../../../../../store/actions';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -17,26 +20,37 @@ import styles from './spellsselect.module.css';
 // Types
 import {
 	SpellInterface,
-	SpellsSelectedType,
+	RootState,
 } from '../../../../../../../utils/interfaces';
-type SpellsSelectProps = {
-	formControl: string;
-	spells: Array<SpellInterface>;
-	spellsSelected: SpellsSelectedType;
-	handleSpellSelectChange(
-		e: React.ChangeEvent<HTMLSelectElement>,
-		spellNumber: string
-	): void;
-};
 
 const SpellsSelect = (props: SpellsSelectProps) => {
-	const {
-		formControl,
-		spells,
-		spellsSelected,
-		handleSpellSelectChange,
-	} = props;
-	const { spellOne, spellTwo } = spellsSelected;
+	const { formControl } = props;
+	// Game Data PROPS
+	const { spells } = props;
+	// Build PROPS
+	const { spellsSelected, setSpellsSelected } = props;
+
+	const handleSpellSelectChange = (
+		e: React.ChangeEvent<HTMLSelectElement>,
+		spellNumber: number
+	) => {
+		const { value: spellId } = e.target;
+
+		const getSpell = spells.find(
+			(spell: SpellInterface) => spell.id === spellId
+		);
+
+		if (getSpell) {
+			switch (spellNumber) {
+				case 1:
+					setSpellsSelected('spellOne', getSpell);
+					break;
+				case 2:
+					setSpellsSelected('spellTwo', getSpell);
+					break;
+			}
+		}
+	};
 
 	return (
 		<Box>
@@ -65,4 +79,26 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 	);
 };
 
-export default SpellsSelect;
+const mapStateToProps = (state: RootState) => {
+	return {
+		spellsSelected: state.build.spells,
+		spells: state.gameData.spells,
+	};
+};
+
+const mapDispatchToprops = (dispatch: any) => {
+	return {
+		setSpellsSelected: (spellKey: string, data: SpellInterface) =>
+			dispatch({ type: actionTypes.BUILD_SET_SPELLSSELECTED, spellKey, data }),
+	};
+};
+
+const connector = connect(mapStateToProps, mapDispatchToprops);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type SpellsSelectProps = PropsFromRedux & {
+	formControl: string;
+};
+
+export default connector(SpellsSelect);

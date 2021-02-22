@@ -1,4 +1,5 @@
 import React from 'react';
+// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
@@ -14,18 +15,18 @@ import Typography from '@material-ui/core/Typography';
 // CSS
 import styles from './spell.module.css';
 // Types
-import {
-	SpellInterface,
-	SpellsSelectedType,
-} from '../../../../../../../../utils/interfaces';
+import { SpellInterface } from '../../../../../../../../utils/interfaces';
 type SpellProps = {
 	formControl: string;
 	spells: Array<SpellInterface>;
 	spellNumber: number;
-	spellsSelected: SpellsSelectedType;
+	spellsSelected: {
+		spellOne: SpellInterface;
+		spellTwo: SpellInterface;
+	};
 	handleSpellSelectChange(
 		e: React.ChangeEvent<HTMLSelectElement>,
-		spellNumber: string
+		spellNumber: number
 	): void;
 };
 
@@ -55,12 +56,7 @@ const Spell = (props: SpellProps) => {
 					</InputLabel>
 					<NativeSelect
 						defaultValue={`${spellNumber === 1 ? spellOne.id : spellTwo.id}`}
-						onChange={(e) =>
-							handleSpellSelectChange(
-								e,
-								`${spellNumber === 1 ? 'spellOne' : 'spellTwo'}`
-							)
-						}
+						onChange={(e) => handleSpellSelectChange(e, spellNumber)}
 						inputProps={{
 							name: 'spell',
 							id: 'spell-select',

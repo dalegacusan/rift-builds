@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../../../../../../store/actions';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -17,33 +22,81 @@ import ItemsSelected from '../ItemsSelected/ItemsSelected';
 // CSS
 import styles from './itemsselect.module.css';
 // Types
-import { ItemInterface } from '../../../../../../../utils/interfaces';
-type ItemsSelectProps = {
-	formControl: string;
-	items: Array<ItemInterface>;
-	itemsConfirmed: Array<ItemInterface>;
-	itemReason: string;
-	itemSelected: ItemInterface;
-	handleAddItemClick(): void;
-	handleDeleteItemClick(itemId: string): void;
-	handleItemExplanationChange(e: React.ChangeEvent<HTMLTextAreaElement>): void;
-	handleItemSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void;
-	handleItemTypeChange(e: React.ChangeEvent<HTMLInputElement>): void;
-};
+import {
+	ItemInterface,
+	RootState,
+} from '../../../../../../../utils/interfaces';
 
 const ItemsSelect = (props: ItemsSelectProps) => {
-	const {
-		formControl,
-		items,
-		itemsConfirmed,
-		itemReason,
-		itemSelected,
-		handleAddItemClick,
-		handleDeleteItemClick,
-		handleItemExplanationChange,
-		handleItemSelectChange,
-		handleItemTypeChange,
-	} = props;
+	const { formControl } = props;
+	// Game Data PROPS
+	const { items } = props;
+	// Build PROPS
+	const { itemsConfirmed, setItemsConfirmed } = props;
+
+	const [itemSelected, setItemSelected] = useState<ItemInterface>(
+		// Defaults to Item: 'Abyssal Mask' which is the first option
+		{
+			id: 'a42bcabd-290c-47f2-ae68-258d412c6d8d',
+			itemName: 'Abyssal Mask',
+			url:
+				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/abyssalmask_wild_rift.png',
+			category: 'defense',
+			tier: 'upgraded',
+			statistics: [
+				'+300 Max Health',
+				'+40 Magic Resistance',
+				'+300 Max Mana',
+				'+10 Ability Haste',
+			],
+			description: [
+				'Eternity: Restore Mana equal to 15% of the damage taken from champions. Regen Health equal to 20% of Mana spent. Capped at 25 Health per cast.',
+				'Abyssal: Nearby enemy champions take 15% bonus magic damage.',
+			],
+			price: 2800,
+		}
+	);
+	const [itemType, setItemType] = useState('primary');
+	const [itemReason, setItemReason] = useState('');
+
+	const handleItemSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const { value: itemId } = e.target;
+
+		const getItem = items.find((item: ItemInterface) => item.id === itemId);
+
+		if (getItem) {
+			setItemSelected(getItem);
+		}
+	};
+
+	const handleItemTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setItemType(e.target.value);
+	};
+
+	const handleItemExplanationChange = (
+		e: React.ChangeEvent<HTMLTextAreaElement>
+	) => {
+		setItemReason(e.target.value);
+	};
+
+	const handleDeleteItemClick = (itemId: string) => {
+		const filteredItems = itemsConfirmed.filter(
+			(item: ItemInterface) => item.id !== itemId
+		);
+
+		if (filteredItems) {
+			setItemsConfirmed(filteredItems);
+		}
+	};
+
+	const handleAddItemClick = () => {
+		// Pushes item to itemsConfirmed Array
+		setItemsConfirmed([
+			...itemsConfirmed,
+			{ ...itemSelected, type: itemType, reason: itemReason },
+		]);
+		setItemReason('');
+	};
 
 	return (
 		<Box>
@@ -122,6 +175,8 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 							</Box>
 						</Box>
 					</Grid>
+
+					{/* Item Explanation */}
 					<Grid item xs={12} sm={6}>
 						<Box>
 							<textarea
@@ -149,15 +204,33 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 
 					{/* Items List */}
 					<Grid item xs={12}>
-						<ItemsSelected
-							itemsConfirmed={itemsConfirmed}
-							handleDeleteItemClick={handleDeleteItemClick}
-						/>
+						<ItemsSelected handleDeleteItemClick={handleDeleteItemClick} />
 					</Grid>
 				</Grid>
 			</Box>
 		</Box>
 	);
 };
+const mapStateToProps = (state: RootState) => {
+	return {
+		itemsConfirmed: state.build.itemsConfirmed,
+		items: state.gameData.items,
+	};
+};
 
-export default ItemsSelect;
+const mapDispatchToProps = (dispatch: any) => {
+	return {
+		setItemsConfirmed: (items: Array<ItemInterface>) =>
+			dispatch({ type: actionTypes.BUILD_SET_ITEMSCONFIRMED, data: items }),
+	};
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type ItemsSelectProps = PropsFromRedux & {
+	formControl: string;
+};
+
+export default connector(ItemsSelect);

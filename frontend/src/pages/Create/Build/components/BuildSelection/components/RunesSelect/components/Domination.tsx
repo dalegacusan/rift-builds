@@ -1,5 +1,9 @@
 import React from 'react';
+// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -14,37 +18,25 @@ import styles from './rune.module.css';
 // Types
 import {
 	RuneInterface,
-	RunesSelectedType,
+	RootState,
 } from '../../../../../../../../utils/interfaces';
-type DominationProps = {
-	formControl: string;
-	runes: Array<RuneInterface>;
-	runesSelected: RunesSelectedType;
-	handleRuneSelectChange(
-		e: React.ChangeEvent<HTMLSelectElement>,
-		runeType: string,
-		runePath?: string
-	): void;
-	handleRuneExplanationChange(
-		e: React.ChangeEvent<HTMLTextAreaElement>,
-		runeType: string
-	): void;
-};
 
 const Domination = (props: DominationProps) => {
 	const {
 		formControl,
-		runes,
-		runesSelected,
 		handleRuneSelectChange,
 		handleRuneExplanationChange,
 	} = props;
+	// Game Data PROPS
+	const { runes } = props;
+	// Build PROPS
+	const { runeDomination } = props;
 
 	return (
 		<>
 			<Grid item xs={12} sm={6}>
 				<LazyLoadImage
-					src={`/images/wildriftrunes/${runesSelected.domination.id}.png`}
+					src={`/images/wildriftrunes/${runeDomination.id}.png`}
 					className={styles.runeImage}
 				/>
 
@@ -94,4 +86,28 @@ const Domination = (props: DominationProps) => {
 	);
 };
 
-export default Domination;
+const mapStateToProps = (state: RootState) => {
+	return {
+		runeDomination: state.build.runes.domination,
+		runes: state.gameData.runes,
+	};
+};
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type DominationProps = PropsFromRedux & {
+	formControl: string;
+	handleRuneSelectChange: (
+		e: React.ChangeEvent<HTMLSelectElement>,
+		runeType: string,
+		runePath?: string
+	) => void;
+	handleRuneExplanationChange: (
+		e: React.ChangeEvent<HTMLTextAreaElement>,
+		runeName: string
+	) => void;
+};
+
+export default connector(Domination);

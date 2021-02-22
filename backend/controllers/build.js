@@ -65,9 +65,9 @@ const getAllBuildsForChampion = (req, res, next) => {
 }
 
 const saveBuild = (req, res, next) => {
-	const { username, champion, items, rank, runes } = req.body;
+	const { itemsConfirmed } = req.body;
 
-	var itemArray = items.map((item) => {
+	var itemArray = itemsConfirmed.map((item) => {
 		return item.id;
 	});
 	var isDuplicate = itemArray.some((item, index) => {

@@ -1,39 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../../../../store/actions';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import Select from '@material-ui/core/Select';
 // Components
 // CSS
 import styles from './createbuild.module.css';
 // Types
-import {
-	BuildInterface,
-	CountersInterface,
-	ChampionInterface,
-	ItemInterface,
-	RankInterface,
-	RuneInterface,
-	SpellInterface,
-} from '../../../../../utils/interfaces';
-type BuildInformationProps = {
-	formControl: string;
-	setBuild: (newBuild: any) => void;
-};
+import { RootState } from '../../../../../utils/interfaces';
 
 const BuildInformation = (props: BuildInformationProps) => {
-	const { formControl, setBuild } = props;
+	// Build PROPS
+	const { buildTitle, buildRole, setBuildTitle, setBuildRole } = props;
 
 	const roles = ['Top', 'Jungle', 'Middle', 'Bottom', 'Support'];
 
 	// =============== Build Title =============== //
-	const [buildTitle, setBuildTitle] = useState('');
 	const handleBuildTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
 
@@ -41,19 +27,11 @@ const BuildInformation = (props: BuildInformationProps) => {
 	};
 
 	// =============== Build Role =============== //
-	const [buildRole, setBuildRole] = useState('Top');
-	const handleBuildRoleChange = (e: React.ChangeEvent<{ value: unknown }>) => {
+	const handleBuildRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const { value } = e.target;
 
 		setBuildRole(value as string);
 	};
-
-	// Handler for setBuild()
-	useEffect(() => {
-		setBuild((prev: any) => {
-			return { ...prev, buildTitle, buildRole };
-		});
-	}, [buildTitle, buildRole]);
 
 	return (
 		<Grid container spacing={3}>
@@ -92,4 +70,27 @@ const BuildInformation = (props: BuildInformationProps) => {
 	);
 };
 
-export default BuildInformation;
+// https://redux.js.org/recipes/usage-with-typescript
+const mapStateToProps = (state: RootState) => {
+	return {
+		buildTitle: state.build.buildTitle,
+		buildRole: state.build.buildRole,
+	};
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+	return {
+		setBuildTitle: (newBuildTitle: string) =>
+			dispatch({ type: actionTypes.BUILD_SET_BUILDTITLE, data: newBuildTitle }),
+		setBuildRole: (newBuildRole: string) =>
+			dispatch({ type: actionTypes.BUILD_SET_BUILDROLE, data: newBuildRole }),
+	};
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type BuildInformationProps = PropsFromRedux;
+
+export default connector(BuildInformation);

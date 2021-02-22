@@ -1,5 +1,9 @@
 import React from 'react';
+// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -14,37 +18,25 @@ import styles from './rune.module.css';
 // Types
 import {
 	RuneInterface,
-	RunesSelectedType,
+	RootState,
 } from '../../../../../../../../utils/interfaces';
-type KeystoneProps = {
-	formControl: string;
-	runes: Array<RuneInterface>;
-	runesSelected: RunesSelectedType;
-	handleRuneSelectChange(
-		e: React.ChangeEvent<HTMLSelectElement>,
-		runeType: string,
-		runePath?: string
-	): void;
-	handleRuneExplanationChange(
-		e: React.ChangeEvent<HTMLTextAreaElement>,
-		runeType: string
-	): void;
-};
 
 const Keystone = (props: KeystoneProps) => {
 	const {
 		formControl,
-		runes,
-		runesSelected,
 		handleRuneSelectChange,
 		handleRuneExplanationChange,
 	} = props;
+	// Game Data PROPS
+	const { runes } = props;
+	// Build PROPS
+	const { runeKeystone } = props;
 
 	return (
 		<>
 			<Grid item xs={12} sm={6}>
 				<LazyLoadImage
-					src={`/images/wildriftrunes/${runesSelected.keystone.id}.png`}
+					src={`/images/wildriftrunes/${runeKeystone.id}.png`}
 					className={styles.runeImage}
 				/>
 
@@ -89,4 +81,32 @@ const Keystone = (props: KeystoneProps) => {
 	);
 };
 
-export default Keystone;
+const mapStateToProps = (state: RootState) => {
+	return {
+		runeKeystone: state.build.runes.keystone,
+		runes: state.gameData.runes,
+	};
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+	return {};
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type KeystoneProps = PropsFromRedux & {
+	formControl: string;
+	handleRuneSelectChange: (
+		e: React.ChangeEvent<HTMLSelectElement>,
+		runeType: string,
+		runePath?: string
+	) => void;
+	handleRuneExplanationChange: (
+		e: React.ChangeEvent<HTMLTextAreaElement>,
+		runeName: string
+	) => void;
+};
+
+export default connector(Keystone);

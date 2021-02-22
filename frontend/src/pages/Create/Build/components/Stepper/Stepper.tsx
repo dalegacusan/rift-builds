@@ -8,9 +8,9 @@ import Typography from '@material-ui/core/Typography';
 // Types
 type StepperProps = {
 	activeStep: number;
-	setActiveStep(step: any): void;
 	componentToDisplay: React.ReactNode;
-	setOpenBackdrop(toOpen: boolean): void;
+	setActiveStep: (step: any) => void;
+	submitBuild: () => void;
 };
 // CSS
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,17 +33,15 @@ function getSteps() {
 }
 
 const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
-	const {
-		activeStep,
-		setActiveStep,
-		componentToDisplay,
-		setOpenBackdrop,
-	} = props;
+	const { activeStep, setActiveStep, componentToDisplay, submitBuild } = props;
 
 	const classes = useStyles();
 	const steps = getSteps();
 
 	const handleNext = () => {
+		if (activeStep === steps.length - 1) {
+			submitBuild();
+		}
 		setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
 	};
 
@@ -55,29 +53,28 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 		setActiveStep(0);
 	};
 
-	if (activeStep === steps.length) {
-		setOpenBackdrop(true);
-	}
-
 	return (
 		<div className={classes.root}>
-			<div>
-				<div>
-					<Box style={{ padding: '10px 0' }}>{componentToDisplay}</Box>
-					<Box display='flex' flexDirection='row-reverse'>
-						<Button variant='contained' color='primary' onClick={handleNext}>
-							{activeStep === steps.length - 1 ? 'Create Build' : 'Next'}
-						</Button>
-						<Button
-							disabled={activeStep === 0}
-							onClick={handleBack}
-							className={classes.backButton}
-						>
-							Back
-						</Button>
-					</Box>
-				</div>
-			</div>
+			<Box style={{ padding: '10px 0' }}>{componentToDisplay}</Box>
+			<Box display='flex' flexDirection='row-reverse'>
+				{activeStep === steps.length - 1 ? (
+					<Button variant='contained' color='primary' onClick={submitBuild}>
+						Create Build
+					</Button>
+				) : (
+					<Button variant='contained' color='primary' onClick={handleNext}>
+						Next
+					</Button>
+				)}
+
+				<Button
+					disabled={activeStep === 0}
+					onClick={handleBack}
+					className={classes.backButton}
+				>
+					Back
+				</Button>
+			</Box>
 		</div>
 	);
 };

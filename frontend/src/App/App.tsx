@@ -4,6 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
+// Redux
+import { connect } from 'react-redux';
+import actionTypes from '../store/actions';
+
 // MaterialUI
 import CssBaseline from '@material-ui/core/CssBaseline';
 // Components
@@ -13,11 +17,13 @@ import Landing from '../pages/Landing/Landing';
 import PageNotFound from '../components/Error/404/PageNotFound';
 // Types
 import {
+	BuildInterface,
 	ChampionInterface,
 	ItemInterface,
 	RuneInterface,
 	SpellInterface,
 	RankInterface,
+	gameDataInterface,
 } from '../utils/interfaces';
 // CSS
 const theme = createMuiTheme({
@@ -37,13 +43,16 @@ const theme = createMuiTheme({
 		},
 	},
 });
+interface AppProps {
+	setChampions: (prevChampions: Array<ChampionInterface>) => void;
+	setItems: (prevChampions: Array<ItemInterface>) => void;
+	setRunes: (prevChampions: Array<RuneInterface>) => void;
+	setRanks: (prevChampions: Array<RankInterface>) => void;
+	setSpells: (prevChampions: Array<SpellInterface>) => void;
+}
 
-const App = () => {
-	const [champions, setChampions] = useState<Array<ChampionInterface>>([]);
-	const [items, setItems] = useState<Array<ItemInterface>>([]);
-	const [runes, setRunes] = useState<Array<RuneInterface>>([]);
-	const [spells, setSpells] = useState<Array<SpellInterface>>([]);
-	const [ranks, setRanks] = useState<Array<RankInterface>>([]);
+const App = (props: AppProps) => {
+	const { setChampions, setItems, setRunes, setRanks, setSpells } = props;
 
 	// Get DATA
 	useEffect(() => {
@@ -77,6 +86,16 @@ const App = () => {
 					{ data: spellsArray },
 					{ data: ranksArray },
 				] = values;
+
+				// const sortArray = (arrName, interface) => {
+
+				// 	switch(arrName){
+				// 		case 'championsArray':
+				// 			return
+				// 	}
+
+				// 	return
+				// }
 
 				// Sort Champions Alphabetically
 				championsArray.sort(function (
@@ -127,9 +146,9 @@ const App = () => {
 
 				setItems(itemsArray);
 				setChampions(championsArray);
+				setRanks(ranksArray);
 				setRunes(runesArray);
 				setSpells(spellsArray);
-				setRanks(ranksArray);
 			})
 			.catch((err) => {
 				console.error('Something went wrong');
@@ -145,16 +164,10 @@ const App = () => {
 					<Router>
 						<Switch>
 							<Route exact path='/'>
-								<Landing champions={champions} setChampions={setChampions} />
+								<Landing />
 							</Route>
 							<Route exact path='/create'>
-								<CreateBuild
-									champions={champions}
-									items={items}
-									runes={runes}
-									spells={spells}
-									ranks={ranks}
-								/>
+								<CreateBuild />
 							</Route>
 
 							{/* 404 - Page not found */}
@@ -167,4 +180,20 @@ const App = () => {
 	);
 };
 
-export default App;
+const mapDispatchToProps = (dispatch: any) => {
+	return {
+		// === SETTER Champions === //
+		setChampions: (champions: Array<ChampionInterface>) =>
+			dispatch({ type: actionTypes.GAMEDATA_SET_CHAMPIONS, data: champions }),
+		setItems: (items: Array<ItemInterface>) =>
+			dispatch({ type: actionTypes.GAMEDATA_SET_ITEMS, data: items }),
+		setRanks: (ranks: Array<RankInterface>) =>
+			dispatch({ type: actionTypes.GAMEDATA_SET_RANKS, data: ranks }),
+		setRunes: (runes: Array<RuneInterface>) =>
+			dispatch({ type: actionTypes.GAMEDATA_SET_RUNES, data: runes }),
+		setSpells: (spells: Array<SpellInterface>) =>
+			dispatch({ type: actionTypes.GAMEDATA_SET_SPELLS, data: spells }),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(App);

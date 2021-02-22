@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../store/actions';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
 // Components
@@ -9,46 +13,21 @@ import Champions from './components/Champions/Champions';
 // CSS
 import styles from './landing.module.css';
 // Types
-import { ChampionInterface } from '../../utils/interfaces';
-type LandingProps = {
-	champions: Array<ChampionInterface>;
-	setChampions(champs: Array<ChampionInterface>): void;
-};
+import { ChampionInterface, RootState } from '../../utils/interfaces';
 
 const Landing = (props: LandingProps) => {
-	const { champions, setChampions } = props;
+	// Game Data PROPS
+	const { champions } = props;
+
 	const [championSearch, setChampionSearch] = useState('');
 	const [filteredChampions, setFilteredChampions] = useState<
 		Array<ChampionInterface>
 	>([]);
 	const [roleFilter, setRoleFilter] = useState('all');
 
-	// Get all Champions
 	useEffect(() => {
-		axios
-			.get('/api/champion/all')
-			.then((res) => {
-				const { data } = res;
-
-				// Sort Alphabetically
-				data.sort(function (a: ChampionInterface, b: ChampionInterface) {
-					if (a.championName < b.championName) {
-						return -1;
-					}
-					if (a.championName > b.championName) {
-						return 1;
-					}
-					return 0;
-				});
-
-				setChampions([...data]);
-				setFilteredChampions([...data]);
-			})
-			.catch((err) => {
-				console.error('Something went wrong');
-				console.error(err);
-			});
-	}, []);
+		setFilteredChampions(champions);
+	}, [champions]);
 
 	// Change state based on "All, Top, Jungle, Middle, Bottom, Support"
 	useEffect(() => {
@@ -89,8 +68,6 @@ const Landing = (props: LandingProps) => {
 		setChampionSearch(value);
 	};
 
-	console.log(champions.length);
-
 	return (
 		<>
 			<Box className={styles.landingContainer}>
@@ -110,4 +87,23 @@ const Landing = (props: LandingProps) => {
 	);
 };
 
-export default Landing;
+const mapStateToProps = (state: RootState) => {
+	return {
+		champions: state.gameData.champions,
+	};
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+	return {
+		setChampions: (data: Array<ChampionInterface>) =>
+			dispatch({ type: actionTypes.GAMEDATA_SET_CHAMPIONS, data }),
+	};
+};
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type LandingProps = PropsFromRedux;
+
+export default connector(Landing);

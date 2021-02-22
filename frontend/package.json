@@ -22,6 +22,7 @@
 		"react-redux": "^7.2.2",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.1",
+		"redux": "^4.0.5",
 		"typescript": "^4.1.3",
 		"web-vitals": "^0.2.4"
 	},
@@ -51,6 +52,7 @@
 	},
 	"proxy": "http://localhost:8080",
 	"devDependencies": {
+		"@types/react-redux": "^7.1.16",
 		"@types/react-router-dom": "^5.1.7"
 	}
 }

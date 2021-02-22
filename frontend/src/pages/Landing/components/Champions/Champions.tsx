@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI

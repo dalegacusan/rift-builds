@@ -1,9 +1,10 @@
 export interface BuildInterface {
+	id?: string;
 	buildTitle: string;
 	buildRole: string;
 	champion: ChampionInterface;
-	dateSubmitted?: string;
-	items: ItemInterface[];
+	dateSubmitted?: Date;
+	itemsConfirmed: ItemInterface[];
 	rank: RankInterface;
 	runes: {
 		keystone: RuneInterface;
@@ -11,7 +12,10 @@ export interface BuildInterface {
 		resolve: RuneInterface;
 		inspiration: RuneInterface;
 	};
-	spells: Array<SpellInterface>;
+	spells: {
+		spellOne: SpellInterface;
+		spellTwo: SpellInterface;
+	};
 	username: string;
 }
 
@@ -45,6 +49,7 @@ export interface ItemInterface {
 	description: Array<string>;
 	itemName: string;
 	reason?: string;
+	price: number;
 	statistics: Array<string>;
 	tier: string;
 	type?: string;
@@ -76,10 +81,16 @@ export interface SpellInterface {
 	url: string;
 }
 
-export type RunesSelectedType = {
-	[key: string]: RuneInterface;
-};
+export interface gameDataInterface {
+	gameData: {
+		champions: Array<ChampionInterface>;
+		items: Array<ItemInterface>;
+		ranks: Array<RankInterface>;
+		runes: Array<RuneInterface>;
+		spells: Array<SpellInterface>;
+	};
+}
 
-export type SpellsSelectedType = {
-	[key: string]: SpellInterface;
-};
+export interface RootState extends gameDataInterface {
+	build: BuildInterface & { builds: Array<BuildInterface> };
+}

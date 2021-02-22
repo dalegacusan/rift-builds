@@ -10,10 +10,10 @@ const buildSchema = new mongoose.Schema({
 		url: String,
 	},
 	dateSubmitted: Date,
-	items: { type: Array, default: [] },
+	itemsConfirmed: { type: Array, default: [] },
 	rank: Object,
 	runes: Object,
-	spells: { type: Array, default: [] },
+	spells: Object,
 	username: String,
 });
 

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
+// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../../../../store/actions';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -10,20 +15,22 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 // Types
-import { BuildInterface, RankInterface } from '../../../../../utils/interfaces';
+import {
+	BuildInterface,
+	RankInterface,
+	RootState,
+} from '../../../../../utils/interfaces';
 // CSS
 import styles from './playerinformation.module.css';
-type PlayerInformationProps = {
-	formControl: string;
-	ranks: Array<RankInterface>;
-	setBuild: (newBuild: any) => void;
-};
 
 const PlayerInformation = (props: PlayerInformationProps) => {
-	const { formControl, ranks, setBuild } = props;
+	const { formControl } = props;
+	// Game Data PROPS
+	const { ranks } = props;
+	// Build PROPS
+	const { username, rankSelected, setRankSelected, setUsername } = props;
 
 	// =============== Username =============== //
-	const [username, setUsername] = useState('');
 	const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
 
@@ -31,15 +38,6 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 	};
 
 	// =============== Rank =============== //
-	const [rankSelected, setRankSelected] = useState<RankInterface>(
-		// Defaults to Rank: 'Unranked' which is the first option
-		{
-			id: 'a4938a79-f11f-4ee1-9ec5-7741a12c4ef9',
-			rankName: 'Unranked',
-			url:
-				'https://static.wikia.nocookie.net/leagueoflegends/images/3/38/Season_2019_-_Unranked.png/revision/latest/scale-to-width-down/130?cb=20190908074432',
-		}
-	);
 	const handleRankSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const getRank = ranks.find(
 			(rank: RankInterface) => rank.id === e.target.value
@@ -51,13 +49,6 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 			setRankSelected(getRank);
 		}
 	};
-
-	// Handler for setBuild()
-	useEffect(() => {
-		setBuild((prev: any) => {
-			return { ...prev, username, rank: rankSelected };
-		});
-	}, [username, rankSelected]);
 
 	return (
 		<Grid container spacing={3}>
@@ -112,4 +103,29 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 	);
 };
 
-export default PlayerInformation;
+const mapStateToProps = (state: RootState) => {
+	return {
+		username: state.build.username,
+		rankSelected: state.build.rank,
+		ranks: state.gameData.ranks,
+	};
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+	return {
+		setRankSelected: (newRank: RankInterface) =>
+			dispatch({ type: actionTypes.BUILD_SET_RANKSELECTED, data: newRank }),
+		setUsername: (newUsername: string) =>
+			dispatch({ type: actionTypes.BUILD_SET_USERNAME, data: newUsername }),
+	};
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type PlayerInformationProps = PropsFromRedux & {
+	formControl: string;
+};
+
+export default connector(PlayerInformation);
