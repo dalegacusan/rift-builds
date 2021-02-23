@@ -107,18 +107,10 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 					<Grid item xs={12} sm={6}>
 						<Box>
 							{/* ITEM IMAGE */}
-							{itemSelected ? (
-								<LazyLoadImage
-									src={`/images/wildriftitems/${itemSelected.id}.png`}
-									className={styles.itemImage}
-								/>
-							) : (
-								// Defaults to "Abyssal Mask" image if no item is selected
-								<LazyLoadImage
-									src={`/images/wildriftitems/a42bcabd-290c-47f2-ae68-258d412c6d8d.png`}
-									className={styles.itemImage}
-								/>
-							)}
+							<LazyLoadImage
+								src={`/images/wildriftitems/${itemSelected.id}.png`}
+								className={styles.itemImage}
+							/>
 
 							{/* <SELECT> */}
 							{
@@ -127,21 +119,20 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 										Item
 									</InputLabel>
 									<NativeSelect
+										value={itemSelected.id}
 										onChange={handleItemSelectChange}
 										inputProps={{
 											name: 'item',
 											id: 'item-select',
 										}}
 									>
-										{items.map(
-											({ id, itemName, url }: ItemInterface, index) => {
-												return (
-													<option key={index} value={id}>
-														{itemName}
-													</option>
-												);
-											}
-										)}
+										{items.map(({ id, itemName }: ItemInterface, index) => {
+											return (
+												<option key={index} value={id}>
+													{itemName}
+												</option>
+											);
+										})}
 									</NativeSelect>
 									<FormHelperText>Add an item to your build</FormHelperText>
 								</FormControl>
@@ -183,9 +174,9 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								id='itemReason'
 								name='itemReason'
 								rows={6}
+								value={itemReason}
 								placeholder='Add an explanation for this item'
 								className={styles.explanationTextArea}
-								value={itemReason}
 								onChange={(e) => handleItemExplanationChange(e)}
 							></textarea>
 							<Box display='flex' flexDirection='row-reverse'>

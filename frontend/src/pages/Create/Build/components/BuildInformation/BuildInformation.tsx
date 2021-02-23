@@ -40,6 +40,7 @@ const BuildInformation = (props: BuildInformationProps) => {
 					<p>1. Build Title</p>
 					<input
 						type='text'
+						value={buildTitle}
 						placeholder='Build title'
 						style={{ width: '100%' }}
 						onChange={(e) => handleBuildTitleChange(e)}
@@ -50,11 +51,7 @@ const BuildInformation = (props: BuildInformationProps) => {
 				<Box>
 					<p>2. Role</p>
 					{
-						<select
-							defaultValue='Top'
-							value={buildRole}
-							onChange={handleBuildRoleChange}
-						>
+						<select value={buildRole} onChange={handleBuildRoleChange}>
 							{roles.map((role, index) => {
 								return (
 									<option key={index} value={role}>

@@ -83,6 +83,7 @@ export interface SpellInterface {
 
 export interface gameDataInterface {
 	gameData: {
+		builds: Array<BuildInterface>;
 		champions: Array<ChampionInterface>;
 		items: Array<ItemInterface>;
 		ranks: Array<RankInterface>;
@@ -92,5 +93,5 @@ export interface gameDataInterface {
 }
 
 export interface RootState extends gameDataInterface {
-	build: BuildInterface & { builds: Array<BuildInterface> };
+	build: BuildInterface;
 }

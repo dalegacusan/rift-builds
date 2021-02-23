@@ -6,7 +6,6 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { connect, ConnectedProps } from 'react-redux';
 
 // MaterialUI
-import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
@@ -36,7 +35,7 @@ const Resolve = (props: ResolveProps) => {
 		<>
 			<Grid item xs={12} sm={6}>
 				<LazyLoadImage
-					src={`/images/wildriftrunes/${runeResolve.id}.png`}
+					src={`/images/wildriftrunes/${runeResolve.id}.jpg`}
 					className={styles.runeImage}
 				/>
 
@@ -46,6 +45,7 @@ const Resolve = (props: ResolveProps) => {
 							Resolve (Slot 2)
 						</InputLabel>
 						<NativeSelect
+							value={runeResolve.id}
 							onChange={(e) =>
 								handleRuneSelectChange(e, 'secondary', 'resolve')
 							}
@@ -75,6 +75,7 @@ const Resolve = (props: ResolveProps) => {
 					id='runeResolve'
 					name='runeResolve'
 					rows={6}
+					value={runeResolve.reason}
 					placeholder='Add an explanation for this rune'
 					className={styles.explanationTextArea}
 					// value={itemReason}

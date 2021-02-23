@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import {
+	errorItemDuplicate,
+	errorPrimaryItemsLimit,
+} from '../../../../../../../utils/alertpopups';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../../../store/actions';
@@ -37,7 +42,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 			return item.id;
 		});
 		var isDuplicate = itemArray.some((item, index) => {
-			return itemArray.indexOf(item) != index;
+			return itemArray.indexOf(item) !== index;
 		});
 
 		// Remove duplicates from itemsConfirmed Array
@@ -48,9 +53,9 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 		if (isDuplicate) {
 			alert('Duplicate');
 			setItemsConfirmed(filteredItemsConfirmed);
-			// errorItemDuplicate();
+			errorItemDuplicate();
 		} else if (primaryItems.length > 6) {
-			// errorPrimaryItemsLimit();
+			errorPrimaryItemsLimit();
 			alert('Limit');
 
 			const itemsConfirmedCopy = [...itemsConfirmed];

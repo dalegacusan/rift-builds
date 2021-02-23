@@ -169,6 +169,8 @@ const buildReducer = (state = initialState, action) => {
 				...state,
 				username: action.data
 			};
+		case actionTypes.BUILD_REFRESH:
+			return initialState
 		default:
 			return state;
 	}

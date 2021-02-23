@@ -6,7 +6,6 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { connect, ConnectedProps } from 'react-redux';
 
 // MaterialUI
-import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
@@ -36,7 +35,7 @@ const Domination = (props: DominationProps) => {
 		<>
 			<Grid item xs={12} sm={6}>
 				<LazyLoadImage
-					src={`/images/wildriftrunes/${runeDomination.id}.png`}
+					src={`/images/wildriftrunes/${runeDomination.id}.jpg`}
 					className={styles.runeImage}
 				/>
 
@@ -46,6 +45,7 @@ const Domination = (props: DominationProps) => {
 							Domination (Slot 1)
 						</InputLabel>
 						<NativeSelect
+							value={runeDomination.id}
 							onChange={(e) =>
 								handleRuneSelectChange(e, 'secondary', 'domination')
 							}
@@ -76,6 +76,7 @@ const Domination = (props: DominationProps) => {
 					id='runeDomination'
 					name='runeDomination'
 					rows={6}
+					value={runeDomination.reason}
 					placeholder='Add an explanation for this rune'
 					className={styles.explanationTextArea}
 					// value={itemReason}

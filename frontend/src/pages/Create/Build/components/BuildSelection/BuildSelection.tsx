@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 // MaterialUI
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 // Components
 import ChampionSelect from './components/ChampionSelect/ChampionSelect';
@@ -11,16 +10,6 @@ import SpellsSelect from './components/SpellsSelect/SpellsSelect';
 // CSS
 import styles from './buildselection.module.css';
 // Types
-import {
-	BuildInterface,
-	CountersInterface,
-	ChampionInterface,
-	ItemInterface,
-	RankInterface,
-	RuneInterface,
-	SpellInterface,
-	RootState,
-} from '../../../../../utils/interfaces';
 type BuildSelectionProps = {
 	formControl: string;
 };

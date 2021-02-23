@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -47,7 +47,7 @@ const ChampionSelect = (props: ChampionSelectProps) => {
 			<Box className={styles.championSelectContainer}>
 				{/* Display Champion Image */}
 				<LazyLoadImage
-					src={`/images/wildriftchampions/${championSelected.id}.png`}
+					src={`/images/wildriftchampions/${championSelected.id}.jpg`}
 					className={styles.championImage}
 				/>
 

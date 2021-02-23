@@ -3,7 +3,6 @@ import React, { FunctionComponent } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 // Components
 // Types
@@ -27,7 +26,7 @@ const Champions: FunctionComponent<ChampionsProps> = (props) => {
 					<Box key={index} className={styles.championImageContainer}>
 						<a href={`/builds/${championId}`} className={styles.championLink}>
 							<LazyLoadImage
-								src={`/images/wildriftchampions/${championId}.png`}
+								src={`/images/wildriftchampions/${championId}.jpg`}
 								className={styles.championImage}
 								title={championName}
 								alt={championName}

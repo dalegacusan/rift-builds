@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import {
+	errorNoUsername,
+	errorNoItemSelected,
+	errorBuildSaved,
+	successBuildSaved,
+	errorNoBuildTitle,
+} from '../../../utils/alertpopups';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -31,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const CreateBuild = (props: CreateBuildProps) => {
 	const classes = useStyles();
 	// Build PROPS
-	const { completeBuild } = props;
+	const { completeBuild, refreshState } = props;
 
 	const [savedBuild, setSavedBuild] = useState({
 		id: '',
@@ -52,7 +60,11 @@ const CreateBuild = (props: CreateBuildProps) => {
 	}
 
 	const submitBuild = async () => {
-		if (completeBuild.itemsConfirmed.length !== 0 && completeBuild.username) {
+		if (
+			completeBuild.itemsConfirmed.length !== 0 &&
+			completeBuild.username &&
+			completeBuild.buildTitle
+		) {
 			setOpenBackdrop(true);
 			const saveToDatabase = await axios
 				.post(
@@ -67,6 +79,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 					// successBuildSaved();
 					setSavedBuild(res.data);
 					setHasSubmittedBuild(true);
+					refreshState();
 					console.log('Successfully saved build');
 				})
 				.catch((err) => {
@@ -75,20 +88,18 @@ const CreateBuild = (props: CreateBuildProps) => {
 						err.response.data ===
 							"You're creating too many builds. Please try again after 30 minutes."
 					) {
-						// errorBuildSaved(err.response.data);
-						console.log("You're creating too many builds");
+						errorBuildSaved(err.response.data);
 					} else {
-						// errorBuildSaved('Something went wrong. Failed to save build.');
-						console.log('Something went wrong. Failed to save build.');
+						errorBuildSaved('Something went wrong. Failed to save build.');
 					}
 				});
 		} else {
-			if (completeBuild.itemsConfirmed.length === 0) {
-				// errorNoItemSelected();
-				console.log('No items selected');
+			if (!completeBuild.buildTitle) {
+				errorNoBuildTitle();
+			} else if (completeBuild.itemsConfirmed.length === 0) {
+				errorNoItemSelected();
 			} else if (!completeBuild.username) {
-				// errorNoUsername();
-				console.log('No username');
+				errorNoUsername();
 			}
 			return;
 		}
@@ -102,6 +113,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 	return (
 		<Box>
 			<BackdropLoading openBackdrop={openBackdrop} />
+			<Toaster />
 			<CreateBuildHeader />
 
 			<Stepper
@@ -120,7 +132,13 @@ const mapStateToProps = (state: RootState) => {
 	};
 };
 
-const connector = connect(mapStateToProps);
+const mapDispatchToProps = (dispatch: any) => {
+	return {
+		refreshState: () => dispatch({ type: actionTypes.BUILD_REFRESH }),
+	};
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

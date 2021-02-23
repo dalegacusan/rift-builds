@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 // Types
 type StepperProps = {
 	activeStep: number;
@@ -47,10 +46,6 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 
 	const handleBack = () => {
 		setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
-	};
-
-	const handleReset = () => {
-		setActiveStep(0);
 	};
 
 	return (

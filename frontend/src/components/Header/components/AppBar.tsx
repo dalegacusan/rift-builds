@@ -55,7 +55,11 @@ const AppBarComponent = (props: any) => {
 				<AppBar className={styles.header}>
 					<Toolbar>
 						<a href='/' className={classes.title}>
-							<img src='/images/riftbuilds.png' className={styles.headerLogo} />
+							<img
+								src='/images/riftbuilds.png'
+								className={styles.headerLogo}
+								alt='Rift Builds Logo'
+							/>
 						</a>
 						<a href='/' className={styles.headerLink}>
 							<p className={classes.menuLinks}>Home</p>

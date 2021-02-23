@@ -5,15 +5,6 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 // Components
 // Types
-import {
-	BuildInterface,
-	CountersInterface,
-	ChampionInterface,
-	ItemInterface,
-	RankInterface,
-	RuneInterface,
-	SpellInterface,
-} from '../../../../../utils/interfaces';
 // CSS
 
 const CreateBuildHeader = () => {

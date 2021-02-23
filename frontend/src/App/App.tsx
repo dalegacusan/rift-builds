@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -17,13 +17,11 @@ import Landing from '../pages/Landing/Landing';
 import PageNotFound from '../components/Error/404/PageNotFound';
 // Types
 import {
-	BuildInterface,
 	ChampionInterface,
 	ItemInterface,
 	RuneInterface,
 	SpellInterface,
 	RankInterface,
-	gameDataInterface,
 } from '../utils/interfaces';
 // CSS
 const theme = createMuiTheme({

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
-import actionTypes from '../../store/actions';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -90,13 +88,6 @@ const Landing = (props: LandingProps) => {
 const mapStateToProps = (state: RootState) => {
 	return {
 		champions: state.gameData.champions,
-	};
-};
-
-const mapDispatchToProps = (dispatch: any) => {
-	return {
-		setChampions: (data: Array<ChampionInterface>) =>
-			dispatch({ type: actionTypes.GAMEDATA_SET_CHAMPIONS, data }),
 	};
 };
 

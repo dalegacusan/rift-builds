@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -15,11 +15,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 // Types
-import {
-	BuildInterface,
-	RankInterface,
-	RootState,
-} from '../../../../../utils/interfaces';
+import { RankInterface, RootState } from '../../../../../utils/interfaces';
 // CSS
 import styles from './playerinformation.module.css';
 
@@ -28,7 +24,7 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 	// Game Data PROPS
 	const { ranks } = props;
 	// Build PROPS
-	const { username, rankSelected, setRankSelected, setUsername } = props;
+	const { rankSelected, setRankSelected, username, setUsername } = props;
 
 	// =============== Username =============== //
 	const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,6 +53,7 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 					<p>7. Username</p>
 					<input
 						type='text'
+						value={username}
 						placeholder='Username'
 						onChange={(e) => handleUsernameChange(e)}
 						style={{ width: '100%' }}
@@ -79,6 +76,7 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 									Rank
 								</InputLabel>
 								<NativeSelect
+									value={rankSelected.id}
 									onChange={handleRankSelectChange}
 									inputProps={{
 										name: 'rank',
@@ -105,9 +103,9 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 
 const mapStateToProps = (state: RootState) => {
 	return {
-		username: state.build.username,
 		rankSelected: state.build.rank,
 		ranks: state.gameData.ranks,
+		username: state.build.username,
 	};
 };
 

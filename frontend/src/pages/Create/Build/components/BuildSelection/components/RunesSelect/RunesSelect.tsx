@@ -6,11 +6,7 @@ import actionTypes from '../../../../../../../store/actions';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 import Domination from './components/Domination';
 import Inspiration from './components/Inspiration';
