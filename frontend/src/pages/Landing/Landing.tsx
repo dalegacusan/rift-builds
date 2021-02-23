@@ -23,6 +23,14 @@ const Landing = (props: LandingProps) => {
 	>([]);
 	const [roleFilter, setRoleFilter] = useState('all');
 
+	// HANDLER for "Search for a champion" input
+	const handleChampionSearchChange = (
+		e: React.ChangeEvent<HTMLInputElement> // ChangeEvent more suitable for typing form events.
+	) => {
+		const { value } = e.target;
+		setChampionSearch(value);
+	};
+
 	useEffect(() => {
 		setFilteredChampions(champions);
 	}, [champions]);
@@ -52,19 +60,13 @@ const Landing = (props: LandingProps) => {
 	// Change state based on "Search for a champion"
 	useEffect(() => {
 		const filterChampions = champions.filter((champion: ChampionInterface) =>
-			champion.championName.toLocaleLowerCase().includes(championSearch)
+			champion.championName
+				.toLocaleLowerCase()
+				.includes(championSearch.toLocaleLowerCase())
 		);
 
 		setFilteredChampions(filterChampions);
 	}, [championSearch]);
-
-	// HANDLER for "Search for a champion" input
-	const handleChampionSearchChange = (
-		e: React.ChangeEvent<HTMLInputElement> // ChangeEvent more suitable for typing form events.
-	) => {
-		const { value } = e.target;
-		setChampionSearch(value);
-	};
 
 	return (
 		<>

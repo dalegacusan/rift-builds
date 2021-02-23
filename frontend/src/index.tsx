@@ -9,7 +9,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage';
 import buildReducer from './store/reducers/build';
 import gameDataReducer from './store/reducers/gameData';
-import actionTypes from './store/actions';
 
 import './index.css';
 import App from './App/App';
