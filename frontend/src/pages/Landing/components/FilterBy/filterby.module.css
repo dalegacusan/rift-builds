@@ -1,8 +1,7 @@
 .filterContainer {
-	/* background-color: green; */
 	padding: 5px 10px 10px 10px;
 	margin-top: 10px;
-	border-bottom: 2px solid #cccccc;
+	border-bottom: 2px solid #969696;
 }
 
 .rolesListContainer {
@@ -17,8 +16,9 @@
 
 .rolesList li {
 	display: inline-block;
-	margin-right: 6px;
+	margin-right: 12px;
 	font-size: 16px;
+	color: #ebebeb;
 }
 
 .rolesList li:hover {
@@ -28,4 +28,9 @@
 
 .searchForChampionContainer {
 	margin-top: 10px;
+}
+
+.searchForChampionInput {
+	width: 100%;
+	padding: 6px;
 }

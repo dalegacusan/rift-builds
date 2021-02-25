@@ -81,6 +81,11 @@ export interface SpellInterface {
 	url: string;
 }
 
+export interface RoleInterface {
+	id: string;
+	role: string;
+}
+
 export interface gameDataInterface {
 	gameData: {
 		builds: Array<BuildInterface>;

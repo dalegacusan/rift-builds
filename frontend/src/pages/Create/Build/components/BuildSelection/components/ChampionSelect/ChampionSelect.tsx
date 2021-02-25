@@ -65,7 +65,7 @@ const ChampionSelect = (props: ChampionSelectProps) => {
 							}}
 						>
 							{champions.map(
-								({ id, championName }: ChampionInterface, index) => {
+								({ id, championName }: ChampionInterface, index: number) => {
 									return (
 										<option key={index} value={id}>
 											{championName}

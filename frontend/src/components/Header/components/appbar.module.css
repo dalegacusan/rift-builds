@@ -1,14 +1,14 @@
 .header {
-	background-color: #111111 !important;
+	background-color: #171717 !important;
 }
 
 .headerLink {
-	color: #ffffff;
+	color: #ebebeb;
 	text-decoration: none;
 }
 
 .headerLink:hover {
-	color: #d4d4d4;
+	color: #cacaca;
 }
 
 .headerLogo {

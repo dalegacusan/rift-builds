@@ -5,6 +5,7 @@ const initialState = {
 	champions: [],
 	items: [],
 	ranks: [],
+	roles: [],
 	runes: [],
 	spells: [],
 };
@@ -31,6 +32,11 @@ const gameDataReducer = (state = initialState, action) => {
 			return {
 				...state,
 				ranks: action.data
+			};
+		case actionTypes.GAMEDATA_SET_ROLES:
+			return {
+				...state,
+				roles: action.data
 			};
 		case actionTypes.GAMEDATA_SET_RUNES:
 			return {

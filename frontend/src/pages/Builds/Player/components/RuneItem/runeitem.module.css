@@ -1,0 +1,16 @@
+.runeAvatar {
+	float: left;
+	margin-right: 10px;
+}
+
+.runeImage {
+	width: 100%;
+}
+
+.runeReasonContainer {
+	width: 50%;
+}
+
+.runeReason {
+	color: #d3d6da;
+}

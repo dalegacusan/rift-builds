@@ -126,13 +126,15 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 											id: 'item-select',
 										}}
 									>
-										{items.map(({ id, itemName }: ItemInterface, index) => {
-											return (
-												<option key={index} value={id}>
-													{itemName}
-												</option>
-											);
-										})}
+										{items.map(
+											({ id, itemName }: ItemInterface, index: number) => {
+												return (
+													<option key={index} value={id}>
+														{itemName}
+													</option>
+												);
+											}
+										)}
 									</NativeSelect>
 									<FormHelperText>Add an item to your build</FormHelperText>
 								</FormControl>
@@ -202,6 +204,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 		</Box>
 	);
 };
+
 const mapStateToProps = (state: RootState) => {
 	return {
 		itemsConfirmed: state.build.itemsConfirmed,

@@ -1,0 +1,16 @@
+.itemAvatar {
+	float: left;
+	margin-right: 10px;
+}
+
+.itemImage {
+	width: 100%;
+}
+
+.itemReasonContainer {
+	width: 50%;
+}
+
+.itemReason {
+	color: #d3d6da;
+}

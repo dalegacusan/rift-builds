@@ -56,10 +56,10 @@ const Domination = (props: DominationProps) => {
 						>
 							{runes
 								.filter(
-									(rune) =>
+									(rune: RuneInterface) =>
 										rune.type === 'secondary' && rune.path === 'domination'
 								)
-								.map(({ id, runeName, url }: RuneInterface, index) => {
+								.map(({ id, runeName, url }: RuneInterface, index: number) => {
 									return (
 										<option key={index} value={id}>
 											{runeName}

@@ -7,9 +7,11 @@ import Container from '@material-ui/core/Container';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 // CSS
+import styles from './layout.module.css';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
+		backgroundColor: theme.palette.secondary.light,
 	},
 }));
 // Types
@@ -23,8 +25,9 @@ const Layout = (props: { children: React.ReactNode }) => {
 			<Header />
 			<Container maxWidth='lg'>
 				<section>{children}</section>
-				<Footer />
 			</Container>
+			<div className={styles.footerPush} />
+			<Footer />
 		</div>
 	);
 };

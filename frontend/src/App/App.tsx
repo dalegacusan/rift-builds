@@ -15,15 +15,19 @@ import CreateBuild from '../pages/Create/Build/CreateBuild';
 import Layout from '../components/Layout';
 import Landing from '../pages/Landing/Landing';
 import PageNotFound from '../components/Error/404/PageNotFound';
+import HeroBuilds from '../pages/Builds/Champion/ChampionBuilds';
+import PlayerBuild from '../pages/Builds/Player/PlayerBuild';
 // Types
 import {
 	ChampionInterface,
 	ItemInterface,
+	RankInterface,
+	RoleInterface,
 	RuneInterface,
 	SpellInterface,
-	RankInterface,
 } from '../utils/interfaces';
 // CSS
+import styles from './app.module.css';
 const theme = createMuiTheme({
 	typography: {
 		fontFamily: ['Helvetica Neue', 'Helvetica', 'Arial', 'Tahoma'].join(','),
@@ -42,15 +46,23 @@ const theme = createMuiTheme({
 	},
 });
 interface AppProps {
-	setChampions: (prevChampions: Array<ChampionInterface>) => void;
-	setItems: (prevChampions: Array<ItemInterface>) => void;
-	setRunes: (prevChampions: Array<RuneInterface>) => void;
-	setRanks: (prevChampions: Array<RankInterface>) => void;
-	setSpells: (prevChampions: Array<SpellInterface>) => void;
+	setChampions: (newChampions: Array<ChampionInterface>) => void;
+	setItems: (newItems: Array<ItemInterface>) => void;
+	setRanks: (newRanks: Array<RankInterface>) => void;
+	setRoles: (newRoles: Array<RoleInterface>) => void;
+	setRunes: (newRunes: Array<RuneInterface>) => void;
+	setSpells: (newSpells: Array<SpellInterface>) => void;
 }
 
 const App = (props: AppProps) => {
-	const { setChampions, setItems, setRunes, setRanks, setSpells } = props;
+	const {
+		setChampions,
+		setItems,
+		setRanks,
+		setRoles,
+		setRunes,
+		setSpells,
+	} = props;
 
 	// Get DATA
 	useEffect(() => {
@@ -74,8 +86,16 @@ const App = (props: AppProps) => {
 			// 'https://wildriftbuilds.herokuapp.com/api/rank/all'
 			'/api/rank/all'
 		);
+		const getRoles = axios.get('/api/role/all');
 
-		Promise.all([getChampions, getItems, getRunes, getSpells, getRanks])
+		Promise.all([
+			getChampions,
+			getItems,
+			getRunes,
+			getSpells,
+			getRanks,
+			getRoles,
+		])
 			.then((values) => {
 				const [
 					{ data: championsArray },
@@ -83,6 +103,7 @@ const App = (props: AppProps) => {
 					{ data: runesArray },
 					{ data: spellsArray },
 					{ data: ranksArray },
+					{ data: rolesArray },
 				] = values;
 
 				// const sortArray = (arrName, interface) => {
@@ -147,6 +168,7 @@ const App = (props: AppProps) => {
 				setRanks(ranksArray);
 				setRunes(runesArray);
 				setSpells(spellsArray);
+				setRoles(rolesArray);
 			})
 			.catch((err) => {
 				console.error('Something went wrong');
@@ -156,7 +178,7 @@ const App = (props: AppProps) => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<div className='App'>
+			<div className={`App ${styles.appContainer}`}>
 				<CssBaseline />
 				<Layout>
 					<Router>
@@ -164,8 +186,14 @@ const App = (props: AppProps) => {
 							<Route exact path='/'>
 								<Landing />
 							</Route>
-							<Route exact path='/create'>
+							<Route exact path='/build/create'>
 								<CreateBuild />
+							</Route>
+							<Route exact path='/builds/champion/:heroName'>
+								<HeroBuilds />
+							</Route>
+							<Route exact path='/build/:buildId'>
+								<PlayerBuild />
 							</Route>
 
 							{/* 404 - Page not found */}
@@ -187,6 +215,8 @@ const mapDispatchToProps = (dispatch: any) => {
 			dispatch({ type: actionTypes.GAMEDATA_SET_ITEMS, data: items }),
 		setRanks: (ranks: Array<RankInterface>) =>
 			dispatch({ type: actionTypes.GAMEDATA_SET_RANKS, data: ranks }),
+		setRoles: (roles: Array<RoleInterface>) =>
+			dispatch({ type: actionTypes.GAMEDATA_SET_ROLES, data: roles }),
 		setRunes: (runes: Array<RuneInterface>) =>
 			dispatch({ type: actionTypes.GAMEDATA_SET_RUNES, data: runes }),
 		setSpells: (spells: Array<SpellInterface>) =>

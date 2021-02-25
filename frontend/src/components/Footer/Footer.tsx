@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
 // Components
 // CSS
 import styles from './footer.module.css';
@@ -13,16 +14,21 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
 	},
+	footerContainer: {
+		backgroundColor: theme.palette.secondary.main,
+		position: 'relative',
+		bottom: 0,
+		// minHeight: '100vh',
+	},
 }));
-//Types
 
 const Footer = () => {
 	const classes = useStyles();
 
 	return (
-		<>
-			<footer className={classes.root}>
-				<Grid container>
+		<footer className={classes.root}>
+			<Grid container className={classes.footerContainer}>
+				<Container maxWidth='lg'>
 					<Grid item xs>
 						<Box style={{ padding: '80px 0' }}>
 							<Box style={{ paddingBottom: '20px' }}>
@@ -55,9 +61,9 @@ const Footer = () => {
 							</Box>
 						</Box>
 					</Grid>
-				</Grid>
-			</footer>
-		</>
+				</Container>
+			</Grid>
+		</footer>
 	);
 };
 

@@ -1,0 +1,12 @@
+.spellAvatar {
+	margin-right: 10px;
+}
+
+.spellImage {
+	width: 100%;
+}
+
+.spellName {
+	display: inline-block;
+	margin-top: 8px;
+}

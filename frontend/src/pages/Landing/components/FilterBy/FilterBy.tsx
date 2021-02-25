@@ -46,12 +46,12 @@ const FilterBy = (props: FilterByProps) => {
 				</Grid>
 				<Grid item xs={12} sm={2}>
 					<Box className={styles.searchForChampionContainer}>
-						<TextField
+						<input
+							type='text'
 							value={championSearch}
 							onChange={handleChampionSearchChange}
-							label='Search a Champion'
-							variant='outlined'
-							size='small'
+							placeholder='Search a Champion'
+							className={styles.searchForChampionInput}
 						/>
 					</Box>
 				</Grid>

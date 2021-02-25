@@ -16,8 +16,11 @@
 }
 
 .championName {
-	color: #4a4a4a;
-	font-size: 14px;
+	color: #aba79e;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.05em;
+	text-shadow: 0 2px 4px rgb(0 0 0 / 70%);
 	margin: 0;
 	width: 82px;
 }

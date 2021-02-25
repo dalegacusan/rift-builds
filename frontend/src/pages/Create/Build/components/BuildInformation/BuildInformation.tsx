@@ -34,7 +34,7 @@ const BuildInformation = (props: BuildInformationProps) => {
 	};
 
 	return (
-		<Grid container spacing={3}>
+		<Grid container spacing={3} style={{ color: '#EBEBEB' }}>
 			<Grid item xs={12} sm={6}>
 				<Box>
 					<p>1. Build Title</p>

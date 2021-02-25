@@ -18,7 +18,7 @@ const BuildSelection = (props: BuildSelectionProps) => {
 	const { formControl } = props;
 
 	return (
-		<Grid container spacing={3}>
+		<Grid container spacing={3} style={{ color: '#EBEBEB' }}>
 			<Grid item xs={12}>
 				<ChampionSelect formControl={formControl} />
 			</Grid>

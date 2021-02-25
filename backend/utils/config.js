@@ -1,4 +1,6 @@
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config();
+}
 
 const PORT = process.env.PORT || 8080;
 const { MONGODB_URL, TEST_MONGODB_URL } = process.env;
