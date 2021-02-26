@@ -7,9 +7,10 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
+// CSS
+import styles from './playerbuildheader.module.css';
+// Types
 import { BuildInterface } from '../../../../../utils/interfaces';
-
 type PlayerBuildHeaderProps = {
 	build: BuildInterface;
 };
@@ -43,60 +44,50 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 			container
 			wrap='nowrap'
 			spacing={2}
-			style={{ margin: '20px 0 40px 0' }}
+			className={styles.playerBuildHeaderContainer}
 		>
+			{/* Champion Image */}
 			<Grid item>
-				<LazyLoadImage
-					src={`/images/wildriftchampions/${champion.id}.jpg`}
-					title={champion.championName}
-					style={{ width: '80%', float: 'left', marginRight: '20px' }}
-				/>
-			</Grid>
-			<Grid item xs>
-				<Box>
-					<span
-						style={{
-							color: '#517ebd',
-							fontWeight: 'bold',
-							fontSize: '36px',
-							margin: 0,
-							padding: 0,
-						}}
+				<Box className={styles.championImageContainer}>
+					<LazyLoadImage
+						src={`/images/wildriftchampions/${champion.id}.jpg`}
+						className={styles.championImage}
+						title={champion.championName}
+					/>
+					<Box
+						className={styles.buildRoleContainer}
+						display='flex'
+						justifyContent='center'
 					>
+						<LazyLoadImage
+							src={`/images/wildriftroles/${roleToDisplay}.png`}
+							className={styles.buildRoleImage}
+							title={buildRole}
+						/>
+						<span className={styles.buildRoleText}>{buildRole}</span>
+					</Box>
+				</Box>
+			</Grid>
+			{/* Champion Name, Build Title, and Username */}
+			<Grid item xs>
+				<Box className={styles.buildInformationContainer}>
+					<span className={styles.championNameText}>
 						{champion.championName}
 					</span>
-					<LazyLoadImage
-						src={`/images/wildriftroles/${roleToDisplay}.png`}
-						style={{ width: '26px', marginLeft: '10px' }}
-						title={buildRole}
-					/>
-
-					<Typography variant='body1'>
-						<p
+					<Box>
+						<p className={styles.buildTitleText}>{buildTitle}</p>
+						<span>by</span>{' '}
+						<span className={styles.usernameText}>{username}</span>
+						{/* <LazyLoadImage
+							src={`/images/wildriftranks/${build.rank.id}.png`}
 							style={{
-								margin: 0,
-								fontWeight: 'bold',
-								fontSize: '20px',
-								color: '#CFCFCF',
+								width: '30px',
+								marginLeft: '10px',
+								position: 'absolute',
 							}}
-						>
-							{buildTitle}
-						</p>
-						<span style={{ color: '#CFCFCF' }}>by</span>{' '}
-						<span style={{ color: '#FFB84D' }}>{username}</span>
-						{/* <Avatar
-							style={{
-								// backgroundColor: '#232831',
-								width: '40px',
-							}}
-						>
-							<LazyLoadImage
-								src={`/images/wildriftranks/${build.rank.id}.png`}
-								style={{ width: '80%' }}
-								title={rank.rankName}
-							/>
-						</Avatar> */}
-					</Typography>
+							title={rank.rankName}
+						/> */}
+					</Box>
 				</Box>
 			</Grid>
 		</Grid>

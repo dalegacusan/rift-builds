@@ -1,0 +1,54 @@
+.playerBuildHeaderContainer {
+	margin: 20px 0 !important;
+}
+
+.championImageContainer {
+	display: inline-block;
+	position: relative;
+}
+
+.championImage {
+	width: 100%;
+	float: left;
+}
+
+.championNameText {
+	color: #00a3fe;
+	font-weight: bold;
+	font-size: 38px;
+}
+
+.buildRoleContainer {
+	background-color: rgb(0, 0, 0, 60%);
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 5px;
+}
+
+.buildRoleImage {
+	width: 20px;
+	margin-right: 10px;
+}
+
+.buildRoleText {
+	color: #cfcfcf;
+}
+
+.buildTitleText {
+	margin: 0;
+	font-weight: bold;
+	font-size: 20px;
+	color: #cfcfcf;
+}
+
+.usernameText {
+	color: #ffb84d;
+	display: inline-block;
+	margin-top: 4px;
+}
+
+.buildInformationContainer {
+	margin-left: 10px;
+	color: #cfcfcf;
+}

@@ -1,0 +1,37 @@
+.popoverItemName {
+	color: #e5d69b;
+	font-size: 16px;
+	display: inline-block;
+}
+
+.popoverCoinImage {
+	width: 16px;
+	display: inline-block;
+	position: relative;
+	top: 4px;
+	left: 8px;
+}
+
+.popoverItemPrice {
+	color: #9c6203;
+	font-size: 13px;
+	display: inline-block;
+	position: relative;
+	top: 2px;
+	left: 14px;
+}
+
+.popoverSectionContainer {
+	margin: 15px 0;
+}
+
+.popoverStatText {
+	color: #24fb46;
+	font-size: 12px;
+	margin: 0;
+}
+
+.popoverItemDescContainer {
+	color: #ffffff;
+	font-size: 12px;
+}

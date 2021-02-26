@@ -51,12 +51,10 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 		);
 
 		if (isDuplicate) {
-			alert('Duplicate');
 			setItemsConfirmed(filteredItemsConfirmed);
 			errorItemDuplicate();
 		} else if (primaryItems.length > 6) {
 			errorPrimaryItemsLimit();
-			alert('Limit');
 
 			const itemsConfirmedCopy = [...itemsConfirmed];
 

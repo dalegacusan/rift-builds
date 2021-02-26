@@ -42,9 +42,11 @@ const RuneItem = (props: RuneItemProps) => {
 				</Avatar>
 				{runeName}
 			</Box>
-			<Box p={1} className={styles.runeReasonContainer}>
-				<span className={styles.runeReason}>{reason}</span>
-			</Box>
+			{reason ? (
+				<Box p={1} className={styles.runeReasonContainer}>
+					<span className={styles.runeReason}>{reason}</span>
+				</Box>
+			) : null}
 		</Box>
 	);
 };

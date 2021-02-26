@@ -70,16 +70,7 @@ const PlayerBuild = (props: any) => {
 							{build.itemsConfirmed
 								.filter((item: ItemInterface) => item.type !== 'optional')
 								.map((item: ItemInterface, index) => {
-									const { id: itemId, itemName, reason } = item;
-
-									return (
-										<BuildItem
-											key={index}
-											itemId={itemId}
-											itemName={itemName}
-											reason={reason ? reason : ''}
-										/>
-									);
+									return <BuildItem key={index} item={item} />;
 								})}
 						</Grid>
 					</Grid>
@@ -91,16 +82,7 @@ const PlayerBuild = (props: any) => {
 							{build.itemsConfirmed
 								.filter((item: ItemInterface) => item.type !== 'primary')
 								.map((item: ItemInterface, index) => {
-									const { id: itemId, itemName, reason } = item;
-
-									return (
-										<BuildItem
-											key={index}
-											itemId={itemId}
-											itemName={itemName}
-											reason={reason ? reason : ''}
-										/>
-									);
+									return <BuildItem key={index} item={item} />;
 								})}
 						</Grid>
 					</Grid>
