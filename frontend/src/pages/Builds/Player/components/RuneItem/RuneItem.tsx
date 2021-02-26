@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 // Components
+import RunePopover from '../../../../../components/Popover/RunePopover';
+// Types
+import { RuneInterface } from '../../../../../utils/interfaces';
 // CSS
 import styles from './runeitem.module.css';
 const useStyles = makeStyles((theme) => ({
@@ -15,16 +18,28 @@ const useStyles = makeStyles((theme) => ({
 		height: theme.spacing(7),
 	},
 }));
-// Types
 type RuneItemProps = {
-	runeId: string;
-	runeName: string;
-	reason: string;
+	rune: RuneInterface;
 };
 
 const RuneItem = (props: RuneItemProps) => {
-	const { runeId, runeName, reason } = props;
+	const { rune } = props;
+	const { id: runeId, runeName, reason } = rune;
 	const classes = useStyles();
+
+	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+	const handlePopoverOpen = (
+		event: React.MouseEvent<HTMLElement, MouseEvent>
+	) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handlePopoverClose = () => {
+		setAnchorEl(null);
+	};
+
+	const open = Boolean(anchorEl);
 
 	return (
 		<Box display='flex' p={1}>
@@ -32,6 +47,8 @@ const RuneItem = (props: RuneItemProps) => {
 				<Avatar
 					variant='square'
 					className={`${classes.large} ${styles.runeAvatar}`}
+					onMouseEnter={handlePopoverOpen}
+					onMouseLeave={handlePopoverClose}
 				>
 					<LazyLoadImage
 						src={`/images/wildriftrunes/${runeId}.jpg`}
@@ -40,11 +57,17 @@ const RuneItem = (props: RuneItemProps) => {
 						alt={runeName}
 					/>
 				</Avatar>
+				<RunePopover
+					rune={rune}
+					anchorEl={anchorEl}
+					open={open}
+					handlePopoverClose={handlePopoverClose}
+				/>
 				{runeName}
 			</Box>
 			{reason ? (
 				<Box p={1} className={styles.runeReasonContainer}>
-					<span className={styles.runeReason}>{reason}</span>
+					<span className={styles.runeReason}>{reason ? reason : ''}</span>
 				</Box>
 			) : null}
 		</Box>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -15,9 +15,9 @@ import actionTypes from '../../../../../../../store/actions';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Grow from '@material-ui/core/Grow';
-import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 // Components
+import ItemPopover from '../../../../../../../components/Popover/ItemPopover';
 // CSS
 import styles from './itemsselected.module.css';
 // Types
@@ -85,20 +85,18 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 											style={{ transformOrigin: '0 0 0' }}
 											{...(true ? { timeout: 200 } : {})}
 										>
-											<Tooltip title='Delete'>
-												<Box className={styles.itemContainer}>
-													<Box className={styles.itemImageContainer}>
-														<LazyLoadImage
-															title={currentItem.itemName}
-															className={styles.itemHover}
-															src={`/images/wildriftitems/${currentItem.id}.png`}
-															onClick={() =>
-																handleDeleteItemClick(currentItem.id)
-															}
-														/>
-													</Box>
+											<Box className={styles.itemContainer}>
+												<Box className={styles.itemImageContainer}>
+													<LazyLoadImage
+														title={currentItem.itemName}
+														className={styles.itemHover}
+														src={`/images/wildriftitems/${currentItem.id}.png`}
+														onClick={() =>
+															handleDeleteItemClick(currentItem.id)
+														}
+													/>
 												</Box>
-											</Tooltip>
+											</Box>
 										</Grow>
 									);
 								})}
@@ -117,20 +115,18 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 											style={{ transformOrigin: '0 0 0' }}
 											{...(true ? { timeout: 200 } : {})}
 										>
-											<Tooltip title='Delete'>
-												<Box className={styles.itemContainer}>
-													<Box className={styles.itemImageContainer}>
-														<LazyLoadImage
-															title={currentItem.itemName}
-															className={styles.itemHover}
-															src={`/images/wildriftitems/${currentItem.id}.png`}
-															onClick={() =>
-																handleDeleteItemClick(currentItem.id)
-															}
-														/>
-													</Box>
+											<Box className={styles.itemContainer}>
+												<Box className={styles.itemImageContainer}>
+													<LazyLoadImage
+														title={currentItem.itemName}
+														className={styles.itemHover}
+														src={`/images/wildriftitems/${currentItem.id}.png`}
+														onClick={() =>
+															handleDeleteItemClick(currentItem.id)
+														}
+													/>
 												</Box>
-											</Tooltip>
+											</Box>
 										</Grow>
 									);
 								})}

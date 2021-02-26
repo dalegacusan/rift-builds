@@ -1,4 +1,6 @@
-.popoverItemName {
+.popoverItemName,
+.popoverRuneName,
+.popoverSpellName {
 	color: #e5d69b;
 	font-size: 16px;
 	display: inline-block;
@@ -14,7 +16,7 @@
 
 .popoverItemPrice {
 	color: #9c6203;
-	font-size: 13px;
+	font-size: 13px !important;
 	display: inline-block;
 	position: relative;
 	top: 2px;
@@ -31,7 +33,9 @@
 	margin: 0;
 }
 
-.popoverItemDescContainer {
+.popoverItemDescContainer,
+.popoverRuneDescContainer,
+.popoverSpellDescContainer {
 	color: #ffffff;
 	font-size: 12px;
 }

@@ -1,3 +1,8 @@
+.spellItemContainer {
+	display: inline-block;
+	padding: 10px;
+}
+
 .spellAvatar {
 	margin-right: 10px;
 }

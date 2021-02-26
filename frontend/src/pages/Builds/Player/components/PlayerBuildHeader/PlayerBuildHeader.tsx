@@ -59,11 +59,11 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 						display='flex'
 						justifyContent='center'
 					>
-						<LazyLoadImage
+						{/* <LazyLoadImage
 							src={`/images/wildriftroles/${roleToDisplay}.png`}
 							className={styles.buildRoleImage}
 							title={buildRole}
-						/>
+						/> */}
 						<span className={styles.buildRoleText}>{buildRole}</span>
 					</Box>
 				</Box>
@@ -76,22 +76,24 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 					</span>
 					<Box>
 						<p className={styles.buildTitleText}>{buildTitle}</p>
-						<span>by</span>{' '}
-						<span className={styles.usernameText}>{username}</span>
-						{/* <LazyLoadImage
+
+						<span
+							style={{ position: 'relative', top: '7px', marginRight: '10px' }}
+						>
+							by <span className={styles.usernameText}>{username}</span>
+						</span>
+						<LazyLoadImage
 							src={`/images/wildriftranks/${build.rank.id}.png`}
 							style={{
 								width: '30px',
-								marginLeft: '10px',
 								position: 'absolute',
 							}}
 							title={rank.rankName}
-						/> */}
+						/>
 					</Box>
 				</Box>
 			</Grid>
 		</Grid>
 	);
 };
-
 export default PlayerBuildHeader;

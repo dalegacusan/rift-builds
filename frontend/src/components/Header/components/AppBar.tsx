@@ -54,17 +54,21 @@ const AppBarComponent = (props: any) => {
 			<HideOnScroll {...props}>
 				<AppBar className={styles.header}>
 					<Toolbar>
-						<a href='/' className={classes.title}>
+						<a href='/' target='_blank' className={classes.title}>
 							<img
 								src='/images/riftbuilds.png'
 								className={styles.headerLogo}
 								alt='Rift Builds Logo'
 							/>
 						</a>
-						<a href='/' className={styles.headerLink}>
+						<a href='/' target='_blank' className={styles.headerLink}>
 							<p className={classes.menuLinks}>Home</p>
 						</a>
-						<a href='/build/create' className={styles.headerLink}>
+						<a
+							href='/build/create'
+							target='_blank'
+							className={styles.headerLink}
+						>
 							<p className={classes.menuLinks}>Create</p>
 						</a>
 					</Toolbar>

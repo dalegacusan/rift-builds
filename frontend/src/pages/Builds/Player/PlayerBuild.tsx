@@ -8,7 +8,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 // Components
 import BuildItem from './components/BuildItem/BuildItem';
 import RuneItem from './components/RuneItem/RuneItem';
@@ -92,44 +91,16 @@ const PlayerBuild = (props: any) => {
 					<Grid container spacing={3}>
 						<Grid item xs={12}>
 							{/* KEYSTONE RUNE */}
-							<RuneItem
-								runeId={build.runes.keystone.id}
-								runeName={build.runes.keystone.runeName}
-								reason={
-									build.runes.keystone.reason ? build.runes.keystone.reason : ''
-								}
-							/>
+							<RuneItem rune={build.runes.keystone} />
 
 							{/* DOMINATION RUNE */}
-							<RuneItem
-								runeId={build.runes.domination.id}
-								runeName={build.runes.domination.runeName}
-								reason={
-									build.runes.domination.reason
-										? build.runes.domination.reason
-										: ''
-								}
-							/>
+							<RuneItem rune={build.runes.domination} />
 
 							{/* RESOLVE RUNE */}
-							<RuneItem
-								runeId={build.runes.resolve.id}
-								runeName={build.runes.resolve.runeName}
-								reason={
-									build.runes.resolve.reason ? build.runes.resolve.reason : ''
-								}
-							/>
+							<RuneItem rune={build.runes.resolve} />
 
 							{/* INSPIRATION RUNE BOX */}
-							<RuneItem
-								runeId={build.runes.inspiration.id}
-								runeName={build.runes.inspiration.runeName}
-								reason={
-									build.runes.inspiration.reason
-										? build.runes.inspiration.reason
-										: ''
-								}
-							/>
+							<RuneItem rune={build.runes.inspiration} />
 						</Grid>
 					</Grid>
 
@@ -138,14 +109,8 @@ const PlayerBuild = (props: any) => {
 					<Grid container spacing={3}>
 						<Grid item xs={12}>
 							<Box p={1}>
-								<SpellItem
-									spellId={build.spells.spellOne.id}
-									spellName={build.spells.spellOne.spellName}
-								/>
-								<SpellItem
-									spellId={build.spells.spellTwo.id}
-									spellName={build.spells.spellTwo.spellName}
-								/>
+								<SpellItem spell={build.spells.spellOne} />
+								<SpellItem spell={build.spells.spellTwo} />
 							</Box>
 						</Grid>
 					</Grid>
