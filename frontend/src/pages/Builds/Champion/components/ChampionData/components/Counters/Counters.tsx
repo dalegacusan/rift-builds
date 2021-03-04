@@ -13,15 +13,15 @@ import Box from '@material-ui/core/Box';
 import styles from './counters.module.css';
 // Types
 type ChampionCounterType = {
-	id: String;
-	championName: String;
+	id: string;
+	championName: string;
 };
 type CountersProps = {
 	counters: {
 		strongAgainst: Array<ChampionCounterType>;
 		weakAgainst: Array<ChampionCounterType>;
 	};
-	championName: String;
+	championName: string;
 };
 
 const Counters = (props: CountersProps) => {
@@ -29,7 +29,7 @@ const Counters = (props: CountersProps) => {
 	const { strongAgainst, weakAgainst } = counters;
 
 	// For path='/builds/champion/:championName'
-	const convertChampionNameToAlphabet = (champName: String) => {
+	const convertChampionNameToAlphabet = (champName: string) => {
 		return champName
 			.toLocaleLowerCase()
 			.split(' ')
@@ -89,28 +89,12 @@ const Counters = (props: CountersProps) => {
 						);
 
 						return (
-							<a
+							<CounterContent
 								key={index}
-								href={`/builds/champion/${allAlphabetChampionName}`}
-								className={styles.championCounterLink}
-							>
-								<Box display='flex' className={styles.championCounterContainer}>
-									<Box display='flex' flexGrow={1}>
-										<Avatar
-											variant='square'
-											src={`/images/wildriftchampions/${championId}.jpg`}
-											className={styles.championCounterImage}
-										/>
-										<span className={styles.championCounterName}>
-											{championName}
-										</span>
-									</Box>
-									<span className={styles.goToBuildText}>
-										Builds
-										<ArrowForwardIosIcon className={styles.goToBuildArrow} />
-									</span>
-								</Box>
-							</a>
+								championId={championId}
+								allAlphabetChampionName={allAlphabetChampionName}
+								championName={championName}
+							/>
 						);
 					})}
 				</TabPanel>
@@ -124,33 +108,48 @@ const Counters = (props: CountersProps) => {
 						);
 
 						return (
-							<a
+							<CounterContent
 								key={index}
-								href={`/builds/champion/${allAlphabetChampionName}`}
-								className={styles.championCounterLink}
-							>
-								<Box display='flex' className={styles.championCounterContainer}>
-									<Box display='flex' flexGrow={1}>
-										<Avatar
-											variant='square'
-											src={`/images/wildriftchampions/${championId}.jpg`}
-											className={styles.championCounterImage}
-										/>
-										<span className={styles.championCounterName}>
-											{championName}
-										</span>
-									</Box>
-									<span className={styles.goToBuildText}>
-										Builds
-										<ArrowForwardIosIcon className={styles.goToBuildArrow} />
-									</span>
-								</Box>
-							</a>
+								championId={championId}
+								allAlphabetChampionName={allAlphabetChampionName}
+								championName={championName}
+							/>
 						);
 					})}
 				</TabPanel>
 			</Tabs>
 		</div>
+	);
+};
+
+const CounterContent = (props: {
+	championId: string;
+	allAlphabetChampionName: string;
+	championName: string;
+}) => {
+	const { championId, allAlphabetChampionName, championName } = props;
+
+	return (
+		<a
+			href={`/builds/champion/${allAlphabetChampionName}`}
+			className={styles.championCounterLink}
+			title={championName}
+		>
+			<Box display='flex' className={styles.championCounterContainer}>
+				<Box display='flex' flexGrow={1}>
+					<Avatar
+						variant='square'
+						src={`/images/wildriftchampions/${championId}.jpg`}
+						className={styles.championCounterImage}
+					/>
+					<span className={styles.championCounterName}>{championName}</span>
+				</Box>
+				<span className={styles.goToBuildText}>
+					Builds
+					<ArrowForwardIosIcon className={styles.goToBuildArrow} />
+				</span>
+			</Box>
+		</a>
 	);
 };
 

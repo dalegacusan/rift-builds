@@ -32,12 +32,20 @@ const BuildCountHeader = (props: ChampionDataProps) => {
 		>
 			<Grid container spacing={2}>
 				<Grid item>
-					<LazyLoadImage
-						src={`/images/wildriftchampions/${championId}.jpg`}
-						alt={championName}
-						title={championName}
-						className={styles.championImage}
-					/>
+					<Box className={styles.championImageContainer}>
+						<LazyLoadImage
+							src={`/images/wildriftchampions/${championId}.jpg`}
+							alt={championName}
+							title={championName}
+							className={styles.championImage}
+						/>
+					</Box>
+
+					<Box className={styles.buildsCountContainer} style={{}}>
+						<p style={{ textAlign: 'center', margin: 0 }}>
+							{buildsCount} Builds
+						</p>
+					</Box>
 				</Grid>
 				<Grid item xs>
 					<Box style={{ padding: '5px 0' }}>

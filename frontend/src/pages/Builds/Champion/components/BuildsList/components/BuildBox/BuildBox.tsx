@@ -39,7 +39,7 @@ const BuildBox = (props: BuildBoxProps) => {
 			className={styles.buildBoxContainer}
 		>
 			{/* Date Submitted */}
-			<Grid item sm={2}>
+			<Grid item xs={2} sm={2}>
 				<BuildDate dateSubmitted={dateSubmitted} />
 			</Grid>
 
@@ -49,10 +49,12 @@ const BuildBox = (props: BuildBoxProps) => {
 				direction='row'
 				justify='center'
 				alignItems='center'
+				xs={1}
 				sm={1}
 			>
 				<Avatar
 					alt={championName}
+					title={championName}
 					src={`/images/wildriftchampions/${championId}.jpg`}
 				/>
 			</Grid>
@@ -63,6 +65,7 @@ const BuildBox = (props: BuildBoxProps) => {
 				direction='row'
 				justify='center'
 				alignItems='center'
+				xs={3}
 				sm={3}
 			>
 				{itemsConfirmed
@@ -78,6 +81,7 @@ const BuildBox = (props: BuildBoxProps) => {
 				direction='row'
 				justify='center'
 				alignItems='center'
+				xs={1}
 				sm={1}
 			>
 				<BuildSpell spell={spellOne} />
@@ -90,14 +94,15 @@ const BuildBox = (props: BuildBoxProps) => {
 				direction='row'
 				justify='center'
 				alignItems='center'
+				xs={1}
 				sm={1}
 			>
 				<BuildRune rune={keystone} />
 			</Grid>
 
 			{/* Rank and Username */}
-			<Grid item sm={2}>
-				<BuildRankUser username={username} rankId={rankId} />
+			<Grid item xs={2} sm={2}>
+				<BuildRankUser username={username} rank={rank} />
 			</Grid>
 
 			{/* Learn more Button */}
@@ -106,6 +111,7 @@ const BuildBox = (props: BuildBoxProps) => {
 				direction='row'
 				justify='flex-start'
 				alignItems='center'
+				xs={2}
 				sm={2}
 			>
 				<BuildLearnMoreButton buildId={buildId} />

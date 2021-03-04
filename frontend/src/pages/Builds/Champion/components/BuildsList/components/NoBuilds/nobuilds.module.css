@@ -1,16 +1,20 @@
 .noBuildsContainer {
-	/* background-color: #303841; */
+	background-color: rgb(41, 46, 56, 30%);
 	padding: 40px;
 	margin: 20px 0;
-	color: #cfcfcf;
+	color: rgb(255, 255, 255, 87%);
 }
 
 .championImage {
 	display: block;
-	margin: 0 auto 30px auto;
+	margin: 10px auto 40px auto;
 }
 
 .createBuildLink {
-	color: #517ebd;
+	color: #326cac;
 	text-decoration: none;
+}
+
+.createBuildLink:hover {
+	text-decoration: underline;
 }

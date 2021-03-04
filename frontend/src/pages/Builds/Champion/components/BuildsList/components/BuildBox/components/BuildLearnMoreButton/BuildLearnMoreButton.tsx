@@ -8,8 +8,9 @@ import styles from './buildlearnmorebutton.module.css';
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		learnMoreButton: {
-			color: '#CFCFCF',
+			color: 'rgb(255,255,255, 60%)',
 			backgroundColor: theme.palette.primary.dark,
+			textTransform: 'none',
 		},
 	})
 );
@@ -24,7 +25,10 @@ const BuildLearnMoreButton = (props: BuildLearnMoreButtonProps) => {
 
 	return (
 		<a href={`/build/${buildId}`} style={{ textDecoration: 'none' }}>
-			<Button variant='contained' className={classes.learnMoreButton}>
+			<Button
+				variant='contained'
+				className={`${classes.learnMoreButton} ${styles.learnMoreButton}`}
+			>
 				Learn more
 			</Button>
 		</a>

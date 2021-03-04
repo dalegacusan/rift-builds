@@ -4,6 +4,8 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // Components
 import RunePopover from '../../../../../../../../../components/Popover/RunePopover';
+// CSS
+import styles from './buildrune.module.css';
 // Types
 import { RuneInterface } from '../../../../../../../../../utils/interfaces';
 type BuildRuneProps = {
@@ -31,7 +33,7 @@ const BuildRune = (props: BuildRuneProps) => {
 		<>
 			<LazyLoadImage
 				src={`/images/wildriftrunes/${rune.id}.jpg`}
-				style={{ width: '35px' }}
+				className={styles.runeImage}
 				onMouseEnter={handlePopoverOpen}
 				onMouseLeave={handlePopoverClose}
 			/>

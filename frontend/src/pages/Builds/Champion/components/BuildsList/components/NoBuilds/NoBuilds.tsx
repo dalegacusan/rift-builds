@@ -19,8 +19,7 @@ export default function NoBuilds() {
 		>
 			<Box>
 				<LazyLoadImage
-					src='/images/no_data.svg'
-					width='120'
+					src='/images/empty.png'
 					className={styles.championImage}
 				/>
 				<Typography gutterBottom>

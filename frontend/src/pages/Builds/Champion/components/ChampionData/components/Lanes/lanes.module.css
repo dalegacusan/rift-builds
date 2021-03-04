@@ -1,9 +1,9 @@
 .chipContainer {
-	margin-top: 13px;
+	margin-top: 5px;
 }
 
 .roleChip {
-	margin-right: 4px;
+	margin: 5px 4px 0 0;
 }
 
 .chipTier {
