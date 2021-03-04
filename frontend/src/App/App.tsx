@@ -189,7 +189,7 @@ const App = (props: AppProps) => {
 							<Route exact path='/build/create'>
 								<CreateBuild />
 							</Route>
-							<Route exact path='/builds/champion/:heroName'>
+							<Route exact path='/builds/champion/:championName'>
 								<HeroBuilds />
 							</Route>
 							<Route exact path='/build/:buildId'>

@@ -54,40 +54,41 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 						className={styles.championImage}
 						title={champion.championName}
 					/>
-					<Box
+					{/* <Box
 						className={styles.buildRoleContainer}
 						display='flex'
 						justifyContent='center'
-					>
-						{/* <LazyLoadImage
+					> 
+						<LazyLoadImage
 							src={`/images/wildriftroles/${roleToDisplay}.png`}
 							className={styles.buildRoleImage}
 							title={buildRole}
-						/> */}
+						/> 
 						<span className={styles.buildRoleText}>{buildRole}</span>
-					</Box>
+					</Box> */}
 				</Box>
 			</Grid>
+
 			{/* Champion Name, Build Title, and Username */}
 			<Grid item xs>
 				<Box className={styles.buildInformationContainer}>
-					<span className={styles.championNameText}>
-						{champion.championName}
-					</span>
+					<span className={styles.buildTitleText}>{buildTitle}</span>
 					<Box>
-						<p className={styles.buildTitleText}>{buildTitle}</p>
+						<p className={styles.buildByText}>
+							{champion.championName} build by&nbsp;
+							<span className={styles.usernameText}>{username}</span>
+						</p>
 
-						<span
-							style={{ position: 'relative', top: '7px', marginRight: '10px' }}
-						>
-							by <span className={styles.usernameText}>{username}</span>
+						<span className={styles.buildInformationText}>
+							<span className={styles.buildInformationTitle}>Lane:&nbsp;</span>
+							{buildRole}
+							&nbsp;|&nbsp;
+							<span className={styles.buildInformationTitle}>Rank:&nbsp;</span>
+							{rank.rankName}
 						</span>
 						<LazyLoadImage
 							src={`/images/wildriftranks/${build.rank.id}.png`}
-							style={{
-								width: '30px',
-								position: 'absolute',
-							}}
+							className={styles.laneImage}
 							title={rank.rankName}
 						/>
 					</Box>

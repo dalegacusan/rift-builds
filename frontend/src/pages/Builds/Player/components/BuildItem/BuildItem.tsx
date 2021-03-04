@@ -76,7 +76,7 @@ const BuildItem = (props: BuildItemProps) => {
 					open={open}
 					handlePopoverClose={handlePopoverClose}
 				/>
-				{itemName}
+				<span className={styles.itemName}>{itemName}</span>
 			</Box>
 			{reason ? (
 				<Box p={1} className={styles.itemReasonContainer}>

@@ -1,5 +1,6 @@
 const Build = require('../models/Build');
 const logger = require('../utils/logger');
+const championNameCounterparts = require('../utils/championNameCounterparts');
 
 const getAllBuilds = async (req, res, next) => {
 	const { page } = req.body;
@@ -38,10 +39,10 @@ const getOneBuild = async (req, res, next) => {
 
 const getAllBuildsForChampion = (req, res, next) => {
 	const { page } = req.body;
-	const { championId } = req.params;
+	const { championName } = req.params;
 
-	const allBuilds = Build.find({ 'champion.id': championId }).skip(page - 5).limit(5);
-	const buildsCount = Build.countDocuments({ 'champion.id': championId });
+	const allBuilds = Build.find({ 'champion.championName': championNameCounterparts[championName] }).skip(page - 5).limit(5);
+	const buildsCount = Build.countDocuments({ 'champion.championName': championNameCounterparts[championName] });
 
 	Promise.all([buildsCount, allBuilds])
 		.then(values => {

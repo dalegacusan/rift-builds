@@ -11,11 +11,7 @@ const SectionDivider = (props: { title: string }) => {
 
 	return (
 		<Box className={styles.dividerContainer}>
-			<Typography
-				className={styles.sectionTitle}
-				variant='subtitle1'
-				gutterBottom
-			>
+			<Typography className={styles.sectionTitle} variant='subtitle1'>
 				{title}
 			</Typography>
 		</Box>

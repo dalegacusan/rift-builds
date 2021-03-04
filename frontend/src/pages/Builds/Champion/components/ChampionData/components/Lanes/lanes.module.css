@@ -1,0 +1,12 @@
+.chipContainer {
+	margin-top: 13px;
+}
+
+.roleChip {
+	margin-right: 4px;
+}
+
+.chipTier {
+	background-color: #326cac !important;
+	color: rgb(0, 0, 0, 87%) !important;
+}

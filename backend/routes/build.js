@@ -17,7 +17,7 @@ router.post('/all', BuildController.getAllBuilds);
 router.get('/:buildId', BuildController.getOneBuild);
 
 // Get builds for one champion
-router.post('/all/:championId', BuildController.getAllBuildsForChampion);
+router.post('/all/:championName', BuildController.getAllBuildsForChampion);
 
 router.post('/save', createBuildLimiter, BuildController.saveBuild);
 

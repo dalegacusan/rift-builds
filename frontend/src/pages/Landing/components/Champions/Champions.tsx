@@ -24,7 +24,16 @@ const Champions: FunctionComponent<ChampionsProps> = (props) => {
 
 				return (
 					<Box key={index} className={styles.championImageContainer}>
-						<a href={`/builds/${championId}`} className={styles.championLink}>
+						<a
+							href={`/builds/champion/${championName
+								.toLocaleLowerCase()
+								.split(' ')
+								.filter((char) => char !== '.' && char !== "'")
+								.join('')
+								.replace('.', '')
+								.replace("'", '')}`}
+							className={styles.championLink}
+						>
 							<LazyLoadImage
 								src={`/images/wildriftchampions/${championId}.jpg`}
 								className={styles.championImage}

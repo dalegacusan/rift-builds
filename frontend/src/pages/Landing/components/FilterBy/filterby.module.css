@@ -1,11 +1,11 @@
 .filterContainer {
 	padding: 5px 10px 10px 10px;
 	margin-top: 10px;
-	border-bottom: 2px solid #969696;
+	border-bottom: 1px solid rgb(255, 255, 255, 60%);
 }
 
 .rolesListContainer {
-	margin-top: 15px;
+	margin-top: 20px;
 }
 
 .rolesList {
@@ -18,7 +18,7 @@
 	display: inline-block;
 	margin-right: 12px;
 	font-size: 16px;
-	color: #ebebeb;
+	color: rgb(255, 255, 255, 87%);
 }
 
 .rolesList li:hover {
@@ -32,5 +32,13 @@
 
 .searchForChampionInput {
 	width: 100%;
-	padding: 6px;
+	padding: 10px;
+	background: rgb(41, 46, 56, 30%);
+	border: 1px solid rgb(255, 255, 255, 30%);
+	color: rgb(255, 255, 255, 30%);
+}
+
+.searchForChampionInput:focus {
+	border: 1px solid rgb(255, 255, 255, 60%);
+	outline: none;
 }

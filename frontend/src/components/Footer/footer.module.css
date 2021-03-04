@@ -1,5 +1,5 @@
 .footerLink {
-	color: #a4a4a4;
+	color: rgb(255, 255, 255, 60%);
 	text-decoration: none;
 	display: inline-block;
 	margin-right: 8px;
@@ -10,5 +10,5 @@
 }
 
 .footerDescription {
-	color: #a4a4a4;
+	color: rgb(255, 255, 255, 60%);
 }

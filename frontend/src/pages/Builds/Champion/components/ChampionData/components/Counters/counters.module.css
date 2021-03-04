@@ -1,0 +1,30 @@
+.championCounterLink {
+	text-decoration: none;
+}
+
+.championCounterContainer {
+	margin: 10px 0;
+}
+
+.championCounterLink:hover .championCounterContainer {
+	text-decoration: underline solid rgb(255, 255, 255, 87%);
+}
+
+.championCounterName {
+	color: rgb(255, 255, 255, 87%);
+	margin-left: 10px;
+	margin-top: 9px;
+	text-decoration: none;
+}
+
+.goToBuildText {
+	color: rgb(255, 255, 255, 60%);
+	text-decoration: none;
+}
+
+.goToBuildArrow {
+	margin: 0 0 0 6px;
+	position: relative;
+	top: 6px;
+	width: 15px !important;
+}

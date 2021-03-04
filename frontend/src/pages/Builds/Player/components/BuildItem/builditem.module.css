@@ -11,6 +11,12 @@
 	width: 50%;
 }
 
+.itemName {
+	color: #ffffff;
+	display: inline-block;
+	margin-top: 15px;
+}
+
 .itemReason {
-	color: #d3d6da;
+	color: rgb(255, 255, 255, 87%);
 }

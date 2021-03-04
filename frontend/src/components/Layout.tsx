@@ -11,7 +11,10 @@ import styles from './layout.module.css';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
-		backgroundColor: theme.palette.secondary.light,
+		backgroundColor: '#121212',
+	},
+	secondaryBackground: {
+		background: 'rgb(41, 46, 56, 30%)',
 	},
 }));
 // Types
@@ -22,12 +25,14 @@ const Layout = (props: { children: React.ReactNode }) => {
 
 	return (
 		<div className={classes.root}>
-			<Header />
-			<Container maxWidth='lg'>
-				<section>{children}</section>
-			</Container>
-			<div className={styles.footerPush} />
-			<Footer />
+			<div className={classes.secondaryBackground}>
+				<Header />
+				<Container maxWidth='lg'>
+					<section>{children}</section>
+				</Container>
+				<div className={styles.footerPush} />
+				<Footer />
+			</div>
 		</div>
 	);
 };

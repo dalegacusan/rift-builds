@@ -1,11 +1,11 @@
 .dividerContainer {
-	background-color: #292e38;
+	background-color: #121212;
 	color: black;
 	margin: 20px 0;
 	padding: 20px;
 }
 
 .sectionTitle {
-	font-weight: bolder !important;
+	font-weight: bold !important;
 	color: #cfcfcf;
 }

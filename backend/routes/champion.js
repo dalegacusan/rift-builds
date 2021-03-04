@@ -6,6 +6,6 @@ const ChampionController = require('../controllers/champion');
 router.get('/all', ChampionController.getAllChampions);
 
 // Get one champion
-router.get('/:championId', ChampionController.getOneChampion);
+router.get('/:championName', ChampionController.getOneChampion);
 
 module.exports = router;

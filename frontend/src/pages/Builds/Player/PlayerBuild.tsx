@@ -54,7 +54,7 @@ const PlayerBuild = (props: any) => {
 			{build ? (
 				<Box
 					style={{
-						backgroundColor: '#303841',
+						// backgroundColor: '#303841',
 						padding: '30px',
 						color: '#ffffff',
 						margin: '50px 0',

@@ -12,10 +12,9 @@
 	float: left;
 }
 
-.championNameText {
-	color: #00a3fe;
-	font-weight: bold;
-	font-size: 38px;
+.buildByText {
+	margin: 0;
+	font-size: 16px;
 }
 
 .buildRoleContainer {
@@ -23,7 +22,6 @@
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	/* width: 100%; */
 	padding: 5px;
 }
 
@@ -33,22 +31,38 @@
 }
 
 .buildRoleText {
-	color: #cfcfcf;
+	color: rgb(255, 255, 255, 87%);
 }
 
 .buildTitleText {
-	margin: 0;
-	/* font-weight: bold; */
-	font-size: 18px;
-	color: #cfcfcf;
+	color: #00a3fe;
+	font-weight: bold;
+	font-size: 38px;
 }
 
 .usernameText {
-	color: #ffb84d;
+	color: #5893d4;
 	display: inline-block;
 }
 
 .buildInformationContainer {
 	margin-left: 10px;
-	color: #cfcfcf;
+	color: rgb(255, 255, 255, 87%);
+}
+
+.buildInformationTitle {
+	color: rgb(255, 255, 255, 60%);
+}
+
+.laneImage {
+	width: 20px;
+	position: absolute;
+	margin-top: 7px;
+}
+
+.buildInformationText {
+	position: relative;
+	top: 7px;
+	margin-right: 10px;
+	font-size: 14px;
 }

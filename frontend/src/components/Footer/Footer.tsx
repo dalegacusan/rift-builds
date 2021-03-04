@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 	},
 	footerContainer: {
-		backgroundColor: theme.palette.secondary.main,
+		backgroundColor: '#171717',
 		position: 'relative',
 		bottom: 0,
 		// minHeight: '100vh',

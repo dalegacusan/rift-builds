@@ -1,0 +1,11 @@
+.rankImage {
+	width: 35px;
+	margin-left: 20px;
+}
+
+.usernameText {
+	display: inline-block;
+	position: relative;
+	top: -12px;
+	left: 6px;
+}

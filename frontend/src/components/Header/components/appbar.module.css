@@ -3,12 +3,12 @@
 }
 
 .headerLink {
-	color: #ebebeb;
+	color: rgb(255, 255, 255, 87%);
 	text-decoration: none;
 }
 
 .headerLink:hover {
-	color: #cacaca;
+	color: rgb(255, 255, 255, 60%);
 }
 
 .headerLogo {

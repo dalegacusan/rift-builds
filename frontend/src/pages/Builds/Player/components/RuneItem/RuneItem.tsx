@@ -63,7 +63,7 @@ const RuneItem = (props: RuneItemProps) => {
 					open={open}
 					handlePopoverClose={handlePopoverClose}
 				/>
-				{runeName}
+				<span className={styles.runeName}>{runeName}</span>
 			</Box>
 			{reason ? (
 				<Box p={1} className={styles.runeReasonContainer}>

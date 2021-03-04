@@ -1,14 +1,18 @@
 const champions = require('../data/wildriftchampions.json');
+const championNameCounterparts = require('../utils/championNameCounterparts');
 
 const getAllChampions = (req, res, next) => {
 	res.status(200).json(champions);
 }
 
 const getOneChampion = async (req, res, next) => {
-	const { championId } = req.params;
+	const { championName } = req.params;
 
 	try {
-		const oneChampion = champions.filter(champion => champion.id === championId)
+
+		const oneChampion = champions.filter(champion =>
+			championNameCounterparts[championName] === champion.championName
+		);
 
 		res.status(200).json(oneChampion);
 	} catch (err) {
