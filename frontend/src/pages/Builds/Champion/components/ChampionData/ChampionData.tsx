@@ -41,7 +41,7 @@ const BuildCountHeader = (props: ChampionDataProps) => {
 						/>
 					</Box>
 
-					<Box className={styles.buildsCountContainer} style={{}}>
+					<Box className={styles.buildsCountContainer}>
 						<p style={{ textAlign: 'center', margin: 0 }}>
 							{buildsCount} Builds
 						</p>

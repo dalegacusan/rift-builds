@@ -32,7 +32,7 @@ const Footer = () => {
 					<Grid item xs>
 						<Box style={{ padding: '80px 0' }}>
 							<Box style={{ paddingBottom: '20px' }}>
-								<a href='/' className={styles.footerLink}>
+								<a href='/faq' className={styles.footerLink}>
 									FAQ
 								</a>
 								<a

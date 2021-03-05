@@ -25,7 +25,7 @@ const Lanes = (props: LanesProps) => {
 						key={index}
 						avatar={
 							<Avatar className={styles.chipTier}>
-								{tier[lane] ? tier[lane] : null}
+								{tier[lane] ? tier[lane] : '?'}
 							</Avatar>
 						}
 						label={lane}

@@ -26,6 +26,7 @@ module.exports = {
 	'jhin': 'Jhin',
 	'jinx': 'Jinx',
 	'kaisa': "Kai'sa",
+	'katarina': 'Katarina',
 	'kennen': 'Kennen',
 	'leesin': 'Lee Sin',
 	'lulu': 'Lulu',

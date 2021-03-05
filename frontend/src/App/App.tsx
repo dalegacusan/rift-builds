@@ -12,6 +12,7 @@ import actionTypes from '../store/actions';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // Components
 import CreateBuild from '../pages/Create/Build/CreateBuild';
+import FAQ from '../pages/FAQ/FAQ';
 import Layout from '../components/Layout';
 import Landing from '../pages/Landing/Landing';
 import PageNotFound from '../components/Error/404/PageNotFound';
@@ -194,6 +195,9 @@ const App = (props: AppProps) => {
 							</Route>
 							<Route exact path='/build/:buildId'>
 								<PlayerBuild />
+							</Route>
+							<Route exact path='/faq'>
+								<FAQ />
 							</Route>
 
 							{/* 404 - Page not found */}
