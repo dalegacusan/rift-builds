@@ -19,8 +19,8 @@ export default function NoBuilds() {
 		>
 			<Box>
 				<LazyLoadImage
-					src='/images/empty.png'
-					className={styles.championImage}
+					src='/images/empty.svg'
+					className={styles.noBuildImage}
 				/>
 				<Typography gutterBottom>
 					There are no builds for this champion yet.{' '}

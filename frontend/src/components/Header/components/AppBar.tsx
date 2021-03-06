@@ -65,7 +65,7 @@ const AppBarComponent = (props: any) => {
 							<p className={classes.menuLinks}>Home</p>
 						</a>
 						<a href='/build/create' className={styles.headerLink}>
-							<p className={classes.menuLinks}>Create</p>
+							<p className={classes.menuLinks}>Create a build</p>
 						</a>
 					</Toolbar>
 				</AppBar>

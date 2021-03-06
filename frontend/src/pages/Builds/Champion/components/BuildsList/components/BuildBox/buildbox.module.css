@@ -1,5 +1,9 @@
 .buildBoxContainer {
 	background-color: #121212;
-	color: rgb(255, 255, 255, 80%);
-	padding: 5px 0;
+	color: rgb(255, 255, 255, 80%) !important;
+	padding: 5px 0 !important;
+}
+
+.tableCell {
+	min-width: 20px;
 }

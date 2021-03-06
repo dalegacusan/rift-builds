@@ -45,7 +45,7 @@ const FAQ = () => {
 					<span className={styles.contactEmailAddress}>
 						{referenceLinks.contactEmailAddress}
 					</span>
-					. We will answer to you shortly!
+					. We will get back to you shortly!
 				</p>
 			</Box>
 		</div>

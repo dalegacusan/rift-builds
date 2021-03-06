@@ -1,9 +1,14 @@
 import React from 'react';
+import {
+	patchVersion,
+	patchNotesURL,
+} from '../../../../../../../utils/globalvars';
 
 // MaterialUI
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Chip from '@material-ui/core/Chip';
+import HelpIcon from '@material-ui/icons/Help';
 // CSS
 import styles from './lanes.module.css';
 // Types
@@ -34,7 +39,14 @@ const Lanes = (props: LanesProps) => {
 					/>
 				);
 			})}
+			<span className={styles.patchText}>
+				<HelpIcon className={styles.helpIcon} />
+				<a href={patchNotesURL} target='_blank'>
+					Patch {patchVersion}
+				</a>
+			</span>
 		</Box>
 	);
 };
+
 export default Lanes;

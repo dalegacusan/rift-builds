@@ -1,4 +1,11 @@
 import React from 'react';
+import {
+	patchVersion,
+	tierListCreatorName,
+	tierListCreatorURL,
+	tierListURL,
+	contactEmailAddress,
+} from '../../../utils/globalvars';
 
 // MaterialUI
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -19,16 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 	})
 );
-
-const referenceLinks = {
-	patchVersion: '2.1A',
-	tierListCreatorName: 'Shin Boo',
-	tierListCreatorURL:
-		'https://www.youtube.com/channel/UCTaIw3dVGxFLL8CxhOwmzkA',
-	tierListURL:
-		'https://www.youtube.com/channel/UCTaIw3dVGxFLL8CxhOwmzkA/community?lb=UgzG6NaZujmAQ4R977t4AaABCQ',
-	contactEmailAddress: 'abcwildrift@gmail.com',
-};
 
 export default function ControlledAccordions() {
 	const classes = useStyles();
@@ -166,11 +163,9 @@ export default function ControlledAccordions() {
 				<AccordionDetails className={styles.accordionAnswerContainer}>
 					<p className={styles.tierListReference}>
 						Our tier list is referenced from&nbsp;
-						<a href={referenceLinks.tierListCreatorURL}>
-							{referenceLinks.tierListCreatorName}
-						</a>
-						's Patch {referenceLinks.patchVersion}&nbsp;
-						<a href={referenceLinks.tierListURL}>Tier List</a>
+						<a href={tierListCreatorURL}>{tierListCreatorName}</a>
+						's Patch {patchVersion}&nbsp;
+						<a href={tierListURL}>Tier List</a>
 					</p>
 				</AccordionDetails>
 			</Accordion>
@@ -198,7 +193,7 @@ export default function ControlledAccordions() {
 					<p>
 						We would love to hear from you! Send us an email at&nbsp;
 						<span className={styles.contactEmailAddress}>
-							{referenceLinks.contactEmailAddress}
+							{contactEmailAddress}
 						</span>
 					</p>
 				</AccordionDetails>

@@ -5,9 +5,10 @@
 	color: rgb(255, 255, 255, 87%);
 }
 
-.championImage {
+.noBuildImage {
 	display: block;
 	margin: 10px auto 40px auto;
+	width: 4rem;
 }
 
 .createBuildLink {
