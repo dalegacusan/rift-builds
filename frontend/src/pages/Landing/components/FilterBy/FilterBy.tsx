@@ -3,7 +3,6 @@ import React from 'react';
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 // Components
 // CSS
 import styles from './filterby.module.css';

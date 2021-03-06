@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+// @ts-ignore - No types for this module
+import { Helmet } from 'react-helmet';
 import {
 	errorNoUsername,
 	errorNoItemSelected,
@@ -111,18 +113,23 @@ const CreateBuild = (props: CreateBuildProps) => {
 	}
 
 	return (
-		<Box>
-			<BackdropLoading openBackdrop={openBackdrop} />
-			<Toaster />
-			<CreateBuildHeader />
+		<>
+			<Helmet>
+				<title>Create a build - Rift Builds</title>
+			</Helmet>
+			<Box>
+				<BackdropLoading openBackdrop={openBackdrop} />
+				<Toaster />
+				<CreateBuildHeader />
 
-			<Stepper
-				activeStep={activeStep}
-				componentToDisplay={componentToDisplay}
-				setActiveStep={setActiveStep}
-				submitBuild={submitBuild}
-			/>
-		</Box>
+				<Stepper
+					activeStep={activeStep}
+					componentToDisplay={componentToDisplay}
+					setActiveStep={setActiveStep}
+					submitBuild={submitBuild}
+				/>
+			</Box>
+		</>
 	);
 };
 

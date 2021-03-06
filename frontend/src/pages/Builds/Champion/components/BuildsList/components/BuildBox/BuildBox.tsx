@@ -2,7 +2,6 @@ import React from 'react';
 
 // MaterialUI
 import Avatar from '@material-ui/core/Avatar';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 // Components
 import BuildDate from './components/BuildDate/BuildDate';
@@ -46,6 +45,7 @@ const BuildBox = (props: BuildBoxProps) => {
 			{/* Champion Icon */}
 			<Grid
 				container
+				item
 				direction='row'
 				justify='center'
 				alignItems='center'
@@ -62,6 +62,7 @@ const BuildBox = (props: BuildBoxProps) => {
 			{/* Items */}
 			<Grid
 				container
+				item
 				direction='row'
 				justify='center'
 				alignItems='center'
@@ -78,6 +79,7 @@ const BuildBox = (props: BuildBoxProps) => {
 			{/* Spells */}
 			<Grid
 				container
+				item
 				direction='row'
 				justify='center'
 				alignItems='center'
@@ -91,6 +93,7 @@ const BuildBox = (props: BuildBoxProps) => {
 			{/* Rune */}
 			<Grid
 				container
+				item
 				direction='row'
 				justify='center'
 				alignItems='center'
@@ -108,6 +111,7 @@ const BuildBox = (props: BuildBoxProps) => {
 			{/* Learn more Button */}
 			<Grid
 				container
+				item
 				direction='row'
 				justify='flex-start'
 				alignItems='center'

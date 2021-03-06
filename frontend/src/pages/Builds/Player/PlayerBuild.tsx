@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+// @ts-ignore - No types for this module
+import { Helmet } from 'react-helmet';
+import axios from 'axios';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -52,72 +54,80 @@ const PlayerBuild = (props: any) => {
 	return (
 		<div className={classes.root}>
 			{build ? (
-				<Box
-					style={{
-						// backgroundColor: '#303841',
-						padding: '30px',
-						color: '#ffffff',
-						margin: '50px 0',
-					}}
-				>
-					<PlayerBuildHeader build={build} />
+				<>
+					<Helmet>
+						<title>
+							{build.buildTitle} - {build.champion.championName} Build and Guide
+							| Rift Builds
+						</title>
+					</Helmet>
+					<Box
+						style={{
+							// backgroundColor: '#303841',
+							padding: '30px',
+							color: '#ffffff',
+							margin: '50px 0',
+						}}
+					>
+						<PlayerBuildHeader build={build} />
 
-					{/* PRIMARY ITEMS */}
-					<SectionDivider title='Primary Items' />
-					<Grid container spacing={3}>
-						<Grid item xs={12}>
-							{build.itemsConfirmed
-								.filter((item: ItemInterface) => item.type !== 'optional')
-								.map((item: ItemInterface, index) => {
-									return <BuildItem key={index} item={item} />;
-								})}
+						{/* PRIMARY ITEMS */}
+						<SectionDivider title='Primary Items' />
+						<Grid container spacing={3}>
+							<Grid item xs={12}>
+								{build.itemsConfirmed
+									.filter((item: ItemInterface) => item.type !== 'optional')
+									.map((item: ItemInterface, index) => {
+										return <BuildItem key={index} item={item} />;
+									})}
+							</Grid>
 						</Grid>
-					</Grid>
 
-					{/* OPTIONAL ITEMS */}
-					<SectionDivider title='Optional Items' />
-					<Grid container spacing={3}>
-						<Grid item xs={12}>
-							{build.itemsConfirmed
-								.filter((item: ItemInterface) => item.type !== 'primary')
-								.map((item: ItemInterface, index) => {
-									return <BuildItem key={index} item={item} />;
-								})}
+						{/* OPTIONAL ITEMS */}
+						<SectionDivider title='Optional Items' />
+						<Grid container spacing={3}>
+							<Grid item xs={12}>
+								{build.itemsConfirmed
+									.filter((item: ItemInterface) => item.type !== 'primary')
+									.map((item: ItemInterface, index) => {
+										return <BuildItem key={index} item={item} />;
+									})}
+							</Grid>
 						</Grid>
-					</Grid>
 
-					{/* RUNES */}
-					<SectionDivider title='Runes' />
-					<Grid container spacing={3}>
-						<Grid item xs={12}>
-							{/* KEYSTONE RUNE */}
-							<RuneItem rune={build.runes.keystone} />
+						{/* RUNES */}
+						<SectionDivider title='Runes' />
+						<Grid container spacing={3}>
+							<Grid item xs={12}>
+								{/* KEYSTONE RUNE */}
+								<RuneItem rune={build.runes.keystone} />
 
-							{/* DOMINATION RUNE */}
-							<RuneItem rune={build.runes.domination} />
+								{/* DOMINATION RUNE */}
+								<RuneItem rune={build.runes.domination} />
 
-							{/* RESOLVE RUNE */}
-							<RuneItem rune={build.runes.resolve} />
+								{/* RESOLVE RUNE */}
+								<RuneItem rune={build.runes.resolve} />
 
-							{/* INSPIRATION RUNE BOX */}
-							<RuneItem rune={build.runes.inspiration} />
+								{/* INSPIRATION RUNE BOX */}
+								<RuneItem rune={build.runes.inspiration} />
+							</Grid>
 						</Grid>
-					</Grid>
 
-					{/* SPELLS */}
-					<SectionDivider title='Summoner Spells' />
-					<Grid container spacing={3}>
-						<Grid item xs={12}>
-							<Box p={1}>
-								<SpellItem spell={build.spells.spellOne} />
-								<SpellItem spell={build.spells.spellTwo} />
-							</Box>
+						{/* SPELLS */}
+						<SectionDivider title='Summoner Spells' />
+						<Grid container spacing={3}>
+							<Grid item xs={12}>
+								<Box p={1}>
+									<SpellItem spell={build.spells.spellOne} />
+									<SpellItem spell={build.spells.spellTwo} />
+								</Box>
+							</Grid>
 						</Grid>
-					</Grid>
 
-					{/* FOOTER*/}
-					<PlayerBuildFooter dateSubmitted={build.dateSubmitted} />
-				</Box>
+						{/* FOOTER*/}
+						<PlayerBuildFooter dateSubmitted={build.dateSubmitted} />
+					</Box>
+				</>
 			) : (
 				<CircularProgress />
 			)}

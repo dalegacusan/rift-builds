@@ -16,7 +16,7 @@ import FAQ from '../pages/FAQ/FAQ';
 import Layout from '../components/Layout';
 import Landing from '../pages/Landing/Landing';
 import PageNotFound from '../components/Error/404/PageNotFound';
-import HeroBuilds from '../pages/Builds/Champion/ChampionBuilds';
+import ChampionBuilds from '../pages/Builds/Champion/ChampionBuilds';
 import PlayerBuild from '../pages/Builds/Player/PlayerBuild';
 // Types
 import {
@@ -191,7 +191,7 @@ const App = (props: AppProps) => {
 								<CreateBuild />
 							</Route>
 							<Route exact path='/builds/champion/:championName'>
-								<HeroBuilds />
+								<ChampionBuilds />
 							</Route>
 							<Route exact path='/build/:buildId'>
 								<PlayerBuild />

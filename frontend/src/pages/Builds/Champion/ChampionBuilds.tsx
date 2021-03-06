@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
+// @ts-ignore - No types for this module
+import { Helmet } from 'react-helmet';
 import axios from 'axios';
 
 // MaterialUI
@@ -61,6 +63,12 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		<>
 			{!isLoading ? (
 				<>
+					<Helmet>
+						<title>
+							{championData.championName} Builds and Guides - League of Legends:
+							Wild Rift | Rift Builds
+						</title>
+					</Helmet>
 					{/* Champion Data */}
 					<ChampionData
 						championData={championData}

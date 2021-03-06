@@ -1,4 +1,5 @@
 import React from 'react';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import {
 	patchVersion,
 	patchNotesURL,
@@ -9,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Chip from '@material-ui/core/Chip';
 import HelpIcon from '@material-ui/icons/Help';
+import Tooltip from '@material-ui/core/Tooltip';
 // CSS
 import styles from './lanes.module.css';
 // Types
@@ -19,8 +21,15 @@ type LanesProps = {
 	};
 };
 
+const useStylesBootstrap = makeStyles((theme: Theme) => ({
+	tooltip: {
+		letterSpacing: '0.3px',
+	},
+}));
+
 const Lanes = (props: LanesProps) => {
 	const { lane: lanes, tier } = props;
+	const classes = useStylesBootstrap();
 
 	return (
 		<Box className={styles.chipContainer}>
@@ -40,8 +49,15 @@ const Lanes = (props: LanesProps) => {
 				);
 			})}
 			<span className={styles.patchText}>
-				<HelpIcon className={styles.helpIcon} />
-				<a href={patchNotesURL} target='_blank'>
+				<Tooltip
+					title='The data displayed is based on the latest patch notes of League of Legends: Wild Rift. Check out our FAQ for more information on where we get our tier list data from.'
+					placement='top'
+					classes={classes}
+					arrow
+				>
+					<HelpIcon className={styles.helpIcon} />
+				</Tooltip>
+				<a href={patchNotesURL} target='_blank' rel='noreferrer'>
 					Patch {patchVersion}
 				</a>
 			</span>
