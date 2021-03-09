@@ -29,8 +29,8 @@ const Footer = () => {
 			<Grid container className={classes.footerContainer}>
 				<Container maxWidth='lg'>
 					<Grid item xs>
-						<Box style={{ padding: '80px 0' }}>
-							<Box style={{ paddingBottom: '20px' }}>
+						<Box className={styles.footerContainer}>
+							<Box className={styles.footerLinksContainer}>
 								<a href='/faq' className={styles.footerLink}>
 									FAQ
 								</a>
@@ -40,7 +40,10 @@ const Footer = () => {
 								>
 									Feedback
 								</a>
-								<a href='/' className={styles.footerLink}>
+								<a
+									href='mailto:abcwildrift@gmail.com'
+									className={styles.footerLink}
+								>
 									Report a Bug
 								</a>
 							</Box>

@@ -8,12 +8,9 @@ import actionTypes from '../../../../../../../store/actions';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 // CSS
+import globalstyles from '../../../../createbuild.module.css';
 import styles from './championselect.module.css';
 // Types
 import {
@@ -22,7 +19,6 @@ import {
 } from '../../../../../../../utils/interfaces';
 
 const ChampionSelect = (props: ChampionSelectProps) => {
-	const { formControl } = props;
 	// Game Data PROPS
 	const { champions } = props;
 	// Build PROPS
@@ -42,7 +38,8 @@ const ChampionSelect = (props: ChampionSelectProps) => {
 
 	return (
 		<Box>
-			<p>3. Champion</p>
+			<p className={globalstyles.inputLabel}>3. Champion</p>
+			<p className={globalstyles.inputDescription}>Select a champion</p>
 
 			<Box className={styles.championSelectContainer}>
 				{/* Display Champion Image */}
@@ -51,32 +48,25 @@ const ChampionSelect = (props: ChampionSelectProps) => {
 					className={styles.championImage}
 				/>
 
-				{
-					<FormControl className={formControl}>
-						<InputLabel shrink htmlFor='champion-select'>
-							Champion
-						</InputLabel>
-						<NativeSelect
-							value={championSelected.id}
-							onChange={handleChampSelectChange}
-							inputProps={{
-								name: 'champion',
-								id: 'champion-select',
-							}}
-						>
-							{champions.map(
-								({ id, championName }: ChampionInterface, index: number) => {
-									return (
-										<option key={index} value={id}>
-											{championName}
-										</option>
-									);
-								}
-							)}
-						</NativeSelect>
-						<FormHelperText>Select a champion</FormHelperText>
-					</FormControl>
-				}
+				<select
+					onChange={handleChampSelectChange}
+					className={globalstyles.buildSelectInput}
+					value={championSelected.id}
+				>
+					{champions.map((champion: ChampionInterface, index: number) => {
+						const { id: championId, championName } = champion;
+
+						return (
+							<option
+								key={index}
+								value={championId}
+								className={globalstyles.buildSelectOption}
+							>
+								{championName}
+							</option>
+						);
+					})}
+				</select>
 			</Box>
 		</Box>
 	);
@@ -103,8 +93,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type ChampionSelectProps = PropsFromRedux & {
-	formControl: string;
-};
+type ChampionSelectProps = PropsFromRedux & {};
 
 export default connector(ChampionSelect);

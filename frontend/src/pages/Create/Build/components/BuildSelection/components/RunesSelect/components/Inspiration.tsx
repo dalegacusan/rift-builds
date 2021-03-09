@@ -6,13 +6,10 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { connect, ConnectedProps } from 'react-redux';
 
 // MaterialUI
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 // CSS
+import globalstyles from '../../../../../createbuild.module.css';
 import styles from './rune.module.css';
 // Types
 import {
@@ -21,11 +18,7 @@ import {
 } from '../../../../../../../../utils/interfaces';
 
 const Inspiration = (props: InspirationProps) => {
-	const {
-		formControl,
-		handleRuneSelectChange,
-		handleRuneExplanationChange,
-	} = props;
+	const { handleRuneSelectChange, handleRuneExplanationChange } = props;
 	// Game Data PROPS
 	const { runes } = props;
 	// Build PROPS
@@ -39,45 +32,40 @@ const Inspiration = (props: InspirationProps) => {
 					className={styles.runeImage}
 				/>
 
-				{
-					<FormControl className={formControl}>
-						<InputLabel shrink htmlFor='rune-select'>
-							Inspiration (Slot 3)
-						</InputLabel>
-						<NativeSelect
-							value={runeInspiration.id}
-							onChange={(e) =>
-								handleRuneSelectChange(e, 'secondary', 'inspiration')
-							}
-							inputProps={{
-								name: 'rune',
-								id: 'rune-select',
-							}}
-						>
-							{runes
-								.filter(
-									(rune) =>
-										rune.type === 'secondary' && rune.path === 'inspiration'
-								)
-								.map(({ id, runeName, url }: RuneInterface, index) => {
-									return (
-										<option key={index} value={id}>
-											{runeName}
-										</option>
-									);
-								})}
-						</NativeSelect>
-						<FormHelperText>Select a Inspiration Rune</FormHelperText>
-					</FormControl>
-				}
+				<select
+					onChange={(e) =>
+						handleRuneSelectChange(e, 'secondary', 'inspiration')
+					}
+					value={runeInspiration.id}
+					className={globalstyles.buildSelectInput}
+				>
+					{runes
+						.filter(
+							(rune: RuneInterface) =>
+								rune.type === 'secondary' && rune.path === 'inspiration'
+						)
+						.map((rune: RuneInterface, index: number) => {
+							const { id: runeId, runeName } = rune;
+
+							return (
+								<option
+									key={index}
+									value={runeId}
+									className={globalstyles.buildSelectOption}
+								>
+									{runeName}
+								</option>
+							);
+						})}
+				</select>
 			</Grid>
 			<Grid item xs={12} sm={6}>
 				<textarea
 					id='runeInspiration'
 					name='runeInspiration'
-					rows={6}
+					rows={5}
 					value={runeInspiration.reason}
-					placeholder='Add an explanation for this rune'
+					placeholder='Explanation'
 					className={styles.explanationTextArea}
 					// value={itemReason}
 					onChange={(e) => handleRuneExplanationChange(e, 'inspiration')}
@@ -99,7 +87,6 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type InspirationProps = PropsFromRedux & {
-	formControl: string;
 	handleRuneSelectChange: (
 		e: React.ChangeEvent<HTMLSelectElement>,
 		runeType: string,

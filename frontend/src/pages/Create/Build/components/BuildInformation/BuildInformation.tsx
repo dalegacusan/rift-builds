@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+// @ts-ignore - No types for this module
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -9,58 +11,93 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 // Components
 // CSS
-import styles from './createbuild.module.css';
+import globalstyles from '../../createbuild.module.css';
+import styles from './buildinformation.module.css';
 // Types
-import { RootState } from '../../../../../utils/interfaces';
+import { RoleInterface, RootState } from '../../../../../utils/interfaces';
 
 const BuildInformation = (props: BuildInformationProps) => {
 	// Build PROPS
 	const { buildTitle, buildRole, setBuildTitle, setBuildRole } = props;
+	// Game Data PROPS
+	const { roles } = props;
 
-	const roles = ['Top', 'Jungle', 'Middle', 'Bottom', 'Support'];
+	const maximumCharactersForBuildTitle = 24;
+	const [charactersRemaining, setCharactersRemaining] = useState(
+		maximumCharactersForBuildTitle
+	);
 
 	// =============== Build Title =============== //
 	const handleBuildTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
 
-		setBuildTitle(value);
+		console.log(value.length);
+		console.log(maximumCharactersForBuildTitle);
+
+		// Added +1 because at 24 characters, charactersRemaining is at 1 not 0
+		if (value.length === maximumCharactersForBuildTitle + 1) {
+			e.preventDefault();
+		} else {
+			setCharactersRemaining(maximumCharactersForBuildTitle - value.length);
+			setBuildTitle(value);
+		}
 	};
 
 	// =============== Build Role =============== //
-	const handleBuildRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const { value } = e.target;
+	const handleBuildRoleChange = (props: RoleInterface) => {
+		const { id: roleId, roleName } = props;
 
-		setBuildRole(value as string);
+		setBuildRole({ id: roleId, roleName });
 	};
 
 	return (
-		<Grid container spacing={3} style={{ color: '#EBEBEB' }}>
+		<Grid container spacing={3} className={globalstyles.gridContainer}>
+			<Grid item xs={12} sm={12}>
+				<p className={globalstyles.buildStepHeader}>Tell us about your build</p>
+			</Grid>
 			<Grid item xs={12} sm={6}>
 				<Box>
-					<p>1. Build Title</p>
+					<p className={globalstyles.inputLabel}>1. Build Title</p>
+					<p className={globalstyles.inputDescription}>
+						Give your build a title
+					</p>
 					<input
 						type='text'
 						value={buildTitle}
 						placeholder='Build title'
-						style={{ width: '100%' }}
+						className={globalstyles.buildInput}
 						onChange={(e) => handleBuildTitleChange(e)}
 					/>
+					<p
+						className={globalstyles.inputDescription}
+						style={{ fontStyle: 'italic' }}
+					>
+						{charactersRemaining} characters remaining
+					</p>
 				</Box>
 			</Grid>
 			<Grid item xs={12} sm={6}>
 				<Box>
-					<p>2. Role</p>
-					{
-						<select value={buildRole} onChange={handleBuildRoleChange}>
-							{roles.map((role, index) => {
-								return (
-									<option key={index} value={role}>
-										{role}
-									</option>
-								);
-							})}
-						</select>
-					}
+					<p className={globalstyles.inputLabel}>2. Role</p>
+					<p className={globalstyles.inputDescription}>
+						What role/lane is your build for?
+					</p>
+
+					{roles.map((role: RoleInterface) => {
+						const { id: roleId, roleName } = role;
+
+						return (
+							<LazyLoadImage
+								src={`/images/wildriftroles/${roleId}.png`}
+								key={roleId}
+								className={styles.roleImage}
+								style={{ opacity: buildRole.id === roleId ? 1 : 0.5 }}
+								onClick={() => handleBuildRoleChange({ id: roleId, roleName })}
+								alt={roleName}
+								title={roleName}
+							/>
+						);
+					})}
 				</Box>
 			</Grid>
 		</Grid>
@@ -72,6 +109,7 @@ const mapStateToProps = (state: RootState) => {
 	return {
 		buildTitle: state.build.buildTitle,
 		buildRole: state.build.buildRole,
+		roles: state.gameData.roles,
 	};
 };
 
@@ -79,7 +117,7 @@ const mapDispatchToProps = (dispatch: any) => {
 	return {
 		setBuildTitle: (newBuildTitle: string) =>
 			dispatch({ type: actionTypes.BUILD_SET_BUILDTITLE, data: newBuildTitle }),
-		setBuildRole: (newBuildRole: string) =>
+		setBuildRole: (newBuildRole: RoleInterface) =>
 			dispatch({ type: actionTypes.BUILD_SET_BUILDROLE, data: newBuildRole }),
 	};
 };

@@ -60,8 +60,8 @@ const App = (props: AppProps) => {
 		setChampions,
 		setItems,
 		setRanks,
-		setRoles,
 		setRunes,
+		setRoles,
 		setSpells,
 	} = props;
 

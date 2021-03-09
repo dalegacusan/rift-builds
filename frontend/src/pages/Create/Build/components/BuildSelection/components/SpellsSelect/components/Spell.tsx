@@ -10,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 // CSS
+import globalstyles from '../../../../../createbuild.module.css';
 import styles from './spell.module.css';
 // Types
 import { SpellInterface } from '../../../../../../../../utils/interfaces';
@@ -44,32 +45,28 @@ const Spell = (props: SpellProps) => {
 					spellNumber === 1 ? spellOne.id : spellTwo.id
 				}.jpg`}
 				style={{ width: '90px' }}
+				className={styles.spellImage}
 			/>
 
-			{
-				<FormControl className={formControl}>
-					<InputLabel shrink htmlFor='spell-select'>
-						{spellNumber === 1 ? 'Spell One' : 'Spell Two'}
-					</InputLabel>
-					<NativeSelect
-						defaultValue={`${spellNumber === 1 ? spellOne.id : spellTwo.id}`}
-						onChange={(e) => handleSpellSelectChange(e, spellNumber)}
-						inputProps={{
-							name: 'spell',
-							id: 'spell-select',
-						}}
-					>
-						{spells.map(({ id, spellName, url }: SpellInterface, index) => {
-							return (
-								<option key={index} value={id}>
-									{spellName}
-								</option>
-							);
-						})}
-					</NativeSelect>
-					<FormHelperText>Select a Spell</FormHelperText>
-				</FormControl>
-			}
+			<select
+				value={`${spellNumber === 1 ? spellOne.id : spellTwo.id}`}
+				onChange={(e) => handleSpellSelectChange(e, spellNumber)}
+				className={globalstyles.buildSelectInput}
+			>
+				{spells.map((spell: SpellInterface, index) => {
+					const { id: spellId, spellName } = spell;
+
+					return (
+						<option
+							key={index}
+							value={spellId}
+							className={globalstyles.buildSelectOption}
+						>
+							{spellName}
+						</option>
+					);
+				})}
+			</select>
 		</Grid>
 	);
 };

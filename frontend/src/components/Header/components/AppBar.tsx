@@ -2,11 +2,12 @@ import React from 'react';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import Slide from '@material-ui/core/Slide';
 import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Slide from '@material-ui/core/Slide';
 // Components
 // CSS
 import styles from './appbar.module.css';
@@ -65,7 +66,13 @@ const AppBarComponent = (props: any) => {
 							<p className={classes.menuLinks}>Home</p>
 						</a>
 						<a href='/build/create' className={styles.headerLink}>
-							<p className={classes.menuLinks}>Create a build</p>
+							<Button
+								variant='contained'
+								color='primary'
+								className={styles.createBuildButton}
+							>
+								Create a build
+							</Button>
 						</a>
 					</Toolbar>
 				</AppBar>

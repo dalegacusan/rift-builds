@@ -12,22 +12,15 @@ const CreateBuildHeader = () => {
 	return (
 		<Box>
 			<Box className={styles.createBuildHeaderContainer}>
-				<Typography
-					variant='h6'
-					className={styles.createBuildHeader}
-					gutterBottom
-				>
-					Create your build
-				</Typography>
+				<p className={styles.createBuildHeader}>Create your build</p>
 				<Typography
 					variant='body2'
 					className={styles.createBuildSubHeader}
 					gutterBottom
 				>
-					Please note that you can only create up to 5 builds every 30 minutes.
+					You can only create up to 5 builds every 30 minutes.
 				</Typography>
 			</Box>
-			<Box className={styles.createBuildHeaderDivider}>&nbsp;</Box>
 		</Box>
 	);
 };

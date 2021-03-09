@@ -1,0 +1,52 @@
+.gridContainer {
+	color: rgb(255, 255, 255, 87%);
+}
+
+.buildStepHeader {
+	color: #5893d4;
+	font-weight: bold !important;
+	font-size: 18px;
+}
+
+.inputLabel {
+	font-size: 16px;
+	margin: 0;
+}
+
+.inputDescription {
+	color: rgb(255, 255, 255, 60%);
+	font-size: 12px;
+	margin: 5px 0 25px 0;
+}
+
+.buildSelectInput {
+	background-color: transparent;
+	border: 1px solid rgb(255, 255, 255, 30%);
+	border-radius: 2px;
+	color: rgb(255, 255, 255, 30%);
+	margin-top: 1px;
+	padding: 10px;
+	width: 200px;
+}
+
+.buildSelectInput:focus {
+	border: 1px solid rgb(255, 255, 255, 60%);
+	outline: none;
+}
+
+.buildSelectOption {
+	color: #000000;
+}
+
+.buildInput {
+	background: rgb(41, 46, 56, 30%);
+	border: 1px solid rgb(255, 255, 255, 30%);
+	color: rgb(255, 255, 255, 30%);
+	padding: 10px;
+	width: 100%;
+}
+
+.buildInput:focus {
+	border: 1px solid rgb(255, 255, 255, 60%);
+	outline: none;
+}

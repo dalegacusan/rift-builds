@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 // MaterialUI
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 // Types
@@ -19,6 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		backButton: {
 			marginRight: theme.spacing(1),
+			color: 'rgb(255,255,255, 60%)',
+		},
+		backArrowIcon: {
+			width: '16px',
+			marginRight: '8px',
 		},
 		instructions: {
 			marginTop: theme.spacing(1),
@@ -53,11 +59,21 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 			<Box style={{ padding: '10px 0' }}>{componentToDisplay}</Box>
 			<Box display='flex' flexDirection='row-reverse'>
 				{activeStep === steps.length - 1 ? (
-					<Button variant='contained' color='primary' onClick={submitBuild}>
+					<Button
+						variant='contained'
+						color='primary'
+						onClick={submitBuild}
+						style={{ textTransform: 'none' }}
+					>
 						Create Build
 					</Button>
 				) : (
-					<Button variant='contained' color='primary' onClick={handleNext}>
+					<Button
+						variant='contained'
+						color='primary'
+						onClick={handleNext}
+						style={{ textTransform: 'none' }}
+					>
 						Next
 					</Button>
 				)}
@@ -66,8 +82,9 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 					disabled={activeStep === 0}
 					onClick={handleBack}
 					className={classes.backButton}
+					style={{ textTransform: 'none' }}
 				>
-					Back
+					<ArrowBackIcon className={classes.backArrowIcon} /> Back
 				</Button>
 			</Box>
 		</div>

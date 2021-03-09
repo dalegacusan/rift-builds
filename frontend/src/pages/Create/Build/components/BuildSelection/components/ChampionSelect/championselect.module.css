@@ -5,4 +5,5 @@
 .championImage {
 	width: 100px;
 	margin-right: 10px;
+	float: left;
 }

@@ -14,3 +14,7 @@
 .headerLogo {
 	width: 100px;
 }
+
+.createBuildButton {
+	text-transform: none !important;
+}

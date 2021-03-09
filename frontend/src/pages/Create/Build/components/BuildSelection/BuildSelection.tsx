@@ -8,6 +8,7 @@ import ItemsSelect from './components/ItemsSelect/ItemsSelect';
 import RunesSelect from './components/RunesSelect/RunesSelect';
 import SpellsSelect from './components/SpellsSelect/SpellsSelect';
 // CSS
+import globalstyles from '../../createbuild.module.css';
 import styles from './buildselection.module.css';
 // Types
 type BuildSelectionProps = {
@@ -18,9 +19,14 @@ const BuildSelection = (props: BuildSelectionProps) => {
 	const { formControl } = props;
 
 	return (
-		<Grid container spacing={3} style={{ color: '#EBEBEB' }}>
+		<Grid container spacing={3} className={globalstyles.gridContainer}>
+			<Grid item xs={12} sm={12}>
+				<p className={globalstyles.buildStepHeader}>
+					Choose your champion, items, runes, and spells
+				</p>
+			</Grid>
 			<Grid item xs={12}>
-				<ChampionSelect formControl={formControl} />
+				<ChampionSelect />
 			</Grid>
 			<Grid item xs={12}>
 				<ItemsSelect formControl={formControl} />

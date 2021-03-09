@@ -4,17 +4,12 @@
 }
 
 .createBuildHeader {
-	font-weight: bold;
-	color: #ebebeb;
+	font-weight: bold !important;
+	color: #ffffff;
+	font-size: 24px;
+	margin: 10px 0;
 }
 
 .createBuildSubHeader {
-	color: #9c9c9c;
-}
-
-.createBuildHeaderDivider {
-	width: 150px;
-	height: 1px;
-	margin: 10px 0 20px 0;
-	background-color: #000000;
+	color: rgb(255, 255, 255, 87%);
 }

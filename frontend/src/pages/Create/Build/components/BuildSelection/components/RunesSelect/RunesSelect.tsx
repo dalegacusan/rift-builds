@@ -13,6 +13,7 @@ import Inspiration from './components/Inspiration';
 import Keystone from './components/Keystone';
 import Resolve from './components/Resolve';
 // CSS
+import globalstyles from '../../../../createbuild.module.css';
 import styles from './runesselect.module.css';
 // Types
 import {
@@ -21,7 +22,6 @@ import {
 } from '../../../../../../../utils/interfaces';
 
 const RunesSelect = (props: RunesSelectProps) => {
-	const { formControl } = props;
 	// Game Data PROPS
 	const { runes } = props;
 	// Build PROPS
@@ -110,33 +110,32 @@ const RunesSelect = (props: RunesSelectProps) => {
 
 	return (
 		<Box>
-			<p>5. Runes</p>
+			<p className={globalstyles.inputLabel}>5. Runes</p>
+			<p className={globalstyles.inputDescription}>
+				Select the runes for your build
+			</p>
 
-			<Grid container item xs={12}>
+			<Grid container item xs={12} spacing={1}>
 				{/* KEYSTONE Rune */}
 				<Keystone
-					formControl={formControl}
 					handleRuneSelectChange={handleRuneSelectChange}
 					handleRuneExplanationChange={handleRuneExplanationChange}
 				/>
 
 				{/* Secondary: Domination */}
 				<Domination
-					formControl={formControl}
 					handleRuneSelectChange={handleRuneSelectChange}
 					handleRuneExplanationChange={handleRuneExplanationChange}
 				/>
 
 				{/* Secondary: Resolve */}
 				<Resolve
-					formControl={formControl}
 					handleRuneSelectChange={handleRuneSelectChange}
 					handleRuneExplanationChange={handleRuneExplanationChange}
 				/>
 
 				{/* Secondary: Inspiration */}
 				<Inspiration
-					formControl={formControl}
 					handleRuneSelectChange={handleRuneSelectChange}
 					handleRuneExplanationChange={handleRuneExplanationChange}
 				/>

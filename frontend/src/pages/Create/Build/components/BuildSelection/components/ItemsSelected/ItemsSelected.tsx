@@ -12,24 +12,33 @@ import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../../../store/actions';
 
 // MaterialUI
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Grow from '@material-ui/core/Grow';
-import Typography from '@material-ui/core/Typography';
+import InfoIcon from '@material-ui/icons/Info';
+import Tooltip from '@material-ui/core/Tooltip';
 // Components
 import ItemPopover from '../../../../../../../components/Popover/ItemPopover';
-// CSS
-import styles from './itemsselected.module.css';
 // Types
 import {
 	ItemInterface,
 	RootState,
 } from '../../../../../../../utils/interfaces';
+// CSS
+import styles from './itemsselected.module.css';
+const useStylesBootstrap = makeStyles((theme: Theme) => ({
+	tooltip: {
+		letterSpacing: '0.3px',
+	},
+}));
 
 const ItemsSelected = (props: ItemsSelectedProps) => {
 	const { handleDeleteItemClick } = props;
 	// Build PROPS
 	const { itemsConfirmed, setItemsConfirmed } = props;
+
+	const classes = useStylesBootstrap();
 
 	// Check for duplicate items selected
 	// Check for primary items limit
@@ -66,14 +75,26 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 
 	return (
 		<Box>
-			<Typography gutterBottom>Items List</Typography>
-			<i>Click on an item to delete it from your list</i>
-
 			<Box className={styles.itemsSelectedContainer}>
 				{itemsConfirmed.length !== 0 ? (
 					<>
 						{/* TYPE: MAIN */}
-						<p>Primary Items</p>
+						<Box display='flex'>
+							<Box flexGrow={1}>
+								<p className={styles.itemsSelectedHeader}>Primary Items</p>
+							</Box>
+							<Box>
+								<Tooltip
+									title='Click on an item to delete it from your list'
+									placement='top'
+									classes={classes}
+									arrow
+								>
+									<InfoIcon className={styles.infoIcon} />
+								</Tooltip>
+							</Box>
+						</Box>
+
 						<Grid item xs={12}>
 							{itemsConfirmed
 								.filter((item: ItemInterface) => item.type !== 'optional')
@@ -89,7 +110,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 												<Box className={styles.itemImageContainer}>
 													<LazyLoadImage
 														title={currentItem.itemName}
-														className={styles.itemHover}
+														className={styles.itemImage}
 														src={`/images/wildriftitems/${currentItem.id}.png`}
 														onClick={() =>
 															handleDeleteItemClick(currentItem.id)
@@ -103,7 +124,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 						</Grid>
 
 						{/* TYPE: OPTIONAL */}
-						<p>Optional Items</p>
+						<p className={styles.itemsSelectedHeader}>Optional Items</p>
 						<Grid item xs={12}>
 							{itemsConfirmed
 								.filter((item: ItemInterface) => item.type !== 'primary')
@@ -119,7 +140,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 												<Box className={styles.itemImageContainer}>
 													<LazyLoadImage
 														title={currentItem.itemName}
-														className={styles.itemHover}
+														className={styles.itemImage}
 														src={`/images/wildriftitems/${currentItem.id}.png`}
 														onClick={() =>
 															handleDeleteItemClick(currentItem.id)

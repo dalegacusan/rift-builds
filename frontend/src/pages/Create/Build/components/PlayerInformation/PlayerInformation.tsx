@@ -8,15 +8,12 @@ import actionTypes from '../../../../../store/actions';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 // Types
 import { RankInterface, RootState } from '../../../../../utils/interfaces';
 // CSS
+import globalstyles from '../../createbuild.module.css';
 import styles from './playerinformation.module.css';
 
 const PlayerInformation = (props: PlayerInformationProps) => {
@@ -50,50 +47,57 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 		<Grid container spacing={3} style={{ color: '#EBEBEB' }}>
 			<Grid item xs={12} sm={6}>
 				<Box>
-					<p>7. Username</p>
+					<p className={globalstyles.inputLabel}>7. Username</p>
+					<p className={globalstyles.inputDescription}>
+						What is your in-game name (IGN)?
+					</p>
 					<input
 						type='text'
 						value={username}
 						placeholder='Username'
 						onChange={(e) => handleUsernameChange(e)}
-						style={{ width: '100%' }}
+						className={globalstyles.buildInput}
 					/>
+					<p
+						className={globalstyles.inputDescription}
+						style={{ fontStyle: 'italic' }}
+					>
+						Please include your ID (i.e. ABC#DEFGH)
+					</p>
 				</Box>
 			</Grid>
 			<Grid item xs={12} sm={6}>
 				<Box>
-					<p>8. Rank</p>
+					<p className={globalstyles.inputLabel}>8. Rank</p>
+					<p className={globalstyles.inputDescription}>
+						What is your current rank?
+					</p>
 
 					<Box>
 						<LazyLoadImage
 							src={`/images/wildriftranks/${rankSelected.id}.png`}
-							style={{ width: '100px' }}
+							className={styles.rankImage}
 						/>
 
-						{
-							<FormControl className={formControl}>
-								<InputLabel shrink htmlFor='rank-select'>
-									Rank
-								</InputLabel>
-								<NativeSelect
-									value={rankSelected.id}
-									onChange={handleRankSelectChange}
-									inputProps={{
-										name: 'rank',
-										id: 'rank-select',
-									}}
-								>
-									{ranks.map(({ id, rankName, url }: RankInterface, index) => {
-										return (
-											<option key={index} value={id}>
-												{rankName}
-											</option>
-										);
-									})}
-								</NativeSelect>
-								<FormHelperText>Select your rank</FormHelperText>
-							</FormControl>
-						}
+						<select
+							value={rankSelected.id}
+							onChange={handleRankSelectChange}
+							className={globalstyles.buildSelectInput}
+						>
+							{ranks.map((rank: RankInterface, index) => {
+								const { id: rankId, rankName } = rank;
+
+								return (
+									<option
+										key={index}
+										value={rankId}
+										className={globalstyles.buildSelectOption}
+									>
+										{rankName}
+									</option>
+								);
+							})}
+						</select>
 					</Box>
 				</Box>
 			</Grid>

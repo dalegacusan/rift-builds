@@ -1,3 +1,11 @@
+.footerContainer {
+	padding: 80px 0;
+}
+
+.footerLinksContainer {
+	padding-bottom: 20px;
+}
+
 .footerLink {
 	color: rgb(255, 255, 255, 60%);
 	text-decoration: none;

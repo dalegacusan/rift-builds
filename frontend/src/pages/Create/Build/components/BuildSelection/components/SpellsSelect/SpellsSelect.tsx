@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 // Components
 import Spell from './components/Spell';
 // CSS
+import globalstyles from '../../../../createbuild.module.css';
 import styles from './spellsselect.module.css';
 // Types
 import {
@@ -48,7 +49,10 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 
 	return (
 		<Box>
-			<p>6. Summoner Spells</p>
+			<p className={globalstyles.inputLabel}>6. Summoner Spells</p>
+			<p className={globalstyles.inputDescription}>
+				Select the spells for your build
+			</p>
 
 			<Grid container item xs={12}>
 				{/* Spell One */}

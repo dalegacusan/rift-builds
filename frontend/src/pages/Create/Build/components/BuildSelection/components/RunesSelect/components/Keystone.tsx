@@ -6,13 +6,10 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { connect, ConnectedProps } from 'react-redux';
 
 // MaterialUI
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 // CSS
+import globalstyles from '../../../../../createbuild.module.css';
 import styles from './rune.module.css';
 // Types
 import {
@@ -21,11 +18,7 @@ import {
 } from '../../../../../../../../utils/interfaces';
 
 const Keystone = (props: KeystoneProps) => {
-	const {
-		formControl,
-		handleRuneSelectChange,
-		handleRuneExplanationChange,
-	} = props;
+	const { handleRuneSelectChange, handleRuneExplanationChange } = props;
 	// Game Data PROPS
 	const { runes } = props;
 	// Build PROPS
@@ -39,40 +32,35 @@ const Keystone = (props: KeystoneProps) => {
 					className={styles.runeImage}
 				/>
 
-				{
-					<FormControl className={formControl}>
-						<InputLabel shrink htmlFor='rune-select'>
-							Keystone
-						</InputLabel>
-						<NativeSelect
-							value={runeKeystone.id}
-							onChange={(e) => handleRuneSelectChange(e, 'keystone')}
-							inputProps={{
-								name: 'rune',
-								id: 'rune-select',
-							}}
-						>
-							{runes
-								.filter((rune) => rune.type === 'keystone')
-								.map(({ id, runeName, url }: RuneInterface, index) => {
-									return (
-										<option key={index} value={id}>
-											{runeName}
-										</option>
-									);
-								})}
-						</NativeSelect>
-						<FormHelperText>Select a Keystone Rune</FormHelperText>
-					</FormControl>
-				}
+				<select
+					onChange={(e) => handleRuneSelectChange(e, 'keystone')}
+					value={runeKeystone.id}
+					className={globalstyles.buildSelectInput}
+				>
+					{runes
+						.filter((rune: RuneInterface) => rune.type === 'keystone')
+						.map((rune: RuneInterface, index: number) => {
+							const { id: runeId, runeName } = rune;
+
+							return (
+								<option
+									key={index}
+									value={runeId}
+									className={globalstyles.buildSelectOption}
+								>
+									{runeName}
+								</option>
+							);
+						})}
+				</select>
 			</Grid>
 			<Grid item xs={12} sm={6}>
 				<textarea
 					id='runeKeystone'
 					name='runeKeystone'
-					rows={6}
+					rows={5}
 					value={runeKeystone.reason}
-					placeholder='Add an explanation for this rune'
+					placeholder='Explanation'
 					className={styles.explanationTextArea}
 					// value={itemReason}
 					onChange={(e) => handleRuneExplanationChange(e, 'keystone')}
@@ -98,7 +86,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type KeystoneProps = PropsFromRedux & {
-	formControl: string;
 	handleRuneSelectChange: (
 		e: React.ChangeEvent<HTMLSelectElement>,
 		runeType: string,

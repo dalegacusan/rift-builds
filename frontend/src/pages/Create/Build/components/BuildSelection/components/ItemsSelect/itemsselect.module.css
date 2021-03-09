@@ -1,16 +1,45 @@
 .itemImage {
 	width: 100px;
 	margin-right: 10px;
+	float: left;
 }
 
 .radioGroup {
 	display: inline-block;
+	margin: 10px 0;
 }
 
-.radioButton {
+.radioButtonContainer {
 	margin: 0;
 }
 
+.radioButton {
+	color: rgb(255, 255, 255, 30%);
+}
+
 .explanationTextArea {
+	background-color: transparent;
+	border: 1px solid rgb(255, 255, 255, 30%);
+	border-radius: 3px;
+	color: rgb(255, 255, 255, 30%);
 	width: 100%;
+	padding: 10px;
+	resize: none;
+}
+
+.explanationTextArea:focus {
+	border: 1px solid rgb(255, 255, 255, 60%);
+	outline: none;
+}
+
+.addItemButtonContainer {
+	margin-top: 5px;
+}
+
+.addItemButton {
+	text-transform: none !important;
+}
+
+.addItemButton:hover {
+	background-color: #285689 !important;
 }

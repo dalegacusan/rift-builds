@@ -1,7 +1,7 @@
 export interface BuildInterface {
 	id?: string;
 	buildTitle: string;
-	buildRole: string;
+	buildRole: RoleInterface;
 	champion: ChampionInterface;
 	dateSubmitted?: Date;
 	itemsConfirmed: ItemInterface[];
@@ -83,7 +83,7 @@ export interface SpellInterface {
 
 export interface RoleInterface {
 	id: string;
-	role: string;
+	roleName: string;
 }
 
 export interface gameDataInterface {
@@ -92,6 +92,7 @@ export interface gameDataInterface {
 		champions: Array<ChampionInterface>;
 		items: Array<ItemInterface>;
 		ranks: Array<RankInterface>;
+		roles: Array<RoleInterface>;
 		runes: Array<RuneInterface>;
 		spells: Array<SpellInterface>;
 	};

@@ -20,6 +20,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 // Components
 import ItemsSelected from '../ItemsSelected/ItemsSelected';
 // CSS
+import globalstyles from '../../../../createbuild.module.css';
 import styles from './itemsselect.module.css';
 // Types
 import {
@@ -100,7 +101,10 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 
 	return (
 		<Box>
-			<p>4. Items</p>
+			<p className={globalstyles.inputLabel}>4. Items</p>
+			<p className={globalstyles.inputDescription}>
+				Select the items for your build
+			</p>
 
 			<Box>
 				<Grid container spacing={3}>
@@ -113,36 +117,27 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 							/>
 
 							{/* <SELECT> */}
-							{
-								<FormControl className={formControl}>
-									<InputLabel shrink htmlFor='item-select'>
-										Item
-									</InputLabel>
-									<NativeSelect
-										value={itemSelected.id}
-										onChange={handleItemSelectChange}
-										inputProps={{
-											name: 'item',
-											id: 'item-select',
-										}}
-									>
-										{items.map(
-											({ id, itemName }: ItemInterface, index: number) => {
-												return (
-													<option key={index} value={id}>
-														{itemName}
-													</option>
-												);
-											}
-										)}
-									</NativeSelect>
-									<FormHelperText>Add an item to your build</FormHelperText>
-								</FormControl>
-							}
+							<select
+								onChange={handleItemSelectChange}
+								className={globalstyles.buildSelectInput}
+							>
+								{items.map((item: ItemInterface, index: number) => {
+									const { id: itemId, itemName } = item;
+
+									return (
+										<option
+											key={index}
+											value={itemId}
+											className={globalstyles.buildSelectOption}
+										>
+											{itemName}
+										</option>
+									);
+								})}
+							</select>
 
 							{/* ITEM TYPE */}
 							<Box>
-								<span>Item Type</span>
 								<RadioGroup
 									row
 									name='position'
@@ -152,17 +147,21 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								>
 									<FormControlLabel
 										value='primary'
-										control={<Radio color='primary' />}
+										control={
+											<Radio color='primary' className={styles.radioButton} />
+										}
 										label='Primary'
 										labelPlacement='end'
-										className={styles.radioButton}
+										className={styles.radioButtonContainer}
 									/>
 									<FormControlLabel
 										value='optional'
-										control={<Radio color='primary' />}
+										control={
+											<Radio color='primary' className={styles.radioButton} />
+										}
 										label='Optional'
 										labelPlacement='end'
-										className={styles.radioButton}
+										className={styles.radioButtonContainer}
 									/>
 								</RadioGroup>
 							</Box>
@@ -175,22 +174,25 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 							<textarea
 								id='itemReason'
 								name='itemReason'
-								rows={6}
+								rows={5}
 								value={itemReason}
-								placeholder='Add an explanation for this item'
+								placeholder='Explanation'
 								className={styles.explanationTextArea}
 								onChange={(e) => handleItemExplanationChange(e)}
 							></textarea>
-							<Box display='flex' flexDirection='row-reverse'>
-								<Box>
-									<Button
-										variant='contained'
-										color='primary'
-										onClick={handleAddItemClick}
-									>
-										Add Item
-									</Button>
-								</Box>
+							<Box
+								display='flex'
+								flexDirection='row-reverse'
+								className={styles.addItemButtonContainer}
+							>
+								<Button
+									variant='contained'
+									style={{ backgroundColor: '#326cac' }}
+									onClick={handleAddItemClick}
+									className={styles.addItemButton}
+								>
+									Add Item
+								</Button>
 							</Box>
 						</Box>
 					</Grid>

@@ -3,10 +3,8 @@ import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
-import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 // CSS
 import styles from './playerbuildheader.module.css';
 // Types
@@ -18,10 +16,11 @@ type PlayerBuildHeaderProps = {
 const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 	const { build } = props;
 	const { buildTitle, buildRole, champion, rank, spells, username } = build;
+	const { id, roleName } = buildRole;
 
 	let roleToDisplay;
 
-	switch (buildRole) {
+	switch (roleName) {
 		case 'Jungle':
 			roleToDisplay = 'e4cbdb64-7118-436b-b0c6-89388731aeb5';
 			break;

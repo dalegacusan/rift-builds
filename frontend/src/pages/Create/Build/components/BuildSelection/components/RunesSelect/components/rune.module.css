@@ -3,5 +3,17 @@
 }
 
 .runeImage {
-	width: 95px;
+	width: 100px;
+	margin-right: 10px;
+	float: left;
+}
+
+.explanationTextArea {
+	background-color: transparent;
+	border: 1px solid rgb(255, 255, 255, 30%);
+	border-radius: 3px;
+	color: rgb(255, 255, 255, 30%);
+	width: 100%;
+	padding: 10px;
+	resize: none;
 }
