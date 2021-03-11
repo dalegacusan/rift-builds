@@ -38,7 +38,7 @@ const BuildTitle = (props: BuildTitleProps) => {
 				placeholder='Build title'
 				className={globalstyles.buildInput}
 				onChange={(e) => handleBuildTitleChange(e)}
-				maxLength={maximumCharactersForBuildTitle} // Used maxlength instead
+				maxLength={maximumCharactersForBuildTitle}
 			/>
 			<p
 				className={globalstyles.inputDescription}

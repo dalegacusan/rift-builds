@@ -18,7 +18,11 @@ const CreateBuildHeader = () => {
 					className={styles.createBuildSubHeader}
 					gutterBottom
 				>
-					You can only create up to 5 builds every 30 minutes.
+					You can only create up to{' '}
+					<span className={styles.textHighlight}>
+						5 builds every 30 minutes
+					</span>
+					.
 				</Typography>
 			</Box>
 		</Box>

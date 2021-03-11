@@ -12,6 +12,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Box from '@material-ui/core/Box';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 // CSS
@@ -86,7 +87,13 @@ export default function ControlledAccordions() {
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails className={styles.accordionAnswerContainer}>
-					<p>You can create up to X builds per Y</p>
+					<p>
+						You can create up to&nbsp;
+						<span className={styles.textHighlight}>
+							5 builds every 30 minutes
+						</span>
+						.
+					</p>
 				</AccordionDetails>
 			</Accordion>
 
@@ -110,7 +117,29 @@ export default function ControlledAccordions() {
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails className={styles.accordionAnswerContainer}>
-					<p>You can share your build by</p>
+					<Box>
+						<p>
+							You can share a build you created by heading over to the&nbsp;
+							<span className={styles.textHighlight}>page of your build</span>
+						</p>
+						<img
+							src='/images/faq/step1.png'
+							style={{ width: '600px' }}
+							alt='How to share a build'
+						/>
+						<p>
+							then right above the champion icon,{' '}
+							<span className={styles.textHighlight}>
+								click the copy button
+							</span>{' '}
+							and it will <i>copy the link to your clipboard</i>.
+						</p>
+						<img
+							src='/images/faq/step2.png'
+							style={{ width: '600px' }}
+							alt='How to share a build'
+						/>
+					</Box>
 				</AccordionDetails>
 			</Accordion>
 
