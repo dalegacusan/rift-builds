@@ -11,7 +11,8 @@ const tierListURL = 'https://www.youtube.com/watch?v=JpUJyqZ_9XY';
 const contactEmailAddress = 'abcwildrift@gmail.com';
 
 // === HEROKU === //
-const herokuURL = 'https://wildriftbuilds.herokuapp.com';
+// const herokuURL = 'https://wildriftbuilds.herokuapp.com';
+const herokuURL = '';
 
 // === NETLIFY === //
 const netlifyURL = 'https://riftbuilds.netlify.app';

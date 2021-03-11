@@ -1,9 +1,17 @@
 .buildBoxContainer {
 	background-color: #121212;
 	color: rgb(255, 255, 255, 80%) !important;
-	padding: 5px 0 !important;
+	padding: 3px 0 !important;
+}
+
+.championImage {
+	width: 2rem;
 }
 
 .tableCell {
 	min-width: 20px;
+}
+
+.divider {
+	background-color: #20242c;
 }

@@ -8,23 +8,33 @@ import axios from 'axios';
 
 // MaterialUI
 // Components
+import Box from '@material-ui/core/Box';
 import BuildsList from './components/BuildsList/BuildsList';
+import Button from '@material-ui/core/Button';
 import ChampionData from './components/ChampionData/ChampionData';
 // CSS
 import styles from './championbuilds.module.css';
 // Types
-import { ChampionInterface } from '../../../utils/interfaces';
+import { BuildInterface, ChampionInterface } from '../../../utils/interfaces';
 type PathParamsType = {
 	championName: string;
 };
+type ChampionBuildsType = {
+	builds: Array<BuildInterface>;
+	buildsCount: number;
+};
 type HeroBuildsProps = RouteComponentProps<PathParamsType> & {};
+
+// For pagination (used in POST requests)
+let page = 5;
 
 const HeroBuilds = (props: HeroBuildsProps) => {
 	const { match } = props;
 	const { championName } = match.params;
 
 	const [isLoading, setIsLoading] = useState(true);
-	const [championBuilds, setChampionBuilds] = useState({
+	const [isLoadingMoreBuilds, setIsLoadingMoreBuilds] = useState(false);
+	const [championBuilds, setChampionBuilds] = useState<ChampionBuildsType>({
 		builds: [],
 		buildsCount: 0,
 	});
@@ -41,16 +51,35 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		url: '',
 	});
 
+	const getBuildsForChampion = () => {
+		return axios.post(`${herokuURL}/api/build/all/${championName}`, { page });
+	};
+	const getMoreBuilds = async () => {
+		setIsLoadingMoreBuilds(true);
+
+		page += 5;
+
+		const moreBuildsRequest = await getBuildsForChampion();
+
+		const { data } = moreBuildsRequest;
+		const { buildsCount: newBuildsCount, builds: newBuilds } = data;
+
+		setChampionBuilds((prev: ChampionBuildsType) => {
+			const { builds: previousBuilds } = prev;
+			return {
+				builds: [...previousBuilds, ...newBuilds],
+				buildsCount: newBuildsCount,
+			};
+		});
+		setIsLoadingMoreBuilds(false);
+	};
+
 	useEffect(() => {
-		const getAllBuildsForChampion = axios.post(
-			`${herokuURL}/api/build/all/${championName}`,
-			{ page: 5 }
-		);
 		const getOneChampion = axios.get(
 			`${herokuURL}/api/champion/${championName}`
 		);
 
-		Promise.all([getAllBuildsForChampion, getOneChampion]).then((values) => {
+		Promise.all([getBuildsForChampion(), getOneChampion]).then((values) => {
 			const [{ data: buildsForChampion }, { data: dataForChampion }] = values;
 			const { buildsCount, builds } = buildsForChampion;
 
@@ -60,6 +89,8 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 			setIsLoading(!isLoading);
 		});
 	}, []);
+
+	console.log(championBuilds);
 
 	return (
 		<>
@@ -78,6 +109,21 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 					/>
 					{/* Builds */}
 					<BuildsList builds={championBuilds.builds} />
+
+					{/* Load More Button */}
+					<Box
+						display='flex'
+						justifyContent='center'
+						className={styles.loadMoreContainer}
+					>
+						<Button
+							onClick={getMoreBuilds}
+							variant='contained'
+							className={styles.loadMoreButton}
+						>
+							{isLoadingMoreBuilds ? 'Loading...' : 'Load more builds'}
+						</Button>
+					</Box>
 				</>
 			) : (
 				<p>Loading...</p>

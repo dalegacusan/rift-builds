@@ -1,7 +1,6 @@
 import React from 'react';
 
 // MaterialUI
-import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 // Components
 import BuildDate from './components/BuildDate/BuildDate';
@@ -10,6 +9,7 @@ import BuildLearnMoreButton from './components/BuildLearnMoreButton/BuildLearnMo
 import BuildRankUser from './components/BuildRankUser/BuildRankUser';
 import BuildRune from './components/BuildRune/BuildRune';
 import BuildSpell from './components/BuildSpell/BuildSpell';
+import Divider from '@material-ui/core/Divider';
 // Types
 import { BuildInterface } from '../../../../../../../utils/interfaces';
 // CSS
@@ -30,97 +30,101 @@ const BuildBox = (props: BuildBoxProps) => {
 	const { itemsConfirmed } = build; // Arrays
 
 	return (
-		<Grid
-			container
-			direction='row'
-			justify='center'
-			alignItems='center'
-			className={styles.buildBoxContainer}
-		>
-			{/* Date Submitted */}
-			<Grid item xs={2} sm={2}>
-				<BuildDate dateSubmitted={dateSubmitted} />
-			</Grid>
-
-			{/* Champion Icon */}
+		<>
 			<Grid
 				container
-				item
 				direction='row'
 				justify='center'
 				alignItems='center'
-				xs={1}
-				sm={1}
+				className={styles.buildBoxContainer}
 			>
-				<Avatar
-					alt={championName}
-					title={championName}
-					src={`/images/wildriftchampions/${championId}.jpg`}
-				/>
-			</Grid>
+				{/* Date Submitted */}
+				<Grid item xs={2} sm={2}>
+					<BuildDate dateSubmitted={dateSubmitted} />
+				</Grid>
 
-			{/* Items */}
-			<Grid
-				container
-				item
-				direction='row'
-				justify='center'
-				alignItems='center'
-				xs={3}
-				sm={3}
-			>
-				{itemsConfirmed
-					.filter((item) => item.type === 'primary')
-					.map((item, index) => {
-						return <BuildItem key={index} item={item} />;
-					})}
-			</Grid>
+				{/* Champion Icon */}
+				<Grid
+					container
+					item
+					direction='row'
+					justify='center'
+					alignItems='center'
+					xs={1}
+					sm={1}
+				>
+					<img
+						alt={championName}
+						title={championName}
+						src={`/images/wildriftchampions/${championId}.jpg`}
+						className={styles.championImage}
+					/>
+				</Grid>
 
-			{/* Spells */}
-			<Grid
-				container
-				item
-				direction='row'
-				justify='center'
-				alignItems='center'
-				xs={1}
-				sm={1}
-			>
-				<BuildSpell spell={spellOne} />
-				<BuildSpell spell={spellTwo} />
-			</Grid>
+				{/* Items */}
+				<Grid
+					container
+					item
+					direction='row'
+					justify='center'
+					alignItems='center'
+					xs={3}
+					sm={3}
+				>
+					{itemsConfirmed
+						.filter((item) => item.type === 'primary')
+						.map((item, index) => {
+							return <BuildItem key={index} item={item} />;
+						})}
+				</Grid>
 
-			{/* Rune */}
-			<Grid
-				container
-				item
-				direction='row'
-				justify='center'
-				alignItems='center'
-				xs={1}
-				sm={1}
-			>
-				<BuildRune rune={keystone} />
-			</Grid>
+				{/* Spells */}
+				<Grid
+					container
+					item
+					direction='row'
+					justify='center'
+					alignItems='center'
+					xs={1}
+					sm={1}
+				>
+					<BuildSpell spell={spellOne} />
+					<BuildSpell spell={spellTwo} />
+				</Grid>
 
-			{/* Rank and Username */}
-			<Grid item xs={2} sm={2}>
-				<BuildRankUser username={username} rank={rank} />
-			</Grid>
+				{/* Rune */}
+				<Grid
+					container
+					item
+					direction='row'
+					justify='center'
+					alignItems='center'
+					xs={1}
+					sm={1}
+				>
+					<BuildRune rune={keystone} />
+				</Grid>
 
-			{/* Learn more Button */}
-			<Grid
-				container
-				item
-				direction='row'
-				justify='flex-start'
-				alignItems='center'
-				xs={2}
-				sm={2}
-			>
-				<BuildLearnMoreButton buildId={buildId} />
+				{/* Rank and Username */}
+				<Grid item xs={2} sm={2}>
+					<BuildRankUser username={username} rank={rank} />
+				</Grid>
+
+				{/* Learn more Button */}
+				<Grid
+					container
+					item
+					direction='row'
+					justify='flex-start'
+					alignItems='center'
+					xs={2}
+					sm={2}
+				>
+					<BuildLearnMoreButton buildId={buildId} />
+				</Grid>
 			</Grid>
-		</Grid>
+			<Divider className={styles.divider} />
+		</>
 	);
 };
 

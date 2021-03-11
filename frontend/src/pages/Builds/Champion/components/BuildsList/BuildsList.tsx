@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import BuildBox from './components/BuildBox/BuildBox';
 import NoBuilds from './components/NoBuilds/NoBuilds';
 // CSS
+import styles from './buildslist.module.css';
 // Types
 import { BuildInterface } from '../../../../../utils/interfaces';
 type BuildsListProps = {
@@ -16,11 +17,7 @@ const BuildsList = (props: BuildsListProps) => {
 	const { builds } = props;
 
 	return (
-		<Box
-			style={{
-				margin: '60px 0 0 0',
-			}}
-		>
+		<Box className={styles.buildsListContainer}>
 			{builds.length !== 0 ? (
 				<>
 					{builds.map((build, index) => {
