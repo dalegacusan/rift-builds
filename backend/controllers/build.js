@@ -68,6 +68,8 @@ const getAllBuildsForChampion = (req, res, next) => {
 const saveBuild = (req, res, next) => {
 	const { itemsConfirmed } = req.body;
 
+	console.log(req.body);
+
 	var itemArray = itemsConfirmed.map((item) => {
 		return item.id;
 	});
@@ -88,7 +90,7 @@ const saveBuild = (req, res, next) => {
 				logger.error('Error: ', err);
 
 				res.status(400).json({
-					message: 'Failed to save build to the database.',
+					message: err.message,
 				});
 
 				next(err);

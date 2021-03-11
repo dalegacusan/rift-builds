@@ -11,6 +11,7 @@ import {
 	successBuildSaved,
 	errorNoBuildTitle,
 } from '../../../utils/alertpopups';
+import { herokuURL } from '../../../utils/globalvars';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -69,20 +70,15 @@ const CreateBuild = (props: CreateBuildProps) => {
 		) {
 			setOpenBackdrop(true);
 			const saveToDatabase = await axios
-				.post(
-					// 'https://wildriftbuilds.herokuapp.com/api/build/save',
-					'/api/build/save',
-					{
-						...completeBuild,
-						dateSubmitted: new Date(),
-					}
-				)
+				.post(`${herokuURL}/api/build/save`, {
+					...completeBuild,
+					dateSubmitted: new Date(),
+				})
 				.then((res) => {
 					// successBuildSaved();
 					setSavedBuild(res.data);
 					setHasSubmittedBuild(true);
 					refreshState();
-					console.log('Successfully saved build');
 				})
 				.catch((err) => {
 					if (
@@ -92,6 +88,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 					) {
 						errorBuildSaved(err.response.data);
 					} else {
+						setOpenBackdrop(false);
 						errorBuildSaved('Something went wrong. Failed to save build.');
 					}
 				});
@@ -108,7 +105,6 @@ const CreateBuild = (props: CreateBuildProps) => {
 	};
 
 	if (hasSubmittedBuild) {
-		console.log(savedBuild);
 		return <Redirect to={`/build/${savedBuild.id}`} />;
 	}
 

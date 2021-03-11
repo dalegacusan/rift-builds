@@ -31,9 +31,6 @@ const BuildInformation = (props: BuildInformationProps) => {
 	const handleBuildTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
 
-		console.log(value.length);
-		console.log(maximumCharactersForBuildTitle);
-
 		// Added +1 because at 24 characters, charactersRemaining is at 1 not 0
 		if (value.length === maximumCharactersForBuildTitle + 1) {
 			e.preventDefault();

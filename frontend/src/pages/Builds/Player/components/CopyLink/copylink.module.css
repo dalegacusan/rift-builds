@@ -1,0 +1,27 @@
+.copyInput {
+	background-color: transparent;
+	border: none;
+	color: rgb(255, 255, 255, 30%);
+	padding: 7.5px 15px;
+	width: 50%;
+	position: relative;
+	top: 0.8px;
+}
+
+.copyInput:focus {
+	outline: none;
+}
+
+.copyButton {
+	border-radius: 0 !important;
+	margin-right: 1px;
+}
+
+.copyButton:hover {
+	background-color: #285689 !important;
+}
+
+.copyIcon {
+	width: 18px !important;
+	color: rgb(255, 255, 255, 87%);
+}

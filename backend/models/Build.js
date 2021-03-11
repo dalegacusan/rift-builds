@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 
 const buildSchema = new mongoose.Schema({
 	buildTitle: String,
-	buildRole: String,
+	buildRole: {
+		id: String,
+		roleName: String
+	},
 	champion: {
 		id: String,
 		championName: String,

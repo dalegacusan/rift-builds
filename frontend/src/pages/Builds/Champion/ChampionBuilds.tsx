@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
+import { herokuURL } from '../../../utils/globalvars';
 import axios from 'axios';
 
 // MaterialUI
@@ -42,11 +43,12 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 
 	useEffect(() => {
 		const getAllBuildsForChampion = axios.post(
-			// `/api/build/${match.params.buildId}`
-			`/api/build/all/${championName}`,
+			`${herokuURL}/api/build/all/${championName}`,
 			{ page: 5 }
 		);
-		const getOneChampion = axios.get(`/api/champion/${championName}`);
+		const getOneChampion = axios.get(
+			`${herokuURL}/api/champion/${championName}`
+		);
 
 		Promise.all([getAllBuildsForChampion, getOneChampion]).then((values) => {
 			const [{ data: buildsForChampion }, { data: dataForChampion }] = values;

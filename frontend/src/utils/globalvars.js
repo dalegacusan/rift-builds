@@ -10,6 +10,12 @@ const tierListURL = 'https://www.youtube.com/watch?v=JpUJyqZ_9XY';
 // === CONTACT DATA === //
 const contactEmailAddress = 'abcwildrift@gmail.com';
 
+// === HEROKU === //
+const herokuURL = 'https://wildriftbuilds.herokuapp.com';
+
+// === NETLIFY === //
+const netlifyURL = 'https://riftbuilds.netlify.app';
+
 module.exports = {
 	patchVersion,
 	patchNotesURL,
@@ -18,5 +24,9 @@ module.exports = {
 	tierListCreatorURL,
 	tierListURL,
 	// === CONTACT DATA === //
-	contactEmailAddress
+	contactEmailAddress,
+	// === HEROKU === //
+	herokuURL,
+	// === NETLIFY === //
+	netlifyURL
 }

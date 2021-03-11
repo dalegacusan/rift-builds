@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import { herokuURL } from '../utils/globalvars';
+import axios from 'axios';
 
 // Redux
 import { connect } from 'react-redux';
@@ -41,7 +42,7 @@ const theme = createMuiTheme({
 		},
 		secondary: {
 			light: '#292E38',
-			main: '#242424',
+			main: '#326CAC',
 			dark: '#171717',
 		},
 	},
@@ -67,27 +68,12 @@ const App = (props: AppProps) => {
 
 	// Get DATA
 	useEffect(() => {
-		const getChampions = axios.get(
-			// 'https://wildriftbuilds.herokuapp.com/api/champion/all'
-			'/api/champion/all'
-		);
-		const getItems = axios.get(
-			// 'https://wildriftbuilds.herokuapp.com/api/item/all'
-			'/api/item/all'
-		);
-		const getRunes = axios.get(
-			// 'https://wildriftbuilds.herokuapp.com/api/rune/all'
-			'/api/rune/all'
-		);
-		const getSpells = axios.get(
-			// 'https://wildriftbuilds.herokuapp.com/api/spell/all'
-			'/api/spell/all'
-		);
-		const getRanks = axios.get(
-			// 'https://wildriftbuilds.herokuapp.com/api/rank/all'
-			'/api/rank/all'
-		);
-		const getRoles = axios.get('/api/role/all');
+		const getChampions = axios.get(`${herokuURL}/api/champion/all`);
+		const getItems = axios.get(`${herokuURL}/api/item/all`);
+		const getRunes = axios.get(`${herokuURL}/api/rune/all`);
+		const getSpells = axios.get(`${herokuURL}/api/spell/all`);
+		const getRanks = axios.get(`${herokuURL}/api/rank/all`);
+		const getRoles = axios.get(`${herokuURL}/api/role/all`);
 
 		Promise.all([
 			getChampions,

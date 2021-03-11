@@ -16,25 +16,25 @@ type PlayerBuildHeaderProps = {
 const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 	const { build } = props;
 	const { buildTitle, buildRole, champion, rank, spells, username } = build;
-	const { id, roleName } = buildRole;
+	const { id: roleId, roleName } = buildRole;
 
 	let roleToDisplay;
 
 	switch (roleName) {
 		case 'Jungle':
-			roleToDisplay = 'e4cbdb64-7118-436b-b0c6-89388731aeb5';
+			roleToDisplay = roleId;
 			break;
 		case 'Support':
-			roleToDisplay = '35b924df-6d60-4cc5-82a8-4e5dc85272a0';
+			roleToDisplay = roleId;
 			break;
 		case 'Top':
-			roleToDisplay = '53f90d2a-d970-41ec-8d5c-f8775580ad7e';
+			roleToDisplay = roleId;
 			break;
 		case 'Middle':
-			roleToDisplay = '6b7ca1d8-872a-4c54-b685-720e14251941';
+			roleToDisplay = roleId;
 			break;
 		case 'Bottom':
-			roleToDisplay = 'e3f90603-6452-4c33-afe6-466a69b6095b';
+			roleToDisplay = roleId;
 			break;
 	}
 
@@ -80,7 +80,7 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 
 						<span className={styles.buildInformationText}>
 							<span className={styles.buildInformationTitle}>Lane:&nbsp;</span>
-							{buildRole}
+							{buildRole.roleName}
 							&nbsp;|&nbsp;
 							<span className={styles.buildInformationTitle}>Rank:&nbsp;</span>
 							{rank.rankName}

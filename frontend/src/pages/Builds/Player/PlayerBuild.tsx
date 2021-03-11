@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
+import { herokuURL } from '../../../utils/globalvars';
 import axios from 'axios';
 
 // MaterialUI
@@ -12,6 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 // Components
 import BuildItem from './components/BuildItem/BuildItem';
+import CopyLink from './components/CopyLink/CopyLink';
 import RuneItem from './components/RuneItem/RuneItem';
 import SpellItem from './components/Spellitem/SpellItem';
 import PlayerBuildHeader from './components/PlayerBuildHeader/PlayerBuildHeader';
@@ -40,15 +42,11 @@ const PlayerBuild = (props: any) => {
 	const [build, setBuild] = useState<BuildInterface>();
 
 	useEffect(() => {
-		axios
-			.get(
-				// `https://wildriftbuilds.herokuapp.com/api/build/${match.params.buildId}`
-				`/api/build/${match.params.buildId}`
-			)
-			.then((res) => {
-				const { data } = res;
-				setBuild(data);
-			});
+		axios.get(`${herokuURL}/api/build/${match.params.buildId}`).then((res) => {
+			const { data } = res;
+
+			setBuild(data);
+		});
 	}, []);
 
 	return (
@@ -61,14 +59,10 @@ const PlayerBuild = (props: any) => {
 							| Rift Builds
 						</title>
 					</Helmet>
-					<Box
-						style={{
-							// backgroundColor: '#303841',
-							padding: '30px',
-							color: '#ffffff',
-							margin: '50px 0',
-						}}
-					>
+					<Box className={styles.playerBuildContainer}>
+						{/* Display Build ID */}
+						{build.id ? <CopyLink buildId={build.id} /> : null}
+
 						<PlayerBuildHeader build={build} />
 
 						{/* PRIMARY ITEMS */}
