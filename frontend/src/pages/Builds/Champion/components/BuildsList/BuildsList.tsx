@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';

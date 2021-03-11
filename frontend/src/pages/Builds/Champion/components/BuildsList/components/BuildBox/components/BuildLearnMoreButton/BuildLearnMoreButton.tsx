@@ -26,6 +26,7 @@ const BuildLearnMoreButton = (props: BuildLearnMoreButtonProps) => {
 	return (
 		<a href={`/build/${buildId}`} style={{ textDecoration: 'none' }}>
 			<Button
+				size='small'
 				variant='contained'
 				className={`${classes.learnMoreButton} ${styles.learnMoreButton}`}
 			>

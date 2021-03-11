@@ -1,6 +1,6 @@
 node_modules
 .env
 
-# UNCOMMENT WHEN PROD
-# COMMENT WHEN DEV - For Github
+# UNCOMMENT WHEN DEV
+# COMMENT WHEN PROD
 /data

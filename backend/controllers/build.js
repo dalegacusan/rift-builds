@@ -41,8 +41,14 @@ const getAllBuildsForChampion = (req, res, next) => {
 	const { page } = req.body;
 	const { championName } = req.params;
 
-	const allBuilds = Build.find({ 'champion.championName': championNameCounterparts[championName] }).skip(page - 5).limit(5);
-	const buildsCount = Build.countDocuments({ 'champion.championName': championNameCounterparts[championName] });
+	// Sort by NEWEST date submitted
+	const allBuilds = Build
+		.find({ 'champion.championName': championNameCounterparts[championName] })
+		.sort({ dateSubmitted: -1 })
+		.skip(page - 5)
+		.limit(5);
+	const buildsCount = Build
+		.countDocuments({ 'champion.championName': championNameCounterparts[championName] });
 
 	Promise.all([buildsCount, allBuilds])
 		.then(values => {
@@ -67,8 +73,6 @@ const getAllBuildsForChampion = (req, res, next) => {
 
 const saveBuild = (req, res, next) => {
 	const { itemsConfirmed } = req.body;
-
-	console.log(req.body);
 
 	var itemArray = itemsConfirmed.map((item) => {
 		return item.id;

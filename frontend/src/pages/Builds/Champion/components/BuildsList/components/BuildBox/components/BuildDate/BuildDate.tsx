@@ -13,11 +13,17 @@ const BuildDate = (props: BuildDateProps) => {
 	var dateToday = moment(Date());
 	const dateDifference = dateToday.diff(originalDate, 'days');
 
-	return (
-		<p style={{ textAlign: 'center' }}>
-			{dateDifference} {dateDifference !== 1 ? 'days' : 'day'} ago
-		</p>
-	);
+	let buildDateToDisplay;
+
+	if (dateDifference === 0) {
+		buildDateToDisplay = `Today`;
+	} else if (dateDifference === 1) {
+		buildDateToDisplay = `${dateDifference} day ago`;
+	} else {
+		buildDateToDisplay = `${dateDifference} days ago`;
+	}
+
+	return <p style={{ textAlign: 'center' }}>{buildDateToDisplay}</p>;
 };
 
 export default BuildDate;

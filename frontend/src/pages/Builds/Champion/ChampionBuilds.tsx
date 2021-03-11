@@ -90,8 +90,6 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		});
 	}, []);
 
-	console.log(championBuilds);
-
 	return (
 		<>
 			{!isLoading ? (
@@ -111,19 +109,22 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 					<BuildsList builds={championBuilds.builds} />
 
 					{/* Load More Button */}
-					<Box
-						display='flex'
-						justifyContent='center'
-						className={styles.loadMoreContainer}
-					>
-						<Button
-							onClick={getMoreBuilds}
-							variant='contained'
-							className={styles.loadMoreButton}
+					{championBuilds.buildsCount !== 0 &&
+					championBuilds.builds.length !== 0 ? (
+						<Box
+							display='flex'
+							justifyContent='center'
+							className={styles.loadMoreContainer}
 						>
-							{isLoadingMoreBuilds ? 'Loading...' : 'Load more builds'}
-						</Button>
-					</Box>
+							<Button
+								onClick={getMoreBuilds}
+								variant='contained'
+								className={styles.loadMoreButton}
+							>
+								{isLoadingMoreBuilds ? 'Loading...' : 'Load more builds'}
+							</Button>
+						</Box>
+					) : null}
 				</>
 			) : (
 				<p>Loading...</p>
