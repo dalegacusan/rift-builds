@@ -23,6 +23,8 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 	// Build PROPS
 	const { rankSelected, setRankSelected, username, setUsername } = props;
 
+	const maximumCharactersForUsername = 22;
+
 	// =============== Username =============== //
 	const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
@@ -57,6 +59,7 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 						placeholder='Username'
 						onChange={(e) => handleUsernameChange(e)}
 						className={globalstyles.buildInput}
+						maxLength={maximumCharactersForUsername}
 					/>
 					<p
 						className={globalstyles.inputDescription}
