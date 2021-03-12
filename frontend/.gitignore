@@ -7,6 +7,8 @@
 /public/images/wildriftrunes
 /public/images/wildriftspells
 
+.env
+
 # dependencies
 /node_modules
 /.pnp

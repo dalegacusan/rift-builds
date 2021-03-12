@@ -1,6 +1,4 @@
 import React from 'react';
-// @ts-ignore - No types for this module
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -18,9 +16,10 @@ export default function NoBuilds() {
 			justifyContent='center'
 		>
 			<Box>
-				<LazyLoadImage
+				<img
 					src='/images/empty.svg'
 					className={styles.noBuildImage}
+					alt='no available builds'
 				/>
 				<Typography gutterBottom>
 					There are no builds for this champion yet.{' '}

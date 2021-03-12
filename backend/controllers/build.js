@@ -1,6 +1,8 @@
 const Build = require('../models/Build');
-const logger = require('../utils/logger');
 const championNameCounterparts = require('../utils/championNameCounterparts');
+const logger = require('../utils/logger');
+const fetch = require("node-fetch");
+const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 
 const getAllBuilds = async (req, res, next) => {
 	const { page } = req.body;
@@ -71,8 +73,11 @@ const getAllBuildsForChampion = (req, res, next) => {
 
 }
 
-const saveBuild = (req, res, next) => {
-	const { itemsConfirmed } = req.body;
+const saveBuild = async (req, res, next) => {
+	const { build, recaptchaToken } = req.body;
+	const { itemsConfirmed } = build;
+
+	const isHuman = await validateHuman(recaptchaToken);
 
 	var itemArray = itemsConfirmed.map((item) => {
 		return item.id;
@@ -81,10 +86,8 @@ const saveBuild = (req, res, next) => {
 		return itemArray.indexOf(item) != index;
 	});
 
-	if (!isDuplicate) {
-		logger.info('No duplicates found');
-
-		const newBuild = new Build(req.body);
+	if (!isDuplicate && isHuman) {
+		const newBuild = new Build(build);
 
 		newBuild.save()
 			.then((data) => {
@@ -101,10 +104,21 @@ const saveBuild = (req, res, next) => {
 			});
 
 	} else {
-		console.log('DUPLICATES');
-		res.status(400).json({ message: 'There are duplicate items that made it through!' });
+		res.status(400).json({ message: 'Something went wrong. Please try again' });
 	}
 
+}
+
+const validateHuman = async (recaptchaToken) => {
+	const response = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`, {
+		method: "POST",
+	})
+		.then(res => res.json())
+		.then(json => {
+			return json.success;
+		});
+
+	return response;
 }
 
 module.exports = {

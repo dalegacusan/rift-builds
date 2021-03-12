@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import { herokuURL } from '../../../utils/globalvars';
+import { serverURL } from '../../../utils/globalvars';
 import axios from 'axios';
 
 // MaterialUI
@@ -42,7 +42,7 @@ const PlayerBuild = (props: any) => {
 	const [build, setBuild] = useState<BuildInterface>();
 
 	useEffect(() => {
-		axios.get(`${herokuURL}/api/build/${match.params.buildId}`).then((res) => {
+		axios.get(`${serverURL}/api/build/${match.params.buildId}`).then((res) => {
 			const { data } = res;
 
 			setBuild(data);

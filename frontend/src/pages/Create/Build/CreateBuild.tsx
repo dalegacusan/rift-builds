@@ -11,7 +11,7 @@ import {
 	successBuildSaved,
 	errorNoBuildTitle,
 } from '../../../utils/alertpopups';
-import { herokuURL } from '../../../utils/globalvars';
+import { serverURL } from '../../../utils/globalvars';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -62,7 +62,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 		);
 	}
 
-	const submitBuild = async () => {
+	const submitBuild = async (recaptchaToken: string | null) => {
 		if (
 			completeBuild.itemsConfirmed.length !== 0 &&
 			completeBuild.username &&
@@ -70,9 +70,12 @@ const CreateBuild = (props: CreateBuildProps) => {
 		) {
 			setOpenBackdrop(true);
 			const saveToDatabase = await axios
-				.post(`${herokuURL}/api/build/save`, {
-					...completeBuild,
-					dateSubmitted: new Date(),
+				.post(`${serverURL}/api/build/save`, {
+					build: {
+						...completeBuild,
+						dateSubmitted: new Date(),
+					},
+					recaptchaToken,
 				})
 				.then((res) => {
 					// successBuildSaved();

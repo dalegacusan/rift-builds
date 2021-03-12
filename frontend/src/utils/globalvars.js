@@ -1,3 +1,5 @@
+const { REACT_APP_NETLIFY_URL, REACT_APP_SERVER_URL, REACT_APP_RECAPTCHA_PUBLIC_KEY } = process.env;
+
 const patchVersion = '2.1A';
 const patchNotesURL = 'https://wildrift.leagueoflegends.com/en-sg/news/game-updates/wild-rift-patch-notes-2-1a/';
 
@@ -10,12 +12,15 @@ const tierListURL = 'https://www.youtube.com/watch?v=JpUJyqZ_9XY';
 // === CONTACT DATA === //
 const contactEmailAddress = 'abcwildrift@gmail.com';
 
-// === HEROKU === //
-// const herokuURL = 'https://wildriftbuilds.herokuapp.com';
-const herokuURL = '';
+// === SERVER === //
+const serverURL = REACT_APP_SERVER_URL; // PROD
+// const serverURL = ''; // DEV
 
 // === NETLIFY === //
-const netlifyURL = 'https://riftbuilds.netlify.app';
+const netlifyURL = REACT_APP_NETLIFY_URL;
+
+// === SECRETS === //
+const recaptchaPublicKey = REACT_APP_RECAPTCHA_PUBLIC_KEY;
 
 module.exports = {
 	patchVersion,
@@ -26,8 +31,10 @@ module.exports = {
 	tierListURL,
 	// === CONTACT DATA === //
 	contactEmailAddress,
-	// === HEROKU === //
-	herokuURL,
+	// === SERVER === //
+	serverURL,
 	// === NETLIFY === //
-	netlifyURL
+	netlifyURL,
+	// === SECRETS === //
+	recaptchaPublicKey,
 }

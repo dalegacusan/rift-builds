@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import { herokuURL } from '../../../utils/globalvars';
+import { serverURL } from '../../../utils/globalvars';
 import axios from 'axios';
 
 // MaterialUI
@@ -52,7 +52,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 	});
 
 	const getBuildsForChampion = () => {
-		return axios.post(`${herokuURL}/api/build/all/${championName}`, { page });
+		return axios.post(`${serverURL}/api/build/all/${championName}`, { page });
 	};
 	const getMoreBuilds = async () => {
 		setIsLoadingMoreBuilds(true);
@@ -60,7 +60,6 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		page += 5;
 
 		const moreBuildsRequest = await getBuildsForChampion();
-
 		const { data } = moreBuildsRequest;
 		const { buildsCount: newBuildsCount, builds: newBuilds } = data;
 
@@ -76,7 +75,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 
 	useEffect(() => {
 		const getOneChampion = axios.get(
-			`${herokuURL}/api/champion/${championName}`
+			`${serverURL}/api/champion/${championName}`
 		);
 
 		Promise.all([getBuildsForChampion(), getOneChampion]).then((values) => {
