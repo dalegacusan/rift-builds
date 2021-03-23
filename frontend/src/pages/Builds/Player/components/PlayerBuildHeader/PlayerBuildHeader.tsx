@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 // CSS
 import styles from './playerbuildheader.module.css';
 // Types
-import { BuildInterface } from '../../../../../utils/interfaces';
+import { BuildInterface } from '../../../../../shared/constants/interfaces';
 type PlayerBuildHeaderProps = {
 	build: BuildInterface;
 };

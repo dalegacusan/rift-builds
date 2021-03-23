@@ -15,7 +15,7 @@ import styles from './rune.module.css';
 import {
 	RuneInterface,
 	RootState,
-} from '../../../../../../../../utils/interfaces';
+} from '../../../../../../../../shared/constants/interfaces';
 
 const Resolve = (props: ResolveProps) => {
 	const { handleRuneSelectChange, handleRuneExplanationChange } = props;

@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 // Components
 import ItemPopover from '../../../../../components/Popover/ItemPopover';
 // Types
-import { ItemInterface } from '../../../../../utils/interfaces';
+import { ItemInterface } from '../../../../../shared/constants/interfaces';
 // CSS
 import styles from './builditem.module.css';
 const useStyles = makeStyles((theme: Theme) =>

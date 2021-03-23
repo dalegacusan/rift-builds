@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 // Types
-import { SpellInterface } from '../../utils/interfaces';
+import { SpellInterface } from '../../shared/constants/interfaces';
 // CSS
 import styles from './popover.module.css';
 const useStyles = makeStyles((theme: Theme) =>

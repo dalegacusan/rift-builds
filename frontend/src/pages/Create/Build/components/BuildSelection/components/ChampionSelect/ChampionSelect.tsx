@@ -16,7 +16,7 @@ import styles from './championselect.module.css';
 import {
 	ChampionInterface,
 	RootState,
-} from '../../../../../../../utils/interfaces';
+} from '../../../../../../../shared/constants/interfaces';
 
 const ChampionSelect = (props: ChampionSelectProps) => {
 	// Game Data PROPS

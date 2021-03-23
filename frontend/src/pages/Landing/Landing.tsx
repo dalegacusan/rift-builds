@@ -11,7 +11,10 @@ import Champions from './components/Champions/Champions';
 // CSS
 import styles from './landing.module.css';
 // Types
-import { ChampionInterface, RootState } from '../../utils/interfaces';
+import {
+	ChampionInterface,
+	RootState,
+} from '../../shared/constants/interfaces';
 
 const Landing = (props: LandingProps) => {
 	// Game Data PROPS

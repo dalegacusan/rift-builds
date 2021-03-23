@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import { serverURL } from '../../../utils/globalvars';
+import { URL } from '../../../shared/constants/constants';
 import axios from 'axios';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
@@ -20,7 +19,10 @@ import PlayerBuildHeader from './components/PlayerBuildHeader/PlayerBuildHeader'
 import PlayerBuildFooter from './components/PlayerBuildFooter/PlayerBuildFooter';
 import SectionDivider from './components/SectionDivider/SectionDivider';
 // Types
-import { BuildInterface, ItemInterface } from '../../../utils/interfaces';
+import {
+	BuildInterface,
+	ItemInterface,
+} from '../../../shared/constants/interfaces';
 // CSS
 import styles from './playerbuild.module.css';
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +44,7 @@ const PlayerBuild = (props: any) => {
 	const [build, setBuild] = useState<BuildInterface>();
 
 	useEffect(() => {
-		axios.get(`${serverURL}/api/build/${match.params.buildId}`).then((res) => {
+		axios.get(`${URL.SERVER}/api/build/${match.params.buildId}`).then((res) => {
 			const { data } = res;
 
 			setBuild(data);

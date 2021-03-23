@@ -20,9 +20,8 @@ const CreateBuildHeader = () => {
 				>
 					You can only create up to{' '}
 					<span className={styles.textHighlight}>
-						5 builds every 30 minutes
+						6 builds every 30 minutes
 					</span>
-					.
 				</Typography>
 			</Box>
 		</Box>

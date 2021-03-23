@@ -5,7 +5,7 @@ const BuildController = require('../controllers/build');
 
 const createBuildLimiter = rateLimit({
 	windowMs: 30 * 60 * 1000, // 30 minute window - in milliseconds(ms)
-	max: 5, // start blocking after 5 requests
+	max: 6, // start blocking after 6 requests
 	message:
 		"You're creating too many builds. Please try again after 30 minutes."
 });

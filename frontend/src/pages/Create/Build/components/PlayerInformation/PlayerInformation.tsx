@@ -11,7 +11,10 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 // Components
 // Types
-import { RankInterface, RootState } from '../../../../../utils/interfaces';
+import {
+	RankInterface,
+	RootState,
+} from '../../../../../shared/constants/interfaces';
 // CSS
 import globalstyles from '../../createbuild.module.css';
 import styles from './playerinformation.module.css';

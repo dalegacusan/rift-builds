@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-	patchVersion,
-	tierListCreatorName,
-	tierListCreatorURL,
-	tierListURL,
-	contactEmailAddress,
-} from '../../../utils/globalvars';
+	Contact,
+	GamePatch,
+	TierList,
+} from '../../../shared/constants/constants';
 
 // MaterialUI
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -192,9 +190,9 @@ export default function ControlledAccordions() {
 				<AccordionDetails className={styles.accordionAnswerContainer}>
 					<p className={styles.tierListReference}>
 						Our tier list is referenced from&nbsp;
-						<a href={tierListCreatorURL}>{tierListCreatorName}</a>
-						's Patch {patchVersion}&nbsp;
-						<a href={tierListURL}>Tier List</a>
+						<a href={TierList.CREATOR_URL}>{TierList.CREATOR_NAME}</a>
+						's Patch {GamePatch.VERSION}&nbsp;
+						<a href={TierList.URL}>Tier List</a>
 					</p>
 				</AccordionDetails>
 			</Accordion>
@@ -222,7 +220,7 @@ export default function ControlledAccordions() {
 					<p>
 						We would love to hear from you! Send us an email at&nbsp;
 						<span className={styles.contactEmailAddress}>
-							{contactEmailAddress}
+							{Contact.EMAIL_ADDRESS}
 						</span>
 					</p>
 				</AccordionDetails>

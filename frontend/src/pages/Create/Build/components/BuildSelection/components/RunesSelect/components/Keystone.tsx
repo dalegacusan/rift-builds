@@ -15,7 +15,7 @@ import styles from './rune.module.css';
 import {
 	RuneInterface,
 	RootState,
-} from '../../../../../../../../utils/interfaces';
+} from '../../../../../../../../shared/constants/interfaces';
 
 const Keystone = (props: KeystoneProps) => {
 	const { handleRuneSelectChange, handleRuneExplanationChange } = props;

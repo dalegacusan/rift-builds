@@ -11,7 +11,7 @@ import BuildRune from './components/BuildRune/BuildRune';
 import BuildSpell from './components/BuildSpell/BuildSpell';
 import Divider from '@material-ui/core/Divider';
 // Types
-import { BuildInterface } from '../../../../../../../utils/interfaces';
+import { BuildInterface } from '../../../../../../../shared/constants/interfaces';
 // CSS
 import styles from './buildbox.module.css';
 

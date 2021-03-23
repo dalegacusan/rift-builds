@@ -13,7 +13,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import globalstyles from '../../../../../createbuild.module.css';
 import styles from './spell.module.css';
 // Types
-import { SpellInterface } from '../../../../../../../../utils/interfaces';
+import { SpellInterface } from '../../../../../../../../shared/constants/interfaces';
 type SpellProps = {
 	formControl: string;
 	spells: Array<SpellInterface>;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { netlifyURL } from '../../../../../utils/globalvars';
+import { URL } from '../../../../../shared/constants/constants';
 
 // MaterialUI
 import Button from '@material-ui/core/Button';
@@ -17,18 +17,14 @@ const CopyLink = (props: CopyLinkProps) => {
 	const { buildId } = props;
 
 	return (
-		<Grid
-			container
-			wrap='nowrap'
-			// spacing={2}
-		>
+		<Grid container wrap='nowrap'>
 			<Grid item xs>
 				<Tooltip
 					title='Click to copy'
 					placement='top'
 					arrow
 					onClick={() => {
-						navigator.clipboard.writeText(`${netlifyURL}/build/${buildId}`);
+						navigator.clipboard.writeText(`${URL.CLIENT}/build/${buildId}`);
 					}}
 				>
 					<Button
@@ -42,7 +38,7 @@ const CopyLink = (props: CopyLinkProps) => {
 				</Tooltip>
 				<input
 					type='text'
-					value={`${netlifyURL}/build/${buildId}`}
+					value={`${URL.CLIENT}/build/${buildId}`}
 					className={styles.copyInput}
 				/>
 			</Grid>

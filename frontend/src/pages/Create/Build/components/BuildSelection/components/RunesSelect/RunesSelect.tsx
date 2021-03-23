@@ -19,7 +19,7 @@ import styles from './runesselect.module.css';
 import {
 	RuneInterface,
 	RootState,
-} from '../../../../../../../utils/interfaces';
+} from '../../../../../../../shared/constants/interfaces';
 
 const RunesSelect = (props: RunesSelectProps) => {
 	// Game Data PROPS
@@ -42,12 +42,12 @@ const RunesSelect = (props: RunesSelectProps) => {
 		if (getRune) {
 			/*
 
-					- "{...getRune}" spreads the previous state
-					- "reason: prev.keystone.reason" gets the 'reason' property of the previous rune and sets it to the new rune
+					- "{...getRune}" spreads the previous state of the rune
+					- "reason: prevRunesSelected[runeName].reason" gets the 'reason' property of the previous rune and sets it to the new rune
 
 					return {
 						...prev,
-						keystone: { ...getRune, reason: prev.keystone.reason || '' },
+						keystone: { ...getRune, reason: prevRunesSelected[runeName].reason || '' },
 					};
 
 			*/

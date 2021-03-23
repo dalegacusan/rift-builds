@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import {
-	errorNoUsername,
-	errorNoItemSelected,
-	errorBuildSaved,
-	successBuildSaved,
-	errorNoBuildTitle,
-} from '../../../utils/alertpopups';
-import { serverURL } from '../../../utils/globalvars';
+import { Error, Success } from '../../../shared/utils/messagepopups';
+import { URL } from '../../../shared/constants/constants';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -30,7 +24,7 @@ import PlayerInformation from './components/PlayerInformation/PlayerInformation'
 // CSS
 import styles from './createbuild.module.css';
 // Types
-import { RootState } from '../../../utils/interfaces';
+import { RootState, ItemInterface } from '../../../shared/constants/interfaces';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -44,6 +38,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 	// Build PROPS
 	const { completeBuild, refreshState } = props;
 
+	// Stores build data from database after successful creation
 	const [savedBuild, setSavedBuild] = useState({
 		id: '',
 	});
@@ -62,49 +57,75 @@ const CreateBuild = (props: CreateBuildProps) => {
 		);
 	}
 
-	const submitBuild = async (recaptchaToken: string | null) => {
-		if (
-			completeBuild.itemsConfirmed.length !== 0 &&
-			completeBuild.username &&
-			completeBuild.buildTitle
-		) {
-			setOpenBackdrop(true);
-			const saveToDatabase = await axios
-				.post(`${serverURL}/api/build/save`, {
-					build: {
-						...completeBuild,
-						dateSubmitted: new Date(),
-					},
-					recaptchaToken,
-				})
-				.then((res) => {
-					// successBuildSaved();
-					setSavedBuild(res.data);
-					setHasSubmittedBuild(true);
-					refreshState();
-				})
-				.catch((err) => {
-					if (
-						err.response.status === 429 &&
-						err.response.data ===
-							"You're creating too many builds. Please try again after 30 minutes."
-					) {
-						errorBuildSaved(err.response.data);
-					} else {
-						setOpenBackdrop(false);
-						errorBuildSaved('Something went wrong. Failed to save build.');
-					}
-				});
-		} else {
-			if (!completeBuild.buildTitle) {
-				errorNoBuildTitle();
-			} else if (completeBuild.itemsConfirmed.length === 0) {
-				errorNoItemSelected();
-			} else if (!completeBuild.username) {
-				errorNoUsername();
-			}
-			return;
+	// ReCaptcha Handlers
+	let recaptchaRef: any = React.createRef();
+	const [recaptchaToken, setRecaptchaToken] = useState<string | null>('');
+	const [openRecaptcha, setOpenRecaptcha] = useState(false);
+
+	const submitBuild = async () => {
+		const buildItems = completeBuild.itemsConfirmed;
+
+		// Validations
+		const isNotEmpty = buildItems.length !== 0;
+		const hasSixPrimaryItems =
+			buildItems.filter((item: ItemInterface) => item.type === 'primary')
+				.length === 6;
+		const hasUsername = completeBuild.username;
+		const hasBuildTitle = completeBuild.buildTitle;
+
+		// ReCaptcha
+		setOpenRecaptcha(true);
+
+		if (recaptchaToken) {
+			console.log(recaptchaToken);
+		} else if (!recaptchaToken) {
+			console.log('Verify yourself.');
 		}
+
+		// if (
+		// 	completeBuild.itemsConfirmed.length !== 0 &&
+		// 	completeBuild.username &&
+		// 	completeBuild.buildTitle
+		// ) {
+		// 	setOpenBackdrop(true);
+		// 	const saveToDatabase = await axios
+		// 		.post(`${URL.SERVER}/api/build/save`, {
+		// 			build: {
+		// 				...completeBuild,
+		// 				dateSubmitted: new Date(),
+		// 			},
+		// 			recaptchaToken,
+		// 		})
+		// 		.then((res) => {
+		// 			// successBuildSaved();
+		// 			setSavedBuild(res.data);
+		// 			setHasSubmittedBuild(true);
+		// 			refreshState();
+		// 		})
+		// 		.catch((err) => {
+		// 			if (
+		// 				err.response.status === 429 &&
+		// 				err.response.data ===
+		// 					"You're creating too many builds. Please try again after 30 minutes."
+		// 			) {
+		// 				Error.BUILD_NOT_SAVED(err.response.data);
+		// 			} else {
+		// 				setOpenBackdrop(false);
+		// 				Error.BUILD_NOT_SAVED(
+		// 					'Something went wrong. Failed to save build.'
+		// 				);
+		// 			}
+		// 		});
+		// } else {
+		// 	if (!completeBuild.buildTitle) {
+		// 		Error.NO_BUILD_TITLE();
+		// 	} else if (completeBuild.itemsConfirmed.length === 0) {
+		// 		Error.NO_ITEMS_SELECTED();
+		// 	} else if (!completeBuild.username) {
+		// 		Error.NO_USERNAME();
+		// 	}
+		// 	return;
+		// }
 	};
 
 	if (hasSubmittedBuild) {
@@ -124,7 +145,11 @@ const CreateBuild = (props: CreateBuildProps) => {
 				<Stepper
 					activeStep={activeStep}
 					componentToDisplay={componentToDisplay}
+					openRecaptcha={openRecaptcha}
+					recaptchaRef={recaptchaRef}
 					setActiveStep={setActiveStep}
+					setOpenRecaptcha={setOpenRecaptcha}
+					setRecaptchaToken={setRecaptchaToken}
 					submitBuild={submitBuild}
 				/>
 			</Box>

@@ -1,0 +1,13 @@
+.stepperButton {
+	text-transform: none !important;
+}
+
+.backButton {
+	margin-right: 8px !important;
+	color: rgb(255, 255, 255, 60%) !important;
+}
+
+.backArrowIcon {
+	width: 16px !important;
+	margin-right: 8px;
+}

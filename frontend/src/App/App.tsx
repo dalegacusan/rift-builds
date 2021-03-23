@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { serverURL } from '../utils/globalvars';
+import { URL } from '../shared/constants/constants';
 import axios from 'axios';
 
 // Redux
@@ -27,7 +27,7 @@ import {
 	RoleInterface,
 	RuneInterface,
 	SpellInterface,
-} from '../utils/interfaces';
+} from '../shared/constants/interfaces';
 // CSS
 import styles from './app.module.css';
 const theme = createMuiTheme({
@@ -68,12 +68,12 @@ const App = (props: AppProps) => {
 
 	// Get DATA
 	useEffect(() => {
-		const getChampions = axios.get(`${serverURL}/api/champion/all`);
-		const getItems = axios.get(`${serverURL}/api/item/all`);
-		const getRunes = axios.get(`${serverURL}/api/rune/all`);
-		const getSpells = axios.get(`${serverURL}/api/spell/all`);
-		const getRanks = axios.get(`${serverURL}/api/rank/all`);
-		const getRoles = axios.get(`${serverURL}/api/role/all`);
+		const getChampions = axios.get(`${URL.SERVER}/api/champion/all`);
+		const getItems = axios.get(`${URL.SERVER}/api/item/all`);
+		const getRunes = axios.get(`${URL.SERVER}/api/rune/all`);
+		const getSpells = axios.get(`${URL.SERVER}/api/spell/all`);
+		const getRanks = axios.get(`${URL.SERVER}/api/rank/all`);
+		const getRoles = axios.get(`${URL.SERVER}/api/role/all`);
 
 		Promise.all([
 			getChampions,

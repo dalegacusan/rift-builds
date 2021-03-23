@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import {
-	errorItemDuplicate,
-	errorPrimaryItemsLimit,
-} from '../../../../../../../utils/alertpopups';
+import { Error } from '../../../../../../../shared/utils/messagepopups';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -24,8 +21,9 @@ import ItemPopover from '../../../../../../../components/Popover/ItemPopover';
 import {
 	ItemInterface,
 	RootState,
-} from '../../../../../../../utils/interfaces';
+} from '../../../../../../../shared/constants/interfaces';
 // CSS
+
 import styles from './itemsselected.module.css';
 const useStylesBootstrap = makeStyles((theme: Theme) => ({
 	tooltip: {
@@ -61,9 +59,9 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 
 		if (isDuplicate) {
 			setItemsConfirmed(filteredItemsConfirmed);
-			errorItemDuplicate();
+			Error.HAS_DUPLICATE_ITEMS();
 		} else if (primaryItems.length > 6) {
-			errorPrimaryItemsLimit();
+			Error.CAN_ONLY_HAVE_SIX_PRIMARY_ITEMS();
 
 			const itemsConfirmedCopy = [...itemsConfirmed];
 

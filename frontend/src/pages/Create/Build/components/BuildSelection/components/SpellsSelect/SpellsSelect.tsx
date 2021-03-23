@@ -16,7 +16,7 @@ import styles from './spellsselect.module.css';
 import {
 	SpellInterface,
 	RootState,
-} from '../../../../../../../utils/interfaces';
+} from '../../../../../../../shared/constants/interfaces';
 
 const SpellsSelect = (props: SpellsSelectProps) => {
 	const { formControl } = props;

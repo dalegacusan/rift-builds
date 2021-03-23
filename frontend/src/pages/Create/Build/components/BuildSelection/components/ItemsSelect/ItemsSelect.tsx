@@ -26,7 +26,7 @@ import styles from './itemsselect.module.css';
 import {
 	ItemInterface,
 	RootState,
-} from '../../../../../../../utils/interfaces';
+} from '../../../../../../../shared/constants/interfaces';
 
 const ItemsSelect = (props: ItemsSelectProps) => {
 	const { formControl } = props;

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import { serverURL } from '../../../utils/globalvars';
+import { URL } from '../../../shared/constants/constants';
 import axios from 'axios';
 
 // MaterialUI
@@ -15,7 +15,10 @@ import ChampionData from './components/ChampionData/ChampionData';
 // CSS
 import styles from './championbuilds.module.css';
 // Types
-import { BuildInterface, ChampionInterface } from '../../../utils/interfaces';
+import {
+	BuildInterface,
+	ChampionInterface,
+} from '../../../shared/constants/interfaces';
 type PathParamsType = {
 	championName: string;
 };
@@ -52,7 +55,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 	});
 
 	const getBuildsForChampion = () => {
-		return axios.post(`${serverURL}/api/build/all/${championName}`, { page });
+		return axios.post(`${URL.SERVER}/api/build/all/${championName}`, { page });
 	};
 	const getMoreBuilds = async () => {
 		setIsLoadingMoreBuilds(true);
@@ -75,7 +78,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 
 	useEffect(() => {
 		const getOneChampion = axios.get(
-			`${serverURL}/api/champion/${championName}`
+			`${URL.SERVER}/api/champion/${championName}`
 		);
 
 		Promise.all([getBuildsForChampion(), getOneChampion]).then((values) => {

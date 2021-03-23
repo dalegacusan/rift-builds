@@ -15,7 +15,7 @@ import styles from './rune.module.css';
 import {
 	RuneInterface,
 	RootState,
-} from '../../../../../../../../utils/interfaces';
+} from '../../../../../../../../shared/constants/interfaces';
 
 const Inspiration = (props: InspirationProps) => {
 	const { handleRuneSelectChange, handleRuneExplanationChange } = props;

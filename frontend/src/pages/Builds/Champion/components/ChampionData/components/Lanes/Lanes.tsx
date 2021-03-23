@@ -1,9 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import {
-	patchVersion,
-	patchNotesURL,
-} from '../../../../../../../utils/globalvars';
+import { GamePatch } from '../../../../../../../shared/constants/constants';
 
 // MaterialUI
 import Avatar from '@material-ui/core/Avatar';
@@ -57,8 +54,8 @@ const Lanes = (props: LanesProps) => {
 				>
 					<HelpIcon className={styles.helpIcon} />
 				</Tooltip>
-				<a href={patchNotesURL} target='_blank' rel='noreferrer'>
-					Patch {patchVersion}
+				<a href={GamePatch.URL} target='_blank' rel='noreferrer'>
+					Patch {GamePatch.VERSION}
 				</a>
 			</span>
 		</Box>
