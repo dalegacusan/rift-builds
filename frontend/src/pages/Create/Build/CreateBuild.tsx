@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import { Error, Success } from '../../../shared/utils/messagepopups';
+
 import { URL } from '../../../shared/constants/constants';
+import { Error, Success } from '../../../shared/utils/messagepopups';
+import { VALIDATE } from '../../../shared/utils/validations';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -37,6 +39,10 @@ const CreateBuild = (props: CreateBuildProps) => {
 	const classes = useStyles();
 	// Build PROPS
 	const { completeBuild, refreshState } = props;
+	// ReCaptcha PROPS
+	const { recaptcha } = props;
+	const { recaptchaRef, recaptchaToken } = recaptcha;
+	const { resetRecaptchToken } = props;
 
 	// Stores build data from database after successful creation
 	const [savedBuild, setSavedBuild] = useState({
@@ -45,6 +51,16 @@ const CreateBuild = (props: CreateBuildProps) => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [openBackdrop, setOpenBackdrop] = useState<boolean>(false);
 	const [hasSubmittedBuild, setHasSubmittedBuild] = useState(false);
+
+	const [openRecaptcha, setOpenRecaptcha] = useState(false);
+
+	const resetCaptcha = () => {
+		// Object is possibly null so it needs to be validated
+		if (recaptchaRef.current) {
+			recaptchaRef.current.reset();
+			resetRecaptchToken('');
+		}
+	};
 
 	let componentToDisplay;
 	if (activeStep === 0) {
@@ -57,75 +73,69 @@ const CreateBuild = (props: CreateBuildProps) => {
 		);
 	}
 
-	// ReCaptcha Handlers
-	let recaptchaRef: any = React.createRef();
-	const [recaptchaToken, setRecaptchaToken] = useState<string | null>('');
-	const [openRecaptcha, setOpenRecaptcha] = useState(false);
-
 	const submitBuild = async () => {
-		const buildItems = completeBuild.itemsConfirmed;
-
 		// Validations
-		const isNotEmpty = buildItems.length !== 0;
-		const hasSixPrimaryItems =
-			buildItems.filter((item: ItemInterface) => item.type === 'primary')
-				.length === 6;
-		const hasUsername = completeBuild.username;
-		const hasBuildTitle = completeBuild.buildTitle;
+		const HAS_ITEMS_SELECTED = VALIDATE.HAS_ITEMS_SELECTED(completeBuild);
+		const HAS_SIX_PRIMARY_ITEMS = VALIDATE.HAS_SIX_PRIMARY_ITEMS(completeBuild);
+		const HAS_USERNAME = VALIDATE.HAS_USERNAME(completeBuild);
+		const HAS_BUILD_TITLE = VALIDATE.HAS_BUILD_TITLE(completeBuild);
 
-		// ReCaptcha
-		setOpenRecaptcha(true);
+		if (
+			HAS_BUILD_TITLE &&
+			HAS_ITEMS_SELECTED &&
+			HAS_SIX_PRIMARY_ITEMS &&
+			HAS_USERNAME
+		) {
+			setOpenRecaptcha(true);
 
-		if (recaptchaToken) {
-			console.log(recaptchaToken);
-		} else if (!recaptchaToken) {
-			console.log('Verify yourself.');
+			if (!recaptchaToken) {
+				return;
+			}
+
+			setOpenBackdrop(true);
+			const saveToDatabase = await axios
+				.post(`${URL.SERVER}/api/build/save`, {
+					build: {
+						...completeBuild,
+						dateSubmitted: new Date(),
+					},
+					recaptchaToken,
+				})
+				.then((res) => {
+					// successBuildSaved();
+					setSavedBuild(res.data);
+					setHasSubmittedBuild(true);
+					refreshState();
+				})
+				.catch((err) => {
+					if (
+						err.response.status === 429 &&
+						err.response.data ===
+							"You're creating too many builds. Please try again after 30 minutes."
+					) {
+						Error.BUILD_NOT_SAVED(err.response.data);
+					} else {
+						setOpenBackdrop(false);
+						Error.BUILD_NOT_SAVED(
+							'Something went wrong. Failed to save build.'
+						);
+					}
+				});
+		} else {
+			if (!HAS_BUILD_TITLE) {
+				Error.NO_BUILD_TITLE();
+			} else if (!HAS_ITEMS_SELECTED) {
+				Error.NO_ITEMS_SELECTED();
+			} else if (!HAS_SIX_PRIMARY_ITEMS) {
+				Error.DOES_NOT_HAVE_SIX_PRIMARY_ITEMS();
+			} else if (!HAS_USERNAME) {
+				Error.NO_USERNAME();
+			}
+
+			resetCaptcha();
+
+			return;
 		}
-
-		// if (
-		// 	completeBuild.itemsConfirmed.length !== 0 &&
-		// 	completeBuild.username &&
-		// 	completeBuild.buildTitle
-		// ) {
-		// 	setOpenBackdrop(true);
-		// 	const saveToDatabase = await axios
-		// 		.post(`${URL.SERVER}/api/build/save`, {
-		// 			build: {
-		// 				...completeBuild,
-		// 				dateSubmitted: new Date(),
-		// 			},
-		// 			recaptchaToken,
-		// 		})
-		// 		.then((res) => {
-		// 			// successBuildSaved();
-		// 			setSavedBuild(res.data);
-		// 			setHasSubmittedBuild(true);
-		// 			refreshState();
-		// 		})
-		// 		.catch((err) => {
-		// 			if (
-		// 				err.response.status === 429 &&
-		// 				err.response.data ===
-		// 					"You're creating too many builds. Please try again after 30 minutes."
-		// 			) {
-		// 				Error.BUILD_NOT_SAVED(err.response.data);
-		// 			} else {
-		// 				setOpenBackdrop(false);
-		// 				Error.BUILD_NOT_SAVED(
-		// 					'Something went wrong. Failed to save build.'
-		// 				);
-		// 			}
-		// 		});
-		// } else {
-		// 	if (!completeBuild.buildTitle) {
-		// 		Error.NO_BUILD_TITLE();
-		// 	} else if (completeBuild.itemsConfirmed.length === 0) {
-		// 		Error.NO_ITEMS_SELECTED();
-		// 	} else if (!completeBuild.username) {
-		// 		Error.NO_USERNAME();
-		// 	}
-		// 	return;
-		// }
 	};
 
 	if (hasSubmittedBuild) {
@@ -146,10 +156,8 @@ const CreateBuild = (props: CreateBuildProps) => {
 					activeStep={activeStep}
 					componentToDisplay={componentToDisplay}
 					openRecaptcha={openRecaptcha}
-					recaptchaRef={recaptchaRef}
+					resetCaptcha={resetCaptcha}
 					setActiveStep={setActiveStep}
-					setOpenRecaptcha={setOpenRecaptcha}
-					setRecaptchaToken={setRecaptchaToken}
 					submitBuild={submitBuild}
 				/>
 			</Box>
@@ -160,12 +168,15 @@ const CreateBuild = (props: CreateBuildProps) => {
 const mapStateToProps = (state: RootState) => {
 	return {
 		completeBuild: state.build,
+		recaptcha: state.recaptcha,
 	};
 };
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
 		refreshState: () => dispatch({ type: actionTypes.BUILD_REFRESH }),
+		resetRecaptchToken: (token: string) =>
+			dispatch({ type: actionTypes.RECAPTCHA_SET_TOKEN, data: token }),
 	};
 };
 

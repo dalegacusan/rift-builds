@@ -1,3 +1,6 @@
+import { RefObject } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+
 export interface BuildInterface {
 	id?: string;
 	buildTitle: string;
@@ -98,6 +101,13 @@ export interface gameDataInterface {
 	};
 }
 
-export interface RootState extends gameDataInterface {
+export interface recaptchaInterface {
+	recaptcha: {
+		recaptchaRef: RefObject<ReCAPTCHA>;
+		recaptchaToken: '';
+	};
+}
+
+export interface RootState extends gameDataInterface, recaptchaInterface {
 	build: BuildInterface;
 }

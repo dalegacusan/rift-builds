@@ -9,6 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage';
 import buildReducer from './store/reducers/build';
 import gameDataReducer from './store/reducers/gameData';
+import recaptchaReducer from './store/reducers/reCaptcha';
 
 import './index.css';
 import App from './App/App';
@@ -22,6 +23,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	build: buildReducer,
 	gameData: gameDataReducer,
+	recaptcha: recaptchaReducer,
 });
 
 const pReducer = persistReducer(persistConfig, rootReducer);

@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { ReCaptcha } from '../../../../../shared/constants/constants';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
 // Components
+import ReCaptcha from '../ReCaptcha/ReCaptcha';
 import StepperButtons from './components/StepperButtons';
 // Types
 type StepperProps = {
 	activeStep: number;
 	componentToDisplay: React.ReactNode;
 	openRecaptcha: boolean;
-	recaptchaRef: any;
+	resetCaptcha: () => void;
 	setActiveStep: (step: any) => void;
-	setOpenRecaptcha: (shouldOpen: boolean) => void;
-	setRecaptchaToken: (token: string | null) => void;
 	submitBuild: () => void;
 };
 // CSS
@@ -32,31 +29,9 @@ function getSteps() {
 }
 
 const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
-	const {
-		activeStep,
-		componentToDisplay,
-		openRecaptcha,
-		setActiveStep,
-		setOpenRecaptcha,
-		setRecaptchaToken,
-		submitBuild,
-	} = props;
-	let { recaptchaRef } = props;
+	const { activeStep, componentToDisplay, setActiveStep, submitBuild } = props;
+	const { openRecaptcha, resetCaptcha } = props;
 	const classes = useStyles();
-
-	// ===== ReCaptcha ===== //
-	const recaptchaHandleChange = (value: string | null) => {
-		setRecaptchaToken(value);
-	};
-	const resetCaptcha = () => {
-		// if (recaptchaRef.current) {
-		// 	recaptchaRef.current.reset();
-
-		// 	console.log(recaptchaRef);
-		// 	console.log('Resetting');
-		// }
-		console.log(recaptchaRef);
-	};
 
 	// ===== Stepper ===== //
 	const steps = getSteps();
@@ -68,13 +43,6 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 		setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
 	};
 
-	useEffect(() => {
-		if (activeStep !== steps.length - 1) {
-			setOpenRecaptcha(false);
-			resetCaptcha();
-		}
-	}, [activeStep]);
-
 	return (
 		<div className={classes.root}>
 			{/* Build Components */}
@@ -83,14 +51,7 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 			{/* ReCAPTCHA */}
 			<Box display='flex' flexDirection='row-reverse'>
 				{openRecaptcha && activeStep === steps.length - 1 ? (
-					<ReCAPTCHA
-						ref={(el) => {
-							recaptchaRef = el;
-						}}
-						sitekey={ReCaptcha.PUBLIC_KEY!} // Always has a value hence !
-						onChange={recaptchaHandleChange}
-						onExpired={() => resetCaptcha()}
-					/>
+					<ReCaptcha resetCaptcha={resetCaptcha} />
 				) : null}
 			</Box>
 
