@@ -1,3 +1,4 @@
+const { GamePatch } = require('../../shared/constants/constants');
 const actionTypes = require('../actions');
 
 const initialState = {
@@ -46,6 +47,7 @@ const initialState = {
 		},
 	},
 	itemsConfirmed: [],
+	patchVersion: GamePatch.VERSION,
 	rank: {
 		id: 'a4938a79-f11f-4ee1-9ec5-7741a12c4ef9',
 		rankName: 'Unranked',

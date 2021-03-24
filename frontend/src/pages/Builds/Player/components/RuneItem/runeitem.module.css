@@ -9,6 +9,7 @@
 
 .runeReasonContainer {
 	width: 50%;
+	word-wrap: break-word;
 }
 
 .runeName {

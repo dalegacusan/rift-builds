@@ -1,6 +1,7 @@
 import React from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { GamePatch } from '../../../../../shared/constants/constants';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -15,7 +16,15 @@ type PlayerBuildHeaderProps = {
 
 const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 	const { build } = props;
-	const { buildTitle, buildRole, champion, rank, spells, username } = build;
+	const {
+		buildTitle,
+		buildRole,
+		champion,
+		patchVersion,
+		rank,
+		spells,
+		username,
+	} = build;
 	const { id: roleId, roleName } = buildRole;
 
 	let roleToDisplay;
@@ -53,35 +62,37 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 						className={styles.championImage}
 						title={champion.championName}
 					/>
-					{/* <Box
-						className={styles.buildRoleContainer}
+					<Box
+						className={styles.buildChampionContainer}
 						display='flex'
 						justifyContent='center'
-					> 
-						<LazyLoadImage
+					>
+						{/* <LazyLoadImage
 							src={`/images/wildriftroles/${roleToDisplay}.png`}
 							className={styles.buildRoleImage}
 							title={buildRole}
-						/> 
-						<span className={styles.buildRoleText}>{buildRole}</span>
-					</Box> */}
+						/> */}
+						<span className={styles.buildChampionText}>
+							{champion.championName}
+						</span>
+					</Box>
 				</Box>
 			</Grid>
 
 			{/* Champion Name, Build Title, and Username */}
 			<Grid item xs>
 				<Box className={styles.buildInformationContainer}>
-					<span className={styles.buildTitleText}>{buildTitle}</span>
+					<span className={styles.buildTitleText}>{buildTitle}&nbsp;</span>
 					<Box>
-						<p className={styles.buildByText}>
-							{champion.championName} build by&nbsp;
-							<span className={styles.usernameText}>{username}</span>
-						</p>
-
+						<Box>
+							<span className={styles.usernameText}>
+								by <span className={styles.usernameHighlight}>{username}</span>
+							</span>
+						</Box>
 						<span className={styles.buildInformationText}>
 							<span className={styles.buildInformationTitle}>Lane:&nbsp;</span>
 							{buildRole.roleName}
-							&nbsp;|&nbsp;
+							&nbsp;
 							<span className={styles.buildInformationTitle}>Rank:&nbsp;</span>
 							{rank.rankName}
 						</span>
@@ -93,6 +104,10 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 					</Box>
 				</Box>
 			</Grid>
+
+			<Box p={2} flexDirection='row-reverse'>
+				<span className={styles.patchText}>Patch {GamePatch.VERSION}</span>
+			</Box>
 		</Grid>
 	);
 };

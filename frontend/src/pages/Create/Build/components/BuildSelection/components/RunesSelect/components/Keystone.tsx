@@ -62,9 +62,9 @@ const Keystone = (props: KeystoneProps) => {
 					value={runeKeystone.reason}
 					placeholder='Explanation'
 					className={styles.explanationTextArea}
-					// value={itemReason}
+					maxLength={400}
 					onChange={(e) => handleRuneExplanationChange(e, 'keystone')}
-				></textarea>
+				/>
 			</Grid>
 		</>
 	);

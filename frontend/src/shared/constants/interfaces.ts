@@ -8,6 +8,7 @@ export interface BuildInterface {
 	champion: ChampionInterface;
 	dateSubmitted?: Date;
 	itemsConfirmed: ItemInterface[];
+	patchVersion: string;
 	rank: RankInterface;
 	runes: {
 		keystone: RuneInterface;

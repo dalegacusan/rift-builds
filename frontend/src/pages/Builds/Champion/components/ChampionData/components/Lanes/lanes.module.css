@@ -23,13 +23,13 @@
 	margin-left: 5px;
 }
 
+.patchText a:hover {
+	text-decoration: underline;
+}
+
 .helpIcon {
 	color: rgb(255, 255, 255, 30%);
 	width: 18px !important;
 	position: relative;
 	top: 6px;
-}
-
-.patchText a:hover {
-	text-decoration: underline;
 }

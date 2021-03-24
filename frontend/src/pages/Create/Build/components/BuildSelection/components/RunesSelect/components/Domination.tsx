@@ -65,9 +65,9 @@ const Domination = (props: DominationProps) => {
 					value={runeDomination.reason}
 					placeholder='Explanation'
 					className={styles.explanationTextArea}
-					// value={itemReason}
+					maxLength={400}
 					onChange={(e) => handleRuneExplanationChange(e, 'domination')}
-				></textarea>
+				/>
 			</Grid>
 		</>
 	);

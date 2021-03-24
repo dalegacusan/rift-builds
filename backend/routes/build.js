@@ -21,4 +21,6 @@ router.post('/all/:championName', BuildController.getAllBuildsForChampion);
 
 router.post('/save', createBuildLimiter, BuildController.saveBuild);
 
+router.delete('/delete', BuildController.deleteAllBuilds)
+
 module.exports = router;

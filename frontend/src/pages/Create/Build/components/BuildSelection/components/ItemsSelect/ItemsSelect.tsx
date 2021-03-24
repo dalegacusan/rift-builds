@@ -178,8 +178,9 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								value={itemReason}
 								placeholder='Explanation'
 								className={styles.explanationTextArea}
+								maxLength={400}
 								onChange={(e) => handleItemExplanationChange(e)}
-							></textarea>
+							/>
 							<Box
 								display='flex'
 								flexDirection='row-reverse'

@@ -67,9 +67,9 @@ const Inspiration = (props: InspirationProps) => {
 					value={runeInspiration.reason}
 					placeholder='Explanation'
 					className={styles.explanationTextArea}
-					// value={itemReason}
+					maxLength={400}
 					onChange={(e) => handleRuneExplanationChange(e, 'inspiration')}
-				></textarea>
+				/>
 			</Grid>
 		</>
 	);

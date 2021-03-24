@@ -14,6 +14,7 @@ const buildSchema = new mongoose.Schema({
 	},
 	dateSubmitted: Date,
 	itemsConfirmed: { type: Array, default: [] },
+	patchVersion: String,
 	rank: Object,
 	runes: Object,
 	spells: Object,

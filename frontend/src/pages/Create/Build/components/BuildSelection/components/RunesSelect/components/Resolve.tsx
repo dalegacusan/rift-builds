@@ -65,9 +65,9 @@ const Resolve = (props: ResolveProps) => {
 					value={runeResolve.reason}
 					placeholder='Explanation'
 					className={styles.explanationTextArea}
-					// value={itemReason}
+					maxLength={400}
 					onChange={(e) => handleRuneExplanationChange(e, 'resolve')}
-				></textarea>
+				/>
 			</Grid>
 		</>
 	);

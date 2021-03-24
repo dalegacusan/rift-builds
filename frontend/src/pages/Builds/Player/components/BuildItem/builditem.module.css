@@ -9,6 +9,7 @@
 
 .itemReasonContainer {
 	width: 50%;
+	word-wrap: break-word;
 }
 
 .itemName {
