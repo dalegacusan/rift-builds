@@ -4,8 +4,8 @@ const actionTypes = require('../actions');
 const initialState = {
 	buildTitle: '',
 	buildRole: {
-		id: "e4cbdb64-7118-436b-b0c6-89388731aeb5",
-		roleName: "Jungle"
+		id: "53f90d2a-d970-41ec-8d5c-f8775580ad7e",
+		roleName: "Top"
 	},
 	champion: {
 		id: '48ca031a-d92e-44e6-b7b6-f3eb1dbe644c',

@@ -1,6 +1,4 @@
 import React from 'react';
-// @ts-ignore - No types for this module
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -21,14 +19,14 @@ import {
 const BuildRole = (props: BuildRoleProps) => {
 	// Build PROPS
 	const { buildRole, setBuildRole } = props;
-	// Game Data PROPS
-	const { roles } = props;
 
 	const handleBuildRoleChange = (props: RoleInterface) => {
 		const { id: roleId, roleName } = props;
 
 		setBuildRole({ id: roleId, roleName });
 	};
+
+	console.log(buildRole);
 
 	return (
 		<Box>
@@ -37,30 +35,102 @@ const BuildRole = (props: BuildRoleProps) => {
 				What role/lane is your build for?
 			</p>
 
-			{roles.map((role: RoleInterface) => {
-				const { id: roleId, roleName } = role;
+			{/* TOP */}
+			<img
+				src={`/images/wildriftroles/53f90d2a-d970-41ec-8d5c-f8775580ad7e.png`}
+				className={styles.roleImage}
+				style={{
+					opacity:
+						buildRole.id === '53f90d2a-d970-41ec-8d5c-f8775580ad7e' ? 1 : 0.4,
+				}}
+				onClick={() =>
+					handleBuildRoleChange({
+						id: '53f90d2a-d970-41ec-8d5c-f8775580ad7e',
+						roleName: 'Top',
+					})
+				}
+				alt='Top'
+				title='Top'
+			/>
 
-				return (
-					<LazyLoadImage
-						src={`/images/wildriftroles/${roleId}.png`}
-						key={roleId}
-						className={styles.roleImage}
-						style={{ opacity: buildRole.id === roleId ? 1 : 0.5 }}
-						onClick={() => handleBuildRoleChange({ id: roleId, roleName })}
-						alt={roleName}
-						title={roleName}
-					/>
-				);
-			})}
+			{/* JUNGLE */}
+			<img
+				src={`/images/wildriftroles/e4cbdb64-7118-436b-b0c6-89388731aeb5.png`}
+				className={styles.roleImage}
+				style={{
+					opacity:
+						buildRole.id === 'e4cbdb64-7118-436b-b0c6-89388731aeb5' ? 1 : 0.4,
+				}}
+				onClick={() =>
+					handleBuildRoleChange({
+						id: 'e4cbdb64-7118-436b-b0c6-89388731aeb5',
+						roleName: 'Jungle',
+					})
+				}
+				alt='Jungle'
+				title='Jungle'
+			/>
+
+			{/* MIDDLE */}
+			<img
+				src={`/images/wildriftroles/6b7ca1d8-872a-4c54-b685-720e14251941.png`}
+				className={styles.roleImage}
+				style={{
+					opacity:
+						buildRole.id === '6b7ca1d8-872a-4c54-b685-720e14251941' ? 1 : 0.4,
+				}}
+				onClick={() =>
+					handleBuildRoleChange({
+						id: '6b7ca1d8-872a-4c54-b685-720e14251941',
+						roleName: 'Middle',
+					})
+				}
+				alt='Middle'
+				title='Middle'
+			/>
+
+			{/* BOTTOM */}
+			<img
+				src={`/images/wildriftroles/e3f90603-6452-4c33-afe6-466a69b6095b.png`}
+				className={styles.roleImage}
+				style={{
+					opacity:
+						buildRole.id === 'e3f90603-6452-4c33-afe6-466a69b6095b' ? 1 : 0.4,
+				}}
+				onClick={() =>
+					handleBuildRoleChange({
+						id: 'e3f90603-6452-4c33-afe6-466a69b6095b',
+						roleName: 'Bottom',
+					})
+				}
+				alt='Bottom'
+				title='Bottom'
+			/>
+
+			{/* SUPPORT */}
+			<img
+				src={`/images/wildriftroles/35b924df-6d60-4cc5-82a8-4e5dc85272a0.png`}
+				className={styles.roleImage}
+				style={{
+					opacity:
+						buildRole.id === '35b924df-6d60-4cc5-82a8-4e5dc85272a0' ? 1 : 0.4,
+				}}
+				onClick={() =>
+					handleBuildRoleChange({
+						id: '35b924df-6d60-4cc5-82a8-4e5dc85272a0',
+						roleName: 'Support',
+					})
+				}
+				alt='Support'
+				title='Support'
+			/>
 		</Box>
 	);
 };
 
-// https://redux.js.org/recipes/usage-with-typescript
 const mapStateToProps = (state: RootState) => {
 	return {
 		buildRole: state.build.buildRole,
-		roles: state.gameData.roles,
 	};
 };
 
