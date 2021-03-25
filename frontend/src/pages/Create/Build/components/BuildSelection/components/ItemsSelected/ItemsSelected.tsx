@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import { Error } from '../../../../../../../shared/utils/messagepopups';
+import { Error } from '../../../../../../../shared/utils/messages';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -20,6 +20,7 @@ import ItemPopover from '../../../../../../../components/Popover/ItemPopover';
 // Types
 import {
 	ItemInterface,
+	snackbarControlsInterface,
 	RootState,
 } from '../../../../../../../shared/constants/interfaces';
 // CSS
@@ -35,6 +36,8 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 	const { handleDeleteItemClick } = props;
 	// Build PROPS
 	const { itemsConfirmed, setItemsConfirmed } = props;
+	// Snackbar Control PROPS
+	const { setSnackbarControls } = props;
 
 	const classes = useStylesBootstrap();
 
@@ -59,9 +62,22 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 
 		if (isDuplicate) {
 			setItemsConfirmed(filteredItemsConfirmed);
-			Error.HAS_DUPLICATE_ITEMS();
+
+			setSnackbarControls({
+				snackbarControls: {
+					message: Error.HAS_DUPLICATE_ITEMS,
+					shouldOpen: true,
+					snackbarType: 'error',
+				},
+			});
 		} else if (primaryItems.length > 6) {
-			Error.CAN_ONLY_HAVE_SIX_PRIMARY_ITEMS();
+			setSnackbarControls({
+				snackbarControls: {
+					message: Error.CAN_ONLY_HAVE_SIX_PRIMARY_ITEMS,
+					shouldOpen: true,
+					snackbarType: 'error',
+				},
+			});
 
 			const itemsConfirmedCopy = [...itemsConfirmed];
 
@@ -171,6 +187,11 @@ const mapDispatchToProps = (dispatch: any) => {
 			dispatch({
 				type: actionTypes.BUILD_SET_ITEMSCONFIRMED,
 				data: newItemsConfirmed,
+			}),
+		setSnackbarControls: (newControls: snackbarControlsInterface) =>
+			dispatch({
+				type: actionTypes.SNACKBAR_SET_CONTROLS,
+				data: newControls.snackbarControls,
 			}),
 	};
 };

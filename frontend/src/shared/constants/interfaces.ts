@@ -109,6 +109,17 @@ export interface recaptchaInterface {
 	};
 }
 
-export interface RootState extends gameDataInterface, recaptchaInterface {
+export interface snackbarControlsInterface {
+	snackbarControls: {
+		message: string;
+		shouldOpen: boolean;
+		snackbarType: string;
+	};
+}
+
+export interface RootState
+	extends gameDataInterface,
+		recaptchaInterface,
+		snackbarControlsInterface {
 	build: BuildInterface;
 }

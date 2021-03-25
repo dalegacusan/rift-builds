@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, RefObject } from 'react';
 import { ReCaptcha } from '../../../../../shared/constants/constants';
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -6,14 +6,9 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../store/actions';
 
-// Types
-import { RootState } from '../../../../../shared/constants/interfaces';
-
 const ReCaptchaComponent = (props: ReCaptchaComponentProps) => {
 	const { resetCaptcha } = props;
-	// Validation Props
-	const { recaptcha } = props;
-	const { recaptchaRef, recaptchaToken } = recaptcha;
+	// RECAPTCHA Props
 	const { setRecaptchRef, setRecaptchaToken } = props;
 
 	// ===== ReCaptcha ===== //
@@ -37,15 +32,9 @@ const ReCaptchaComponent = (props: ReCaptchaComponentProps) => {
 	);
 };
 
-const mapStateToProps = (state: RootState) => {
-	return {
-		recaptcha: state.recaptcha,
-	};
-};
-
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		setRecaptchRef: (recaptchaRef: any) =>
+		setRecaptchRef: (recaptchaRef: RefObject<ReCAPTCHA | null>) =>
 			dispatch({
 				type: actionTypes.RECAPTCHA_SET_REF,
 				data: recaptchaRef,
@@ -58,7 +47,7 @@ const mapDispatchToProps = (dispatch: any) => {
 	};
 };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector> & {
 	resetCaptcha: () => void;

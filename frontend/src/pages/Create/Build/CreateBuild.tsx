@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 
 import { URL } from '../../../shared/constants/constants';
-import { Error, Success } from '../../../shared/utils/messagepopups';
+import { Error, Success } from '../../../shared/utils/messages';
 import { VALIDATE } from '../../../shared/utils/validations';
 
 // Redux
@@ -18,6 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 // Components
 import Stepper from './components/Stepper/Stepper';
+import Snackbars from '../../../components/Snackbars/Snackbars';
 import BackdropLoading from '../../../components/Loading/Backdrop';
 import BuildInformation from './components/BuildInformation/BuildInformation';
 import BuildSelection from './components/BuildSelection/BuildSelection';
@@ -26,7 +26,11 @@ import PlayerInformation from './components/PlayerInformation/PlayerInformation'
 // CSS
 import styles from './createbuild.module.css';
 // Types
-import { RootState, ItemInterface } from '../../../shared/constants/interfaces';
+import {
+	RootState,
+	snackbarControlsInterface,
+	ItemInterface,
+} from '../../../shared/constants/interfaces';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -43,6 +47,8 @@ const CreateBuild = (props: CreateBuildProps) => {
 	const { recaptcha } = props;
 	const { recaptchaRef, recaptchaToken } = recaptcha;
 	const { resetRecaptchToken } = props;
+	// Snackbar Controls Props
+	const { setSnackbarControls } = props;
 
 	// Stores build data from database after successful creation
 	const [savedBuild, setSavedBuild] = useState({
@@ -102,7 +108,6 @@ const CreateBuild = (props: CreateBuildProps) => {
 					recaptchaToken,
 				})
 				.then((res) => {
-					// successBuildSaved();
 					setSavedBuild(res.data);
 					setHasSubmittedBuild(true);
 					refreshState();
@@ -113,23 +118,58 @@ const CreateBuild = (props: CreateBuildProps) => {
 						err.response.data ===
 							"You're creating too many builds. Please try again after 30 minutes."
 					) {
-						Error.BUILD_NOT_SAVED(err.response.data);
+						setSnackbarControls({
+							snackbarControls: {
+								message: err.response.data,
+								shouldOpen: true,
+								snackbarType: 'error',
+							},
+						});
 					} else {
 						setOpenBackdrop(false);
-						Error.BUILD_NOT_SAVED(
-							'Something went wrong. Failed to save build.'
-						);
+
+						setSnackbarControls({
+							snackbarControls: {
+								message: Error.BUILD_NOT_SAVED,
+								shouldOpen: true,
+								snackbarType: 'error',
+							},
+						});
 					}
 				});
 		} else {
 			if (!HAS_BUILD_TITLE) {
-				Error.NO_BUILD_TITLE();
+				setSnackbarControls({
+					snackbarControls: {
+						message: Error.NO_BUILD_TITLE,
+						shouldOpen: true,
+						snackbarType: 'error',
+					},
+				});
 			} else if (!HAS_ITEMS_SELECTED) {
-				Error.NO_ITEMS_SELECTED();
+				setSnackbarControls({
+					snackbarControls: {
+						message: Error.NO_ITEMS_SELECTED,
+						shouldOpen: true,
+						snackbarType: 'error',
+					},
+				});
 			} else if (!HAS_SIX_PRIMARY_ITEMS) {
-				Error.DOES_NOT_HAVE_SIX_PRIMARY_ITEMS();
+				setSnackbarControls({
+					snackbarControls: {
+						message: Error.DOES_NOT_HAVE_SIX_PRIMARY_ITEMS,
+						shouldOpen: true,
+						snackbarType: 'error',
+					},
+				});
 			} else if (!HAS_USERNAME) {
-				Error.NO_USERNAME();
+				setSnackbarControls({
+					snackbarControls: {
+						message: Error.NO_USERNAME,
+						shouldOpen: true,
+						snackbarType: 'error',
+					},
+				});
 			}
 
 			resetCaptcha();
@@ -149,7 +189,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 			</Helmet>
 			<Box>
 				<BackdropLoading openBackdrop={openBackdrop} />
-				<Toaster />
+				<Snackbars />
 				<CreateBuildHeader />
 
 				<Stepper
@@ -177,6 +217,11 @@ const mapDispatchToProps = (dispatch: any) => {
 		refreshState: () => dispatch({ type: actionTypes.BUILD_REFRESH }),
 		resetRecaptchToken: (token: string) =>
 			dispatch({ type: actionTypes.RECAPTCHA_SET_TOKEN, data: token }),
+		setSnackbarControls: (newControls: snackbarControlsInterface) =>
+			dispatch({
+				type: actionTypes.SNACKBAR_SET_CONTROLS,
+				data: newControls.snackbarControls,
+			}),
 	};
 };
 

@@ -47,14 +47,14 @@ const theme = createMuiTheme({
 		},
 	},
 });
-interface AppProps {
+type AppProps = {
 	setChampions: (newChampions: Array<ChampionInterface>) => void;
 	setItems: (newItems: Array<ItemInterface>) => void;
 	setRanks: (newRanks: Array<RankInterface>) => void;
 	setRoles: (newRoles: Array<RoleInterface>) => void;
 	setRunes: (newRunes: Array<RuneInterface>) => void;
 	setSpells: (newSpells: Array<SpellInterface>) => void;
-}
+};
 
 const App = (props: AppProps) => {
 	const {

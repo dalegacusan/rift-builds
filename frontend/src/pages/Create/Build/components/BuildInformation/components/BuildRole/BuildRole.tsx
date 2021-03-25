@@ -26,8 +26,6 @@ const BuildRole = (props: BuildRoleProps) => {
 		setBuildRole({ id: roleId, roleName });
 	};
 
-	console.log(buildRole);
-
 	return (
 		<Box>
 			<p className={globalstyles.inputLabel}>2. Role</p>

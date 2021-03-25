@@ -10,6 +10,7 @@ import storage from 'redux-persist/lib/storage';
 import buildReducer from './store/reducers/build';
 import gameDataReducer from './store/reducers/gameData';
 import recaptchaReducer from './store/reducers/reCaptcha';
+import snackbarControlsReducer from './store/reducers/snackbarControls';
 
 import './index.css';
 import App from './App/App';
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
 	build: buildReducer,
 	gameData: gameDataReducer,
 	recaptcha: recaptchaReducer,
+	snackbarControls: snackbarControlsReducer,
 });
 
 const pReducer = persistReducer(persistConfig, rootReducer);

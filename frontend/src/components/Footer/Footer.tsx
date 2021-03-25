@@ -52,7 +52,7 @@ const Footer = () => {
 									Report a Bug
 								</a>
 								<a
-									href='#'
+									href='/'
 									className={styles.footerLink}
 									onClick={deleteAllBuilds}
 									style={{ color: 'red' }}

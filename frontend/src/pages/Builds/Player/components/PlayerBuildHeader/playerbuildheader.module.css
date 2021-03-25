@@ -51,7 +51,7 @@
 }
 
 .usernameHighlight {
-	color: #5893d4;
+	color: rgb(255, 255, 255, 60%);
 }
 
 .buildInformationContainer {
