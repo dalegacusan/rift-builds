@@ -8,11 +8,11 @@ import Button from '@material-ui/core/Button';
 import styles from './viewmorebuilds.module.css';
 // Types
 type ViewMoreBuildsProps = {
-	buildId: string | undefined;
+	championName: string;
 };
 
 const ViewMoreBuilds = (props: ViewMoreBuildsProps) => {
-	const { buildId } = props;
+	const { championName } = props;
 
 	return (
 		<Box
@@ -21,7 +21,16 @@ const ViewMoreBuilds = (props: ViewMoreBuildsProps) => {
 			className={styles.viewMoreBuildsContainer}
 		>
 			<Box>
-				<a href={`/build/${buildId}`} style={{ textDecoration: 'none' }}>
+				<a
+					href={`/builds/champion/${championName
+						.toLocaleLowerCase()
+						.split(' ')
+						.filter((char) => char !== '.' && char !== "'")
+						.join('')
+						.replace('.', '')
+						.replace("'", '')}`}
+					style={{ textDecoration: 'none' }}
+				>
 					<Button
 						variant='contained'
 						color='secondary'

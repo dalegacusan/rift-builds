@@ -38,9 +38,9 @@ const useStyles = makeStyles((theme) => ({
 
 // === CHANGE PROPS TYPE === //
 const PlayerBuild = (props: any) => {
+	const { match } = props;
 	const classes = useStyles();
 
-	const { match } = props;
 	const [build, setBuild] = useState<BuildInterface>();
 
 	useEffect(() => {
@@ -119,7 +119,10 @@ const PlayerBuild = (props: any) => {
 						</Grid>
 
 						{/* FOOTER*/}
-						<PlayerBuildFooter buildId={build.id} />
+						<PlayerBuildFooter
+							buildId={build.id}
+							championName={build.champion.championName}
+						/>
 					</Box>
 				</>
 			) : (

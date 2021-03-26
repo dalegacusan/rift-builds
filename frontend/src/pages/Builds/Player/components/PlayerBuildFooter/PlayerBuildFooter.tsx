@@ -10,16 +10,17 @@ import styles from './playerbuildfooter.module.css';
 // Types
 type PlayerBuildFooterProps = {
 	buildId: string | undefined;
+	championName: string;
 };
 
 const PlayerBuildFooter = (props: PlayerBuildFooterProps) => {
-	const { buildId } = props;
+	const { buildId, championName } = props;
 
 	return (
 		<Box display='flex' className={styles.playerBuildFooterContainer}>
 			<Box flexGrow={1} className={styles.playerBuildFooterBody}>
 				<CopyBuildLink buildId={buildId} />
-				<ViewMoreBuilds buildId={buildId} />
+				<ViewMoreBuilds championName={championName} />
 			</Box>
 		</Box>
 	);
