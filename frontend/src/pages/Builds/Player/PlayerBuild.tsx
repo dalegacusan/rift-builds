@@ -12,7 +12,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 // Components
 import BuildItem from './components/BuildItem/BuildItem';
-import CopyLink from './components/CopyLink/CopyLink';
+import CopyLink from './components/PlayerBuildFooter/components/CopyBuildLink/CopyBuildLink';
 import RuneItem from './components/RuneItem/RuneItem';
 import SpellItem from './components/Spellitem/SpellItem';
 import PlayerBuildHeader from './components/PlayerBuildHeader/PlayerBuildHeader';
@@ -63,8 +63,6 @@ const PlayerBuild = (props: any) => {
 					</Helmet>
 					<Box className={styles.playerBuildContainer}>
 						{/* Display Build ID */}
-						{build.id ? <CopyLink buildId={build.id} /> : null}
-
 						<PlayerBuildHeader build={build} />
 
 						{/* PRIMARY ITEMS */}
@@ -121,7 +119,7 @@ const PlayerBuild = (props: any) => {
 						</Grid>
 
 						{/* FOOTER*/}
-						<PlayerBuildFooter dateSubmitted={build.dateSubmitted} />
+						<PlayerBuildFooter buildId={build.id} />
 					</Box>
 				</>
 			) : (

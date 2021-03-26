@@ -57,6 +57,7 @@ const RunePopover = (props: RunePopoverProps) => {
 				horizontal: 'left',
 			}}
 			disableRestoreFocus
+			disableScrollLock
 		>
 			<Typography className={styles.popoverRuneName}>{runeName}</Typography>
 

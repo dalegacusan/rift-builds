@@ -1,7 +1,7 @@
 const { REACT_APP_CLIENT_URL, REACT_APP_SERVER_URL, REACT_APP_RECAPTCHA_PUBLIC_KEY } = process.env;
 
 export const Contact = {
-	EMAIL_ADDRESS: 'abcwildrift'
+	EMAIL_ADDRESS: 'abcwildrift@gmail.com'
 }
 
 export const GamePatch = {

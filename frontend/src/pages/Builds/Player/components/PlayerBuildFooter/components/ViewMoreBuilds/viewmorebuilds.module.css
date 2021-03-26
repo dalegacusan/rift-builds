@@ -1,0 +1,17 @@
+.viewMoreBuildsContainer {
+	padding: 40px;
+}
+
+.viewMoreBuildsTitle {
+	color: rgb(255, 255, 255, 87%);
+	font-weight: bold;
+}
+
+.viewMoreBuildsButton {
+	color: rgb(255, 255, 255, 87%) !important;
+	text-transform: none !important;
+}
+
+.viewMoreBuildsButton:hover {
+	background-color: #285689 !important;
+}

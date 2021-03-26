@@ -1,11 +1,8 @@
 .playerBuildFooterContainer {
-	margin: 30px 0;
+	margin: 80px 0 0 0;
 }
 
-.buildDateSubmittedText {
-	color: #13aaff;
-}
-
-.reportBuildText {
-	color: #b00020;
+.playerBuildFooterBody {
+	background-color: #20242c;
+	padding: 40px 0 0 0;
 }

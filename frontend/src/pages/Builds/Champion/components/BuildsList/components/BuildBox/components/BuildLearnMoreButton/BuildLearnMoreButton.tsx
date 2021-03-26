@@ -8,7 +8,7 @@ import styles from './buildlearnmorebutton.module.css';
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		learnMoreButton: {
-			color: 'rgb(255,255,255, 60%)',
+			color: 'rgb(255,255,255, 87%)',
 			backgroundColor: theme.palette.primary.dark,
 			textTransform: 'none',
 		},

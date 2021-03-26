@@ -2,6 +2,8 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 
+import { Contact } from '../../shared/constants/constants';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -11,10 +13,6 @@ import AccordionFAQ from './components/AccordionFAQ';
 import styles from './faq.module.css';
 
 const FAQ = () => {
-	const referenceLinks = {
-		contactEmailAddress: 'abcwildrift@gmail.com',
-	};
-
 	return (
 		<>
 			<Helmet>
@@ -49,7 +47,7 @@ const FAQ = () => {
 						If you cannot find an answer to your question in our FAQ, you can
 						always contact us at{' '}
 						<span className={styles.contactEmailAddress}>
-							{referenceLinks.contactEmailAddress}
+							{Contact.EMAIL_ADDRESS}
 						</span>
 						. We will get back to you shortly!
 					</p>

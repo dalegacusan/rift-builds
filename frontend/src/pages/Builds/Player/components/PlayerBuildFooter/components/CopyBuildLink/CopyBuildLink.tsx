@@ -1,26 +1,33 @@
 import React from 'react';
-import { URL } from '../../../../../shared/constants/constants';
+import { URL } from '../../../../../../../shared/constants/constants';
 
 // MaterialUI
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 // CSS
-import styles from './copylink.module.css';
+import styles from './copybuildlink.module.css';
 // Types
 type CopyLinkProps = {
 	buildId: string | undefined;
 };
 
-const CopyLink = (props: CopyLinkProps) => {
+const CopyBuildLink = (props: CopyLinkProps) => {
 	const { buildId } = props;
 
 	return (
-		<Grid container wrap='nowrap'>
-			<Grid item xs>
+		<Grid container className={styles.copyBuildLinkContainer}>
+			<Grid item xs={12}>
+				<p className={styles.copyTitle}>Get sharable link</p>
+				<p className={styles.copyDescription}>
+					Copy and paste the link below into chat rooms or browsers.
+				</p>
+			</Grid>
+			<Grid item xs={12}>
 				<Tooltip
-					title='Click to copy'
+					title='Copy to clipboard'
 					placement='top'
 					arrow
 					onClick={() => {
@@ -29,7 +36,6 @@ const CopyLink = (props: CopyLinkProps) => {
 				>
 					<Button
 						variant='contained'
-						size='small'
 						className={styles.copyButton}
 						color='secondary'
 					>
@@ -46,4 +52,4 @@ const CopyLink = (props: CopyLinkProps) => {
 	);
 };
 
-export default CopyLink;
+export default CopyBuildLink;

@@ -57,6 +57,7 @@ const SpellPopover = (props: SpellPopoverProps) => {
 				horizontal: 'left',
 			}}
 			disableRestoreFocus
+			disableScrollLock
 		>
 			<Typography className={styles.popoverSpellName}>{spellName}</Typography>
 

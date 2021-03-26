@@ -59,6 +59,7 @@ const ItemPopover = (props: ItemPopoverProps) => {
 				horizontal: 'left',
 			}}
 			disableRestoreFocus
+			disableScrollLock
 		>
 			<Typography className={styles.popoverItemName}>{itemName}</Typography>
 			<LazyLoadImage

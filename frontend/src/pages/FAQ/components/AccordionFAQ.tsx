@@ -88,9 +88,8 @@ export default function ControlledAccordions() {
 					<p>
 						You can create up to&nbsp;
 						<span className={styles.textHighlight}>
-							5 builds every 30 minutes
+							6 builds every 30 minutes
 						</span>
-						.
 					</p>
 				</AccordionDetails>
 			</Accordion>
@@ -126,7 +125,7 @@ export default function ControlledAccordions() {
 							alt='How to share a build'
 						/>
 						<p>
-							then right above the champion icon,{' '}
+							then scroll to the very bottom of the page,&nbsp;
 							<span className={styles.textHighlight}>
 								click the copy button
 							</span>{' '}
@@ -143,7 +142,7 @@ export default function ControlledAccordions() {
 
 			{/* 
 				Panel 4
-				How can I report an inappropriate/troll build?
+				Where do you get your tier list data from?
 			*/}
 			<Accordion
 				expanded={expanded === 'panel4'}
@@ -154,33 +153,6 @@ export default function ControlledAccordions() {
 					expandIcon={<ExpandMoreIcon className={styles.expandMoreIcon} />}
 					aria-controls='panel4bh-content'
 					id='panel4bh-header'
-					className={styles.accordionQuestionContainer}
-				>
-					<Typography className={classes.heading}>
-						How can I report an inappropriate/troll build?
-					</Typography>
-				</AccordionSummary>
-				<AccordionDetails className={styles.accordionAnswerContainer}>
-					<p>
-						Click&nbsp;
-						<span className={styles.reportBuildText}>Report this build</span>
-					</p>
-				</AccordionDetails>
-			</Accordion>
-
-			{/* 
-				Panel 5
-				Where do you get your tier list data from?
-			*/}
-			<Accordion
-				expanded={expanded === 'panel5'}
-				onChange={handleChange('panel5')}
-				className={styles.accordionContainer}
-			>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon className={styles.expandMoreIcon} />}
-					aria-controls='panel5bh-content'
-					id='panel5bh-header'
 					className={styles.accordionQuestionContainer}
 				>
 					<Typography className={classes.heading}>
@@ -198,18 +170,18 @@ export default function ControlledAccordions() {
 			</Accordion>
 
 			{/* 
-				Panel 6
+				Panel 5
 				I want to recommend a feature
 			*/}
 			<Accordion
-				expanded={expanded === 'panel6'}
-				onChange={handleChange('panel6')}
+				expanded={expanded === 'panel5'}
+				onChange={handleChange('panel5')}
 				className={styles.accordionContainer}
 			>
 				<AccordionSummary
 					expandIcon={<ExpandMoreIcon className={styles.expandMoreIcon} />}
-					aria-controls='panel6bh-content'
-					id='panel6bh-header'
+					aria-controls='panel5bh-content'
+					id='panel5bh-header'
 					className={styles.accordionQuestionContainer}
 				>
 					<Typography className={classes.heading}>

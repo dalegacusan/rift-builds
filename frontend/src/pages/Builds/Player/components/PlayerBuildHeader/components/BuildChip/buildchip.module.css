@@ -1,0 +1,12 @@
+.BuildChipContainer {
+	background-color: #20242c;
+	border-radius: 4px;
+	color: rgb(255, 255, 255, 60%);
+	font-size: 14px;
+	margin-right: 6px;
+	padding: 3px 10px;
+}
+
+.chipValue {
+	color: #13aaff;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { GamePatch } from '../../../../../shared/constants/constants';
@@ -6,6 +7,8 @@ import { GamePatch } from '../../../../../shared/constants/constants';
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+// Components
+import BuildChip from './components/BuildChip/BuildChip';
 // CSS
 import styles from './playerbuildheader.module.css';
 // Types
@@ -20,6 +23,7 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 		buildTitle,
 		buildRole,
 		champion,
+		dateSubmitted,
 		patchVersion,
 		rank,
 		spells,
@@ -67,11 +71,11 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 						display='flex'
 						justifyContent='center'
 					>
-						 <LazyLoadImage
+						<LazyLoadImage
 							src={`/images/wildriftroles/${roleToDisplay}.png`}
 							className={styles.buildRoleImage}
 							title={buildRole}
-						/> 
+						/>
 						<span className={styles.buildChampionText}>
 							{champion.championName}
 						</span>
@@ -85,31 +89,24 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 					<span className={styles.buildTitleText}>{buildTitle}&nbsp;</span>
 					<Box>
 						<Box>
-							<span className={styles.usernameText}>
-								{champion.championName} build by&nbsp;
-								<span className={styles.usernameHighlight}>{username}</span>
-							</span>
+							<span className={styles.usernameText}>Build by {username}</span>
 						</Box>
-						<span className={styles.buildInformationText}>
-							<span className={styles.buildInformationTitle}>Lane:&nbsp;</span>
-							{buildRole.roleName}
-							&nbsp;
-							<span className={styles.buildInformationTitle}>Rank:&nbsp;</span>
-							{rank.rankName}
-						</span>
-						<LazyLoadImage
-							src={`/images/wildriftranks/${build.rank.id}.png`}
-							className={styles.laneImage}
-							title={rank.rankName}
-						/>
+						<Box display='flex' className={styles.buildChipsContainer}>
+							<BuildChip property='Lane' value={buildRole.roleName} />
+							<BuildChip property='Rank' value={rank.rankName} />
+						</Box>
 					</Box>
 				</Box>
 			</Grid>
 
 			<Box p={2} flexDirection='row-reverse'>
-				<span className={styles.patchText}>Patch {GamePatch.VERSION}</span>
+				<p className={styles.patchText}>Patch {GamePatch.VERSION}</p>
+				<span className={styles.buildDateSubmitted}>
+					{moment(dateSubmitted).format('MM/DD/YYYY')}
+				</span>
 			</Box>
 		</Grid>
 	);
 };
+
 export default PlayerBuildHeader;
