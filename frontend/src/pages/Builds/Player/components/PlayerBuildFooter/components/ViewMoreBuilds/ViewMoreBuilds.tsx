@@ -1,6 +1,7 @@
 import React from 'react';
 
 // MaterialUI
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 // Components
@@ -33,10 +34,11 @@ const ViewMoreBuilds = (props: ViewMoreBuildsProps) => {
 				>
 					<Button
 						variant='contained'
-						color='secondary'
+						// color='secondary'
 						className={styles.viewMoreBuildsButton}
+						endIcon={<KeyboardArrowRightIcon />}
 					>
-						View more builds for this champion
+						View more builds for {championName}
 					</Button>
 				</a>
 			</Box>
