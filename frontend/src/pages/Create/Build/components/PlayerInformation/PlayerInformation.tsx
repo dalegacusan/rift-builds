@@ -52,7 +52,9 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 		<Grid container spacing={3} style={{ color: '#EBEBEB' }}>
 			<Grid item xs={12} sm={6}>
 				<Box>
-					<p className={globalstyles.inputLabel}>7. Username</p>
+					<p className={globalstyles.inputLabel}>
+						7. Username <span className={globalstyles.requiredInput}>*</span>
+					</p>
 					<p className={globalstyles.inputDescription}>
 						What is your in-game name (IGN)?
 					</p>

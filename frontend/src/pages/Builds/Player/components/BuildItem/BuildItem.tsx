@@ -36,7 +36,7 @@ type BuildItemProps = {
 
 const BuildItem = (props: BuildItemProps) => {
 	const { item } = props;
-	const { id: itemId, itemName, reason } = item;
+	const { id: itemId, itemName, reason, mode } = item;
 
 	const classes = useStyles();
 

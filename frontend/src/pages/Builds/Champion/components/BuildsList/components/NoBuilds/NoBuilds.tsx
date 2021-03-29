@@ -19,7 +19,8 @@ export default function NoBuilds() {
 				<img
 					src='/images/empty.svg'
 					className={styles.noBuildImage}
-					alt='no available builds'
+					alt='no builds'
+					title='no builds'
 				/>
 				<Typography gutterBottom>
 					There are no builds for this champion yet.{' '}

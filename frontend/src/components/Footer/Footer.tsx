@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import axios from 'axios';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,10 +24,6 @@ const useStyles = makeStyles((theme) => ({
 const Footer = () => {
 	const classes = useStyles();
 
-	const deleteAllBuilds = () => {
-		axios.delete('/api/build/delete');
-	};
-
 	return (
 		<footer className={classes.root}>
 			<Grid container className={classes.footerContainer}>
@@ -50,14 +45,6 @@ const Footer = () => {
 									className={styles.footerLink}
 								>
 									Report a Bug
-								</a>
-								<a
-									href='/'
-									className={styles.footerLink}
-									onClick={deleteAllBuilds}
-									style={{ color: 'red' }}
-								>
-									Delete All Builds
 								</a>
 							</Box>
 							<Box>

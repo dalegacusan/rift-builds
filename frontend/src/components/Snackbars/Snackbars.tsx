@@ -32,8 +32,6 @@ const Snackbars = (props: SnackbarsProps) => {
 	const { snackbarControls, setSnackbarControls } = props;
 	const { message, shouldOpen, snackbarType } = snackbarControls;
 
-	console.log(snackbarControls);
-
 	const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
 		if (reason === 'clickaway') {
 			return;

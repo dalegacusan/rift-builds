@@ -13,7 +13,7 @@ const initialState = {
 		url:
 			'https://lolwildriftbuild.com/wp-content/uploads/2020/10/Ahri_wild_rift.png',
 		lane: ['Middle'],
-		tier: { Middle: 'A' },
+		tier: { Middle: 'S' },
 		title: 'Nine-Tailed Fox',
 		counters: {
 			weakAgainst: [
@@ -106,6 +106,7 @@ const initialState = {
 		spellOne: {
 			id: 'dd6ff556-3b07-4be0-bd1f-c2dd9c9ce1dd',
 			spellName: 'Flash',
+			applicableMaps: ["wild-rift", "howling-abyss"],
 			url:
 				'/uploads/league-of-legends-wild-rift/images/summoner-spells/flash.jpg',
 			description: [
@@ -116,6 +117,7 @@ const initialState = {
 		spellTwo: {
 			id: 'aeb37ecd-ccb5-41fc-ad9c-c9b6bef39e34',
 			spellName: 'Ignite',
+			applicableMaps: ["wild-rift", "howling-abyss"],
 			url:
 				'/uploads/league-of-legends-wild-rift/images/summoner-spells/ignite.jpg',
 			description: [
@@ -174,7 +176,7 @@ const buildReducer = (state = initialState, action) => {
 				...state,
 				username: action.data
 			};
-		case actionTypes.BUILD_REFRESH:
+		case actionTypes.BUILD_RESET:
 			return initialState
 		default:
 			return state;

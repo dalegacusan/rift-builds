@@ -30,7 +30,9 @@ const BuildTitle = (props: BuildTitleProps) => {
 
 	return (
 		<Box>
-			<p className={globalstyles.inputLabel}>1. Build Title</p>
+			<p className={globalstyles.inputLabel}>
+				1. Build Title <span className={globalstyles.requiredInput}>*</span>
+			</p>
 			<p className={globalstyles.inputDescription}>Give your build a title</p>
 			<input
 				type='text'

@@ -47,7 +47,7 @@ const Lanes = (props: LanesProps) => {
 			})}
 			<span className={styles.patchText}>
 				<Tooltip
-					title='The data displayed is based on the latest patch notes of League of Legends: Wild Rift. Check out our FAQ for more information on where we get our tier list data from.'
+					title={`The data displayed is based on Patch ${GamePatch.VERSION} of League of Legends: Wild Rift. Check out our FAQ for more information on where we get our tier list data from.`}
 					placement='top'
 					classes={classes}
 					arrow

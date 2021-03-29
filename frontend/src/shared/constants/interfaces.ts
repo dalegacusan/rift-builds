@@ -52,8 +52,9 @@ export interface ItemInterface {
 	category: string;
 	description: Array<string>;
 	itemName: string;
-	reason?: string;
+	mode: string;
 	price: number;
+	reason?: string;
 	statistics: Array<string>;
 	tier: string;
 	type?: string;
@@ -79,9 +80,10 @@ export interface RuneInterface {
 
 export interface SpellInterface {
 	id: string;
-	cooldown: string;
-	description: Array<String>;
 	spellName: string;
+	applicableMaps: Array<String>;
+	description: Array<String>;
+	cooldown: string;
 	url: string;
 }
 

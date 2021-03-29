@@ -5,18 +5,19 @@ export const Contact = {
 }
 
 export const GamePatch = {
-	URL: 'https://wildrift.leagueoflegends.com/en-sg/news/game-updates/wild-rift-patch-notes-2-1b/',
-	VERSION: '2.1B',
+	URL: 'https://wildrift.leagueoflegends.com/en-sg/news/game-updates/wild-rift-patch-notes-2-2/',
+	VERSION: '2.2',
 }
 
 export const TierList = {
+	VERSION: '2.1B',
 	CREATOR_NAME: 'Sh1n Boo',
 	CREATOR_URL: 'https://www.youtube.com/channel/UCTaIw3dVGxFLL8CxhOwmzkA',
 	URL: 'https://www.youtube.com/post/Ugz-_9iIRB1Mbd0wuzB4AaABCQ'
 }
 
 export const URL = {
-	// URL: REACT_APP_SERVER_URL, // PROD
+	// SERVER: REACT_APP_SERVER_URL, // PROD
 	SERVER: '', // DEV
 	CLIENT: REACT_APP_CLIENT_URL
 }

@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const rateLimit = require("express-rate-limit");
+const MESSAGES = require('../utils/constants/messages');
+
 const BuildController = require('../controllers/build');
 
 const createBuildLimiter = rateLimit({
 	windowMs: 30 * 60 * 1000, // 30 minute window - in milliseconds(ms)
 	max: 6, // start blocking after 6 requests
-	message:
-		"You're creating too many builds. Please try again after 30 minutes."
+	message: MESSAGES.ERROR.BUILD.CREATING_TOO_MANY_BUILDS
 });
-
-// Returns 5 documents every time
-router.post('/all', BuildController.getAllBuilds);
 
 // Get one build
 router.get('/:buildId', BuildController.getOneBuild);
@@ -20,7 +18,5 @@ router.get('/:buildId', BuildController.getOneBuild);
 router.post('/all/:championName', BuildController.getAllBuildsForChampion);
 
 router.post('/save', createBuildLimiter, BuildController.saveBuild);
-
-router.delete('/delete', BuildController.deleteAllBuilds)
 
 module.exports = router;

@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { URL } from '../../../shared/constants/constants';
-import { Error, Success } from '../../../shared/utils/messages';
+import { ERROR, SUCCESS } from '../../../shared/utils/messages';
 import { VALIDATE } from '../../../shared/utils/validations';
 
 // Redux
@@ -29,7 +29,6 @@ import styles from './createbuild.module.css';
 import {
 	RootState,
 	snackbarControlsInterface,
-	ItemInterface,
 } from '../../../shared/constants/interfaces';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,17 +40,22 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateBuild = (props: CreateBuildProps) => {
 	const classes = useStyles();
+	// Game Data PROPS
+	const { gameData } = props;
+	const { roles, champions, items, runes, spells, ranks } = gameData;
 	// Build PROPS
-	const { completeBuild, refreshState } = props;
+	const { completeBuild, resetState } = props;
 	// ReCaptcha PROPS
 	const { recaptcha } = props;
 	const { recaptchaRef, recaptchaToken } = recaptcha;
 	const { resetRecaptchToken } = props;
-	// Snackbar Controls Props
+	// Snackbar Controls PROPS
 	const { setSnackbarControls } = props;
 
 	// Stores build data from database after successful creation
 	const [savedBuild, setSavedBuild] = useState({
+		// has "id" property for page redirection ( if(hasSubmittedBuild) )
+		// else gives an error that savedBuild.id isn't defined
 		id: '',
 	});
 	const [activeStep, setActiveStep] = useState(0);
@@ -61,7 +65,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 	const [openRecaptcha, setOpenRecaptcha] = useState(false);
 
 	const resetCaptcha = () => {
-		// Object is possibly null so it needs to be validated
+		// recaptchaRef.current is possibly null so it needs to be validated before reset
 		if (recaptchaRef.current) {
 			recaptchaRef.current.reset();
 			resetRecaptchToken('');
@@ -81,16 +85,38 @@ const CreateBuild = (props: CreateBuildProps) => {
 
 	const submitBuild = async () => {
 		// Validations
+		const HAS_BUILD_TITLE = VALIDATE.HAS_BUILD_TITLE(completeBuild);
+		const IS_VALID_BUILD_TITLE = VALIDATE.IS_VALID_BUILD_TITLE(completeBuild);
 		const HAS_ITEMS_SELECTED = VALIDATE.HAS_ITEMS_SELECTED(completeBuild);
 		const HAS_SIX_PRIMARY_ITEMS = VALIDATE.HAS_SIX_PRIMARY_ITEMS(completeBuild);
 		const HAS_USERNAME = VALIDATE.HAS_USERNAME(completeBuild);
-		const HAS_BUILD_TITLE = VALIDATE.HAS_BUILD_TITLE(completeBuild);
+		const IS_VALID_USERNAME = VALIDATE.IS_VALID_USERNAME(completeBuild);
+		const IS_VALID_ROLE = VALIDATE.IS_VALID_ROLE(completeBuild, roles);
+		const IS_VALID_CHAMPION = VALIDATE.IS_VALID_CHAMPION(
+			completeBuild,
+			champions
+		);
+		const IS_VALID_ITEMS_SELECTED = VALIDATE.IS_VALID_ITEMS_SELECTED(
+			completeBuild,
+			items
+		);
+		const IS_VALID_RUNES = VALIDATE.IS_VALID_RUNES(completeBuild, runes);
+		const IS_VALID_SPELLS = VALIDATE.IS_VALID_SPELLS(completeBuild, spells);
+		const IS_VALID_RANK = VALIDATE.IS_VALID_RANK(completeBuild, ranks);
 
 		if (
 			HAS_BUILD_TITLE &&
+			IS_VALID_BUILD_TITLE &&
 			HAS_ITEMS_SELECTED &&
 			HAS_SIX_PRIMARY_ITEMS &&
-			HAS_USERNAME
+			HAS_USERNAME &&
+			IS_VALID_USERNAME &&
+			IS_VALID_ROLE &&
+			IS_VALID_CHAMPION &&
+			IS_VALID_ITEMS_SELECTED &&
+			IS_VALID_RUNES &&
+			IS_VALID_SPELLS &&
+			IS_VALID_RANK
 		) {
 			setOpenRecaptcha(true);
 
@@ -99,28 +125,29 @@ const CreateBuild = (props: CreateBuildProps) => {
 			}
 
 			setOpenBackdrop(true);
+
 			const saveToDatabase = await axios
 				.post(`${URL.SERVER}/api/build/save`, {
 					build: {
 						...completeBuild,
 						dateSubmitted: new Date(),
 					},
-					recaptchaToken,
+					recaptchaToken: '',
 				})
 				.then((res) => {
 					setSavedBuild(res.data);
 					setHasSubmittedBuild(true);
-					refreshState();
+					resetState();
 				})
 				.catch((err) => {
 					if (
 						err.response.status === 429 &&
-						err.response.data ===
-							"You're creating too many builds. Please try again after 30 minutes."
+						// Check if error message is the same as ERROR.CREATING_TOO_MANY_BUILDS
+						err.response.data === ERROR.CREATING_TOO_MANY_BUILDS
 					) {
 						setSnackbarControls({
 							snackbarControls: {
-								message: err.response.data,
+								message: ERROR.CREATING_TOO_MANY_BUILDS,
 								shouldOpen: true,
 								snackbarType: 'error',
 							},
@@ -130,7 +157,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 
 						setSnackbarControls({
 							snackbarControls: {
-								message: Error.BUILD_NOT_SAVED,
+								message: ERROR.BUILD_NOT_SAVED,
 								shouldOpen: true,
 								snackbarType: 'error',
 							},
@@ -141,7 +168,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 			if (!HAS_BUILD_TITLE) {
 				setSnackbarControls({
 					snackbarControls: {
-						message: Error.NO_BUILD_TITLE,
+						message: ERROR.NO_BUILD_TITLE,
 						shouldOpen: true,
 						snackbarType: 'error',
 					},
@@ -149,7 +176,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 			} else if (!HAS_ITEMS_SELECTED) {
 				setSnackbarControls({
 					snackbarControls: {
-						message: Error.NO_ITEMS_SELECTED,
+						message: ERROR.NO_ITEMS_SELECTED,
 						shouldOpen: true,
 						snackbarType: 'error',
 					},
@@ -157,7 +184,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 			} else if (!HAS_SIX_PRIMARY_ITEMS) {
 				setSnackbarControls({
 					snackbarControls: {
-						message: Error.DOES_NOT_HAVE_SIX_PRIMARY_ITEMS,
+						message: ERROR.DOES_NOT_HAVE_SIX_PRIMARY_ITEMS,
 						shouldOpen: true,
 						snackbarType: 'error',
 					},
@@ -165,7 +192,15 @@ const CreateBuild = (props: CreateBuildProps) => {
 			} else if (!HAS_USERNAME) {
 				setSnackbarControls({
 					snackbarControls: {
-						message: Error.NO_USERNAME,
+						message: ERROR.NO_USERNAME,
+						shouldOpen: true,
+						snackbarType: 'error',
+					},
+				});
+			} else {
+				setSnackbarControls({
+					snackbarControls: {
+						message: ERROR.BUILD_NOT_SAVED,
 						shouldOpen: true,
 						snackbarType: 'error',
 					},
@@ -207,6 +242,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 
 const mapStateToProps = (state: RootState) => {
 	return {
+		gameData: state.gameData,
 		completeBuild: state.build,
 		recaptcha: state.recaptcha,
 	};
@@ -214,7 +250,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		refreshState: () => dispatch({ type: actionTypes.BUILD_REFRESH }),
+		resetState: () => dispatch({ type: actionTypes.BUILD_RESET }),
 		resetRecaptchToken: (token: string) =>
 			dispatch({ type: actionTypes.RECAPTCHA_SET_TOKEN, data: token }),
 		setSnackbarControls: (newControls: snackbarControlsInterface) =>

@@ -163,7 +163,7 @@ export default function ControlledAccordions() {
 					<p className={styles.tierListReference}>
 						Our tier list is referenced from&nbsp;
 						<a href={TierList.CREATOR_URL}>{TierList.CREATOR_NAME}</a>
-						's Patch {GamePatch.VERSION}&nbsp;
+						's Patch {TierList.VERSION}&nbsp;
 						<a href={TierList.URL}>Tier List</a>
 					</p>
 				</AccordionDetails>

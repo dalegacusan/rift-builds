@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import { Error } from '../../../../../../../shared/utils/messages';
+import { ERROR } from '../../../../../../../shared/utils/messages';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -65,7 +65,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 
 			setSnackbarControls({
 				snackbarControls: {
-					message: Error.HAS_DUPLICATE_ITEMS,
+					message: ERROR.HAS_DUPLICATE_ITEMS,
 					shouldOpen: true,
 					snackbarType: 'error',
 				},
@@ -73,7 +73,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 		} else if (primaryItems.length > 6) {
 			setSnackbarControls({
 				snackbarControls: {
-					message: Error.CAN_ONLY_HAVE_SIX_PRIMARY_ITEMS,
+					message: ERROR.CAN_ONLY_HAVE_SIX_PRIMARY_ITEMS,
 					shouldOpen: true,
 					snackbarType: 'error',
 				},

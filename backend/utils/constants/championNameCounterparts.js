@@ -18,6 +18,7 @@ module.exports = {
 	'ezreal': 'Ezreal',
 	'fiora': 'Fiora',
 	'fizz': 'Fizz',
+	'galio': 'Galio',
 	'garen': 'Garen',
 	'gragas': 'Gragas',
 	'graves': 'Graves',

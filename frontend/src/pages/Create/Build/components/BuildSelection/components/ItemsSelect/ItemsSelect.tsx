@@ -55,6 +55,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 				'Abyssal: Nearby enemy champions take 15% bonus magic damage.',
 			],
 			price: 2800,
+			mode: 'active',
 		}
 	);
 	const [itemType, setItemType] = useState('primary');
@@ -101,9 +102,10 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 
 	return (
 		<Box>
-			<p className={globalstyles.inputLabel}>4. Items</p>
+			<p className={globalstyles.inputLabel}>4. Items <span className={globalstyles.requiredInput}>*</span></p>
 			<p className={globalstyles.inputDescription}>
-				Select the items for your build
+				Select the items for your build{' '}
+				
 			</p>
 
 			<Box>
@@ -122,17 +124,19 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								className={globalstyles.buildSelectInput}
 							>
 								{items.map((item: ItemInterface, index: number) => {
-									const { id: itemId, itemName } = item;
+									const { id: itemId, itemName, mode } = item;
 
-									return (
-										<option
-											key={index}
-											value={itemId}
-											className={globalstyles.buildSelectOption}
-										>
-											{itemName}
-										</option>
-									);
+									if (mode !== 'removed') {
+										return (
+											<option
+												key={index}
+												value={itemId}
+												className={globalstyles.buildSelectOption}
+											>
+												{itemName}
+											</option>
+										);
+									}
 								})}
 							</select>
 
