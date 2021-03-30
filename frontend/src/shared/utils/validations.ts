@@ -8,6 +8,9 @@ import {
 	SpellInterface,
 } from '../constants/interfaces';
 
+// Build Title Length = 24
+// Username length = 22
+
 const HAS_BUILD_TITLE = (build: BuildInterface) => build.buildTitle;
 const IS_VALID_BUILD_TITLE = (build: BuildInterface) => {
 	const { buildTitle } = build;
@@ -78,14 +81,70 @@ const IS_VALID_ITEMS_SELECTED = (
 ) => {
 	const { itemsConfirmed } = build;
 
-	// https://stackoverflow.com/questions/27030/comparing-arrays-of-objects-in-javascript
+	// Checks if every reason property of item has type string value
+	const validReasonTypeAndLength = itemsConfirmed
+		.map((item: ItemInterface) => {
+			const { reason } = item;
 
-	return true;
+			// If there's a reason property, check if it's the right type
+			// and right length
+			// This will always return true if it doesn't fail any of the
+			// two conditions
+			if (reason) {
+				const isValidType = typeof reason === 'string';
+				// -1 because reason can be empty
+				const isValidLength = reason.length > -1 && reason.length <= 400;
+
+				if (!(isValidType && isValidLength)) return false;
+			}
+
+			return true;
+		})
+		.every((boolIsTrue) => boolIsTrue);
+
+	// Removes "reason" and "type" property which is defined by user
+	const modifiedItemsConfirmed = itemsConfirmed.map((item: ItemInterface) => {
+		const { reason, type, ...modifiedObject } = item;
+
+		return modifiedObject;
+	});
+
+	// Return items from ITEMSCONFIRMED that are in ITEMS
+	const validatedItems = items.filter((item) => {
+		// Check if "some" items from MODIFIEDITEMSCONFIRMED are found in ITEMS
+		if (
+			modifiedItemsConfirmed.some(
+				(buildItem) => JSON.stringify(buildItem) === JSON.stringify(item)
+			)
+		) {
+			return item;
+		}
+	});
+
+	// Check if valid items' (items that are in ITEMS array) length is
+	// equal to length of itemsConfirmed
+	return (
+		validatedItems.length === itemsConfirmed.length && validReasonTypeAndLength
+	);
 };
 
 const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 	const { runes: buildRunes } = build;
 	const { keystone, domination, resolve, inspiration } = buildRunes;
+
+	const isValidReasonAndType = (rune: RuneInterface) => {
+		const { reason } = rune;
+
+		if (reason) {
+			const isValidType = typeof reason === 'string';
+			// -1 because reason can be empty
+			const isValidLength = reason.length > -1 && reason.length <= 400;
+
+			if (!(isValidType && isValidLength)) return false;
+		}
+
+		return true;
+	};
 
 	const VALID_KEYSTONE = () => {
 		return (
@@ -94,7 +153,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 				const { reason, ...keystoneCopy } = keystone;
 
 				return JSON.stringify(rune) === JSON.stringify(keystoneCopy);
-			}).length === 1
+			}).length === 1 && isValidReasonAndType(keystone)
 		);
 	};
 	const VALID_DOMINATION = () => {
@@ -104,7 +163,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 				const { reason, ...dominationCopy } = domination;
 
 				return JSON.stringify(rune) === JSON.stringify(dominationCopy);
-			}).length === 1
+			}).length === 1 && isValidReasonAndType(domination)
 		);
 	};
 	const VALID_RESOLVE = () => {
@@ -114,7 +173,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 				const { reason, ...resolveCopy } = resolve;
 
 				return JSON.stringify(rune) === JSON.stringify(resolveCopy);
-			}).length === 1
+			}).length === 1 && isValidReasonAndType(resolve)
 		);
 	};
 	const VALID_INSPIRATION = () => {
@@ -124,7 +183,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 				const { reason, ...inspirationCopy } = inspiration;
 
 				return JSON.stringify(rune) === JSON.stringify(inspirationCopy);
-			}).length === 1
+			}).length === 1 && isValidReasonAndType(inspiration)
 		);
 	};
 

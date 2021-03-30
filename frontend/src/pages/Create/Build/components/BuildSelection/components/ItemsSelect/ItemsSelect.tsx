@@ -9,12 +9,8 @@ import actionTypes from '../../../../../../../store/actions';
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 // Components
@@ -102,10 +98,11 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 
 	return (
 		<Box>
-			<p className={globalstyles.inputLabel}>4. Items <span className={globalstyles.requiredInput}>*</span></p>
+			<p className={globalstyles.inputLabel}>
+				4. Items <span className={globalstyles.requiredInput}>*</span>
+			</p>
 			<p className={globalstyles.inputDescription}>
 				Select the items for your build{' '}
-				
 			</p>
 
 			<Box>
