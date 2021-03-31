@@ -40,7 +40,7 @@ const StepperButtons = (props: StepperButtonsProps) => {
 				</Button>
 			)}
 
-			{/* Show back button ONLY when active step is 0 (start of stepper) */}
+			{/* Don't show back button ONLY when active step is 0 (start of stepper) */}
 			{activeStep !== 0 ? (
 				<Button
 					onClick={handleBack}

@@ -45,6 +45,7 @@ const Landing = (props: LandingProps) => {
 
 			// Check if champion has "lane" property
 			if (lane) {
+				// Return every champion if filter is "all"
 				if (roleFilter === 'all') {
 					return champion;
 				} else {

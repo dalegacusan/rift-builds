@@ -25,7 +25,7 @@ type CountersProps = {
 };
 
 const Counters = (props: CountersProps) => {
-	const { counters, championName } = props;
+	const { counters } = props;
 	const { strongAgainst, weakAgainst } = counters;
 
 	// For path='/builds/champion/:championName'

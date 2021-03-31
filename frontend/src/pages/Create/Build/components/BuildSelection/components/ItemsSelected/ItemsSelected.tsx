@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import {
+	ItemType,
+	Validation,
+} from '../../../../../../../shared/constants/constants';
 import { ERROR } from '../../../../../../../shared/utils/messages';
 
 // Redux
@@ -45,7 +49,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 	// Check for primary items limit
 	useEffect(() => {
 		const primaryItems = itemsConfirmed.filter(
-			(item) => item.type === 'primary'
+			(item) => item.type === ItemType.PRIMARY
 		);
 
 		var itemArray = itemsConfirmed.map((item) => {
@@ -70,7 +74,9 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 					snackbarType: 'error',
 				},
 			});
-		} else if (primaryItems.length > 6) {
+		} else if (
+			primaryItems.length > Validation.ITEMS.MAX_NUMBER_OF_PRIMARY_ITEMS
+		) {
 			setSnackbarControls({
 				snackbarControls: {
 					message: ERROR.CAN_ONLY_HAVE_SIX_PRIMARY_ITEMS,
@@ -81,6 +87,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 
 			const itemsConfirmedCopy = [...itemsConfirmed];
 
+			// Remove last item added to array
 			itemsConfirmedCopy.pop();
 
 			setItemsConfirmed(itemsConfirmedCopy);
@@ -111,7 +118,9 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 
 						<Grid item xs={12}>
 							{itemsConfirmed
-								.filter((item: ItemInterface) => item.type !== 'optional')
+								.filter(
+									(item: ItemInterface) => item.type !== ItemType.OPTIONAL
+								)
 								.map((currentItem, index) => {
 									return (
 										<Grow
@@ -141,7 +150,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 						<p className={styles.itemsSelectedHeader}>Optional Items</p>
 						<Grid item xs={12}>
 							{itemsConfirmed
-								.filter((item: ItemInterface) => item.type !== 'primary')
+								.filter((item: ItemInterface) => item.type !== ItemType.PRIMARY)
 								.map((currentItem: ItemInterface, index) => {
 									return (
 										<Grow

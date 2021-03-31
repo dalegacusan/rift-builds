@@ -2,6 +2,9 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { Validation } from '../../../../../../../../shared/constants/constants';
+import { Rune } from '../../../../../../../../shared/constants/constants';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 
@@ -33,12 +36,12 @@ const Keystone = (props: KeystoneProps) => {
 				/>
 
 				<select
-					onChange={(e) => handleRuneSelectChange(e, 'keystone')}
+					onChange={(e) => handleRuneSelectChange(e, Rune.TYPE.KEYSTONE)}
 					value={runeKeystone.id}
 					className={globalstyles.buildSelectInput}
 				>
 					{runes
-						.filter((rune: RuneInterface) => rune.type === 'keystone')
+						.filter((rune: RuneInterface) => rune.type === Rune.TYPE.KEYSTONE)
 						.map((rune: RuneInterface, index: number) => {
 							const { id: runeId, runeName } = rune;
 
@@ -62,8 +65,8 @@ const Keystone = (props: KeystoneProps) => {
 					value={runeKeystone.reason}
 					placeholder='Explanation'
 					className={styles.explanationTextArea}
-					maxLength={400}
-					onChange={(e) => handleRuneExplanationChange(e, 'keystone')}
+					maxLength={Validation.REASON.MAX_LENGTH}
+					onChange={(e) => handleRuneExplanationChange(e, Rune.TYPE.KEYSTONE)}
 				/>
 			</Grid>
 		</>

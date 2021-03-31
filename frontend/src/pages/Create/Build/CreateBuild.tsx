@@ -76,15 +76,12 @@ const CreateBuild = (props: CreateBuildProps) => {
 	if (activeStep === 0) {
 		componentToDisplay = <BuildInformation />;
 	} else if (activeStep === 1) {
-		componentToDisplay = <BuildSelection formControl={classes.formControl} />;
+		componentToDisplay = <BuildSelection />;
 	} else if (activeStep === 2) {
-		componentToDisplay = (
-			<PlayerInformation formControl={classes.formControl} />
-		);
+		componentToDisplay = <PlayerInformation />;
 	}
 
-	const submitBuild = async () => {
-		// Validations
+	const validateBuild = () => {
 		const HAS_BUILD_TITLE = VALIDATE.HAS_BUILD_TITLE(completeBuild);
 		const IS_VALID_BUILD_TITLE = VALIDATE.IS_VALID_BUILD_TITLE(completeBuild);
 		const HAS_ITEMS_SELECTED = VALIDATE.HAS_ITEMS_SELECTED(completeBuild);
@@ -103,21 +100,55 @@ const CreateBuild = (props: CreateBuildProps) => {
 		const IS_VALID_RUNES = VALIDATE.IS_VALID_RUNES(completeBuild, runes);
 		const IS_VALID_SPELLS = VALIDATE.IS_VALID_SPELLS(completeBuild, spells);
 		const IS_VALID_RANK = VALIDATE.IS_VALID_RANK(completeBuild, ranks);
+		const IS_VALID_NUMBER_OF_ITEMS_SELECTED = VALIDATE.IS_VALID_NUMBER_OF_ITEMS_SELECTED(
+			completeBuild
+		);
 
-		if (
-			HAS_BUILD_TITLE &&
-			IS_VALID_BUILD_TITLE &&
-			HAS_ITEMS_SELECTED &&
-			HAS_SIX_PRIMARY_ITEMS &&
-			HAS_USERNAME &&
-			IS_VALID_USERNAME &&
-			IS_VALID_ROLE &&
-			IS_VALID_CHAMPION &&
-			IS_VALID_ITEMS_SELECTED &&
-			IS_VALID_RUNES &&
-			IS_VALID_SPELLS &&
-			IS_VALID_RANK
-		) {
+		const validationsCollection = [
+			HAS_BUILD_TITLE,
+			IS_VALID_BUILD_TITLE,
+			HAS_ITEMS_SELECTED,
+			HAS_SIX_PRIMARY_ITEMS,
+			HAS_USERNAME,
+			IS_VALID_USERNAME,
+			IS_VALID_ROLE,
+			IS_VALID_CHAMPION,
+			IS_VALID_ITEMS_SELECTED,
+			IS_VALID_RUNES,
+			IS_VALID_SPELLS,
+			IS_VALID_RANK,
+			IS_VALID_NUMBER_OF_ITEMS_SELECTED,
+		];
+
+		const allValidationsAreValid = validationsCollection.every((validation) => {
+			const { result } = validation;
+
+			return result === true;
+		});
+
+		if (allValidationsAreValid) {
+			return {
+				message: null,
+				result: true,
+			};
+		}
+
+		// Find all validations that returned false
+		// Return first validation that failed, hence [0]
+		return validationsCollection.filter((validation) => {
+			const { result } = validation;
+
+			if (result === false) {
+				return validation;
+			}
+		})[0];
+	};
+
+	const submitBuild = async () => {
+		// Validations
+		const isValidBuild = validateBuild();
+
+		if (isValidBuild.result) {
 			setOpenRecaptcha(true);
 
 			if (!recaptchaToken) {
@@ -165,34 +196,12 @@ const CreateBuild = (props: CreateBuildProps) => {
 					}
 				});
 		} else {
-			if (!HAS_BUILD_TITLE) {
+			// Check if there's a value for message property,
+			// else, use a generic error message
+			if (isValidBuild.message) {
 				setSnackbarControls({
 					snackbarControls: {
-						message: ERROR.NO_BUILD_TITLE,
-						shouldOpen: true,
-						snackbarType: 'error',
-					},
-				});
-			} else if (!HAS_ITEMS_SELECTED) {
-				setSnackbarControls({
-					snackbarControls: {
-						message: ERROR.NO_ITEMS_SELECTED,
-						shouldOpen: true,
-						snackbarType: 'error',
-					},
-				});
-			} else if (!HAS_SIX_PRIMARY_ITEMS) {
-				setSnackbarControls({
-					snackbarControls: {
-						message: ERROR.DOES_NOT_HAVE_SIX_PRIMARY_ITEMS,
-						shouldOpen: true,
-						snackbarType: 'error',
-					},
-				});
-			} else if (!HAS_USERNAME) {
-				setSnackbarControls({
-					snackbarControls: {
-						message: ERROR.NO_USERNAME,
+						message: isValidBuild.message,
 						shouldOpen: true,
 						snackbarType: 'error',
 					},

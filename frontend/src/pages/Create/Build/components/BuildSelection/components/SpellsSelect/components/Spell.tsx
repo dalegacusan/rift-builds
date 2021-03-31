@@ -3,11 +3,7 @@ import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
 // Components
 // CSS
 import globalstyles from '../../../../../createbuild.module.css';
@@ -15,7 +11,6 @@ import styles from './spell.module.css';
 // Types
 import { SpellInterface } from '../../../../../../../../shared/constants/interfaces';
 type SpellProps = {
-	formControl: string;
 	spells: Array<SpellInterface>;
 	spellNumber: number;
 	spellsSelected: {
@@ -30,7 +25,6 @@ type SpellProps = {
 
 const Spell = (props: SpellProps) => {
 	const {
-		formControl,
 		spells,
 		spellNumber,
 		spellsSelected,

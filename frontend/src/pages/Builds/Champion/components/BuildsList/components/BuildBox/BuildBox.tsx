@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ItemType } from '../../../../../../../shared/constants/constants';
+
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
 // Components
@@ -21,11 +23,10 @@ type BuildBoxProps = {
 
 const BuildBox = (props: BuildBoxProps) => {
 	const { build } = props;
-	const { id: buildId, buildRole, buildTitle, dateSubmitted, username } = build; // Strings
+	const { id: buildId, dateSubmitted, username } = build; // Strings
 	const { champion, rank, runes, spells } = build; // Objects
 	const { id: championId, championName } = champion;
-	const { id: rankId, rankName } = rank;
-	const { domination, inspiration, keystone, resolve } = runes;
+	const { keystone } = runes;
 	const { spellOne, spellTwo } = spells;
 	const { itemsConfirmed } = build; // Arrays
 
@@ -72,7 +73,7 @@ const BuildBox = (props: BuildBoxProps) => {
 					sm={3}
 				>
 					{itemsConfirmed
-						.filter((item) => item.type === 'primary')
+						.filter((item) => item.type === ItemType.PRIMARY)
 						.map((item, index) => {
 							return <BuildItem key={index} item={item} />;
 						})}

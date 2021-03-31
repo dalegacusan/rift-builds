@@ -11,13 +11,9 @@ import SpellsSelect from './components/SpellsSelect/SpellsSelect';
 import globalstyles from '../../createbuild.module.css';
 import styles from './buildselection.module.css';
 // Types
-type BuildSelectionProps = {
-	formControl: string;
-};
+type BuildSelectionProps = {};
 
 const BuildSelection = (props: BuildSelectionProps) => {
-	const { formControl } = props;
-
 	return (
 		<Grid container spacing={3} className={globalstyles.gridContainer}>
 			<Grid item xs={12} sm={12}>
@@ -29,13 +25,13 @@ const BuildSelection = (props: BuildSelectionProps) => {
 				<ChampionSelect />
 			</Grid>
 			<Grid item xs={12}>
-				<ItemsSelect formControl={formControl} />
+				<ItemsSelect />
 			</Grid>
 			<Grid item xs={12}>
-				<RunesSelect formControl={formControl} />
+				<RunesSelect />
 			</Grid>
 			<Grid item xs={12}>
-				<SpellsSelect formControl={formControl} />
+				<SpellsSelect />
 			</Grid>
 		</Grid>
 	);

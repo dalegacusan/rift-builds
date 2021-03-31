@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import {
+	Validation,
+	ItemType,
+	ItemStatus,
+} from '../../../../../../../shared/constants/constants';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../../../store/actions';
@@ -25,7 +31,6 @@ import {
 } from '../../../../../../../shared/constants/interfaces';
 
 const ItemsSelect = (props: ItemsSelectProps) => {
-	const { formControl } = props;
 	// Game Data PROPS
 	const { items } = props;
 	// Build PROPS
@@ -51,10 +56,10 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 				'Abyssal: Nearby enemy champions take 15% bonus magic damage.',
 			],
 			price: 2800,
-			mode: 'active',
+			status: 'active',
 		}
 	);
-	const [itemType, setItemType] = useState('primary');
+	const [itemType, setItemType] = useState(ItemType.PRIMARY);
 	const [itemReason, setItemReason] = useState('');
 
 	const handleItemSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -121,9 +126,9 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								className={globalstyles.buildSelectInput}
 							>
 								{items.map((item: ItemInterface, index: number) => {
-									const { id: itemId, itemName, mode } = item;
+									const { id: itemId, itemName, status } = item;
 
-									if (mode !== 'removed') {
+									if (status !== ItemStatus.REMOVED) {
 										return (
 											<option
 												key={index}
@@ -142,12 +147,12 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								<RadioGroup
 									row
 									name='position'
-									defaultValue='primary'
+									defaultValue={ItemType.PRIMARY}
 									className={styles.radioGroup}
 									onChange={handleItemTypeChange}
 								>
 									<FormControlLabel
-										value='primary'
+										value={ItemType.PRIMARY}
 										control={
 											<Radio color='primary' className={styles.radioButton} />
 										}
@@ -156,7 +161,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 										className={styles.radioButtonContainer}
 									/>
 									<FormControlLabel
-										value='optional'
+										value={ItemType.OPTIONAL}
 										control={
 											<Radio color='primary' className={styles.radioButton} />
 										}
@@ -179,7 +184,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								value={itemReason}
 								placeholder='Explanation'
 								className={styles.explanationTextArea}
-								maxLength={400}
+								maxLength={Validation.REASON.MAX_LENGTH}
 								onChange={(e) => handleItemExplanationChange(e)}
 							/>
 							<Box
@@ -227,8 +232,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type ItemsSelectProps = PropsFromRedux & {
-	formControl: string;
-};
+type ItemsSelectProps = PropsFromRedux;
 
 export default connector(ItemsSelect);

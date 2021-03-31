@@ -2,6 +2,9 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { Validation } from '../../../../../../../../shared/constants/constants';
+import { Rune } from '../../../../../../../../shared/constants/constants';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 
@@ -33,14 +36,17 @@ const Domination = (props: DominationProps) => {
 				/>
 
 				<select
-					onChange={(e) => handleRuneSelectChange(e, 'secondary', 'domination')}
+					onChange={(e) =>
+						handleRuneSelectChange(e, Rune.TYPE.SECONDARY, Rune.PATH.DOMINATION)
+					}
 					value={runeDomination.id}
 					className={globalstyles.buildSelectInput}
 				>
 					{runes
 						.filter(
 							(rune: RuneInterface) =>
-								rune.type === 'secondary' && rune.path === 'domination'
+								rune.type === Rune.TYPE.SECONDARY &&
+								rune.path === Rune.PATH.DOMINATION
 						)
 						.map((rune: RuneInterface, index: number) => {
 							const { id: runeId, runeName } = rune;
@@ -65,8 +71,8 @@ const Domination = (props: DominationProps) => {
 					value={runeDomination.reason}
 					placeholder='Explanation'
 					className={styles.explanationTextArea}
-					maxLength={400}
-					onChange={(e) => handleRuneExplanationChange(e, 'domination')}
+					maxLength={Validation.REASON.MAX_LENGTH}
+					onChange={(e) => handleRuneExplanationChange(e, Rune.PATH.DOMINATION)}
 				/>
 			</Grid>
 		</>

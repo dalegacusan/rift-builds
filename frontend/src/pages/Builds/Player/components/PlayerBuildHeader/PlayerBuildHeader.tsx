@@ -31,26 +31,6 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 	} = build;
 	const { id: roleId, roleName } = buildRole;
 
-	let roleToDisplay;
-
-	switch (roleName) {
-		case 'Jungle':
-			roleToDisplay = roleId;
-			break;
-		case 'Support':
-			roleToDisplay = roleId;
-			break;
-		case 'Top':
-			roleToDisplay = roleId;
-			break;
-		case 'Middle':
-			roleToDisplay = roleId;
-			break;
-		case 'Bottom':
-			roleToDisplay = roleId;
-			break;
-	}
-
 	return (
 		<Grid
 			container
@@ -72,9 +52,9 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 						justifyContent='center'
 					>
 						<LazyLoadImage
-							src={`/images/wildriftroles/${roleToDisplay}.png`}
+							src={`/images/wildriftroles/${roleId}.png`}
 							className={styles.buildRoleImage}
-							title={buildRole}
+							title={roleName}
 						/>
 						<span className={styles.buildChampionText}>
 							{champion.championName}

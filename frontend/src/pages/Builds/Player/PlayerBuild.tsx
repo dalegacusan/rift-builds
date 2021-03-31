@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import { URL } from '../../../shared/constants/constants';
 import axios from 'axios';
+
+import { URL, ItemType } from '../../../shared/constants/constants';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -70,7 +71,9 @@ const PlayerBuild = (props: any) => {
 						<Grid container spacing={3}>
 							<Grid item xs={12}>
 								{build.itemsConfirmed
-									.filter((item: ItemInterface) => item.type !== 'optional')
+									.filter(
+										(item: ItemInterface) => item.type !== ItemType.OPTIONAL
+									)
 									.map((item: ItemInterface, index) => {
 										return <BuildItem key={index} item={item} />;
 									})}
@@ -82,7 +85,9 @@ const PlayerBuild = (props: any) => {
 						<Grid container spacing={3}>
 							<Grid item xs={12}>
 								{build.itemsConfirmed
-									.filter((item: ItemInterface) => item.type !== 'primary')
+									.filter(
+										(item: ItemInterface) => item.type !== ItemType.PRIMARY
+									)
 									.map((item: ItemInterface, index) => {
 										return <BuildItem key={index} item={item} />;
 									})}

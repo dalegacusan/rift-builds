@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Rune } from '../../../../../../../shared/constants/constants';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../../../store/actions';
@@ -68,19 +70,19 @@ const RunesSelect = (props: RunesSelectProps) => {
 				setRunesSelected(runeName, modifiedRunesSelected);
 			};
 
-			if (runeType === 'keystone') {
-				runesSelectStateHandler('keystone');
+			if (runeType === Rune.TYPE.KEYSTONE) {
+				runesSelectStateHandler(Rune.TYPE.KEYSTONE);
 			}
-			if (runeType === 'secondary') {
+			if (runeType === Rune.TYPE.SECONDARY) {
 				switch (runePath) {
-					case 'domination':
-						runesSelectStateHandler('domination');
+					case Rune.PATH.DOMINATION:
+						runesSelectStateHandler(Rune.PATH.DOMINATION);
 						break;
-					case 'resolve':
-						runesSelectStateHandler('resolve');
+					case Rune.PATH.RESOLVE:
+						runesSelectStateHandler(Rune.PATH.RESOLVE);
 						break;
-					case 'inspiration':
-						runesSelectStateHandler('inspiration');
+					case Rune.PATH.INSPIRATION:
+						runesSelectStateHandler(Rune.PATH.INSPIRATION);
 						break;
 				}
 			}
@@ -165,8 +167,6 @@ const connector = connect(mapStateToProps, mapDispatchToprops);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type RunesSelectProps = PropsFromRedux & {
-	formControl: string;
-};
+type RunesSelectProps = PropsFromRedux;
 
 export default connector(RunesSelect);

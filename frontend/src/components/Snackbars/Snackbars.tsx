@@ -53,7 +53,7 @@ const Snackbars = (props: SnackbarsProps) => {
 					<Snackbar
 						anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
 						open={shouldOpen}
-						autoHideDuration={3000}
+						autoHideDuration={4000}
 						onClose={handleClose}
 					>
 						<Alert

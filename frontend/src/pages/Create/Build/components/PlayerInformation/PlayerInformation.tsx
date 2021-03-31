@@ -2,6 +2,8 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { Validation } from '../../../../../shared/constants/constants';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../store/actions';
@@ -20,13 +22,10 @@ import globalstyles from '../../createbuild.module.css';
 import styles from './playerinformation.module.css';
 
 const PlayerInformation = (props: PlayerInformationProps) => {
-	const { formControl } = props;
 	// Game Data PROPS
 	const { ranks } = props;
 	// Build PROPS
 	const { rankSelected, setRankSelected, username, setUsername } = props;
-
-	const maximumCharactersForUsername = 22;
 
 	// =============== Username =============== //
 	const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +63,7 @@ const PlayerInformation = (props: PlayerInformationProps) => {
 						placeholder='Username'
 						onChange={(e) => handleUsernameChange(e)}
 						className={globalstyles.buildInput}
-						maxLength={maximumCharactersForUsername}
+						maxLength={Validation.USERNAME.MAX_LENGTH}
 					/>
 					<p
 						className={globalstyles.inputDescription}
@@ -134,8 +133,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type PlayerInformationProps = PropsFromRedux & {
-	formControl: string;
-};
+type PlayerInformationProps = PropsFromRedux;
 
 export default connector(PlayerInformation);

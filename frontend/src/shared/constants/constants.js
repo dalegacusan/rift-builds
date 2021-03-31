@@ -25,3 +25,54 @@ export const URL = {
 export const ReCaptcha = {
 	PUBLIC_KEY: REACT_APP_RECAPTCHA_PUBLIC_KEY
 }
+
+// Build Title Length = 24
+// Username length = 22
+export const Validation = {
+	BUILD_TITLE: {
+		MIN_LENGTH: 0, // 6?
+		MAX_LENGTH: 24,
+	},
+	USERNAME: {
+		MIN_LENGTH: 0, // 6?
+		MAX_LENGTH: 22,
+	},
+	REASON: {
+		MIN_LENGTH: 0,
+		MAX_LENGTH: 440,
+	},
+	// itemsConfirmed isn't valid if there isn't 6 primary items
+	// hence the absence of MIN_LENGTH
+	ITEMS: {
+		MAX_LENGTH: 14,
+		MAX_NUMBER_OF_PRIMARY_ITEMS: 6,
+		MAX_NUMBER_OF_OPTIONAL_ITEMS: 8,
+	}
+}
+
+export const ItemType = {
+	PRIMARY: 'primary',
+	OPTIONAL: 'optional'
+}
+
+export const ItemStatus = {
+	ACTIVE: 'active',
+	REMOVED: 'removed'
+}
+
+export const Rune = {
+	TYPE: {
+		KEYSTONE: 'keystone',
+		SECONDARY: 'secondary'
+	},
+	PATH: {
+		DOMINATION: 'domination',
+		RESOLVE: 'resolve',
+		INSPIRATION: 'inspiration'
+	}
+}
+
+export const SpellNumber = {
+	SPELL_ONE: 'spellOne',
+	SPELL_TWO: 'spellTwo',
+}

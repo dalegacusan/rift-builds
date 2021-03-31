@@ -2,6 +2,9 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { Validation } from '../../../../../../../../shared/constants/constants';
+import { Rune } from '../../../../../../../../shared/constants/constants';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 
@@ -34,7 +37,11 @@ const Inspiration = (props: InspirationProps) => {
 
 				<select
 					onChange={(e) =>
-						handleRuneSelectChange(e, 'secondary', 'inspiration')
+						handleRuneSelectChange(
+							e,
+							Rune.TYPE.SECONDARY,
+							Rune.PATH.INSPIRATION
+						)
 					}
 					value={runeInspiration.id}
 					className={globalstyles.buildSelectInput}
@@ -42,7 +49,8 @@ const Inspiration = (props: InspirationProps) => {
 					{runes
 						.filter(
 							(rune: RuneInterface) =>
-								rune.type === 'secondary' && rune.path === 'inspiration'
+								rune.type === Rune.TYPE.SECONDARY &&
+								rune.path === Rune.PATH.INSPIRATION
 						)
 						.map((rune: RuneInterface, index: number) => {
 							const { id: runeId, runeName } = rune;
@@ -67,8 +75,10 @@ const Inspiration = (props: InspirationProps) => {
 					value={runeInspiration.reason}
 					placeholder='Explanation'
 					className={styles.explanationTextArea}
-					maxLength={400}
-					onChange={(e) => handleRuneExplanationChange(e, 'inspiration')}
+					maxLength={Validation.REASON.MAX_LENGTH}
+					onChange={(e) =>
+						handleRuneExplanationChange(e, Rune.PATH.INSPIRATION)
+					}
 				/>
 			</Grid>
 		</>

@@ -7,54 +7,120 @@ import {
 	RuneInterface,
 	SpellInterface,
 } from '../constants/interfaces';
+import { ERROR } from '../utils/messages';
+import { Validation } from '../constants/constants';
 
-// Build Title Length = 24
-// Username length = 22
+// START: Global Functions
+const resultHandler = (message: string | null, result: boolean) => {
+	return {
+		message,
+		result,
+	};
+};
 
-const HAS_BUILD_TITLE = (build: BuildInterface) => build.buildTitle;
+const isValidReasonAndType = (objectToCheck: RuneInterface | ItemInterface) => {
+	const { reason } = objectToCheck;
+
+	// If there's a reason property, check if it's the right type
+	// and right length
+	// This will always return true if it doesn't fail any of the
+	// two conditions
+	if (reason) {
+		const isValidType = typeof reason === 'string';
+		const isValidLength =
+			reason.length >= Validation.REASON.MIN_LENGTH &&
+			reason.length <= Validation.REASON.MAX_LENGTH;
+
+		if (!(isValidType && isValidLength)) return false;
+	}
+
+	return true;
+};
+// END: Global Functions
+
+const HAS_BUILD_TITLE = (build: BuildInterface) => {
+	if (build.buildTitle) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NO_BUILD_TITLE, false);
+};
+
+const HAS_ITEMS_SELECTED = (build: BuildInterface) => {
+	if (build.itemsConfirmed.length !== 0) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NO_ITEMS_SELECTED, false);
+};
+
+const HAS_SIX_PRIMARY_ITEMS = (build: BuildInterface) => {
+	const hasSixPrimaryItems =
+		build.itemsConfirmed.filter(
+			(item: ItemInterface) => item.type === 'primary'
+		).length === Validation.ITEMS.MAX_NUMBER_OF_PRIMARY_ITEMS;
+
+	if (hasSixPrimaryItems) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.DOES_NOT_HAVE_SIX_PRIMARY_ITEMS, false);
+};
+
+const HAS_USERNAME = (build: BuildInterface) => {
+	if (build.username) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NO_USERNAME, false);
+};
+
 const IS_VALID_BUILD_TITLE = (build: BuildInterface) => {
 	const { buildTitle } = build;
 
 	const isTypeString = typeof buildTitle === 'string';
-	const isValidLength = buildTitle.length > 0 && buildTitle.length <= 24;
+	const isValidLength =
+		buildTitle.length >= Validation.BUILD_TITLE.MIN_LENGTH &&
+		buildTitle.length <= Validation.BUILD_TITLE.MAX_LENGTH;
 
-	return isTypeString && isValidLength;
+	if (isTypeString && isValidLength) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_BUILD_TITLE, false);
 };
 
-const HAS_ITEMS_SELECTED = (build: BuildInterface) =>
-	build.itemsConfirmed.length !== 0;
-
-const HAS_SIX_PRIMARY_ITEMS = (build: BuildInterface) => {
-	return (
-		build.itemsConfirmed.filter(
-			(item: ItemInterface) => item.type === 'primary'
-		).length === 6
-	);
-};
-
-const HAS_USERNAME = (build: BuildInterface) => build.username;
 const IS_VALID_USERNAME = (build: BuildInterface) => {
 	const { username } = build;
 
 	const isTypeString = typeof username === 'string';
-	const isValidLength = username.length > 0 && username.length <= 22;
+	const isValidLength =
+		username.length >= Validation.USERNAME.MIN_LENGTH &&
+		username.length <= Validation.USERNAME.MAX_LENGTH;
 
-	return isTypeString && isValidLength;
+	if (isTypeString && isValidLength) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_USERNAME, false);
 };
 
 const IS_VALID_ROLE = (build: BuildInterface, roles: Array<RoleInterface>) => {
 	const { buildRole } = build;
 
-	// Checks if buildRole.id and buildRole.roleName has a corresponding object to the fixed options
-	// Checks if LENGTH is 1 which means that it matches with one of the fixed options
-	// RETURNS A BOOLEAN
-	return (
+	// Checks if buildRole.id and buildRole.roleName has a corresponding object to roles
+	const isValidRole =
 		roles.filter((role) => {
 			const { id, roleName } = role;
 
 			return id === buildRole.id && roleName === buildRole.roleName;
-		}).length === 1
-	);
+		}).length === 1;
+
+	if (isValidRole) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_ROLE, false);
 };
 
 const IS_VALID_CHAMPION = (
@@ -63,16 +129,20 @@ const IS_VALID_CHAMPION = (
 ) => {
 	const { champion: buildChampion } = build;
 
-	return (
+	const isValidChampion =
 		champions.filter((champion) => {
 			// Checks if both objects have same properties and corresponding values
-			// Checks if LENGTH is 1 which means that it matches with one of the fixed options
 			// THE ORDER OF PROPERTIES IS IMPORTANT
 			// Source: https://stackoverflow.com/questions/1068834/object-comparison-in-javascript
 
 			return JSON.stringify(buildChampion) === JSON.stringify(champion);
-		}).length === 1
-	);
+		}).length === 1;
+
+	if (isValidChampion) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_CHAMPION, false);
 };
 
 const IS_VALID_ITEMS_SELECTED = (
@@ -81,25 +151,9 @@ const IS_VALID_ITEMS_SELECTED = (
 ) => {
 	const { itemsConfirmed } = build;
 
-	// Checks if every reason property of item has type string value
+	// Checks if every reason property of an item is type string and has valid length
 	const validReasonTypeAndLength = itemsConfirmed
-		.map((item: ItemInterface) => {
-			const { reason } = item;
-
-			// If there's a reason property, check if it's the right type
-			// and right length
-			// This will always return true if it doesn't fail any of the
-			// two conditions
-			if (reason) {
-				const isValidType = typeof reason === 'string';
-				// -1 because reason can be empty
-				const isValidLength = reason.length > -1 && reason.length <= 400;
-
-				if (!(isValidType && isValidLength)) return false;
-			}
-
-			return true;
-		})
+		.map((item: ItemInterface) => isValidReasonAndType(item))
 		.every((boolIsTrue) => boolIsTrue);
 
 	// Removes "reason" and "type" property which is defined by user
@@ -123,76 +177,83 @@ const IS_VALID_ITEMS_SELECTED = (
 
 	// Check if valid items' (items that are in ITEMS array) length is
 	// equal to length of itemsConfirmed
-	return (
-		validatedItems.length === itemsConfirmed.length && validReasonTypeAndLength
+	if (
+		validatedItems.length === itemsConfirmed.length &&
+		validReasonTypeAndLength
+	) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_ITEMS_SELECTED, false);
+};
+
+const IS_VALID_NUMBER_OF_ITEMS_SELECTED = (build: BuildInterface) => {
+	const { itemsConfirmed } = build;
+
+	const primaryItems = itemsConfirmed.filter((item) => item.type === 'primary');
+	const optionalItems = itemsConfirmed.filter(
+		(item) => item.type === 'optional'
 	);
+
+	const isValidPrimaryItemsLength =
+		primaryItems.length === Validation.ITEMS.MAX_NUMBER_OF_PRIMARY_ITEMS;
+	const isValidOptionalItemsLength =
+		optionalItems.length >= 0 &&
+		optionalItems.length <= Validation.ITEMS.MAX_NUMBER_OF_OPTIONAL_ITEMS;
+
+	if (isValidPrimaryItemsLength && isValidOptionalItemsLength) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_NUMBER_OF_ITEMS_SELECTED, false);
 };
 
 const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 	const { runes: buildRunes } = build;
 	const { keystone, domination, resolve, inspiration } = buildRunes;
 
-	const isValidReasonAndType = (rune: RuneInterface) => {
-		const { reason } = rune;
+	const VALID_KEYSTONE =
+		runes.filter((rune) => {
+			// Remove reason property from buildRune;
+			const { reason, ...keystoneCopy } = keystone;
 
-		if (reason) {
-			const isValidType = typeof reason === 'string';
-			// -1 because reason can be empty
-			const isValidLength = reason.length > -1 && reason.length <= 400;
+			return JSON.stringify(rune) === JSON.stringify(keystoneCopy);
+		}).length === 1 && isValidReasonAndType(keystone);
 
-			if (!(isValidType && isValidLength)) return false;
-		}
+	const VALID_DOMINATION =
+		runes.filter((rune) => {
+			// Remove reason property from buildRune;
+			const { reason, ...dominationCopy } = domination;
 
-		return true;
-	};
+			return JSON.stringify(rune) === JSON.stringify(dominationCopy);
+		}).length === 1 && isValidReasonAndType(domination);
 
-	const VALID_KEYSTONE = () => {
-		return (
-			runes.filter((rune) => {
-				// Remove reason property from buildRune;
-				const { reason, ...keystoneCopy } = keystone;
+	const VALID_RESOLVE =
+		runes.filter((rune) => {
+			// Remove reason property from buildRune;
+			const { reason, ...resolveCopy } = resolve;
 
-				return JSON.stringify(rune) === JSON.stringify(keystoneCopy);
-			}).length === 1 && isValidReasonAndType(keystone)
-		);
-	};
-	const VALID_DOMINATION = () => {
-		return (
-			runes.filter((rune) => {
-				// Remove reason property from buildRune;
-				const { reason, ...dominationCopy } = domination;
+			return JSON.stringify(rune) === JSON.stringify(resolveCopy);
+		}).length === 1 && isValidReasonAndType(resolve);
 
-				return JSON.stringify(rune) === JSON.stringify(dominationCopy);
-			}).length === 1 && isValidReasonAndType(domination)
-		);
-	};
-	const VALID_RESOLVE = () => {
-		return (
-			runes.filter((rune) => {
-				// Remove reason property from buildRune;
-				const { reason, ...resolveCopy } = resolve;
+	const VALID_INSPIRATION =
+		runes.filter((rune) => {
+			// Remove reason property from buildRune;
+			const { reason, ...inspirationCopy } = inspiration;
 
-				return JSON.stringify(rune) === JSON.stringify(resolveCopy);
-			}).length === 1 && isValidReasonAndType(resolve)
-		);
-	};
-	const VALID_INSPIRATION = () => {
-		return (
-			runes.filter((rune) => {
-				// Remove reason property from buildRune;
-				const { reason, ...inspirationCopy } = inspiration;
+			return JSON.stringify(rune) === JSON.stringify(inspirationCopy);
+		}).length === 1 && isValidReasonAndType(inspiration);
 
-				return JSON.stringify(rune) === JSON.stringify(inspirationCopy);
-			}).length === 1 && isValidReasonAndType(inspiration)
-		);
-	};
+	if (
+		VALID_KEYSTONE &&
+		VALID_DOMINATION &&
+		VALID_RESOLVE &&
+		VALID_INSPIRATION
+	) {
+		return resultHandler(null, true);
+	}
 
-	return (
-		VALID_KEYSTONE() &&
-		VALID_DOMINATION() &&
-		VALID_RESOLVE() &&
-		VALID_INSPIRATION()
-	);
+	return resultHandler(ERROR.NOT_VALID_RUNES, false);
 };
 
 const IS_VALID_SPELLS = (
@@ -202,44 +263,49 @@ const IS_VALID_SPELLS = (
 	const { spells: buildSpells } = build;
 	const { spellOne, spellTwo } = buildSpells;
 
-	const VALID_SPELL_ONE = () => {
-		return (
-			spells.filter((spell) => {
-				return JSON.stringify(spell) === JSON.stringify(spellOne);
-			}).length === 1
-		);
-	};
-	const VALID_SPELL_TWO = () => {
-		return (
-			spells.filter((spell) => {
-				return JSON.stringify(spell) === JSON.stringify(spellTwo);
-			}).length === 1
-		);
-	};
+	const VALID_SPELL_ONE =
+		spells.filter((spell) => {
+			return JSON.stringify(spell) === JSON.stringify(spellOne);
+		}).length === 1;
 
-	return VALID_SPELL_ONE() && VALID_SPELL_TWO;
+	const VALID_SPELL_TWO =
+		spells.filter((spell) => {
+			return JSON.stringify(spell) === JSON.stringify(spellTwo);
+		}).length === 1;
+
+	if (VALID_SPELL_ONE && VALID_SPELL_TWO) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_SPELLS, false);
 };
 
 const IS_VALID_RANK = (build: BuildInterface, ranks: Array<RankInterface>) => {
 	const { rank: buildRank } = build;
 
-	return (
+	const isValidRank =
 		ranks.filter((rank) => {
 			return JSON.stringify(rank) === JSON.stringify(buildRank);
-		}).length === 1
-	);
+		}).length === 1;
+
+	if (isValidRank) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_RANK, false);
 };
 
 export const VALIDATE = {
 	HAS_BUILD_TITLE,
-	IS_VALID_BUILD_TITLE,
 	HAS_ITEMS_SELECTED,
 	HAS_SIX_PRIMARY_ITEMS,
 	HAS_USERNAME,
+	IS_VALID_BUILD_TITLE,
 	IS_VALID_USERNAME,
 	IS_VALID_ROLE,
 	IS_VALID_CHAMPION,
 	IS_VALID_ITEMS_SELECTED,
+	IS_VALID_NUMBER_OF_ITEMS_SELECTED,
 	IS_VALID_RUNES,
 	IS_VALID_SPELLS,
 	IS_VALID_RANK,

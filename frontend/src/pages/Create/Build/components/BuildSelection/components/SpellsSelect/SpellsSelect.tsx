@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { SpellNumber } from '../../../../../../../shared/constants/constants';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../../../store/actions';
@@ -19,7 +21,6 @@ import {
 } from '../../../../../../../shared/constants/interfaces';
 
 const SpellsSelect = (props: SpellsSelectProps) => {
-	const { formControl } = props;
 	// Game Data PROPS
 	const { spells } = props;
 	// Build PROPS
@@ -38,10 +39,10 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 		if (getSpell) {
 			switch (spellNumber) {
 				case 1:
-					setSpellsSelected('spellOne', getSpell);
+					setSpellsSelected(SpellNumber.SPELL_ONE, getSpell);
 					break;
 				case 2:
-					setSpellsSelected('spellTwo', getSpell);
+					setSpellsSelected(SpellNumber.SPELL_TWO, getSpell);
 					break;
 			}
 		}
@@ -57,7 +58,6 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 			<Grid container item xs={12}>
 				{/* Spell One */}
 				<Spell
-					formControl={formControl}
 					spells={spells}
 					spellNumber={1}
 					spellsSelected={spellsSelected}
@@ -66,7 +66,6 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 
 				{/* Spell Two */}
 				<Spell
-					formControl={formControl}
 					spells={spells}
 					spellNumber={2}
 					spellsSelected={spellsSelected}
@@ -95,8 +94,6 @@ const connector = connect(mapStateToProps, mapDispatchToprops);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type SpellsSelectProps = PropsFromRedux & {
-	formControl: string;
-};
+type SpellsSelectProps = PropsFromRedux;
 
 export default connector(SpellsSelect);

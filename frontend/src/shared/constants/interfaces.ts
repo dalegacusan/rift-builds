@@ -52,7 +52,7 @@ export interface ItemInterface {
 	category: string;
 	description: Array<string>;
 	itemName: string;
-	mode: string;
+	status: string;
 	price: number;
 	reason?: string;
 	statistics: Array<string>;
@@ -113,7 +113,7 @@ export interface recaptchaInterface {
 
 export interface snackbarControlsInterface {
 	snackbarControls: {
-		message: string;
+		message: string | null;
 		shouldOpen: boolean;
 		snackbarType: string;
 	};
