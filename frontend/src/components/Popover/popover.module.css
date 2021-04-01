@@ -25,6 +25,7 @@
 
 .popoverSectionContainer {
 	margin: 15px 0;
+	font-size: 12px;
 }
 
 .popoverStatText {
@@ -37,5 +38,12 @@
 .popoverRuneDescContainer,
 .popoverSpellDescContainer {
 	color: #ffffff;
-	font-size: 12px;
+}
+
+.cooldown {
+	color: rgb(255, 255, 255, 60%);
+}
+
+.applicableMapsContainer {
+	color: #deb18f;
 }

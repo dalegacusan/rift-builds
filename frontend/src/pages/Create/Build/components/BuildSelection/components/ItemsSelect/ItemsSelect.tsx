@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import {
-	Validation,
 	ItemType,
 	ItemStatus,
 } from '../../../../../../../shared/constants/constants';
+import { DefaultSelectedState } from '../../../../../../../shared/constants/defaultSelectedState';
+import { Validation } from '../../../../../../../shared/constants/validation';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -38,26 +39,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 
 	const [itemSelected, setItemSelected] = useState<ItemInterface>(
 		// Defaults to Item: 'Abyssal Mask' which is the first option
-		{
-			id: 'a42bcabd-290c-47f2-ae68-258d412c6d8d',
-			itemName: 'Abyssal Mask',
-			url:
-				'https://lolwildriftbuild.com/wp-content/uploads/2020/10/abyssalmask_wild_rift.png',
-			category: 'defense',
-			tier: 'upgraded',
-			statistics: [
-				'+300 Max Health',
-				'+40 Magic Resistance',
-				'+300 Max Mana',
-				'+10 Ability Haste',
-			],
-			description: [
-				'Eternity: Restore Mana equal to 15% of the damage taken from champions. Regen Health equal to 20% of Mana spent. Capped at 25 Health per cast.',
-				'Abyssal: Nearby enemy champions take 15% bonus magic damage.',
-			],
-			price: 2800,
-			status: 'active',
-		}
+		DefaultSelectedState.ITEM
 	);
 	const [itemType, setItemType] = useState(ItemType.PRIMARY);
 	const [itemReason, setItemReason] = useState('');
@@ -107,7 +89,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 				4. Items <span className={globalstyles.requiredInput}>*</span>
 			</p>
 			<p className={globalstyles.inputDescription}>
-				Select the items for your build{' '}
+				Select the items for your build&nbsp;
 			</p>
 
 			<Box>

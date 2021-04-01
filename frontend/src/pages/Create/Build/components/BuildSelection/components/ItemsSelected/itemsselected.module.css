@@ -31,6 +31,17 @@
 }
 
 .infoIcon {
-	/* color: #00a3fe; */
 	color: rgb(255, 255, 255, 60%);
+}
+
+.tooltipHighlight {
+	color: #00a3fe;
+}
+
+.tooltipWarning {
+	color: rgb(255, 255, 255, 60%);
+}
+
+.tooltipContainer p {
+	margin: 8px 0;
 }

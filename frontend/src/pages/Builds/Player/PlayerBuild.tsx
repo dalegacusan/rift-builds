@@ -13,7 +13,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 // Components
 import BuildItem from './components/BuildItem/BuildItem';
-import CopyLink from './components/PlayerBuildFooter/components/CopyBuildLink/CopyBuildLink';
 import RuneItem from './components/RuneItem/RuneItem';
 import SpellItem from './components/Spellitem/SpellItem';
 import PlayerBuildHeader from './components/PlayerBuildHeader/PlayerBuildHeader';

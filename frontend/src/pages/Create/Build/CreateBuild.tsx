@@ -31,15 +31,7 @@ import {
 	snackbarControlsInterface,
 } from '../../../shared/constants/interfaces';
 
-const useStyles = makeStyles((theme) => ({
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 120,
-	},
-}));
-
 const CreateBuild = (props: CreateBuildProps) => {
-	const classes = useStyles();
 	// Game Data PROPS
 	const { gameData } = props;
 	const { roles, champions, items, runes, spells, ranks } = gameData;
@@ -85,7 +77,9 @@ const CreateBuild = (props: CreateBuildProps) => {
 		const HAS_BUILD_TITLE = VALIDATE.HAS_BUILD_TITLE(completeBuild);
 		const IS_VALID_BUILD_TITLE = VALIDATE.IS_VALID_BUILD_TITLE(completeBuild);
 		const HAS_ITEMS_SELECTED = VALIDATE.HAS_ITEMS_SELECTED(completeBuild);
-		const HAS_SIX_PRIMARY_ITEMS = VALIDATE.HAS_SIX_PRIMARY_ITEMS(completeBuild);
+		const HAS_THREE_TO_SIX_PRIMARY_ITEMS = VALIDATE.HAS_THREE_TO_SIX_PRIMARY_ITEMS(
+			completeBuild
+		);
 		const HAS_USERNAME = VALIDATE.HAS_USERNAME(completeBuild);
 		const IS_VALID_USERNAME = VALIDATE.IS_VALID_USERNAME(completeBuild);
 		const IS_VALID_ROLE = VALIDATE.IS_VALID_ROLE(completeBuild, roles);
@@ -108,7 +102,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 			HAS_BUILD_TITLE,
 			IS_VALID_BUILD_TITLE,
 			HAS_ITEMS_SELECTED,
-			HAS_SIX_PRIMARY_ITEMS,
+			HAS_THREE_TO_SIX_PRIMARY_ITEMS,
 			HAS_USERNAME,
 			IS_VALID_USERNAME,
 			IS_VALID_ROLE,
@@ -163,7 +157,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 						...completeBuild,
 						dateSubmitted: new Date(),
 					},
-					recaptchaToken: '',
+					recaptchaToken,
 				})
 				.then((res) => {
 					setSavedBuild(res.data);

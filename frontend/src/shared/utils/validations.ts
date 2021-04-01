@@ -7,8 +7,9 @@ import {
 	RuneInterface,
 	SpellInterface,
 } from '../constants/interfaces';
+import { ItemType } from '../constants/constants';
+import { Validation } from '../constants/validation';
 import { ERROR } from '../utils/messages';
-import { Validation } from '../constants/constants';
 
 // START: Global Functions
 const resultHandler = (message: string | null, result: boolean) => {
@@ -54,17 +55,20 @@ const HAS_ITEMS_SELECTED = (build: BuildInterface) => {
 	return resultHandler(ERROR.NO_ITEMS_SELECTED, false);
 };
 
-const HAS_SIX_PRIMARY_ITEMS = (build: BuildInterface) => {
-	const hasSixPrimaryItems =
-		build.itemsConfirmed.filter(
-			(item: ItemInterface) => item.type === 'primary'
-		).length === Validation.ITEMS.MAX_NUMBER_OF_PRIMARY_ITEMS;
+const HAS_THREE_TO_SIX_PRIMARY_ITEMS = (build: BuildInterface) => {
+	const lengthOfPrimaryItems = build.itemsConfirmed.filter(
+		(item: ItemInterface) => item.type === 'primary'
+	).length;
 
-	if (hasSixPrimaryItems) {
+	const hasThreeToSixPrimaryItems =
+		lengthOfPrimaryItems >= Validation.ITEMS.PRIMARY.MIN_LENGTH &&
+		lengthOfPrimaryItems <= Validation.ITEMS.PRIMARY.MAX_LENGTH;
+
+	if (hasThreeToSixPrimaryItems) {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.DOES_NOT_HAVE_SIX_PRIMARY_ITEMS, false);
+	return resultHandler(ERROR.DOES_NOT_HAVE_THREE_TO_SIX_PRIMARY_ITEMS, false);
 };
 
 const HAS_USERNAME = (build: BuildInterface) => {
@@ -176,7 +180,7 @@ const IS_VALID_ITEMS_SELECTED = (
 	});
 
 	// Check if valid items' (items that are in ITEMS array) length is
-	// equal to length of itemsConfirmed
+	// equal to length of ITEMSCONFIRMED
 	if (
 		validatedItems.length === itemsConfirmed.length &&
 		validReasonTypeAndLength
@@ -190,16 +194,19 @@ const IS_VALID_ITEMS_SELECTED = (
 const IS_VALID_NUMBER_OF_ITEMS_SELECTED = (build: BuildInterface) => {
 	const { itemsConfirmed } = build;
 
-	const primaryItems = itemsConfirmed.filter((item) => item.type === 'primary');
+	const primaryItems = itemsConfirmed.filter(
+		(item) => item.type === ItemType.PRIMARY
+	).length;
 	const optionalItems = itemsConfirmed.filter(
-		(item) => item.type === 'optional'
-	);
+		(item) => item.type === ItemType.OPTIONAL
+	).length;
 
 	const isValidPrimaryItemsLength =
-		primaryItems.length === Validation.ITEMS.MAX_NUMBER_OF_PRIMARY_ITEMS;
+		primaryItems >= Validation.ITEMS.PRIMARY.MIN_LENGTH &&
+		primaryItems <= Validation.ITEMS.PRIMARY.MAX_LENGTH;
 	const isValidOptionalItemsLength =
-		optionalItems.length >= 0 &&
-		optionalItems.length <= Validation.ITEMS.MAX_NUMBER_OF_OPTIONAL_ITEMS;
+		optionalItems >= Validation.ITEMS.OPTIONAL.MIN_LENGTH &&
+		optionalItems <= Validation.ITEMS.OPTIONAL.MAX_LENGTH;
 
 	if (isValidPrimaryItemsLength && isValidOptionalItemsLength) {
 		return resultHandler(null, true);
@@ -214,7 +221,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 
 	const VALID_KEYSTONE =
 		runes.filter((rune) => {
-			// Remove reason property from buildRune;
+			// Remove reason property from build rune;
 			const { reason, ...keystoneCopy } = keystone;
 
 			return JSON.stringify(rune) === JSON.stringify(keystoneCopy);
@@ -222,7 +229,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 
 	const VALID_DOMINATION =
 		runes.filter((rune) => {
-			// Remove reason property from buildRune;
+			// Remove reason property from build rune;
 			const { reason, ...dominationCopy } = domination;
 
 			return JSON.stringify(rune) === JSON.stringify(dominationCopy);
@@ -230,7 +237,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 
 	const VALID_RESOLVE =
 		runes.filter((rune) => {
-			// Remove reason property from buildRune;
+			// Remove reason property from build rune;
 			const { reason, ...resolveCopy } = resolve;
 
 			return JSON.stringify(rune) === JSON.stringify(resolveCopy);
@@ -238,7 +245,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 
 	const VALID_INSPIRATION =
 		runes.filter((rune) => {
-			// Remove reason property from buildRune;
+			// Remove reason property from build rune;
 			const { reason, ...inspirationCopy } = inspiration;
 
 			return JSON.stringify(rune) === JSON.stringify(inspirationCopy);
@@ -298,7 +305,7 @@ const IS_VALID_RANK = (build: BuildInterface, ranks: Array<RankInterface>) => {
 export const VALIDATE = {
 	HAS_BUILD_TITLE,
 	HAS_ITEMS_SELECTED,
-	HAS_SIX_PRIMARY_ITEMS,
+	HAS_THREE_TO_SIX_PRIMARY_ITEMS,
 	HAS_USERNAME,
 	IS_VALID_BUILD_TITLE,
 	IS_VALID_USERNAME,

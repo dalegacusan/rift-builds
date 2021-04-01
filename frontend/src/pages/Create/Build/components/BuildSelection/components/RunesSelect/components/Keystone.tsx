@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import { Validation } from '../../../../../../../../shared/constants/constants';
+import { Validation } from '../../../../../../../../shared/constants/validation';
 import { Rune } from '../../../../../../../../shared/constants/constants';
 
 // Redux

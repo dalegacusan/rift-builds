@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Maps } from '../../shared/constants/constants';
+
 // MaterialUI
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -34,7 +36,7 @@ type SpellPopoverProps = {
 
 const SpellPopover = (props: SpellPopoverProps) => {
 	const { anchorEl, handlePopoverClose, spell, open } = props;
-	const { cooldown, description, spellName } = spell;
+	const { cooldown, description, spellName, applicableMaps } = spell;
 
 	const classes = useStyles();
 
@@ -63,6 +65,28 @@ const SpellPopover = (props: SpellPopoverProps) => {
 
 			{/* === Description === */}
 			<Box className={styles.popoverSectionContainer}>
+				<Box className={styles.applicableMapsContainer}>
+					<span>Applicable Maps: </span>
+					<span>
+						{/* Turn array into string and join replace commas with a comma + space */}
+						{applicableMaps
+							.map((map) => {
+								const mapToDisplay =
+									map === Maps.WILD_RIFT_BASE
+										? Maps.WILD_RIFT
+										: Maps.HOWLING_ABYSS;
+
+								return mapToDisplay;
+							})
+							.join()
+							.replace(/,/g, ', ')}
+					</span>
+				</Box>
+
+				<br />
+
+				<span className={styles.cooldown}>Cooldown: {cooldown} second(s)</span>
+
 				{description &&
 					description.map((desc, index) => {
 						const indexOfColon = desc.indexOf(':');

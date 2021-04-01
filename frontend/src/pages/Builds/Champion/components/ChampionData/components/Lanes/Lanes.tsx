@@ -20,7 +20,10 @@ type LanesProps = {
 
 const useStylesBootstrap = makeStyles((theme: Theme) => ({
 	tooltip: {
-		letterSpacing: '0.3px',
+		letterSpacing: '0.1px',
+		backgroundColor: '#171717',
+		fontSize: '12px',
+		padding: '12px',
 	},
 }));
 

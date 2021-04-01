@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';

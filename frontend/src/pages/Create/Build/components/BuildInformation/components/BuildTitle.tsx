@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { Validation } from '../../../../../../shared/constants/validation';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../../store/actions';
@@ -16,15 +18,14 @@ const BuildTitle = (props: BuildTitleProps) => {
 	// Build PROPS
 	const { buildTitle, setBuildTitle } = props;
 
-	const maximumCharactersForBuildTitle = 24;
 	const [charactersRemaining, setCharactersRemaining] = useState(
-		maximumCharactersForBuildTitle
+		Validation.BUILD_TITLE.MAX_LENGTH
 	);
 
 	const handleBuildTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
 
-		setCharactersRemaining(maximumCharactersForBuildTitle - value.length);
+		setCharactersRemaining(Validation.BUILD_TITLE.MAX_LENGTH - value.length);
 		setBuildTitle(value);
 	};
 
@@ -40,7 +41,7 @@ const BuildTitle = (props: BuildTitleProps) => {
 				placeholder='Build title'
 				className={globalstyles.buildInput}
 				onChange={(e) => handleBuildTitleChange(e)}
-				maxLength={maximumCharactersForBuildTitle}
+				maxLength={Validation.BUILD_TITLE.MAX_LENGTH}
 			/>
 			<p
 				className={globalstyles.inputDescription}

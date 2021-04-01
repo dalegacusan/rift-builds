@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { GamePatch } from '../../../../../shared/constants/constants';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -26,7 +25,6 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 		dateSubmitted,
 		patchVersion,
 		rank,
-		spells,
 		username,
 	} = build;
 	const { id: roleId, roleName } = buildRole;
@@ -80,7 +78,7 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 			</Grid>
 
 			<Box p={2} flexDirection='row-reverse'>
-				<p className={styles.patchText}>Patch {GamePatch.VERSION}</p>
+				<p className={styles.patchText}>Patch {patchVersion}</p>
 				<span className={styles.buildDateSubmitted}>
 					{moment(dateSubmitted).format('MM/DD/YYYY')}
 				</span>

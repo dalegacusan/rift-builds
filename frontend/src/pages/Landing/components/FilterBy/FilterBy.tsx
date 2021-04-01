@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { RoleFilter } from '../../../../shared/constants/constants';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -23,22 +25,30 @@ const FilterBy = (props: FilterByProps) => {
 					<Box className={styles.rolesListContainer}>
 						<ul className={styles.rolesList}>
 							<li>
-								<span onClick={() => setRoleFilter('all')}>All</span>
+								<span onClick={() => setRoleFilter(RoleFilter.ALL)}>All</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter('top')}>Top</span>
+								<span onClick={() => setRoleFilter(RoleFilter.TOP)}>Top</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter('jungle')}>Jungle</span>
+								<span onClick={() => setRoleFilter(RoleFilter.JUNGLE)}>
+									Jungle
+								</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter('middle')}>Middle</span>
+								<span onClick={() => setRoleFilter(RoleFilter.MIDDLE)}>
+									Middle
+								</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter('bottom')}>Bottom</span>
+								<span onClick={() => setRoleFilter(RoleFilter.BOTTOM)}>
+									Bottom
+								</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter('support')}>Support</span>
+								<span onClick={() => setRoleFilter(RoleFilter.SUPPORT)}>
+									Support
+								</span>
 							</li>
 						</ul>
 					</Box>

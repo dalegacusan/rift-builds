@@ -74,8 +74,10 @@
 
 .patchText {
 	color: #5893d4;
+	text-align: right;
 }
 
 .buildDateSubmitted {
 	color: rgb(255, 255, 255, 60%);
+	text-align: right;
 }

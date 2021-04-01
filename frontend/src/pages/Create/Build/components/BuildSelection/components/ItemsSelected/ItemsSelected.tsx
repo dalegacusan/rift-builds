@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import {
-	ItemType,
-	Validation,
-} from '../../../../../../../shared/constants/constants';
+import { ItemType } from '../../../../../../../shared/constants/constants';
+import { Validation } from '../../../../../../../shared/constants/validation';
 import { ERROR } from '../../../../../../../shared/utils/messages';
 
 // Redux
@@ -28,11 +26,13 @@ import {
 	RootState,
 } from '../../../../../../../shared/constants/interfaces';
 // CSS
-
 import styles from './itemsselected.module.css';
 const useStylesBootstrap = makeStyles((theme: Theme) => ({
 	tooltip: {
-		letterSpacing: '0.3px',
+		letterSpacing: '0.1px',
+		backgroundColor: '#171717',
+		fontSize: '12px',
+		padding: '12px',
 	},
 }));
 
@@ -74,9 +74,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 					snackbarType: 'error',
 				},
 			});
-		} else if (
-			primaryItems.length > Validation.ITEMS.MAX_NUMBER_OF_PRIMARY_ITEMS
-		) {
+		} else if (primaryItems.length > Validation.ITEMS.PRIMARY.MAX_LENGTH) {
 			setSnackbarControls({
 				snackbarControls: {
 					message: ERROR.CAN_ONLY_HAVE_SIX_PRIMARY_ITEMS,
@@ -106,7 +104,40 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 							</Box>
 							<Box>
 								<Tooltip
-									title='Click on an item to delete it from your list'
+									title={
+										<div className={styles.tooltipContainer}>
+											<div>
+												<p>
+													Primary:&nbsp;
+													<span className={styles.tooltipHighlight}>
+														{Validation.ITEMS.PRIMARY.MIN_LENGTH}
+													</span>
+													&nbsp;-&nbsp;
+													<span className={styles.tooltipHighlight}>
+														{Validation.ITEMS.PRIMARY.MAX_LENGTH}
+													</span>
+													&nbsp;items
+												</p>
+
+												<p>
+													Optional:&nbsp;
+													<span className={styles.tooltipHighlight}>
+														{Validation.ITEMS.OPTIONAL.MIN_LENGTH}
+													</span>
+													&nbsp;-&nbsp;
+													<span className={styles.tooltipHighlight}>
+														{Validation.ITEMS.OPTIONAL.MAX_LENGTH}
+													</span>
+													&nbsp;items
+												</p>
+											</div>
+											<div>
+												<p className={styles.tooltipWarning}>
+													Click on an item to <i>delete</i> it from your list
+												</p>
+											</div>
+										</div>
+									}
 									placement='top'
 									classes={classes}
 									arrow

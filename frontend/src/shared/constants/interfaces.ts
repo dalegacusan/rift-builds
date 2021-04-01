@@ -70,7 +70,7 @@ export interface RankInterface {
 export interface RuneInterface {
 	id: string;
 	cooldown?: string;
-	description: Array<String>;
+	description: Array<string>;
 	path?: string;
 	reason?: string;
 	runeName: string;
@@ -81,8 +81,8 @@ export interface RuneInterface {
 export interface SpellInterface {
 	id: string;
 	spellName: string;
-	applicableMaps: Array<String>;
-	description: Array<String>;
+	applicableMaps: Array<string>;
+	description: Array<string>;
 	cooldown: string;
 	url: string;
 }

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { RoleFilter } from '../../shared/constants/constants';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 
@@ -24,7 +26,7 @@ const Landing = (props: LandingProps) => {
 	const [filteredChampions, setFilteredChampions] = useState<
 		Array<ChampionInterface>
 	>([]);
-	const [roleFilter, setRoleFilter] = useState('all');
+	const [roleFilter, setRoleFilter] = useState(RoleFilter.ALL);
 
 	// HANDLER for "Search for a champion" input
 	const handleChampionSearchChange = (
@@ -46,7 +48,7 @@ const Landing = (props: LandingProps) => {
 			// Check if champion has "lane" property
 			if (lane) {
 				// Return every champion if filter is "all"
-				if (roleFilter === 'all') {
+				if (roleFilter === RoleFilter.ALL) {
 					return champion;
 				} else {
 					for (let i = 0; i < lane.length; i++) {
