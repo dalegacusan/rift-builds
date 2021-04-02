@@ -1,0 +1,16 @@
+.gamemodeButton {
+	background-color: rgb(255, 255, 255, 0) !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	color: rgb(255, 255, 255, 87%) !important;
+	padding: 6px 30px !important;
+	text-transform: none !important;
+}
+
+.gamemodeButton:hover {
+	background-color: #285689 !important;
+}
+
+.selected {
+	background-color: #326cac !important;
+}

@@ -72,9 +72,7 @@ const SpellPopover = (props: SpellPopoverProps) => {
 						{applicableMaps
 							.map((map) => {
 								const mapToDisplay =
-									map === Maps.WILD_RIFT_BASE
-										? Maps.WILD_RIFT
-										: Maps.HOWLING_ABYSS;
+									map === Maps.WILD_RIFT ? 'Wild Rift' : 'Howling Abyss';
 
 								return mapToDisplay;
 							})

@@ -143,6 +143,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 		const isValidBuild = validateBuild();
 
 		if (isValidBuild.result) {
+			console.log(completeBuild);
 			setOpenRecaptcha(true);
 
 			if (!recaptchaToken) {

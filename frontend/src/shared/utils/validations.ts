@@ -11,12 +11,16 @@ import { ItemType } from '../constants/constants';
 import { Validation } from '../constants/validation';
 import { ERROR } from '../utils/messages';
 
-// START: Global Functions
+// === START: Global Functions === //
 const resultHandler = (message: string | null, result: boolean) => {
 	return {
 		message,
 		result,
 	};
+};
+
+const isValidString = (text: string) => {
+	return typeof text === 'string';
 };
 
 const isValidReasonAndType = (objectToCheck: RuneInterface | ItemInterface) => {
@@ -27,7 +31,7 @@ const isValidReasonAndType = (objectToCheck: RuneInterface | ItemInterface) => {
 	// This will always return true if it doesn't fail any of the
 	// two conditions
 	if (reason) {
-		const isValidType = typeof reason === 'string';
+		const isValidType = isValidString(reason);
 		const isValidLength =
 			reason.length >= Validation.REASON.MIN_LENGTH &&
 			reason.length <= Validation.REASON.MAX_LENGTH;
@@ -37,7 +41,7 @@ const isValidReasonAndType = (objectToCheck: RuneInterface | ItemInterface) => {
 
 	return true;
 };
-// END: Global Functions
+// === END: Global Functions === //
 
 const HAS_BUILD_TITLE = (build: BuildInterface) => {
 	if (build.buildTitle) {
@@ -82,7 +86,7 @@ const HAS_USERNAME = (build: BuildInterface) => {
 const IS_VALID_BUILD_TITLE = (build: BuildInterface) => {
 	const { buildTitle } = build;
 
-	const isTypeString = typeof buildTitle === 'string';
+	const isTypeString = isValidString(buildTitle);
 	const isValidLength =
 		buildTitle.length >= Validation.BUILD_TITLE.MIN_LENGTH &&
 		buildTitle.length <= Validation.BUILD_TITLE.MAX_LENGTH;
@@ -97,7 +101,7 @@ const IS_VALID_BUILD_TITLE = (build: BuildInterface) => {
 const IS_VALID_USERNAME = (build: BuildInterface) => {
 	const { username } = build;
 
-	const isTypeString = typeof username === 'string';
+	const isTypeString = isValidString(username);
 	const isValidLength =
 		username.length >= Validation.USERNAME.MIN_LENGTH &&
 		username.length <= Validation.USERNAME.MAX_LENGTH;

@@ -1,3 +1,5 @@
+import { GameMode, GameServer } from './constants';
+
 // Update object if backend data is edited
 export const DefaultSelectedState = {
 	ROLE: {
@@ -43,12 +45,7 @@ export const DefaultSelectedState = {
 			],
 		},
 	},
-	RANK: {
-		id: 'a4938a79-f11f-4ee1-9ec5-7741a12c4ef9',
-		rankName: 'Unranked',
-		url:
-			'https://static.wikia.nocookie.net/leagueoflegends/images/3/38/Season_2019_-_Unranked.png/revision/latest/scale-to-width-down/130?cb=20190908074432',
-	},
+	GAMEMODE: GameMode.NORMAL,
 	ITEM: {
 		id: 'a42bcabd-290c-47f2-ae68-258d412c6d8d',
 		itemName: 'Abyssal Mask',
@@ -68,6 +65,12 @@ export const DefaultSelectedState = {
 		],
 		price: 2800,
 		status: 'active',
+	},
+	RANK: {
+		id: 'a4938a79-f11f-4ee1-9ec5-7741a12c4ef9',
+		rankName: 'Unranked',
+		url:
+			'https://static.wikia.nocookie.net/leagueoflegends/images/3/38/Season_2019_-_Unranked.png/revision/latest/scale-to-width-down/130?cb=20190908074432',
 	},
 	RUNES: {
 		keystone: {
@@ -117,6 +120,7 @@ export const DefaultSelectedState = {
 			],
 		},
 	},
+	SERVER: GameServer.SEA,
 	SPELLS: {
 		spellOne: {
 			id: "dd6ff556-3b07-4be0-bd1f-c2dd9c9ce1dd",

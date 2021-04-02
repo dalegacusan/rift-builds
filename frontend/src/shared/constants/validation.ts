@@ -3,7 +3,7 @@
 export const Validation = {
 	BUILD_TITLE: {
 		MIN_LENGTH: 0, // 6?
-		MAX_LENGTH: 60,
+		MAX_LENGTH: 100,
 	},
 	USERNAME: {
 		MIN_LENGTH: 0, // 6?
@@ -17,11 +17,11 @@ export const Validation = {
 		MAX_LENGTH: 42, // ?
 		PRIMARY: {
 			MIN_LENGTH: 3,
-			MAX_LENGTH: 6
+			MAX_LENGTH: 6,
 		},
 		OPTIONAL: {
 			MIN_LENGTH: 0,
 			MAX_LENGTH: 36,
-		}
-	}
-}
+		},
+	},
+};

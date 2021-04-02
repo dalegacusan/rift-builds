@@ -6,10 +6,13 @@ const initialState = {
 	buildTitle: '',
 	buildRole: DefaultSelectedState.ROLE,
 	champion: DefaultSelectedState.CHAMPION,
+	description: '',
+	gameMode: DefaultSelectedState.GAMEMODE,
 	itemsConfirmed: [],
 	patchVersion: GamePatch.VERSION,
 	rank: DefaultSelectedState.RANK,
 	runes: DefaultSelectedState.RUNES,
+	server: DefaultSelectedState.SERVER,
 	spells: DefaultSelectedState.SPELLS,
 	username: '',
 }
@@ -32,6 +35,16 @@ const buildReducer = (state = initialState, action) => {
 				...state,
 				champion: action.data
 			};
+		case actionTypes.BUILD_SET_DESCRIPTION:
+			return {
+				...state,
+				description: action.data
+			};
+		case actionTypes.BUILD_SET_GAMEMODE:
+			return {
+				...state,
+				gameMode: action.data
+			};
 		case actionTypes.BUILD_SET_ITEMSCONFIRMED:
 			return {
 				...state,
@@ -41,6 +54,11 @@ const buildReducer = (state = initialState, action) => {
 			return {
 				...state,
 				runes: action.data
+			};
+		case actionTypes.BUILD_SET_SERVER:
+			return {
+				...state,
+				server: action.data
 			};
 		case actionTypes.BUILD_SET_SPELLSSELECTED:
 			return {

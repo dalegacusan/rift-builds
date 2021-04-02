@@ -13,10 +13,13 @@ const buildSchema = new mongoose.Schema({
 		url: String,
 	},
 	dateSubmitted: Date,
+	description: String,
+	gameMode: String,
 	itemsConfirmed: { type: Array, default: [] },
 	patchVersion: String,
 	rank: Object,
 	runes: Object,
+	server: String,
 	spells: Object,
 	username: String,
 });

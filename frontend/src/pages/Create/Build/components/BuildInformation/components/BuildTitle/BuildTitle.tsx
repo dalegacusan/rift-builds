@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 
-import { Validation } from '../../../../../../shared/constants/validation';
+import { Validation } from '../../../../../../../shared/constants/validation';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
-import actionTypes from '../../../../../../store/actions';
+import actionTypes from '../../../../../../../store/actions';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
 // Components
 // CSS
-import globalstyles from '../../../createbuild.module.css';
+import globalstyles from '../../../../createbuild.module.css';
 // Types
-import { RootState } from '../../../../../../shared/constants/interfaces';
+import { RootState } from '../../../../../../../shared/constants/interfaces';
 
 const BuildTitle = (props: BuildTitleProps) => {
 	// Build PROPS
@@ -52,6 +52,7 @@ const BuildTitle = (props: BuildTitleProps) => {
 		</Box>
 	);
 };
+
 // https://redux.js.org/recipes/usage-with-typescript
 const mapStateToProps = (state: RootState) => {
 	return {

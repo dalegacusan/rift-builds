@@ -62,9 +62,18 @@ export const SpellNumber = {
 	SPELL_TWO: 'spellTwo',
 }
 
+export const GameMode = {
+	ARAM: 'aram',
+	NORMAL: 'normal'
+}
+
+export const GameServer = {
+	SEA: 'sea',
+	NA: 'na',
+	EUW: 'euw'
+}
+
 export const Maps = {
-	WILD_RIFT_BASE: 'wild_rift',
-	HOWLING_ABYSS_BASE: 'howling_abyss',
-	WILD_RIFT: 'Wild Rift',
-	HOWLING_ABYSS: 'Howling Abyss'
+	WILD_RIFT: 'wild_rift',
+	HOWLING_ABYSS: 'howling_abyss',
 }

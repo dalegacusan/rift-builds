@@ -7,6 +7,8 @@ export interface BuildInterface {
 	buildRole: RoleInterface;
 	champion: ChampionInterface;
 	dateSubmitted?: Date;
+	description: string;
+	gameMode: string;
 	itemsConfirmed: ItemInterface[];
 	patchVersion: string;
 	rank: RankInterface;
@@ -16,6 +18,7 @@ export interface BuildInterface {
 		resolve: RuneInterface;
 		inspiration: RuneInterface;
 	};
+	server: string;
 	spells: {
 		spellOne: SpellInterface;
 		spellTwo: SpellInterface;
