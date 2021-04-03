@@ -50,7 +50,7 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 
 	return (
 		<Box>
-			<p className={globalstyles.inputLabel}>6. Summoner Spells</p>
+			<p className={globalstyles.inputLabel}>8. Summoner Spells</p>
 			<p className={globalstyles.inputDescription}>
 				Select the spells for your build
 			</p>

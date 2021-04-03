@@ -38,7 +38,7 @@ const ChampionSelect = (props: ChampionSelectProps) => {
 
 	return (
 		<Box>
-			<p className={globalstyles.inputLabel}>3. Champion</p>
+			<p className={globalstyles.inputLabel}>5. Champion</p>
 			<p className={globalstyles.inputDescription}>Select a champion</p>
 
 			<Box className={styles.championSelectContainer}>

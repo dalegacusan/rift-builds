@@ -112,7 +112,7 @@ const RunesSelect = (props: RunesSelectProps) => {
 
 	return (
 		<Box>
-			<p className={globalstyles.inputLabel}>5. Runes</p>
+			<p className={globalstyles.inputLabel}>7. Runes</p>
 			<p className={globalstyles.inputDescription}>
 				Select the runes for your build
 			</p>

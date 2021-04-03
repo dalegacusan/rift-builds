@@ -86,7 +86,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 	return (
 		<Box>
 			<p className={globalstyles.inputLabel}>
-				4. Items <span className={globalstyles.requiredInput}>*</span>
+				6. Items <span className={globalstyles.requiredInput}>*</span>
 			</p>
 			<p className={globalstyles.inputDescription}>
 				Select the items for your build&nbsp;
