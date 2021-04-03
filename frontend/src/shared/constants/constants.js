@@ -67,7 +67,7 @@ export const GameMode = {
 	NORMAL: 'normal'
 }
 
-export const GameServer = {
+export const GameRegion = {
 	SEA: 'sea',
 	NA: 'na',
 	EUW: 'euw'

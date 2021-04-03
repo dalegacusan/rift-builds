@@ -3,6 +3,8 @@ import moment from 'moment';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { GameMode } from '../../../../../shared/constants/constants';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -23,11 +25,24 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 		buildRole,
 		champion,
 		dateSubmitted,
+		description,
+		gameMode,
 		patchVersion,
 		rank,
+		region,
 		username,
 	} = build;
 	const { id: roleId, roleName } = buildRole;
+
+	let gameModeToDisplay;
+	switch (gameMode) {
+		case GameMode.NORMAL:
+			gameModeToDisplay = 'Normal';
+			break;
+		case GameMode.ARAM:
+			gameModeToDisplay = 'ARAM';
+			break;
+	}
 
 	return (
 		<Grid
@@ -70,8 +85,11 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 							<span className={styles.usernameText}>Build by {username}</span>
 						</Box>
 						<Box display='flex' className={styles.buildChipsContainer}>
+							{/* Capitalize first letter of Game Mode */}
+							<BuildChip property='Mode' value={gameModeToDisplay} />
 							<BuildChip property='Lane' value={buildRole.roleName} />
 							<BuildChip property='Rank' value={rank.rankName} />
+							<BuildChip property='Region' value={region.toUpperCase()} />
 						</Box>
 					</Box>
 				</Box>

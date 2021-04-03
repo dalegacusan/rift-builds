@@ -10,3 +10,8 @@
 .chipValue {
 	color: #13aaff;
 }
+
+.chipHighlight {
+	background-color: #13aaff;
+	color: rgb(0, 0, 0) !important;
+}

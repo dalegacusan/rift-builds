@@ -12,7 +12,7 @@ const initialState = {
 	patchVersion: GamePatch.VERSION,
 	rank: DefaultSelectedState.RANK,
 	runes: DefaultSelectedState.RUNES,
-	server: DefaultSelectedState.SERVER,
+	region: DefaultSelectedState.REGION,
 	spells: DefaultSelectedState.SPELLS,
 	username: '',
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GameServer } from '../../../../../../../shared/constants/constants';
+import { GameRegion } from '../../../../../../../shared/constants/constants';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -10,17 +10,14 @@ import actionTypes from '../../../../../../../store/actions';
 import Box from '@material-ui/core/Box';
 // Components
 // Types
-import {
-	RankInterface,
-	RootState,
-} from '../../../../../../../shared/constants/interfaces';
+import { RootState } from '../../../../../../../shared/constants/interfaces';
 // CSS
 import globalstyles from '../../../../createbuild.module.css';
-import styles from './playerserver.module.css';
+import styles from './playerregion.module.css';
 
-const PlayerServer = (props: PlayerServerProps) => {
+const PlayerRegion = (props: PlayerRegionProps) => {
 	// Build PROPS
-	const { serverSelected, setServerSelected } = props;
+	const { regionSelected, setRegionSelected } = props;
 
 	// =============== Rank =============== //
 	const handleServerSelectChange = (
@@ -28,39 +25,37 @@ const PlayerServer = (props: PlayerServerProps) => {
 	) => {
 		const { value } = e.target;
 
-		setServerSelected(value);
+		setRegionSelected(value);
 	};
 
 	return (
 		<Box>
-			<p className={globalstyles.inputLabel}>11. Server</p>
-			<p className={globalstyles.inputDescription}>
-				What server are you playing on?
-			</p>
+			<p className={globalstyles.inputLabel}>11. Region</p>
+			<p className={globalstyles.inputDescription}>Select your region</p>
 
 			<Box>
 				<select
-					value={serverSelected}
+					value={regionSelected}
 					onChange={handleServerSelectChange}
 					className={globalstyles.buildSelectInput}
 				>
 					<option
-						value={GameServer.SEA}
+						value={GameRegion.SEA}
 						className={globalstyles.buildSelectOption}
 					>
-						SEA
+						{GameRegion.SEA.toUpperCase()}
 					</option>
 					<option
-						value={GameServer.NA}
+						value={GameRegion.NA}
 						className={globalstyles.buildSelectOption}
 					>
-						NA
+						{GameRegion.NA.toUpperCase()}
 					</option>
 					<option
-						value={GameServer.EUW}
+						value={GameRegion.EUW}
 						className={globalstyles.buildSelectOption}
 					>
-						EUW
+						{GameRegion.EUW.toUpperCase()}
 					</option>
 				</select>
 			</Box>
@@ -70,14 +65,14 @@ const PlayerServer = (props: PlayerServerProps) => {
 
 const mapStateToProps = (state: RootState) => {
 	return {
-		serverSelected: state.build.server,
+		regionSelected: state.build.region,
 	};
 };
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		setServerSelected: (newServer: string) =>
-			dispatch({ type: actionTypes.BUILD_SET_SERVER, data: newServer }),
+		setRegionSelected: (newRegion: string) =>
+			dispatch({ type: actionTypes.BUILD_SET_REGION, data: newRegion }),
 	};
 };
 
@@ -85,6 +80,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type PlayerServerProps = PropsFromRedux;
+type PlayerRegionProps = PropsFromRedux;
 
-export default connector(PlayerServer);
+export default connector(PlayerRegion);

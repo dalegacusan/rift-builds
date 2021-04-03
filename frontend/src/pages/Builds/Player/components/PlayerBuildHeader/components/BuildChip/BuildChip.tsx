@@ -2,13 +2,12 @@ import React from 'react';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 // CSS
 import styles from './buildchip.module.css';
 // Types
 type BuildChipProps = {
 	property: string;
-	value: string;
+	value: string | undefined;
 };
 
 const BuildChip = (props: BuildChipProps) => {
@@ -17,7 +16,8 @@ const BuildChip = (props: BuildChipProps) => {
 	return (
 		<Box className={styles.BuildChipContainer}>
 			<span>
-				{property} &nbsp;<span className={styles.chipValue}>{value}</span>
+				{property} &nbsp;
+				<span className={styles.chipValue}>{value ? value : '?'}</span>
 			</span>
 		</Box>
 	);

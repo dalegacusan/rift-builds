@@ -1,0 +1,18 @@
+.accordionContainer {
+	color: rgb(255, 255, 255, 60%) !important;
+	border: none none solid none;
+}
+
+.accordionQuestionContainer {
+	background-color: #20242c !important;
+	padding: 0 20px;
+}
+
+.accordionAnswerContainer {
+	background-color: #292e38 !important;
+	white-space: pre-wrap;
+}
+
+.expandMoreIcon {
+	color: rgb(255, 255, 255, 30%);
+}

@@ -19,7 +19,7 @@ const buildSchema = new mongoose.Schema({
 	patchVersion: String,
 	rank: Object,
 	runes: Object,
-	server: String,
+	region: String,
 	spells: Object,
 	username: String,
 });

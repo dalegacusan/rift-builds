@@ -1,4 +1,4 @@
-import { GameMode, GameServer } from './constants';
+import { GameMode, GameRegion } from './constants';
 
 // Update object if backend data is edited
 export const DefaultSelectedState = {
@@ -120,7 +120,7 @@ export const DefaultSelectedState = {
 			],
 		},
 	},
-	SERVER: GameServer.SEA,
+	REGION: GameRegion.SEA,
 	SPELLS: {
 		spellOne: {
 			id: "dd6ff556-3b07-4be0-bd1f-c2dd9c9ce1dd",

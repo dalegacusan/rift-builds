@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 // Components
 import PlayerUsername from './components/Username/PlayerUsername';
 import PlayerRank from './components/Rank/PlayerRank';
-import PlayerServer from './components/Server/PlayerServer';
+import PlayerServer from './components/Region/PlayerRegion';
 // Types
 // CSS
 

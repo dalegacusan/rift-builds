@@ -18,7 +18,7 @@ export interface BuildInterface {
 		resolve: RuneInterface;
 		inspiration: RuneInterface;
 	};
-	server: string;
+	region: string;
 	spells: {
 		spellOne: SpellInterface;
 		spellTwo: SpellInterface;

@@ -15,6 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import BuildItem from './components/BuildItem/BuildItem';
 import RuneItem from './components/RuneItem/RuneItem';
 import SpellItem from './components/Spellitem/SpellItem';
+import BuildDescription from './components/BuildDescription/BuildDescription';
 import PlayerBuildHeader from './components/PlayerBuildHeader/PlayerBuildHeader';
 import PlayerBuildFooter from './components/PlayerBuildFooter/PlayerBuildFooter';
 import SectionDivider from './components/SectionDivider/SectionDivider';
@@ -57,13 +58,15 @@ const PlayerBuild = (props: any) => {
 				<>
 					<Helmet>
 						<title>
-							{build.buildTitle} - {build.champion.championName} Build and Guide
-							| Rift Builds
+							{build.champion.championName} Build and Guide by {build.username}
+							&nbsp; | Rift Builds
 						</title>
 					</Helmet>
 					<Box className={styles.playerBuildContainer}>
 						{/* Display Build ID */}
 						<PlayerBuildHeader build={build} />
+
+						<BuildDescription description={build.description} />
 
 						{/* PRIMARY ITEMS */}
 						<SectionDivider title='Primary Items' />
