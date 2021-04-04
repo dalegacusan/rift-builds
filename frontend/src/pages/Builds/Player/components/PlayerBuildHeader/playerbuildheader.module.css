@@ -35,7 +35,8 @@
 .buildTitleText {
 	color: rgb(255, 255, 255, 60%);
 	font-weight: bold;
-	font-size: 32px;
+	font-size: 22px;
+	margin: 3px 0;
 }
 
 .usernameText {
@@ -43,6 +44,7 @@
 	display: inline-block;
 	font-weight: normal;
 	font-size: 16px;
+	margin: 3px 0;
 }
 
 .buildChipsContainer {
@@ -52,7 +54,7 @@
 .buildInformationContainer {
 	color: rgb(255, 255, 255, 87%);
 	margin-left: 10px;
-	margin-top: 5px;
+	margin-top: 8px;
 }
 
 .buildInformationTitle {
@@ -65,13 +67,6 @@
 	width: 20px;
 }
 
-.buildInformationText {
-	font-size: 14px;
-	margin-right: 10px;
-	position: relative;
-	top: 7px;
-}
-
 .patchText {
 	color: #5893d4;
 	text-align: right;
@@ -80,4 +75,8 @@
 .buildDateSubmitted {
 	color: rgb(255, 255, 255, 60%);
 	text-align: right;
+}
+
+.miscellaneousDataContainer {
+	padding-top: 0 !important;
 }

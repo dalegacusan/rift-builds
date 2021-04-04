@@ -79,10 +79,10 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 			{/* Champion Name, Build Title, and Username */}
 			<Grid item xs>
 				<Box className={styles.buildInformationContainer}>
-					<span className={styles.buildTitleText}>{buildTitle}&nbsp;</span>
+					<p className={styles.buildTitleText}>{buildTitle}&nbsp;</p>
 					<Box>
 						<Box>
-							<span className={styles.usernameText}>Build by {username}</span>
+							<p className={styles.usernameText}>Build by {username}</p>
 						</Box>
 						<Box display='flex' className={styles.buildChipsContainer}>
 							{/* Capitalize first letter of Game Mode */}
@@ -95,7 +95,11 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 				</Box>
 			</Grid>
 
-			<Box p={2} flexDirection='row-reverse'>
+			<Box
+				p={2}
+				flexDirection='row-reverse'
+				className={styles.miscellaneousDataContainer}
+			>
 				<p className={styles.patchText}>Patch {patchVersion}</p>
 				<span className={styles.buildDateSubmitted}>
 					{moment(dateSubmitted).format('MM/DD/YYYY')}

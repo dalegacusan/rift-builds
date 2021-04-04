@@ -30,6 +30,10 @@ import {
 	RootState,
 	snackbarControlsInterface,
 } from '../../../shared/constants/interfaces';
+type ValidationResult = {
+	message: string | null;
+	result: boolean;
+};
 
 const CreateBuild = (props: CreateBuildProps) => {
 	// Game Data PROPS
@@ -72,6 +76,99 @@ const CreateBuild = (props: CreateBuildProps) => {
 	} else if (activeStep === 2) {
 		componentToDisplay = <PlayerInformation />;
 	}
+
+	const validateStep = () => {
+		let allValidationsAreValid = false;
+		let validationsCollection: Array<ValidationResult> = [];
+
+		if (activeStep === 0) {
+			const HAS_BUILD_TITLE = VALIDATE.HAS_BUILD_TITLE(completeBuild);
+			const IS_VALID_BUILD_TITLE = VALIDATE.IS_VALID_BUILD_TITLE(completeBuild);
+			const IS_VALID_ROLE = VALIDATE.IS_VALID_ROLE(completeBuild, roles);
+			const IS_VALID_GAME_MODE = VALIDATE.IS_VALID_GAME_MODE(completeBuild);
+			const IS_VALID_BUILD_DESCRIPTION = VALIDATE.IS_VALID_BUILD_DESCRIPTION(
+				completeBuild
+			);
+
+			validationsCollection = [
+				HAS_BUILD_TITLE,
+				IS_VALID_BUILD_TITLE,
+				IS_VALID_ROLE,
+				IS_VALID_GAME_MODE,
+				IS_VALID_BUILD_DESCRIPTION,
+			];
+
+			allValidationsAreValid = checkAllValidationsAreValid(
+				validationsCollection
+			);
+		} else if (activeStep === 1) {
+			const IS_VALID_CHAMPION = VALIDATE.IS_VALID_CHAMPION(
+				completeBuild,
+				champions
+			);
+			const HAS_ITEMS_SELECTED = VALIDATE.HAS_ITEMS_SELECTED(completeBuild);
+			const HAS_THREE_TO_SIX_PRIMARY_ITEMS = VALIDATE.HAS_THREE_TO_SIX_PRIMARY_ITEMS(
+				completeBuild
+			);
+			const IS_VALID_ITEMS_SELECTED = VALIDATE.IS_VALID_ITEMS_SELECTED(
+				completeBuild,
+				items
+			);
+			const IS_VALID_NUMBER_OF_ITEMS_SELECTED = VALIDATE.IS_VALID_NUMBER_OF_ITEMS_SELECTED(
+				completeBuild
+			);
+			const IS_VALID_RUNES = VALIDATE.IS_VALID_RUNES(completeBuild, runes);
+			const IS_VALID_SPELLS = VALIDATE.IS_VALID_SPELLS(completeBuild, spells);
+
+			validationsCollection = [
+				IS_VALID_CHAMPION,
+				HAS_ITEMS_SELECTED,
+				HAS_THREE_TO_SIX_PRIMARY_ITEMS,
+				IS_VALID_ITEMS_SELECTED,
+				IS_VALID_NUMBER_OF_ITEMS_SELECTED,
+				IS_VALID_RUNES,
+				IS_VALID_SPELLS,
+			];
+
+			allValidationsAreValid = checkAllValidationsAreValid(
+				validationsCollection
+			);
+		}
+
+		if (allValidationsAreValid) {
+			return true;
+		}
+
+		// Find all validations that returned false
+		// Return first validation that failed, hence [0]
+		const error = validationsCollection.filter((validation) => {
+			const { result } = validation;
+
+			if (result === false) {
+				return validation;
+			}
+		})[0];
+
+		setSnackbarControls({
+			snackbarControls: {
+				message: error.message,
+				shouldOpen: true,
+				snackbarType: 'error',
+			},
+		});
+
+		return false;
+	};
+
+	const checkAllValidationsAreValid = (
+		validationsCollection: Array<ValidationResult>
+	) => {
+		return validationsCollection.every((validation: ValidationResult) => {
+			const { result } = validation;
+
+			return result === true;
+		});
+	};
 
 	const validateBuild = () => {
 		const HAS_BUILD_TITLE = VALIDATE.HAS_BUILD_TITLE(completeBuild);
@@ -122,11 +219,9 @@ const CreateBuild = (props: CreateBuildProps) => {
 			IS_VALID_REGION,
 		];
 
-		const allValidationsAreValid = validationsCollection.every((validation) => {
-			const { result } = validation;
-
-			return result === true;
-		});
+		const allValidationsAreValid = checkAllValidationsAreValid(
+			validationsCollection
+		);
 
 		if (allValidationsAreValid) {
 			return {
@@ -246,6 +341,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 					resetCaptcha={resetCaptcha}
 					setActiveStep={setActiveStep}
 					submitBuild={submitBuild}
+					validateStep={validateStep}
 				/>
 			</Box>
 		</>

@@ -14,6 +14,7 @@ type StepperProps = {
 	resetCaptcha: () => void;
 	setActiveStep: (step: any) => void;
 	submitBuild: () => void;
+	validateStep: () => boolean;
 };
 // CSS
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,12 +25,18 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-function getSteps() {
+const getSteps = () => {
 	return ['Build Information', 'Create Build', 'Player Information'];
-}
+};
 
 const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
-	const { activeStep, componentToDisplay, setActiveStep, submitBuild } = props;
+	const {
+		activeStep,
+		componentToDisplay,
+		setActiveStep,
+		submitBuild,
+		validateStep,
+	} = props;
 	const { openRecaptcha, resetCaptcha } = props;
 	const classes = useStyles();
 
@@ -37,7 +44,13 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 	const steps = getSteps();
 
 	const handleNext = () => {
-		setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
+		const stepIsValid = validateStep();
+
+		if (stepIsValid) {
+			setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
+		} else {
+			return;
+		}
 	};
 	const handleBack = () => {
 		setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
