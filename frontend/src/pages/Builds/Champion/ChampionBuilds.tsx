@@ -18,7 +18,7 @@ import styles from './championbuilds.module.css';
 import {
 	BuildInterface,
 	ChampionInterface,
-} from '../../../shared/constants/interfaces';
+} from '../../../shared/interfaces/interfaces';
 type PathParamsType = {
 	championName: string;
 };

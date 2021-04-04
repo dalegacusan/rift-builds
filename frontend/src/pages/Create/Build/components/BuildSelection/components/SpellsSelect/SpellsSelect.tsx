@@ -18,7 +18,7 @@ import styles from './spellsselect.module.css';
 import {
 	SpellInterface,
 	RootState,
-} from '../../../../../../../shared/constants/interfaces';
+} from '../../../../../../../shared/interfaces/interfaces';
 
 const SpellsSelect = (props: SpellsSelectProps) => {
 	// Game Data PROPS

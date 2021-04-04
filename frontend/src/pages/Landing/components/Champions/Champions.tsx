@@ -6,7 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Box from '@material-ui/core/Box';
 // Components
 // Types
-import { ChampionInterface } from '../../../../shared/constants/interfaces';
+import { ChampionInterface } from '../../../../shared/interfaces/interfaces';
 // CSS
 import styles from './champions.module.css';
 

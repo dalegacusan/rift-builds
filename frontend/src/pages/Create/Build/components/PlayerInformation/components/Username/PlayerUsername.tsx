@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Validation } from '../../../../../../../shared/constants/validation';
+import { RequiredLength } from '../../../../../../../shared/constants/requiredLength';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -10,7 +10,7 @@ import actionTypes from '../../../../../../../store/actions';
 import Box from '@material-ui/core/Box';
 // Components
 // Types
-import { RootState } from '../../../../../../../shared/constants/interfaces';
+import { RootState } from '../../../../../../../shared/interfaces/interfaces';
 // CSS
 import globalstyles from '../../../../createbuild.module.css';
 
@@ -38,7 +38,7 @@ const PlayerUsername = (props: PlayerUsernameProps) => {
 				placeholder='Username'
 				onChange={(e) => handleUsernameChange(e)}
 				className={globalstyles.buildInput}
-				maxLength={Validation.USERNAME.MAX_LENGTH}
+				maxLength={RequiredLength.USERNAME.MAX_LENGTH}
 			/>
 			<p
 				className={globalstyles.inputDescription}

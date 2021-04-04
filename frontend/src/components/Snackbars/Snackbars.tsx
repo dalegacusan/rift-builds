@@ -12,7 +12,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import {
 	snackbarControlsInterface,
 	RootState,
-} from '../../shared/constants/interfaces';
+} from '../../shared/interfaces/interfaces';
 
 function Alert(props: AlertProps) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;

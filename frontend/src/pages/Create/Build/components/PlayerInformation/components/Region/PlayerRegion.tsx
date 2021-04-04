@@ -10,7 +10,7 @@ import actionTypes from '../../../../../../../store/actions';
 import Box from '@material-ui/core/Box';
 // Components
 // Types
-import { RootState } from '../../../../../../../shared/constants/interfaces';
+import { RootState } from '../../../../../../../shared/interfaces/interfaces';
 // CSS
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './playerregion.module.css';

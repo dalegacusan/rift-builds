@@ -14,7 +14,7 @@ import styles from './buildrole.module.css';
 import {
 	RootState,
 	RoleInterface,
-} from '../../../../../../../shared/constants/interfaces';
+} from '../../../../../../../shared/interfaces/interfaces';
 
 const BuildRole = (props: BuildRoleProps) => {
 	// Build PROPS

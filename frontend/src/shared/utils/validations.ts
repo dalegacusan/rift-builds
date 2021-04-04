@@ -6,10 +6,11 @@ import {
 	RoleInterface,
 	RuneInterface,
 	SpellInterface,
-} from '../constants/interfaces';
+	ValidationResult,
+} from '../interfaces/interfaces';
 import { ItemType, GameMode, GameRegion } from '../constants/constants';
-import { Validation } from '../constants/validation';
-import { ERROR } from '../utils/messages';
+import { RequiredLength } from '../constants/requiredLength';
+import { Message } from '../constants/validationMessages';
 
 // === START: Global Functions === //
 
@@ -26,12 +27,12 @@ const isValidString = (text: string) => {
 	return typeof text === 'string';
 };
 
-const isValidStringLength = (text: string) => {
-	const isValidLength =
-		text.length >= Validation.REASON.MIN_LENGTH &&
-		text.length <= Validation.REASON.MAX_LENGTH;
+const isValidReasonLength = (text: string) => {
+	const isValidReasonLength =
+		text.length >= RequiredLength.REASON.MIN_LENGTH &&
+		text.length <= RequiredLength.REASON.MAX_LENGTH;
 
-	return isValidLength;
+	return isValidReasonLength;
 };
 
 const isValidReasonAndType = (objectToCheck: RuneInterface | ItemInterface) => {
@@ -43,12 +44,36 @@ const isValidReasonAndType = (objectToCheck: RuneInterface | ItemInterface) => {
 	// two conditions
 	if (reason) {
 		const isValidType = isValidString(reason);
-		const isValidLength = isValidStringLength(reason);
+		const isValidLength = isValidReasonLength(reason);
 
 		if (!(isValidType && isValidLength)) return false;
 	}
 
 	return true;
+};
+
+// Find all validations that returned false
+// Return first validation that failed, hence [0]
+const findValidationErrorAndReturn = (
+	validationsCollection: Array<ValidationResult>
+) => {
+	return validationsCollection.filter((validation) => {
+		const { result } = validation;
+
+		if (result === false) {
+			return validation;
+		}
+	})[0];
+};
+
+const checkAllValidationsAreValid = (
+	validationsCollection: Array<ValidationResult>
+) => {
+	return validationsCollection.every((validation: ValidationResult) => {
+		const { result } = validation;
+
+		return result === true;
+	});
 };
 
 // === END: Global Functions === //
@@ -58,7 +83,7 @@ const HAS_BUILD_TITLE = (build: BuildInterface) => {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NO_BUILD_TITLE, false);
+	return resultHandler(Message.ERROR.NO_BUILD_TITLE, false);
 };
 
 const HAS_ITEMS_SELECTED = (build: BuildInterface) => {
@@ -66,7 +91,7 @@ const HAS_ITEMS_SELECTED = (build: BuildInterface) => {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NO_ITEMS_SELECTED, false);
+	return resultHandler(Message.ERROR.NO_ITEMS_SELECTED, false);
 };
 
 const HAS_THREE_TO_SIX_PRIMARY_ITEMS = (build: BuildInterface) => {
@@ -75,14 +100,17 @@ const HAS_THREE_TO_SIX_PRIMARY_ITEMS = (build: BuildInterface) => {
 	).length;
 
 	const hasThreeToSixPrimaryItems =
-		lengthOfPrimaryItems >= Validation.ITEMS.PRIMARY.MIN_LENGTH &&
-		lengthOfPrimaryItems <= Validation.ITEMS.PRIMARY.MAX_LENGTH;
+		lengthOfPrimaryItems >= RequiredLength.ITEMS.PRIMARY.MIN_LENGTH &&
+		lengthOfPrimaryItems <= RequiredLength.ITEMS.PRIMARY.MAX_LENGTH;
 
 	if (hasThreeToSixPrimaryItems) {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.DOES_NOT_HAVE_THREE_TO_SIX_PRIMARY_ITEMS, false);
+	return resultHandler(
+		Message.ERROR.DOES_NOT_HAVE_THREE_TO_SIX_PRIMARY_ITEMS,
+		false
+	);
 };
 
 const HAS_USERNAME = (build: BuildInterface) => {
@@ -90,7 +118,7 @@ const HAS_USERNAME = (build: BuildInterface) => {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NO_USERNAME, false);
+	return resultHandler(Message.ERROR.NO_USERNAME, false);
 };
 
 const IS_VALID_BUILD_TITLE = (build: BuildInterface) => {
@@ -98,14 +126,14 @@ const IS_VALID_BUILD_TITLE = (build: BuildInterface) => {
 
 	const isTypeString = isValidString(buildTitle);
 	const isValidLength =
-		buildTitle.length >= Validation.BUILD_TITLE.MIN_LENGTH &&
-		buildTitle.length <= Validation.BUILD_TITLE.MAX_LENGTH;
+		buildTitle.length >= RequiredLength.BUILD_TITLE.MIN_LENGTH &&
+		buildTitle.length <= RequiredLength.BUILD_TITLE.MAX_LENGTH;
 
 	if (isTypeString && isValidLength) {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_BUILD_TITLE, false);
+	return resultHandler(Message.ERROR.NOT_VALID_BUILD_TITLE, false);
 };
 
 const IS_VALID_USERNAME = (build: BuildInterface) => {
@@ -113,14 +141,14 @@ const IS_VALID_USERNAME = (build: BuildInterface) => {
 
 	const isTypeString = isValidString(username);
 	const isValidLength =
-		username.length >= Validation.USERNAME.MIN_LENGTH &&
-		username.length <= Validation.USERNAME.MAX_LENGTH;
+		username.length >= RequiredLength.USERNAME.MIN_LENGTH &&
+		username.length <= RequiredLength.USERNAME.MAX_LENGTH;
 
 	if (isTypeString && isValidLength) {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_USERNAME, false);
+	return resultHandler(Message.ERROR.NOT_VALID_USERNAME, false);
 };
 
 const IS_VALID_ROLE = (build: BuildInterface, roles: Array<RoleInterface>) => {
@@ -138,7 +166,7 @@ const IS_VALID_ROLE = (build: BuildInterface, roles: Array<RoleInterface>) => {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_ROLE, false);
+	return resultHandler(Message.ERROR.NOT_VALID_ROLE, false);
 };
 
 const IS_VALID_GAME_MODE = (build: BuildInterface) => {
@@ -152,20 +180,20 @@ const IS_VALID_GAME_MODE = (build: BuildInterface) => {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_GAME_MODE, false);
+	return resultHandler(Message.ERROR.NOT_VALID_GAME_MODE, false);
 };
 
 const IS_VALID_BUILD_DESCRIPTION = (build: BuildInterface) => {
 	const { description } = build;
 
 	const isTypeString = isValidString(description);
-	const isValidLength = isValidStringLength(description);
+	const isValidLength = isValidReasonLength(description);
 
 	if (isTypeString && isValidLength) {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_BUILD_DESCRIPTION, false);
+	return resultHandler(Message.ERROR.NOT_VALID_BUILD_DESCRIPTION, false);
 };
 
 const IS_VALID_CHAMPION = (
@@ -187,7 +215,7 @@ const IS_VALID_CHAMPION = (
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_CHAMPION, false);
+	return resultHandler(Message.ERROR.NOT_VALID_CHAMPION, false);
 };
 
 const IS_VALID_ITEMS_SELECTED = (
@@ -229,7 +257,7 @@ const IS_VALID_ITEMS_SELECTED = (
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_ITEMS_SELECTED, false);
+	return resultHandler(Message.ERROR.NOT_VALID_ITEMS_SELECTED, false);
 };
 
 const IS_VALID_NUMBER_OF_ITEMS_SELECTED = (build: BuildInterface) => {
@@ -243,17 +271,17 @@ const IS_VALID_NUMBER_OF_ITEMS_SELECTED = (build: BuildInterface) => {
 	).length;
 
 	const isValidPrimaryItemsLength =
-		primaryItems >= Validation.ITEMS.PRIMARY.MIN_LENGTH &&
-		primaryItems <= Validation.ITEMS.PRIMARY.MAX_LENGTH;
+		primaryItems >= RequiredLength.ITEMS.PRIMARY.MIN_LENGTH &&
+		primaryItems <= RequiredLength.ITEMS.PRIMARY.MAX_LENGTH;
 	const isValidOptionalItemsLength =
-		optionalItems >= Validation.ITEMS.OPTIONAL.MIN_LENGTH &&
-		optionalItems <= Validation.ITEMS.OPTIONAL.MAX_LENGTH;
+		optionalItems >= RequiredLength.ITEMS.OPTIONAL.MIN_LENGTH &&
+		optionalItems <= RequiredLength.ITEMS.OPTIONAL.MAX_LENGTH;
 
 	if (isValidPrimaryItemsLength && isValidOptionalItemsLength) {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_NUMBER_OF_ITEMS_SELECTED, false);
+	return resultHandler(Message.ERROR.NOT_VALID_NUMBER_OF_ITEMS_SELECTED, false);
 };
 
 const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
@@ -301,7 +329,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_RUNES, false);
+	return resultHandler(Message.ERROR.NOT_VALID_RUNES, false);
 };
 
 const IS_VALID_SPELLS = (
@@ -325,7 +353,7 @@ const IS_VALID_SPELLS = (
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_SPELLS, false);
+	return resultHandler(Message.ERROR.NOT_VALID_SPELLS, false);
 };
 
 const IS_VALID_RANK = (build: BuildInterface, ranks: Array<RankInterface>) => {
@@ -340,7 +368,7 @@ const IS_VALID_RANK = (build: BuildInterface, ranks: Array<RankInterface>) => {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_RANK, false);
+	return resultHandler(Message.ERROR.NOT_VALID_RANK, false);
 };
 
 const IS_VALID_REGION = (build: BuildInterface) => {
@@ -356,10 +384,10 @@ const IS_VALID_REGION = (build: BuildInterface) => {
 		return resultHandler(null, true);
 	}
 
-	return resultHandler(ERROR.NOT_VALID_REGION, false);
+	return resultHandler(Message.ERROR.NOT_VALID_REGION, false);
 };
 
-export const VALIDATE = {
+export const Validate = {
 	HAS_BUILD_TITLE,
 	HAS_ITEMS_SELECTED,
 	HAS_THREE_TO_SIX_PRIMARY_ITEMS,
@@ -376,4 +404,9 @@ export const VALIDATE = {
 	IS_VALID_SPELLS,
 	IS_VALID_RANK,
 	IS_VALID_REGION,
+};
+
+export const ValidateHelper = {
+	findValidationErrorAndReturn,
+	checkAllValidationsAreValid,
 };

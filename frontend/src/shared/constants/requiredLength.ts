@@ -1,6 +1,6 @@
 // Build Title Length = 24
 // Username length = 22
-export const Validation = {
+export const RequiredLength = {
 	BUILD_TITLE: {
 		MIN_LENGTH: 0, // 6?
 		MAX_LENGTH: 100,

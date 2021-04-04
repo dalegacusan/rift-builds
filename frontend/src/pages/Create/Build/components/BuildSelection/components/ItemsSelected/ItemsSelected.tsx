@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { ItemType } from '../../../../../../../shared/constants/constants';
-import { Validation } from '../../../../../../../shared/constants/validation';
-import { ERROR } from '../../../../../../../shared/utils/messages';
+import { RequiredLength } from '../../../../../../../shared/constants/requiredLength';
+import { Message } from '../../../../../../../shared/constants/validationMessages';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -24,7 +24,7 @@ import {
 	ItemInterface,
 	snackbarControlsInterface,
 	RootState,
-} from '../../../../../../../shared/constants/interfaces';
+} from '../../../../../../../shared/interfaces/interfaces';
 // CSS
 import styles from './itemsselected.module.css';
 const useStylesBootstrap = makeStyles((theme: Theme) => ({
@@ -69,15 +69,15 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 
 			setSnackbarControls({
 				snackbarControls: {
-					message: ERROR.HAS_DUPLICATE_ITEMS,
+					message: Message.ERROR.HAS_DUPLICATE_ITEMS,
 					shouldOpen: true,
 					snackbarType: 'error',
 				},
 			});
-		} else if (primaryItems.length > Validation.ITEMS.PRIMARY.MAX_LENGTH) {
+		} else if (primaryItems.length > RequiredLength.ITEMS.PRIMARY.MAX_LENGTH) {
 			setSnackbarControls({
 				snackbarControls: {
-					message: ERROR.CAN_ONLY_HAVE_SIX_PRIMARY_ITEMS,
+					message: Message.ERROR.CAN_ONLY_HAVE_SIX_PRIMARY_ITEMS,
 					shouldOpen: true,
 					snackbarType: 'error',
 				},
@@ -110,11 +110,11 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 												<p>
 													Primary:&nbsp;
 													<span className={styles.tooltipHighlight}>
-														{Validation.ITEMS.PRIMARY.MIN_LENGTH}
+														{RequiredLength.ITEMS.PRIMARY.MIN_LENGTH}
 													</span>
 													&nbsp;-&nbsp;
 													<span className={styles.tooltipHighlight}>
-														{Validation.ITEMS.PRIMARY.MAX_LENGTH}
+														{RequiredLength.ITEMS.PRIMARY.MAX_LENGTH}
 													</span>
 													&nbsp;items
 												</p>
@@ -122,11 +122,11 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 												<p>
 													Optional:&nbsp;
 													<span className={styles.tooltipHighlight}>
-														{Validation.ITEMS.OPTIONAL.MIN_LENGTH}
+														{RequiredLength.ITEMS.OPTIONAL.MIN_LENGTH}
 													</span>
 													&nbsp;-&nbsp;
 													<span className={styles.tooltipHighlight}>
-														{Validation.ITEMS.OPTIONAL.MAX_LENGTH}
+														{RequiredLength.ITEMS.OPTIONAL.MAX_LENGTH}
 													</span>
 													&nbsp;items
 												</p>

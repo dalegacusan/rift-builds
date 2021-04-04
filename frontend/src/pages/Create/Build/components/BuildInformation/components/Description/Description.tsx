@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Validation } from '../../../../../../../shared/constants/validation';
+import { RequiredLength } from '../../../../../../../shared/constants/requiredLength';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './description.module.css';
 // Types
-import { RootState } from '../../../../../../../shared/constants/interfaces';
+import { RootState } from '../../../../../../../shared/interfaces/interfaces';
 
 const BuildDescription = (props: BuildDescriptionProps) => {
 	// Build PROPS
@@ -40,7 +40,7 @@ const BuildDescription = (props: BuildDescriptionProps) => {
 				value={buildDescription}
 				placeholder='Describe your build'
 				className={styles.explanationTextArea}
-				maxLength={Validation.REASON.MAX_LENGTH}
+				maxLength={RequiredLength.REASON.MAX_LENGTH}
 				onChange={(e) => handleBuildDescriptionChange(e)}
 			/>
 		</Box>

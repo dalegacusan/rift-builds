@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import { Validation } from '../../../../../../../../shared/constants/validation';
+import { RequiredLength } from '../../../../../../../../shared/constants/requiredLength';
 import { Rune } from '../../../../../../../../shared/constants/constants';
 
 // Redux
@@ -18,7 +18,7 @@ import styles from './rune.module.css';
 import {
 	RuneInterface,
 	RootState,
-} from '../../../../../../../../shared/constants/interfaces';
+} from '../../../../../../../../shared/interfaces/interfaces';
 
 const Keystone = (props: KeystoneProps) => {
 	const { handleRuneSelectChange, handleRuneExplanationChange } = props;
@@ -65,7 +65,7 @@ const Keystone = (props: KeystoneProps) => {
 					value={runeKeystone.reason}
 					placeholder='Explanation'
 					className={styles.explanationTextArea}
-					maxLength={Validation.REASON.MAX_LENGTH}
+					maxLength={RequiredLength.REASON.MAX_LENGTH}
 					onChange={(e) => handleRuneExplanationChange(e, Rune.TYPE.KEYSTONE)}
 				/>
 			</Grid>

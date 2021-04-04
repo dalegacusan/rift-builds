@@ -27,7 +27,7 @@ import {
 	RoleInterface,
 	RuneInterface,
 	SpellInterface,
-} from '../shared/constants/interfaces';
+} from '../shared/interfaces/interfaces';
 // CSS
 import styles from './app.module.css';
 const theme = createMuiTheme({

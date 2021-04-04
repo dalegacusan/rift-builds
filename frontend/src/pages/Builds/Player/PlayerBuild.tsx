@@ -23,7 +23,7 @@ import SectionDivider from './components/SectionDivider/SectionDivider';
 import {
 	BuildInterface,
 	ItemInterface,
-} from '../../../shared/constants/interfaces';
+} from '../../../shared/interfaces/interfaces';
 // CSS
 import styles from './playerbuild.module.css';
 const useStyles = makeStyles((theme) => ({

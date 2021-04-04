@@ -7,7 +7,7 @@ import {
 	ItemStatus,
 } from '../../../../../../../shared/constants/constants';
 import { DefaultSelectedState } from '../../../../../../../shared/constants/defaultSelectedState';
-import { Validation } from '../../../../../../../shared/constants/validation';
+import { RequiredLength } from '../../../../../../../shared/constants/requiredLength';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -29,7 +29,7 @@ import styles from './itemsselect.module.css';
 import {
 	ItemInterface,
 	RootState,
-} from '../../../../../../../shared/constants/interfaces';
+} from '../../../../../../../shared/interfaces/interfaces';
 
 const ItemsSelect = (props: ItemsSelectProps) => {
 	// Game Data PROPS
@@ -166,7 +166,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								value={itemReason}
 								placeholder='Explanation'
 								className={styles.explanationTextArea}
-								maxLength={Validation.REASON.MAX_LENGTH}
+								maxLength={RequiredLength.REASON.MAX_LENGTH}
 								onChange={(e) => handleItemExplanationChange(e)}
 							/>
 							<Box

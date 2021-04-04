@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import {
 	RankInterface,
 	RootState,
-} from '../../../../../../../shared/constants/interfaces';
+} from '../../../../../../../shared/interfaces/interfaces';
 // CSS
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './playerrank.module.css';

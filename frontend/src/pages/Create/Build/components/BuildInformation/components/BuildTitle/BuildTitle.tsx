@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Validation } from '../../../../../../../shared/constants/validation';
+import { RequiredLength } from '../../../../../../../shared/constants/requiredLength';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -12,20 +12,22 @@ import Box from '@material-ui/core/Box';
 // CSS
 import globalstyles from '../../../../createbuild.module.css';
 // Types
-import { RootState } from '../../../../../../../shared/constants/interfaces';
+import { RootState } from '../../../../../../../shared/interfaces/interfaces';
 
 const BuildTitle = (props: BuildTitleProps) => {
 	// Build PROPS
 	const { buildTitle, setBuildTitle } = props;
 
 	const [charactersRemaining, setCharactersRemaining] = useState(
-		Validation.BUILD_TITLE.MAX_LENGTH
+		RequiredLength.BUILD_TITLE.MAX_LENGTH
 	);
 
 	const handleBuildTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
 
-		setCharactersRemaining(Validation.BUILD_TITLE.MAX_LENGTH - value.length);
+		setCharactersRemaining(
+			RequiredLength.BUILD_TITLE.MAX_LENGTH - value.length
+		);
 		setBuildTitle(value);
 	};
 
@@ -41,7 +43,7 @@ const BuildTitle = (props: BuildTitleProps) => {
 				placeholder='Build title'
 				className={globalstyles.buildInput}
 				onChange={(e) => handleBuildTitleChange(e)}
-				maxLength={Validation.BUILD_TITLE.MAX_LENGTH}
+				maxLength={RequiredLength.BUILD_TITLE.MAX_LENGTH}
 			/>
 			<p
 				className={globalstyles.inputDescription}

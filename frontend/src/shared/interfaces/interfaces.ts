@@ -122,6 +122,11 @@ export interface snackbarControlsInterface {
 	};
 }
 
+export interface ValidationResult {
+	message: string | null;
+	result: boolean;
+};
+
 export interface RootState
 	extends gameDataInterface,
 		recaptchaInterface,

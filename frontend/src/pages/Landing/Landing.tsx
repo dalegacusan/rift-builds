@@ -16,7 +16,7 @@ import styles from './landing.module.css';
 import {
 	ChampionInterface,
 	RootState,
-} from '../../shared/constants/interfaces';
+} from '../../shared/interfaces/interfaces';
 
 const Landing = (props: LandingProps) => {
 	// Game Data PROPS

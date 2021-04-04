@@ -21,7 +21,7 @@ import styles from './runesselect.module.css';
 import {
 	RuneInterface,
 	RootState,
-} from '../../../../../../../shared/constants/interfaces';
+} from '../../../../../../../shared/interfaces/interfaces';
 
 const RunesSelect = (props: RunesSelectProps) => {
 	// Game Data PROPS

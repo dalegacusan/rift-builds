@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import globalstyles from '../../../../../createbuild.module.css';
 import styles from './spell.module.css';
 // Types
-import { SpellInterface } from '../../../../../../../../shared/constants/interfaces';
+import { SpellInterface } from '../../../../../../../../shared/interfaces/interfaces';
 type SpellProps = {
 	spells: Array<SpellInterface>;
 	spellNumber: number;

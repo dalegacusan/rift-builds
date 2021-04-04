@@ -9,7 +9,7 @@ import NoBuilds from './components/NoBuilds/NoBuilds';
 // CSS
 import styles from './buildslist.module.css';
 // Types
-import { BuildInterface } from '../../../../../shared/constants/interfaces';
+import { BuildInterface } from '../../../../../shared/interfaces/interfaces';
 type BuildsListProps = {
 	builds: Array<BuildInterface>;
 };
