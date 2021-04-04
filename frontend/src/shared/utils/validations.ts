@@ -7,11 +7,14 @@ import {
 	RuneInterface,
 	SpellInterface,
 } from '../constants/interfaces';
-import { ItemType } from '../constants/constants';
+import { ItemType, GameMode, GameRegion } from '../constants/constants';
 import { Validation } from '../constants/validation';
 import { ERROR } from '../utils/messages';
 
 // === START: Global Functions === //
+
+// resultHandler is the object that gets returned for each validation
+// and the value of CreateBuild.tsx's isValidBuild variable
 const resultHandler = (message: string | null, result: boolean) => {
 	return {
 		message,
@@ -23,6 +26,14 @@ const isValidString = (text: string) => {
 	return typeof text === 'string';
 };
 
+const isValidStringLength = (text: string) => {
+	const isValidLength =
+		text.length >= Validation.REASON.MIN_LENGTH &&
+		text.length <= Validation.REASON.MAX_LENGTH;
+
+	return isValidLength;
+};
+
 const isValidReasonAndType = (objectToCheck: RuneInterface | ItemInterface) => {
 	const { reason } = objectToCheck;
 
@@ -32,15 +43,14 @@ const isValidReasonAndType = (objectToCheck: RuneInterface | ItemInterface) => {
 	// two conditions
 	if (reason) {
 		const isValidType = isValidString(reason);
-		const isValidLength =
-			reason.length >= Validation.REASON.MIN_LENGTH &&
-			reason.length <= Validation.REASON.MAX_LENGTH;
+		const isValidLength = isValidStringLength(reason);
 
 		if (!(isValidType && isValidLength)) return false;
 	}
 
 	return true;
 };
+
 // === END: Global Functions === //
 
 const HAS_BUILD_TITLE = (build: BuildInterface) => {
@@ -129,6 +139,33 @@ const IS_VALID_ROLE = (build: BuildInterface, roles: Array<RoleInterface>) => {
 	}
 
 	return resultHandler(ERROR.NOT_VALID_ROLE, false);
+};
+
+const IS_VALID_GAME_MODE = (build: BuildInterface) => {
+	const { gameMode } = build;
+
+	const isValidGameMode =
+		gameMode === GameMode.NORMAL || gameMode === GameMode.ARAM;
+	const isTypeString = isValidString(gameMode);
+
+	if (isValidGameMode && isTypeString) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_GAME_MODE, false);
+};
+
+const IS_VALID_BUILD_DESCRIPTION = (build: BuildInterface) => {
+	const { description } = build;
+
+	const isTypeString = isValidString(description);
+	const isValidLength = isValidStringLength(description);
+
+	if (isTypeString && isValidLength) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_BUILD_DESCRIPTION, false);
 };
 
 const IS_VALID_CHAMPION = (
@@ -306,6 +343,22 @@ const IS_VALID_RANK = (build: BuildInterface, ranks: Array<RankInterface>) => {
 	return resultHandler(ERROR.NOT_VALID_RANK, false);
 };
 
+const IS_VALID_REGION = (build: BuildInterface) => {
+	const { region } = build;
+
+	const isValidRegion =
+		region === GameRegion.SEA ||
+		region === GameRegion.NA ||
+		region === GameRegion.EUW;
+	const isTypeString = isValidString(region);
+
+	if (isValidRegion && isTypeString) {
+		return resultHandler(null, true);
+	}
+
+	return resultHandler(ERROR.NOT_VALID_REGION, false);
+};
+
 export const VALIDATE = {
 	HAS_BUILD_TITLE,
 	HAS_ITEMS_SELECTED,
@@ -314,10 +367,13 @@ export const VALIDATE = {
 	IS_VALID_BUILD_TITLE,
 	IS_VALID_USERNAME,
 	IS_VALID_ROLE,
+	IS_VALID_GAME_MODE,
+	IS_VALID_BUILD_DESCRIPTION,
 	IS_VALID_CHAMPION,
 	IS_VALID_ITEMS_SELECTED,
 	IS_VALID_NUMBER_OF_ITEMS_SELECTED,
 	IS_VALID_RUNES,
 	IS_VALID_SPELLS,
 	IS_VALID_RANK,
+	IS_VALID_REGION,
 };

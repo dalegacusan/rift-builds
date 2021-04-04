@@ -161,7 +161,7 @@ export default function ControlledAccordions() {
 				</AccordionSummary>
 				<AccordionDetails className={styles.accordionAnswerContainer}>
 					<p className={styles.tierListReference}>
-						Our tier list is referenced from&nbsp;
+						Our current tier list is referenced from&nbsp;
 						<a href={TierList.CREATOR_URL}>{TierList.CREATOR_NAME}</a>
 						's Patch {TierList.VERSION}&nbsp;
 						<a href={TierList.URL}>Tier List</a>

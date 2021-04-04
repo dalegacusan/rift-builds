@@ -25,6 +25,8 @@ const PlayerRegion = (props: PlayerRegionProps) => {
 	) => {
 		const { value } = e.target;
 
+		console.log(value);
+
 		setRegionSelected(value);
 	};
 

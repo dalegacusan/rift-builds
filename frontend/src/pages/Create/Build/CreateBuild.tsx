@@ -83,6 +83,10 @@ const CreateBuild = (props: CreateBuildProps) => {
 		const HAS_USERNAME = VALIDATE.HAS_USERNAME(completeBuild);
 		const IS_VALID_USERNAME = VALIDATE.IS_VALID_USERNAME(completeBuild);
 		const IS_VALID_ROLE = VALIDATE.IS_VALID_ROLE(completeBuild, roles);
+		const IS_VALID_GAME_MODE = VALIDATE.IS_VALID_GAME_MODE(completeBuild);
+		const IS_VALID_BUILD_DESCRIPTION = VALIDATE.IS_VALID_BUILD_DESCRIPTION(
+			completeBuild
+		);
 		const IS_VALID_CHAMPION = VALIDATE.IS_VALID_CHAMPION(
 			completeBuild,
 			champions
@@ -97,6 +101,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 		const IS_VALID_NUMBER_OF_ITEMS_SELECTED = VALIDATE.IS_VALID_NUMBER_OF_ITEMS_SELECTED(
 			completeBuild
 		);
+		const IS_VALID_REGION = VALIDATE.IS_VALID_REGION(completeBuild);
 
 		const validationsCollection = [
 			HAS_BUILD_TITLE,
@@ -106,12 +111,15 @@ const CreateBuild = (props: CreateBuildProps) => {
 			HAS_USERNAME,
 			IS_VALID_USERNAME,
 			IS_VALID_ROLE,
+			IS_VALID_GAME_MODE,
+			IS_VALID_BUILD_DESCRIPTION,
 			IS_VALID_CHAMPION,
 			IS_VALID_ITEMS_SELECTED,
 			IS_VALID_RUNES,
 			IS_VALID_SPELLS,
 			IS_VALID_RANK,
 			IS_VALID_NUMBER_OF_ITEMS_SELECTED,
+			IS_VALID_REGION,
 		];
 
 		const allValidationsAreValid = validationsCollection.every((validation) => {

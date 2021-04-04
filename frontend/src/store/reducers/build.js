@@ -55,10 +55,10 @@ const buildReducer = (state = initialState, action) => {
 				...state,
 				runes: action.data
 			};
-		case actionTypes.BUILD_SET_SERVER:
+		case actionTypes.BUILD_SET_REGION:
 			return {
 				...state,
-				server: action.data
+				region: action.data
 			};
 		case actionTypes.BUILD_SET_SPELLSSELECTED:
 			return {
