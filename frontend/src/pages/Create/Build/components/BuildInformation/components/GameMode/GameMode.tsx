@@ -18,9 +18,11 @@ import { RootState } from '../../../../../../../shared/interfaces/interfaces';
 
 const GameModeComponent = (props: GameModeComponentProps) => {
 	// Build PROPS
-	const { gameMode, setGameMode } = props;
+	const { gameMode, setGameMode, resetSpellsSelected } = props;
 
 	const handleGameModeChange = (newGameMode: string) => {
+		resetSpellsSelected();
+
 		setGameMode(newGameMode);
 	};
 
@@ -68,6 +70,8 @@ const mapDispatchToProps = (dispatch: any) => {
 	return {
 		setGameMode: (newGameMode: string) =>
 			dispatch({ type: actionTypes.BUILD_SET_GAMEMODE, data: newGameMode }),
+		resetSpellsSelected: () =>
+			dispatch({ type: actionTypes.BUILD_RESET_SPELLSSELECTED }),
 	};
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ItemType } from '../../../../../../../shared/constants/constants';
+import { RequiredLength } from '../../../../../../../shared/constants/requiredLength';
 
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
@@ -13,7 +14,10 @@ import BuildRune from './components/BuildRune/BuildRune';
 import BuildSpell from './components/BuildSpell/BuildSpell';
 import Divider from '@material-ui/core/Divider';
 // Types
-import { BuildInterface } from '../../../../../../../shared/interfaces/interfaces';
+import {
+	BuildInterface,
+	ItemInterface,
+} from '../../../../../../../shared/interfaces/interfaces';
 // CSS
 import styles from './buildbox.module.css';
 
@@ -29,6 +33,35 @@ const BuildBox = (props: BuildBoxProps) => {
 	const { keystone } = runes;
 	const { spellOne, spellTwo } = spells;
 	const { itemsConfirmed } = build; // Arrays
+
+	// Display primary items PLUS optional items (if primary items is less than 6)
+	// Primary items are prioritized - meaning that only optional items are
+	// going to be added and primary items will be displayed by default
+	const buildItemsToDisplay = () => {
+		const primaryItems = itemsConfirmed.filter(
+			(item) => item.type === ItemType.PRIMARY
+		);
+		const optionalItems = itemsConfirmed.filter(
+			(item) => item.type === ItemType.OPTIONAL
+		);
+		const numberOfOptionalItemsToAdd =
+			RequiredLength.ITEMS.PRIMARY.MAX_LENGTH - primaryItems.length;
+
+		const itemsToDisplay = [...primaryItems];
+
+		// Check if length of primary items is less than max length of primary items
+		// If TRUE, add one optional item at a time UNTIL it reaches the
+		// calculated numberOfOptionalItemsToAdd
+		if (primaryItems.length < RequiredLength.ITEMS.PRIMARY.MAX_LENGTH) {
+			for (let i = 0; i < numberOfOptionalItemsToAdd; i++) {
+				itemsToDisplay.push(optionalItems[i]);
+			}
+		}
+
+		// Filters undefined because it's possible that the optionalItems length
+		// is less than numberOfOptionalItemsToAdd
+		return itemsToDisplay.filter((item: ItemInterface) => item !== undefined);
+	};
 
 	return (
 		<>
@@ -72,11 +105,9 @@ const BuildBox = (props: BuildBoxProps) => {
 					xs={3}
 					sm={3}
 				>
-					{itemsConfirmed
-						.filter((item) => item.type === ItemType.PRIMARY)
-						.map((item, index) => {
-							return <BuildItem key={index} item={item} />;
-						})}
+					{buildItemsToDisplay().map((item, index) => {
+						return <BuildItem key={index} item={item} />;
+					})}
 				</Grid>
 
 				{/* Spells */}

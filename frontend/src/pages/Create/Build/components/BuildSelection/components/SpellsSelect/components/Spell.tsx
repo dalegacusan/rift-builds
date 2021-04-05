@@ -49,7 +49,6 @@ const Spell = (props: SpellProps) => {
 			>
 				{spells.map((spell: SpellInterface, index) => {
 					const { id: spellId, spellName } = spell;
-
 					return (
 						<option
 							key={index}

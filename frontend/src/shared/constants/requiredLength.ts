@@ -1,9 +1,7 @@
-// Build Title Length = 24
-// Username length = 22
 export const RequiredLength = {
 	BUILD_TITLE: {
 		MIN_LENGTH: 0, // 6?
-		MAX_LENGTH: 100,
+		MAX_LENGTH: 120,
 	},
 	USERNAME: {
 		MIN_LENGTH: 0, // 6?

@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { SpellNumber } from '../../../../../../../shared/constants/constants';
+import {
+	GameMode,
+	Maps,
+	SpellNumber,
+} from '../../../../../../../shared/constants/constants';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -24,7 +28,7 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 	// Game Data PROPS
 	const { spells } = props;
 	// Build PROPS
-	const { spellsSelected, setSpellsSelected } = props;
+	const { gameMode, spellsSelected, setSpellsSelected } = props;
 
 	const handleSpellSelectChange = (
 		e: React.ChangeEvent<HTMLSelectElement>,
@@ -48,6 +52,26 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 		}
 	};
 
+	// Filter spells to display based on game mode selected
+	// Gamemode = NORMAL ? w/o Mark n Dash, Clarity
+	// Gamemode = ARAM ? w/o Smite
+	// GameMode = NORMAL ? Display spells that has wild_rift applicable map
+	// GameMode = ARAM ? Display spells that has howling_abyss applicable map
+	const buildSpellsToDisplay = spells.filter((spell: SpellInterface) => {
+		const { applicableMaps } = spell;
+
+		const hasHowlingAbyss = applicableMaps.some(
+			(map) => map === Maps.HOWLING_ABYSS
+		);
+		const hasWildRift = applicableMaps.some((map) => map === Maps.WILD_RIFT);
+
+		if (gameMode === GameMode.NORMAL && hasWildRift) {
+			return spell;
+		} else if (gameMode === GameMode.ARAM && hasHowlingAbyss) {
+			return spell;
+		}
+	});
+
 	return (
 		<Box>
 			<p className={globalstyles.inputLabel}>8. Summoner Spells</p>
@@ -58,7 +82,7 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 			<Grid container item xs={12}>
 				{/* Spell One */}
 				<Spell
-					spells={spells}
+					spells={buildSpellsToDisplay}
 					spellNumber={1}
 					spellsSelected={spellsSelected}
 					handleSpellSelectChange={handleSpellSelectChange}
@@ -66,7 +90,7 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 
 				{/* Spell Two */}
 				<Spell
-					spells={spells}
+					spells={buildSpellsToDisplay}
 					spellNumber={2}
 					spellsSelected={spellsSelected}
 					handleSpellSelectChange={handleSpellSelectChange}
@@ -78,6 +102,7 @@ const SpellsSelect = (props: SpellsSelectProps) => {
 
 const mapStateToProps = (state: RootState) => {
 	return {
+		gameMode: state.build.gameMode,
 		spellsSelected: state.build.spells,
 		spells: state.gameData.spells,
 	};

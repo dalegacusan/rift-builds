@@ -68,6 +68,11 @@ const buildReducer = (state = initialState, action) => {
 					[action.spellKey]: action.data
 				}
 			};
+		case actionTypes.BUILD_RESET_SPELLSSELECTED:
+			return {
+				...state,
+				spells: DefaultSelectedState.SPELLS
+			};
 		case actionTypes.BUILD_SET_RANKSELECTED:
 			return {
 				...state,
