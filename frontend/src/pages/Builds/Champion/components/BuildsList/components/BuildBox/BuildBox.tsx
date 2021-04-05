@@ -30,7 +30,6 @@ const BuildBox = (props: BuildBoxProps) => {
 	const { id: buildId, dateSubmitted, username } = build; // Strings
 	const { champion, rank, runes, spells } = build; // Objects
 	const { id: championId, championName } = champion;
-	const { keystone } = runes;
 	const { spellOne, spellTwo } = spells;
 	const { itemsConfirmed } = build; // Arrays
 
@@ -134,7 +133,7 @@ const BuildBox = (props: BuildBoxProps) => {
 					xs={1}
 					sm={1}
 				>
-					<BuildRune rune={keystone} />
+					<BuildRune runes={runes} />
 				</Grid>
 
 				{/* Rank and Username */}

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-// @ts-ignore - No types for this module
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// MaterialUI
+import Badge from '@material-ui/core/Badge';
+import Avatar from '@material-ui/core/Avatar';
+import { Theme, withStyles, createStyles } from '@material-ui/core/styles';
 // Components
 import RunePopover from '../../../../../../../../../components/Popover/RunePopover';
 // CSS
@@ -9,11 +11,26 @@ import styles from './buildrune.module.css';
 // Types
 import { RuneInterface } from '../../../../../../../../../shared/interfaces/interfaces';
 type BuildRuneProps = {
-	rune: RuneInterface;
+	runes: {
+		keystone: RuneInterface;
+		domination: RuneInterface;
+		resolve: RuneInterface;
+		inspiration: RuneInterface;
+	};
 };
 
+const SmallAvatar = withStyles((theme: Theme) =>
+	createStyles({
+		root: {
+			width: 18,
+			height: 18,
+		},
+	})
+)(Avatar);
+
 const BuildRune = (props: BuildRuneProps) => {
-	const { rune } = props;
+	const { runes } = props;
+	const { keystone, domination } = runes;
 
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -31,14 +48,31 @@ const BuildRune = (props: BuildRuneProps) => {
 
 	return (
 		<>
-			<LazyLoadImage
-				src={`/images/wildriftrunes/${rune.id}.jpg`}
-				className={styles.runeImage}
+			<Badge
+				overlap='circle'
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'right',
+				}}
+				badgeContent={
+					<SmallAvatar
+						alt={domination.runeName}
+						src={`/images/wildriftrunes/${domination.id}.jpg`}
+					/>
+				}
 				onMouseEnter={handlePopoverOpen}
 				onMouseLeave={handlePopoverClose}
-			/>
+			>
+				<Avatar
+					alt={keystone.runeName}
+					src={`/images/wildriftrunes/${keystone.id}.jpg`}
+					className={styles.runeImage}
+					// variant="square"
+				/>
+			</Badge>
+
 			<RunePopover
-				rune={rune}
+				rune={keystone}
 				anchorEl={anchorEl}
 				open={open}
 				handlePopoverClose={handlePopoverClose}
