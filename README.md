@@ -36,7 +36,7 @@
 
 ## Setup
 
-To run this project, you need to have the `/data` folder where data is stored.
+To run this project, you need to have the `/data` folder where data is stored. If you wish to contribute, create an issue for requesting access to that folder.
 
 1. Run `npm install` on the root folder
     * This will install the dependencies needed to run both the frontend and backend at the same time.
