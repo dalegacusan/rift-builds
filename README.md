@@ -62,7 +62,7 @@ $ npm run dev
 
 ## FAQ
 
-Frequently Asked Questions: https://riftbuilds.netlify.app/faq
+Frequently Asked Questions: <a href="https://riftbuilds.netlify.app/faq" target="_blank">https://riftbuilds.netlify.app/faq</a>
 
 ## Feedback
 <p>Feel free to send feedback at <a href="mailto:abcwildrift@gmail.com">abcwildrift@gmail.com<a/></p>
