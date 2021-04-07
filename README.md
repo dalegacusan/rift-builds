@@ -1,6 +1,6 @@
 <img src="https://imgur.com/GM2OlXS.png" alt="Rift Builds" title="Rift Builds"/>
 
-<p>Rift Builds is a platform to help you get easy access to builds across all regions for League of Legends: Wild Rift. Get started by creating a build for your favorite champion and share them across the community.</p>
+**Rift Builds** is a platform to help you get easy access to builds across all regions for League of Legends: Wild Rift. Get started by creating a build for your favorite champion and share them across the community.
 
 <p align="center"> 
   <b>
@@ -17,6 +17,7 @@
 * [Setup](#setup)
 * [FAQ](#faq)
 * [Feedback](#feedback)
+* [Contributing](#contributing)
 
 ## Features
 <p>A few of the things you can do with Rift Builds:</p>
@@ -33,7 +34,7 @@
 |   TypeScript  |   TypeScript  |    MongoDB    |
 |     React     |     Node.js   |
 |     Redux     |   Express.js  |
-|               |    Mongoose   |
+|  Material-UI  |    Mongoose   |
 
 ## Setup
 
@@ -65,7 +66,11 @@ $ npm run dev
 
 Frequently Asked Questions: <a href="https://riftbuilds.netlify.app/faq" target="_blank">https://riftbuilds.netlify.app/faq</a>
 
+## Contributing
+
+Please let me know of any issues/feature requests. Pull-requests and all contributions are greatly appreciated.
+
 ## Feedback
-<p>Feel free to send feedback at <a href="mailto:abcwildrift@gmail.com">abcwildrift@gmail.com<a/></p>
+Feel free to send feedback at <a href="mailto:abcwildrift@gmail.com">abcwildrift@gmail.com<a/>
 
 <p>If there's anything you'd like to chat about, please feel free to add <b>dale#9772</b> on <b>Discord</b>!</p>
