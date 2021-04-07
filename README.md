@@ -6,7 +6,7 @@
   <a href="https://riftbuilds.netlify.app/" target="_blank">https://riftbuilds.netlify.app/</a>
 </p>
 
-<img src="https://imgur.com/0HwDxGw.png" alt="sample" title="sample"/>
+<img src="https://imgur.com/XIXTb2x.png" alt="sample" title="sample"/>
 
 ## 📌 Features
 <p>A few of the things you can do with Rift Builds:</p>
