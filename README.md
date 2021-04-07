@@ -2,7 +2,7 @@
 
 <p>Rift Builds is a platform to help you get easy access to builds across all regions for League of Legends: Wild Rift. Get started by creating a build for your favorite champion and share them across the community.</p>
 
-<p> Check out the site live at:
+<p align="center"> Check out the site live at:
   <a href="https://riftbuilds.netlify.app/" target="_blank">https://riftbuilds.netlify.app/</a>
 </p>
 
