@@ -22,6 +22,7 @@
 <p>A few of the things you can do with Rift Builds:</p>
 
 * Create a build for a champion
+* Explain why an item/rune was selected
 * Share your build
 * See what others are building for each champion
 * No accounts needed
@@ -36,7 +37,7 @@
 
 ## Setup
 
-To run this project, you need to have the `/data` folder where data is stored. If you wish to contribute, create an issue for requesting access to that folder.
+To run this project, you need to have the `/data` folder where data is stored. If you wish to contribute, [create an issue](https://github.com/dalegacusan/wildriftcommunitybuilds/issues/new) requesting access to that folder.
 
 1. Run `npm install` on the root folder
     * This will install the dependencies needed to run both the frontend and backend at the same time.
