@@ -25,7 +25,6 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 		buildRole,
 		champion,
 		dateSubmitted,
-		description,
 		gameMode,
 		patchVersion,
 		rank,

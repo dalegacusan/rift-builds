@@ -1,0 +1,15 @@
+const {
+	REACT_APP_CLIENT_URL,
+	REACT_APP_SERVER_URL,
+	REACT_APP_RECAPTCHA_PUBLIC_KEY,
+} = process.env;
+
+export const URL = {
+	// SERVER: REACT_APP_SERVER_URL, // PROD
+	SERVER: '', // DEV
+	CLIENT: REACT_APP_CLIENT_URL,
+};
+
+export const ReCaptcha = {
+	PUBLIC_KEY: REACT_APP_RECAPTCHA_PUBLIC_KEY,
+};

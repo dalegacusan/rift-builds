@@ -67,7 +67,6 @@ const BuildRune = (props: BuildRuneProps) => {
 					alt={keystone.runeName}
 					src={`/images/wildriftrunes/${keystone.id}.jpg`}
 					className={styles.runeImage}
-					// variant="square"
 				/>
 			</Badge>
 

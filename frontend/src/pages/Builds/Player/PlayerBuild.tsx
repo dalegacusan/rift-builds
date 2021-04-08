@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 
-import { URL, ItemType } from '../../../shared/constants/constants';
+import { ItemType } from '../../../shared/constants/constants';
+import { URL } from '../../../shared/config/config';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -59,7 +60,7 @@ const PlayerBuild = (props: any) => {
 					<Helmet>
 						<title>
 							{build.champion.championName} Build and Guide by {build.username}
-							&nbsp; | Rift Builds
+							&nbsp;| Rift Builds
 						</title>
 					</Helmet>
 					<Box className={styles.playerBuildContainer}>

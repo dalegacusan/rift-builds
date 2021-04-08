@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -69,7 +69,7 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 
 			setSnackbarControls({
 				snackbarControls: {
-					message: Message.ERROR.HAS_DUPLICATE_ITEMS,
+					message: Message.ERROR.ITEM_IS_ALREADY_IN_BUILD,
 					shouldOpen: true,
 					snackbarType: 'error',
 				},

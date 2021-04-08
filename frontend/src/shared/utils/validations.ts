@@ -23,6 +23,10 @@ const resultHandler = (message: string | null, result: boolean) => {
 	};
 };
 
+const turnToString = (text: string) => {
+	return String(text);
+};
+
 const isValidString = (text: string) => {
 	return typeof text === 'string';
 };
@@ -35,7 +39,9 @@ const isValidReasonLength = (text: string) => {
 	return isValidReasonLength;
 };
 
-const isValidReasonAndType = (objectToCheck: RuneInterface | ItemInterface) => {
+const isValidReasonTypeAndLength = (
+	objectToCheck: RuneInterface | ItemInterface
+) => {
 	const { reason } = objectToCheck;
 
 	// If there's a reason property, check if it's the right type
@@ -74,6 +80,187 @@ const checkAllValidationsAreValid = (
 
 		return result === true;
 	});
+};
+
+const sanitizeBuildTexts = (build: BuildInterface) => {
+	const { itemsConfirmed } = build;
+
+	// run turnToString() on each item reason property, if it's defined
+	const sanitizedItemsConfirmedReasons = itemsConfirmed.map(
+		(item: ItemInterface) => {
+			const { reason } = item;
+
+			if (reason) {
+				return {
+					...item,
+					reason: turnToString(reason).trim(),
+				};
+			}
+
+			// return item if there's no reason property
+			return item;
+		}
+	);
+
+	return {
+		...build,
+		buildTitle: turnToString(build.buildTitle).trim(),
+		description: turnToString(build.description).trim(),
+		username: turnToString(build.username).trim(),
+		itemsConfirmed: sanitizedItemsConfirmedReasons,
+	};
+};
+
+// Validations for each step
+const validateStep = (
+	activeStep: number,
+	completeBuild: BuildInterface,
+	champions: Array<ChampionInterface>,
+	items: Array<ItemInterface>,
+	runes: Array<RuneInterface>,
+	spells: Array<SpellInterface>,
+	roles: Array<RoleInterface>
+) => {
+	let allValidationsAreValid = false;
+	let validationsCollection: Array<ValidationResult> = [];
+
+	if (activeStep === 0) {
+		const HAS_BUILD_TITLE = Validate.HAS_BUILD_TITLE(completeBuild);
+		const IS_VALID_BUILD_TITLE = Validate.IS_VALID_BUILD_TITLE(completeBuild);
+		const IS_VALID_ROLE = Validate.IS_VALID_ROLE(completeBuild, roles);
+		const IS_VALID_GAME_MODE = Validate.IS_VALID_GAME_MODE(completeBuild);
+		const IS_VALID_BUILD_DESCRIPTION = Validate.IS_VALID_BUILD_DESCRIPTION(
+			completeBuild
+		);
+
+		validationsCollection = [
+			HAS_BUILD_TITLE,
+			IS_VALID_BUILD_TITLE,
+			IS_VALID_ROLE,
+			IS_VALID_GAME_MODE,
+			IS_VALID_BUILD_DESCRIPTION,
+		];
+
+		allValidationsAreValid = ValidateHelper.checkAllValidationsAreValid(
+			validationsCollection
+		);
+	} else if (activeStep === 1) {
+		const IS_VALID_CHAMPION = Validate.IS_VALID_CHAMPION(
+			completeBuild,
+			champions
+		);
+		const HAS_ITEMS_SELECTED = Validate.HAS_ITEMS_SELECTED(completeBuild);
+		const HAS_THREE_TO_SIX_PRIMARY_ITEMS = Validate.HAS_THREE_TO_SIX_PRIMARY_ITEMS(
+			completeBuild
+		);
+		const IS_VALID_ITEMS_SELECTED = Validate.IS_VALID_ITEMS_SELECTED(
+			completeBuild,
+			items
+		);
+		const IS_VALID_NUMBER_OF_ITEMS_SELECTED = Validate.IS_VALID_NUMBER_OF_ITEMS_SELECTED(
+			completeBuild
+		);
+		const IS_VALID_RUNES = Validate.IS_VALID_RUNES(completeBuild, runes);
+		const IS_VALID_SPELLS = Validate.IS_VALID_SPELLS(completeBuild, spells);
+
+		validationsCollection = [
+			IS_VALID_CHAMPION,
+			HAS_ITEMS_SELECTED,
+			HAS_THREE_TO_SIX_PRIMARY_ITEMS,
+			IS_VALID_ITEMS_SELECTED,
+			IS_VALID_NUMBER_OF_ITEMS_SELECTED,
+			IS_VALID_RUNES,
+			IS_VALID_SPELLS,
+		];
+
+		allValidationsAreValid = ValidateHelper.checkAllValidationsAreValid(
+			validationsCollection
+		);
+	}
+
+	if (allValidationsAreValid) {
+		return resultHandler(null, true);
+	}
+
+	// Find all validations that returned false
+	// Return first validation that failed, hence [0]
+	const invalidValidation = ValidateHelper.findValidationErrorAndReturn(
+		validationsCollection
+	);
+
+	return resultHandler(invalidValidation.message, false);
+};
+
+// For FINAL validation
+const validateBuild = (
+	completeBuild: BuildInterface,
+	champions: Array<ChampionInterface>,
+	items: Array<ItemInterface>,
+	runes: Array<RuneInterface>,
+	spells: Array<SpellInterface>,
+	ranks: Array<RankInterface>,
+	roles: Array<RoleInterface>
+) => {
+	const HAS_BUILD_TITLE = Validate.HAS_BUILD_TITLE(completeBuild);
+	const IS_VALID_BUILD_TITLE = Validate.IS_VALID_BUILD_TITLE(completeBuild);
+	const HAS_ITEMS_SELECTED = Validate.HAS_ITEMS_SELECTED(completeBuild);
+	const HAS_THREE_TO_SIX_PRIMARY_ITEMS = Validate.HAS_THREE_TO_SIX_PRIMARY_ITEMS(
+		completeBuild
+	);
+	const HAS_USERNAME = Validate.HAS_USERNAME(completeBuild);
+	const IS_VALID_USERNAME = Validate.IS_VALID_USERNAME(completeBuild);
+	const IS_VALID_ROLE = Validate.IS_VALID_ROLE(completeBuild, roles);
+	const IS_VALID_GAME_MODE = Validate.IS_VALID_GAME_MODE(completeBuild);
+	const IS_VALID_BUILD_DESCRIPTION = Validate.IS_VALID_BUILD_DESCRIPTION(
+		completeBuild
+	);
+	const IS_VALID_CHAMPION = Validate.IS_VALID_CHAMPION(
+		completeBuild,
+		champions
+	);
+	const IS_VALID_ITEMS_SELECTED = Validate.IS_VALID_ITEMS_SELECTED(
+		completeBuild,
+		items
+	);
+	const IS_VALID_RUNES = Validate.IS_VALID_RUNES(completeBuild, runes);
+	const IS_VALID_SPELLS = Validate.IS_VALID_SPELLS(completeBuild, spells);
+	const IS_VALID_RANK = Validate.IS_VALID_RANK(completeBuild, ranks);
+	const IS_VALID_NUMBER_OF_ITEMS_SELECTED = Validate.IS_VALID_NUMBER_OF_ITEMS_SELECTED(
+		completeBuild
+	);
+	const IS_VALID_REGION = Validate.IS_VALID_REGION(completeBuild);
+
+	const validationsCollection = [
+		HAS_BUILD_TITLE,
+		IS_VALID_BUILD_TITLE,
+		HAS_ITEMS_SELECTED,
+		HAS_THREE_TO_SIX_PRIMARY_ITEMS,
+		HAS_USERNAME,
+		IS_VALID_USERNAME,
+		IS_VALID_ROLE,
+		IS_VALID_GAME_MODE,
+		IS_VALID_BUILD_DESCRIPTION,
+		IS_VALID_CHAMPION,
+		IS_VALID_ITEMS_SELECTED,
+		IS_VALID_RUNES,
+		IS_VALID_SPELLS,
+		IS_VALID_RANK,
+		IS_VALID_NUMBER_OF_ITEMS_SELECTED,
+		IS_VALID_REGION,
+	];
+
+	const allValidationsAreValid = ValidateHelper.checkAllValidationsAreValid(
+		validationsCollection
+	);
+
+	if (allValidationsAreValid) {
+		return {
+			message: null,
+			result: true,
+		};
+	}
+
+	return findValidationErrorAndReturn(validationsCollection);
 };
 
 // === END: Global Functions === //
@@ -157,9 +344,7 @@ const IS_VALID_ROLE = (build: BuildInterface, roles: Array<RoleInterface>) => {
 	// Checks if buildRole.id and buildRole.roleName has a corresponding object to roles
 	const isValidRole =
 		roles.filter((role) => {
-			const { id, roleName } = role;
-
-			return id === buildRole.id && roleName === buildRole.roleName;
+			return JSON.stringify(buildRole) === JSON.stringify(role);
 		}).length === 1;
 
 	if (isValidRole) {
@@ -226,7 +411,7 @@ const IS_VALID_ITEMS_SELECTED = (
 
 	// Checks if every reason property of an item is type string and has valid length
 	const validReasonTypeAndLength = itemsConfirmed
-		.map((item: ItemInterface) => isValidReasonAndType(item))
+		.map((item: ItemInterface) => isValidReasonTypeAndLength(item))
 		.every((boolIsTrue) => boolIsTrue);
 
 	// Removes "reason" and "type" property which is defined by user
@@ -294,7 +479,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 			const { reason, ...keystoneCopy } = keystone;
 
 			return JSON.stringify(rune) === JSON.stringify(keystoneCopy);
-		}).length === 1 && isValidReasonAndType(keystone);
+		}).length === 1 && isValidReasonTypeAndLength(keystone);
 
 	const VALID_DOMINATION =
 		runes.filter((rune) => {
@@ -302,7 +487,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 			const { reason, ...dominationCopy } = domination;
 
 			return JSON.stringify(rune) === JSON.stringify(dominationCopy);
-		}).length === 1 && isValidReasonAndType(domination);
+		}).length === 1 && isValidReasonTypeAndLength(domination);
 
 	const VALID_RESOLVE =
 		runes.filter((rune) => {
@@ -310,7 +495,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 			const { reason, ...resolveCopy } = resolve;
 
 			return JSON.stringify(rune) === JSON.stringify(resolveCopy);
-		}).length === 1 && isValidReasonAndType(resolve);
+		}).length === 1 && isValidReasonTypeAndLength(resolve);
 
 	const VALID_INSPIRATION =
 		runes.filter((rune) => {
@@ -318,7 +503,7 @@ const IS_VALID_RUNES = (build: BuildInterface, runes: Array<RuneInterface>) => {
 			const { reason, ...inspirationCopy } = inspiration;
 
 			return JSON.stringify(rune) === JSON.stringify(inspirationCopy);
-		}).length === 1 && isValidReasonAndType(inspiration);
+		}).length === 1 && isValidReasonTypeAndLength(inspiration);
 
 	if (
 		VALID_KEYSTONE &&
@@ -407,6 +592,9 @@ export const Validate = {
 };
 
 export const ValidateHelper = {
+	validateBuild,
+	validateStep,
 	findValidationErrorAndReturn,
 	checkAllValidationsAreValid,
+	sanitizeBuildTexts,
 };

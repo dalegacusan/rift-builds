@@ -1,8 +1,7 @@
 import React from 'react';
-import { URL } from '../../../../../../../shared/constants/constants';
+import { URL } from '../../../../../../../shared/config/config';
 
 // MaterialUI
-import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import Grid from '@material-ui/core/Grid';

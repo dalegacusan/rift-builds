@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-	Contact,
-	GamePatch,
-	TierList,
-} from '../../../shared/constants/constants';
+import { Contact, TierList } from '../../../shared/constants/constants';
 
 // MaterialUI
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';

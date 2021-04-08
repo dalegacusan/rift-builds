@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import { URL } from '../../../shared/constants/constants';
+import { URL } from '../../../shared/config/config';
 import axios from 'axios';
 
 // MaterialUI
@@ -51,7 +51,6 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		lane: [],
 		tier: {},
 		title: '',
-		url: '',
 	});
 
 	const getBuildsForChampion = () => {

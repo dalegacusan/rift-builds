@@ -47,7 +47,6 @@ export interface ChampionInterface {
 		Support?: string;
 	};
 	title: string;
-	url: string;
 }
 
 export interface ItemInterface {
@@ -61,13 +60,11 @@ export interface ItemInterface {
 	statistics: Array<string>;
 	tier: string;
 	type?: string;
-	url: string;
 }
 
 export interface RankInterface {
 	id: string;
 	rankName: string;
-	url: string;
 }
 
 export interface RuneInterface {
@@ -78,7 +75,6 @@ export interface RuneInterface {
 	reason?: string;
 	runeName: string;
 	type: string;
-	url: string;
 }
 
 export interface SpellInterface {
@@ -87,7 +83,6 @@ export interface SpellInterface {
 	applicableMaps: Array<string>;
 	description: Array<string>;
 	cooldown: string;
-	url: string;
 }
 
 export interface RoleInterface {
@@ -125,7 +120,7 @@ export interface snackbarControlsInterface {
 export interface ValidationResult {
 	message: string | null;
 	result: boolean;
-};
+}
 
 export interface RootState
 	extends gameDataInterface,

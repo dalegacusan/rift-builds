@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, RefObject } from 'react';
-import { ReCaptcha } from '../../../../../shared/constants/constants';
+import React, { useEffect, useRef, RefObject } from 'react';
+import { ReCaptcha } from '../../../../../shared/config/config';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 // Redux
