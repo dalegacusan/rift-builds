@@ -71,6 +71,6 @@ Frequently Asked Questions: <a href="https://riftbuilds.netlify.app/faq" target=
 Please let me know of any issues/feature requests. Pull-requests and all contributions are greatly appreciated.
 
 ## Feedback
-Feel free to send feedback at <a href="mailto:abcwildrift@gmail.com">abcwildrift@gmail.com<a/>
+Feel free to send feedback at <a href="mailto:contactriftbuilds@gmail.com">contactriftbuilds@gmail.com<a/>
 
 <p>If there's anything you'd like to chat about, please feel free to add <b>dale#9772</b> on <b>Discord</b>!</p>
