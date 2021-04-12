@@ -1,9 +1,9 @@
 .errorNumber {
 	font-size: 70px;
 	font-weight: bold;
-	line-height: 120%;
+	line-height: 90%;
 	letter-spacing: 3px;
-	margin: 0;
+	margin: 20px 0 0 0;
 }
 
 .errorTitle {
@@ -25,5 +25,4 @@
 }
 
 .errorImage {
-	margin-top: 5px;
 }

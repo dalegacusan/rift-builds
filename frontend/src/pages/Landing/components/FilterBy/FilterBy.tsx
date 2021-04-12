@@ -12,11 +12,17 @@ import styles from './filterby.module.css';
 type FilterByProps = {
 	championSearch: string;
 	handleChampionSearchChange(e: React.ChangeEvent<HTMLInputElement>): void;
+	roleFilter: string | undefined;
 	setRoleFilter(role: string): void;
 };
 
 const FilterBy = (props: FilterByProps) => {
-	const { championSearch, handleChampionSearchChange, setRoleFilter } = props;
+	const {
+		championSearch,
+		handleChampionSearchChange,
+		roleFilter,
+		setRoleFilter,
+	} = props;
 
 	return (
 		<Box className={styles.filterContainer}>
@@ -25,28 +31,74 @@ const FilterBy = (props: FilterByProps) => {
 					<Box className={styles.rolesListContainer}>
 						<ul className={styles.rolesList}>
 							<li>
-								<span onClick={() => setRoleFilter(RoleFilter.ALL)}>All</span>
+								<span
+									onClick={() => setRoleFilter(RoleFilter.ALL)}
+									className={
+										roleFilter === RoleFilter.ALL
+											? styles.selectedFilter
+											: undefined
+									}
+								>
+									All
+								</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter(RoleFilter.TOP)}>Top</span>
+								<span
+									onClick={() => setRoleFilter(RoleFilter.TOP)}
+									className={
+										roleFilter === RoleFilter.TOP
+											? styles.selectedFilter
+											: undefined
+									}
+								>
+									Top
+								</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter(RoleFilter.JUNGLE)}>
+								<span
+									onClick={() => setRoleFilter(RoleFilter.JUNGLE)}
+									className={
+										roleFilter === RoleFilter.JUNGLE
+											? styles.selectedFilter
+											: undefined
+									}
+								>
 									Jungle
 								</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter(RoleFilter.MIDDLE)}>
+								<span
+									onClick={() => setRoleFilter(RoleFilter.MIDDLE)}
+									className={
+										roleFilter === RoleFilter.MIDDLE
+											? styles.selectedFilter
+											: undefined
+									}
+								>
 									Middle
 								</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter(RoleFilter.BOTTOM)}>
+								<span
+									onClick={() => setRoleFilter(RoleFilter.BOTTOM)}
+									className={
+										roleFilter === RoleFilter.BOTTOM
+											? styles.selectedFilter
+											: undefined
+									}
+								>
 									Bottom
 								</span>
 							</li>
 							<li>
-								<span onClick={() => setRoleFilter(RoleFilter.SUPPORT)}>
+								<span
+									onClick={() => setRoleFilter(RoleFilter.SUPPORT)}
+									className={
+										roleFilter === RoleFilter.SUPPORT
+											? styles.selectedFilter
+											: undefined
+									}
+								>
 									Support
 								</span>
 							</li>

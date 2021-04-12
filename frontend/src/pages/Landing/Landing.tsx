@@ -80,6 +80,7 @@ const Landing = (props: LandingProps) => {
 				<FilterBy
 					championSearch={championSearch}
 					handleChampionSearchChange={handleChampionSearchChange}
+					roleFilter={roleFilter}
 					setRoleFilter={setRoleFilter}
 				/>
 
