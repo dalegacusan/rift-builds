@@ -1,0 +1,29 @@
+.errorNumber {
+	font-size: 70px;
+	font-weight: bold;
+	line-height: 120%;
+	letter-spacing: 3px;
+	margin: 0;
+}
+
+.errorTitle {
+	font-size: 35px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.errorDescription {
+	color: rgb(255, 255, 255, 80%);
+	font-size: 16px;
+	width: 40ch;
+}
+
+.errorButton {
+	margin-top: 40px !important;
+	padding: 6px 40px !important;
+	text-transform: none !important;
+}
+
+.errorImage {
+	margin-top: 5px;
+}

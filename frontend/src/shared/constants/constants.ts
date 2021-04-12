@@ -1,5 +1,5 @@
 export const Contact = {
-	EMAIL_ADDRESS: 'abcwildrift@gmail.com',
+	EMAIL_ADDRESS: 'contactriftbuilds@gmail.com',
 };
 
 export const GamePatch = {

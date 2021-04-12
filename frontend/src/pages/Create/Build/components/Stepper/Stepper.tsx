@@ -6,6 +6,8 @@ import Box from '@material-ui/core/Box';
 // Components
 import ReCaptcha from '../ReCaptcha/ReCaptcha';
 import StepperButtons from './components/StepperButtons';
+// CSS
+import globalstyles from '../../createbuild.module.css';
 // Types
 type StepperProps = {
 	activeStep: number;
@@ -16,7 +18,7 @@ type StepperProps = {
 	submitBuild: () => void;
 	validateStep: () => boolean;
 };
-// CSS
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
@@ -60,14 +62,12 @@ const HorizontalLabelPositionBelowStepper = (props: StepperProps) => {
 		<div className={classes.root}>
 			{/* Build Components */}
 			<Box style={{ padding: '10px 0' }}>{componentToDisplay}</Box>
-
 			{/* ReCAPTCHA */}
 			<Box display='flex' flexDirection='row-reverse'>
 				{openRecaptcha && activeStep === steps.length - 1 ? (
 					<ReCaptcha resetCaptcha={resetCaptcha} />
 				) : null}
 			</Box>
-
 			{/* Buttons */}
 			<Box display='flex' flexDirection='row-reverse'>
 				<StepperButtons

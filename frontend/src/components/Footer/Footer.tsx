@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
+import { Contact } from '../../shared/constants/constants';
+
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -35,13 +37,13 @@ const Footer = () => {
 									FAQ
 								</a>
 								<a
-									href='mailto:abcwildrift@gmail.com'
+									href={`mailto:${Contact.EMAIL_ADDRESS}`}
 									className={styles.footerLink}
 								>
 									Feedback
 								</a>
 								<a
-									href='mailto:abcwildrift@gmail.com'
+									href={`mailto:${Contact.EMAIL_ADDRESS}`}
 									className={styles.footerLink}
 								>
 									Report a Bug
