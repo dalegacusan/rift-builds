@@ -3,8 +3,8 @@ import { GameMode, GameRegion } from './constants';
 // Update object if backend data is edited
 export const DefaultSelectedState = {
 	ROLE: {
-		id: "53f90d2a-d970-41ec-8d5c-f8775580ad7e",
-		roleName: "Top"
+		id: '53f90d2a-d970-41ec-8d5c-f8775580ad7e',
+		roleName: 'Top',
 	},
 	CHAMPION: {
 		id: '48ca031a-d92e-44e6-b7b6-f3eb1dbe644c',
@@ -109,23 +109,23 @@ export const DefaultSelectedState = {
 	REGION: GameRegion.SEA,
 	SPELLS: {
 		spellOne: {
-			id: "dd6ff556-3b07-4be0-bd1f-c2dd9c9ce1dd",
-			spellName: "Flash",
-			applicableMaps: ["wild_rift", "howling_abyss"],
+			id: 'dd6ff556-3b07-4be0-bd1f-c2dd9c9ce1dd',
+			spellName: 'Flash',
+			applicableMaps: ['wild_rift', 'howling_abyss'],
 			description: [
-				"Teleport a short distance forward or towards the aimed direction."
+				'Teleport a short distance forward or towards the aimed direction.',
 			],
-			cooldown: "150"
+			cooldown: '150',
 		},
 		spellTwo: {
 			id: 'aeb37ecd-ccb5-41fc-ad9c-c9b6bef39e34',
 			spellName: 'Ignite',
-			applicableMaps: ["wild_rift", "howling_abyss"],
+			applicableMaps: ['wild_rift', 'howling_abyss'],
 			description: [
 				'Ignites target enemy champion, dealing 60−410 (based on level) true damage over 5 seconds and inflincting them with Grievous Wounds.',
 				'Grievous Wounds reduces healing effects by 50%',
 			],
 			cooldown: '90',
-		}
-	}
-}
+		},
+	},
+};

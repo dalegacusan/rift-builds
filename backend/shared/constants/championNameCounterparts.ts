@@ -43,6 +43,7 @@ export const championNameCounterparts: { [key: string]: string } = {
 	orianna: 'Orianna',
 	pantheon: 'Pantheon',
 	rakan: 'Rakan',
+	rammus: 'Rammus',
 	seraphine: 'Seraphine',
 	shyvana: 'Shyvana',
 	singed: 'Singed',

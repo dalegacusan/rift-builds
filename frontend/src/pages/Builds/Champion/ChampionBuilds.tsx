@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 // @ts-ignore - No types for this module
@@ -37,10 +37,10 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [isLoadingMoreBuilds, setIsLoadingMoreBuilds] = useState(false);
-	const [championBuilds, setChampionBuilds] = useState<ChampionBuildsType>({
-		builds: [],
-		buildsCount: 0,
-	});
+	const [championBuilds, setChampionBuilds] = useState<Array<BuildInterface>>(
+		[]
+	);
+	const [championBuildsCount, setChampionBuildsCount] = useState(0);
 	const [championData, setChampionData] = useState<ChampionInterface>({
 		id: '',
 		championName: '',
@@ -52,6 +52,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		tier: {},
 		title: '',
 	});
+	const [disableLoadMoreBuilds, setDisableLoadMoreBuilds] = useState(false);
 
 	const getBuildsForChampion = () => {
 		return axios.post(`${URL.SERVER}/api/build/all/${championName}`, { page });
@@ -63,14 +64,10 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 
 		const moreBuildsRequest = await getBuildsForChampion();
 		const { data } = moreBuildsRequest;
-		const { buildsCount: newBuildsCount, builds: newBuilds } = data;
+		const { builds: newBuilds } = data;
 
-		setChampionBuilds((prev: ChampionBuildsType) => {
-			const { builds: previousBuilds } = prev;
-			return {
-				builds: [...previousBuilds, ...newBuilds],
-				buildsCount: newBuildsCount,
-			};
+		setChampionBuilds((prev: Array<BuildInterface>) => {
+			return [...prev, ...newBuilds];
 		});
 		setIsLoadingMoreBuilds(false);
 	};
@@ -84,12 +81,22 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 			const [{ data: buildsForChampion }, { data: dataForChampion }] = values;
 			const { buildsCount, builds } = buildsForChampion;
 
-			setChampionBuilds({ builds, buildsCount });
+			setChampionBuilds([...builds]);
+			setChampionBuildsCount(buildsCount);
+
 			setChampionData(dataForChampion[0]);
 
 			setIsLoading(!isLoading);
 		});
 	}, []);
+
+	useEffect(() => {
+		if (championBuilds.length === championBuildsCount) {
+			setDisableLoadMoreBuilds(true);
+		} else {
+			setDisableLoadMoreBuilds(false);
+		}
+	}, [championBuilds, championBuildsCount]);
 
 	return (
 		<>
@@ -104,14 +111,13 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 					{/* Champion Data */}
 					<ChampionData
 						championData={championData}
-						buildsCount={championBuilds.buildsCount}
+						buildsCount={championBuildsCount}
 					/>
 					{/* Builds */}
-					<BuildsList builds={championBuilds.builds} />
+					<BuildsList builds={championBuilds} />
 
 					{/* Load More Button */}
-					{championBuilds.buildsCount !== 0 &&
-					championBuilds.builds.length !== 0 ? (
+					{championBuilds.length !== 0 && !disableLoadMoreBuilds ? (
 						<Box
 							display='flex'
 							justifyContent='center'
@@ -121,6 +127,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 								onClick={getMoreBuilds}
 								variant='contained'
 								className={styles.loadMoreButton}
+								disabled={disableLoadMoreBuilds}
 							>
 								{isLoadingMoreBuilds ? 'Loading...' : 'Load more builds'}
 							</Button>
