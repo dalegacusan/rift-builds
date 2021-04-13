@@ -10,7 +10,7 @@ export const DefaultSelectedState = {
 		id: '48ca031a-d92e-44e6-b7b6-f3eb1dbe644c',
 		championName: 'Ahri',
 		lane: ['Middle'],
-		tier: { Middle: 'S' },
+		tier: { Middle: 'A' },
 		title: 'Nine-Tailed Fox',
 		counters: {
 			weakAgainst: [

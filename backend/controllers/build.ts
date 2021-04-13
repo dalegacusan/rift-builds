@@ -23,13 +23,11 @@ const getOneBuild = async (req: Request, res: Response, next: NextFunction) => {
 			throw Message.ERROR.BUILD.FAILED_TO_GET_ONE_BUILD;
 		}
 
-		res.status(200).json(oneBuild);
+		return res.status(200).json(oneBuild);
 	} catch (err) {
-		res.status(400).json({
+		return res.status(400).json({
 			message: err,
 		});
-
-		next(err);
 	}
 };
 
@@ -47,7 +45,7 @@ const getAllBuildsForChampion = async (
 	// Check if championName in URL parameter is a VALID champion name
 	// and found in championNameCounterparts
 	if (!championNameCounterparts[championName]) {
-		res.status(400).json({
+		return res.status(400).json({
 			message: Message.ERROR.BUILD.FAILED_TO_GET_ALL_BUILDS_FOR_CHAMPION,
 		});
 	}
@@ -76,13 +74,11 @@ const getAllBuildsForChampion = async (
 			}
 		);
 
-		res.status(200).json(getAllBuilds);
+		return res.status(200).json(getAllBuilds);
 	} catch (err) {
-		res.status(400).json({
+		return res.status(400).json({
 			message: Message.ERROR.BUILD.FAILED_TO_GET_ALL_BUILDS_FOR_CHAMPION,
 		});
-
-		next(err);
 	}
 };
 
@@ -121,21 +117,19 @@ const saveBuild = async (req: Request, res: Response, next: NextFunction) => {
 		newBuild
 			.save()
 			.then((data: BuildInterface) => {
-				res.status(200).json(data);
+				return res.status(200).json(data);
 			})
 			.catch((err: Error) => {
-				res.status(400).json({
+				return res.status(400).json({
 					message: Message.ERROR.BUILD.FAILED_TO_SAVE_BUILD,
 				});
-
-				next(err);
 			});
 	} else {
 		const validationError = ValidateHelper.findValidationErrorAndReturn(
 			validationsCollection
 		);
 
-		res.status(400).json({
+		return res.status(400).json({
 			message: validationError.errorType,
 		});
 	}
