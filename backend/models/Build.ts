@@ -4,6 +4,8 @@ import { BuildInterface } from '../shared/interfaces/interfaces';
 import { RequiredLength } from '../shared/constants/requiredLengths';
 const { GameMode, GameRegion } = require('../shared/constants/constants');
 
+const mongoosePaginate = require('mongoose-paginate-v2');
+
 const buildSchema = new mongoose.Schema({
 	buildTitle: {
 		type: String,
@@ -38,6 +40,8 @@ const buildSchema = new mongoose.Schema({
 	spells: Object,
 	username: { type: String, required: true, trim: true },
 });
+
+buildSchema.plugin(mongoosePaginate);
 
 buildSchema.set('toJSON', {
 	// Type is ANY based on @types/mongoose index.d.ts Line 1692

@@ -238,4 +238,5 @@ export const ValidateHelper = {
 	findValidationErrorAndReturn,
 	checkAllValidationsAreValid,
 	sanitizeBuildTexts,
+	turnToString,
 };

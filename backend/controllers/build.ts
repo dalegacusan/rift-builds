@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+
 import { BuildInterface } from '../shared/interfaces/interfaces';
 import { Validate, ValidateHelper } from '../shared/utils/validations';
 import { Message } from '../shared/constants/validationMessages';
@@ -8,7 +9,10 @@ const Build = require('../models/Build');
 const logger = require('../shared/utils/logger');
 
 const getOneBuild = async (req: Request, res: Response, next: NextFunction) => {
-	const { buildId } = req.params;
+	let { buildId } = req.params;
+
+	// Sanitize URL Parameter
+	buildId = ValidateHelper.turnToString(buildId);
 
 	try {
 		const oneBuild = await Build.findById(buildId);
@@ -29,36 +33,43 @@ const getAllBuildsForChampion = async (
 	next: NextFunction
 ) => {
 	const { page } = req.body;
-	const { championName } = req.params;
+	let { championName } = req.params;
 
-	// Sort by NEWEST date submitted
-	const allBuilds = Build.find({
-		'champion.championName': championNameCounterparts[championName],
-	})
-		.sort({ dateSubmitted: -1 })
-		.skip(page - 5)
-		.limit(5);
-	const buildsCount = Build.countDocuments({
-		'champion.championName': championNameCounterparts[championName],
-	});
+	// Sanitize URL Parameter
+	championName = ValidateHelper.turnToString(championName);
 
-	Promise.all([buildsCount, allBuilds])
-		.then((values) => {
-			const count = values[0];
-			const builds = values[1];
+	// Limit to 5 documents returned
+	// Sort by latest date
+	const options = {
+		page,
+		limit: 5,
+		sort: { dateSubmitted: -1 },
+	};
 
-			res.status(200).json({
-				builds,
-				buildsCount: count,
-			});
-		})
-		.catch((err) => {
-			res.status(400).json({
-				message: Message.ERROR.BUILD.FAILED_TO_GET_ALL_BUILDS_FOR_CHAMPION,
-			});
+	try {
+		const getAllBuilds = await Build.paginate(
+			{
+				'champion.championName': championNameCounterparts[championName],
+			},
+			options,
+			(err: any, result: any) => {
+				return {
+					builds: result.docs,
+					buildsCount: result.totalDocs,
+					nextPage: result.nextPage,
+					hasNextPage: result.hasNextPage,
+				};
+			}
+		);
 
-			next(err);
+		res.status(200).json(getAllBuilds);
+	} catch (err) {
+		res.status(400).json({
+			message: Message.ERROR.BUILD.FAILED_TO_GET_ALL_BUILDS_FOR_CHAMPION,
 		});
+
+		next(err);
+	}
 };
 
 const saveBuild = async (req: Request, res: Response, next: NextFunction) => {

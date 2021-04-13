@@ -28,15 +28,10 @@ type ChampionBuildsType = {
 };
 type HeroBuildsProps = RouteComponentProps<PathParamsType> & {};
 
-// For pagination (used in POST requests)
-let page = 5;
-
 const HeroBuilds = (props: HeroBuildsProps) => {
 	const { match } = props;
 	const { championName } = match.params;
 
-	const [isLoading, setIsLoading] = useState(true);
-	const [isLoadingMoreBuilds, setIsLoadingMoreBuilds] = useState(false);
 	const [championBuilds, setChampionBuilds] = useState<Array<BuildInterface>>(
 		[]
 	);
@@ -52,19 +47,33 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		tier: {},
 		title: '',
 	});
+
+	const [isLoading, setIsLoading] = useState(true);
+	const [isLoadingMoreBuilds, setIsLoadingMoreBuilds] = useState(false);
 	const [disableLoadMoreBuilds, setDisableLoadMoreBuilds] = useState(false);
 
+	const page = useRef(1);
+
+	// Returns 5 builds every time.
 	const getBuildsForChampion = () => {
-		return axios.post(`${URL.SERVER}/api/build/all/${championName}`, { page });
+		return axios.post(`${URL.SERVER}/api/build/all/${championName}`, {
+			page: page.current,
+		});
 	};
 	const getMoreBuilds = async () => {
 		setIsLoadingMoreBuilds(true);
 
-		page += 5;
-
 		const moreBuildsRequest = await getBuildsForChampion();
 		const { data } = moreBuildsRequest;
-		const { builds: newBuilds } = data;
+		const { nextPage, hasNextPage, builds: newBuilds } = data;
+
+		page.current = nextPage;
+
+		// REMOVES LOAD MORE BUTTON
+		// If there is no more next page
+		if (page.current === null && !hasNextPage) {
+			setDisableLoadMoreBuilds(true);
+		}
 
 		setChampionBuilds((prev: Array<BuildInterface>) => {
 			return [...prev, ...newBuilds];
@@ -72,6 +81,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		setIsLoadingMoreBuilds(false);
 	};
 
+	// Load builds and champion data
 	useEffect(() => {
 		const getOneChampion = axios.get(
 			`${URL.SERVER}/api/champion/${championName}`
@@ -89,14 +99,6 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 			setIsLoading(!isLoading);
 		});
 	}, []);
-
-	useEffect(() => {
-		if (championBuilds.length === championBuildsCount) {
-			setDisableLoadMoreBuilds(true);
-		} else {
-			setDisableLoadMoreBuilds(false);
-		}
-	}, [championBuilds, championBuildsCount]);
 
 	return (
 		<>

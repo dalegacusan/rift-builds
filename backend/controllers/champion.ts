@@ -1,6 +1,7 @@
+import champions from '../data/wildriftchampions.json';
 import { Request, Response, NextFunction } from 'express';
 import { ChampionInterface } from '../shared/interfaces/interfaces';
-import champions from '../data/wildriftchampions.json';
+import { ValidateHelper } from '../shared/utils/validations';
 import { championNameCounterparts } from '../shared/constants/championNameCounterparts';
 const Message = require('../shared/constants/validationMessages');
 
@@ -21,7 +22,9 @@ const getOneChampion = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const { championName } = req.params;
+	let { championName } = req.params;
+
+	championName = ValidateHelper.turnToString(championName);
 
 	try {
 		const oneChampion = champions.filter(
