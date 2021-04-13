@@ -30,6 +30,8 @@ const GameModeComponent = (props: GameModeComponentProps) => {
 	// - If gameMode is X, add .selected class to that button
 	//   else if gameMode is not X, remove .selected class from that button
 
+	let disabledGameMode = GameMode.ARAM;
+
 	return (
 		<Box>
 			<p className={globalstyles.inputLabel}>3. Game Mode</p>
@@ -39,18 +41,24 @@ const GameModeComponent = (props: GameModeComponentProps) => {
 
 			<Button
 				variant='contained'
+				// If gamemode is selected, add button styles
+				// If gamemode is disabled, add line-through, change text color, and disable button
 				className={`${styles.gamemodeButton} ${
 					gameMode === GameMode.NORMAL ? styles.selected : null
-				}`}
+				} ${disabledGameMode === GameMode.NORMAL ? styles.notAvailable : null}`}
+				disabled={disabledGameMode === GameMode.NORMAL ? true : false}
 				onClick={() => handleGameModeChange(GameMode.NORMAL)}
 			>
 				Normal
 			</Button>
 			<Button
 				variant='contained'
+				// If gamemode is selected, add button styles
+				// If gamemode is disabled, add line-through, change text color, and disable button
 				className={`${styles.gamemodeButton} ${
 					gameMode === GameMode.ARAM ? styles.selected : null
-				}`}
+				} ${disabledGameMode === GameMode.ARAM ? styles.notAvailable : null}`}
+				disabled={disabledGameMode === GameMode.ARAM ? true : false}
 				onClick={() => handleGameModeChange(GameMode.ARAM)}
 			>
 				ARAM
