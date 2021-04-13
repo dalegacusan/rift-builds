@@ -17,6 +17,7 @@ import BuildItem from './components/BuildItem/BuildItem';
 import RuneItem from './components/RuneItem/RuneItem';
 import SpellItem from './components/Spellitem/SpellItem';
 import BuildDescription from './components/BuildDescription/BuildDescription';
+import PageNotFound from '../../../components/Error/404/PageNotFound';
 import PlayerBuildHeader from './components/PlayerBuildHeader/PlayerBuildHeader';
 import PlayerBuildFooter from './components/PlayerBuildFooter/PlayerBuildFooter';
 import SectionDivider from './components/SectionDivider/SectionDivider';
@@ -45,17 +46,31 @@ const PlayerBuild = (props: any) => {
 
 	const [build, setBuild] = useState<BuildInterface>();
 
-	useEffect(() => {
-		axios.get(`${URL.SERVER}/api/build/${match.params.buildId}`).then((res) => {
-			const { data } = res;
+	const [renderErrorComponent, setRenderErrorComponent] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
-			setBuild(data);
-		});
+	useEffect(() => {
+		axios
+			.get(`${URL.SERVER}/api/build/${match.params.buildId}`)
+			.then((res) => {
+				const { data } = res;
+
+				setIsLoading(!isLoading);
+
+				setBuild(data);
+			})
+			.catch((err) => {
+				setIsLoading(!isLoading);
+
+				setRenderErrorComponent(true);
+			});
 	}, []);
 
 	return (
 		<div className={classes.root}>
-			{build ? (
+			{renderErrorComponent ? <PageNotFound /> : null}
+
+			{!isLoading && !renderErrorComponent && build ? (
 				<>
 					<Helmet>
 						<title>
@@ -133,9 +148,9 @@ const PlayerBuild = (props: any) => {
 						/>
 					</Box>
 				</>
-			) : (
-				<CircularProgress />
-			)}
+			) : null}
+
+			{isLoading ? <p>Loading...</p> : null}
 		</div>
 	);
 };

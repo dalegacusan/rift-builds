@@ -17,10 +17,16 @@ const getOneBuild = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const oneBuild = await Build.findById(buildId);
 
+		// Check if buildId in URL parameter is a valid document Id
+		// else, throw an error
+		if (!oneBuild) {
+			throw Message.ERROR.BUILD.FAILED_TO_GET_ONE_BUILD;
+		}
+
 		res.status(200).json(oneBuild);
 	} catch (err) {
 		res.status(400).json({
-			message: Message.ERROR.BUILD.FAILED_TO_GET_ONE_BUILD,
+			message: err,
 		});
 
 		next(err);
@@ -37,6 +43,14 @@ const getAllBuildsForChampion = async (
 
 	// Sanitize URL Parameter
 	championName = ValidateHelper.turnToString(championName);
+
+	// Check if championName in URL parameter is a VALID champion name
+	// and found in championNameCounterparts
+	if (!championNameCounterparts[championName]) {
+		res.status(400).json({
+			message: Message.ERROR.BUILD.FAILED_TO_GET_ALL_BUILDS_FOR_CHAMPION,
+		});
+	}
 
 	// Limit to 5 documents returned
 	// Sort by latest date

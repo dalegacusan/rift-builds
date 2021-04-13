@@ -26,6 +26,14 @@ const getOneChampion = async (
 
 	championName = ValidateHelper.turnToString(championName);
 
+	// Check if championName in URL parameter is a VALID champion name
+	// and found in championNameCounterparts
+	if (!championNameCounterparts[championName]) {
+		res.status(400).json({
+			message: Message.ERROR.CHAMPION.FAILED_TO_GET_DATA_FOR_CHAMPION,
+		});
+	}
+
 	try {
 		const oneChampion = champions.filter(
 			(champion: ChampionInterface) =>

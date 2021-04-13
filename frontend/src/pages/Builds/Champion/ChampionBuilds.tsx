@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import BuildsList from './components/BuildsList/BuildsList';
 import Button from '@material-ui/core/Button';
 import ChampionData from './components/ChampionData/ChampionData';
+import PageNotFound from '../../../components/Error/404/PageNotFound';
 // CSS
 import styles from './championbuilds.module.css';
 // Types
@@ -21,10 +22,6 @@ import {
 } from '../../../shared/interfaces/interfaces';
 type PathParamsType = {
 	championName: string;
-};
-type ChampionBuildsType = {
-	builds: Array<BuildInterface>;
-	buildsCount: number;
 };
 type HeroBuildsProps = RouteComponentProps<PathParamsType> & {};
 
@@ -48,6 +45,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		title: '',
 	});
 
+	const [renderErrorComponent, setRenderErrorComponent] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isLoadingMoreBuilds, setIsLoadingMoreBuilds] = useState(false);
 	const [disableLoadMoreBuilds, setDisableLoadMoreBuilds] = useState(false);
@@ -89,22 +87,30 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 			`${URL.SERVER}/api/champion/${championName}`
 		);
 
-		Promise.all([getBuildsForChampion(), getOneChampion]).then((values) => {
-			const [{ data: buildsForChampion }, { data: dataForChampion }] = values;
-			const { buildsCount, builds } = buildsForChampion;
+		Promise.all([getBuildsForChampion(), getOneChampion])
+			.then((values) => {
+				const [{ data: buildsForChampion }, { data: dataForChampion }] = values;
+				const { buildsCount, builds } = buildsForChampion;
 
-			setChampionBuilds([...builds]);
-			setChampionBuildsCount(buildsCount);
+				setChampionBuilds([...builds]);
+				setChampionBuildsCount(buildsCount);
 
-			setChampionData(dataForChampion[0]);
+				setChampionData(dataForChampion[0]);
 
-			setIsLoading(!isLoading);
-		});
+				setIsLoading(!isLoading);
+			})
+			.catch((err) => {
+				setIsLoading(!isLoading);
+
+				setRenderErrorComponent(true);
+			});
 	}, []);
 
 	return (
 		<>
-			{!isLoading ? (
+			{renderErrorComponent ? <PageNotFound /> : null}
+
+			{!isLoading && !renderErrorComponent ? (
 				<>
 					<Helmet>
 						<title>
@@ -138,9 +144,9 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 						</Box>
 					) : null}
 				</>
-			) : (
-				<p>Loading...</p>
-			)}
+			) : null}
+
+			{isLoading ? <p>Loading...</p> : null}
 		</>
 	);
 };
