@@ -43,7 +43,7 @@ const BuildCountHeader = (props: ChampionDataProps) => {
 
 					<Box className={styles.buildsCountContainer}>
 						<p style={{ textAlign: 'center', margin: 0 }}>
-							{buildsCount} Builds
+							{buildsCount} {buildsCount === 1 ? 'Build' : 'Builds'}
 						</p>
 					</Box>
 				</Grid>

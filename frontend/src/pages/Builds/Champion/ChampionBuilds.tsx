@@ -63,22 +63,24 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 	const getMoreBuilds = async () => {
 		setIsLoadingMoreBuilds(true);
 
+		page.current = page.current + 1;
+
 		const moreBuildsRequest = await getBuildsForChampion();
 		const { data } = moreBuildsRequest;
 		const { nextPage, hasNextPage, builds: newBuilds } = data;
 
-		page.current = nextPage;
+		setIsLoadingMoreBuilds(false);
 
 		// REMOVES LOAD MORE BUTTON
 		// If there is no more next page
-		if (page.current === null && !hasNextPage) {
+		if (!hasNextPage) {
 			setDisableLoadMoreBuilds(true);
 		}
 
+		// but still display the remaining builds on the previous page
 		setChampionBuilds((prev: Array<BuildInterface>) => {
 			return [...prev, ...newBuilds];
 		});
-		setIsLoadingMoreBuilds(false);
 	};
 
 	// Load builds and champion data
@@ -119,7 +121,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 					<BuildsList builds={championBuilds} />
 
 					{/* Load More Button */}
-					{championBuilds.length !== 0 && !disableLoadMoreBuilds ? (
+					{championBuilds.length >= 5 && !disableLoadMoreBuilds ? (
 						<Box
 							display='flex'
 							justifyContent='center'
