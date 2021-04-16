@@ -24,11 +24,14 @@ const BuildLearnMoreButton = (props: BuildLearnMoreButtonProps) => {
 	const classes = useStyles();
 
 	return (
-		<a href={`/build/${buildId}`} style={{ textDecoration: 'none' }}>
+		<a
+			href={`/build/${buildId}`}
+			style={{ textDecoration: 'none', width: '100%' }}
+		>
 			<Button
 				size='small'
 				variant='contained'
-				className={`${classes.learnMoreButton} ${styles.learnMoreButton}`}
+				className={`${classes.learnMoreButton} ${styles.learnMoreButton} buildBoxLearnMoreButton`}
 			>
 				Learn more
 			</Button>

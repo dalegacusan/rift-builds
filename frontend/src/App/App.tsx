@@ -12,13 +12,15 @@ import actionTypes from '../store/actions';
 // MaterialUI
 import CssBaseline from '@material-ui/core/CssBaseline';
 // Components
+import About from '../pages/About/About';
+import ChampionBuilds from '../pages/Builds/Champion/ChampionBuilds';
 import CreateBuild from '../pages/Create/Build/CreateBuild';
 import FAQ from '../pages/FAQ/FAQ';
 import Layout from '../components/Layout';
 import Landing from '../pages/Landing/Landing';
 import PageNotFound from '../components/Error/404/PageNotFound';
-import ChampionBuilds from '../pages/Builds/Champion/ChampionBuilds';
 import PlayerBuild from '../pages/Builds/Player/PlayerBuild';
+import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 // Types
 import {
 	ChampionInterface,
@@ -184,6 +186,12 @@ const App = (props: AppProps) => {
 							</Route>
 							<Route exact path='/faq'>
 								<FAQ />
+							</Route>
+							<Route exact path='/privacypolicy'>
+								<PrivacyPolicy />
+							</Route>
+							<Route exact path='/about'>
+								<About />
 							</Route>
 
 							{/* 404 - Page not found */}

@@ -13,6 +13,7 @@ import BuildsList from './components/BuildsList/BuildsList';
 import Button from '@material-ui/core/Button';
 import ChampionData from './components/ChampionData/ChampionData';
 import PageNotFound from '../../../components/Error/404/PageNotFound';
+import LoadingCircle from '../../../components/Loading/Circle';
 // CSS
 import styles from './championbuilds.module.css';
 // Types
@@ -124,7 +125,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 						buildsCount={championBuildsCount}
 					/>
 					{/* Builds */}
-					<BuildsList builds={championBuilds} />
+					<BuildsList builds={championBuilds} championData={championData} />
 
 					{/* Load More Button */}
 					{championBuilds.length >= 5 && !disableLoadMoreBuilds ? (
@@ -146,7 +147,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 				</>
 			) : null}
 
-			{isLoading ? <p>Loading...</p> : null}
+			{isLoading ? <LoadingCircle /> : null}
 		</>
 	);
 };

@@ -15,7 +15,7 @@ const BuildChip = (props: BuildChipProps) => {
 
 	return (
 		<Box className={styles.BuildChipContainer}>
-			<span>
+			<span className={styles.buildChipValue}>
 				{property} &nbsp;
 				<span className={styles.chipValue}>{value ? value : '?'}</span>
 			</span>

@@ -30,7 +30,7 @@ const GameModeComponent = (props: GameModeComponentProps) => {
 	// - If gameMode is X, add .selected class to that button
 	//   else if gameMode is not X, remove .selected class from that button
 
-	let disabledGameMode = GameMode.ARAM;
+	let disabledGameMode = '';
 
 	return (
 		<Box>

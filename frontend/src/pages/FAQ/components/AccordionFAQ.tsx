@@ -117,7 +117,7 @@ export default function ControlledAccordions() {
 						</p>
 						<img
 							src='/images/faq/step1.png'
-							style={{ width: '600px' }}
+							style={{ width: '80%' }}
 							alt='How to share a build'
 						/>
 						<p>
@@ -129,7 +129,7 @@ export default function ControlledAccordions() {
 						</p>
 						<img
 							src='/images/faq/step2.png'
-							style={{ width: '600px' }}
+							style={{ width: '80%' }}
 							alt='How to share a build'
 						/>
 					</Box>

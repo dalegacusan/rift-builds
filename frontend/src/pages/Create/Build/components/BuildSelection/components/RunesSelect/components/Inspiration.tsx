@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -11,6 +11,7 @@ import { connect, ConnectedProps } from 'react-redux';
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
 // Components
+import RunePopover from '../../../../../../../../components/Popover/RunePopover';
 // CSS
 import globalstyles from '../../../../../createbuild.module.css';
 import styles from './rune.module.css';
@@ -27,12 +28,34 @@ const Inspiration = (props: InspirationProps) => {
 	// Build PROPS
 	const { runeInspiration } = props;
 
+	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+	const handlePopoverOpen = (
+		event: React.MouseEvent<HTMLElement, MouseEvent>
+	) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handlePopoverClose = () => {
+		setAnchorEl(null);
+	};
+
+	const open = Boolean(anchorEl);
+
 	return (
 		<>
 			<Grid item xs={12} sm={6}>
 				<LazyLoadImage
 					src={`/images/wildriftrunes/${runeInspiration.id}.jpg`}
 					className={styles.runeImage}
+					onMouseEnter={handlePopoverOpen}
+					onMouseLeave={handlePopoverClose}
+				/>
+				<RunePopover
+					rune={runeInspiration}
+					anchorEl={anchorEl}
+					open={open}
+					handlePopoverClose={handlePopoverClose}
 				/>
 
 				<select

@@ -117,6 +117,8 @@ const saveBuild = async (req: Request, res: Response, next: NextFunction) => {
 		newBuild
 			.save()
 			.then((data: BuildInterface) => {
+				logger.info('Create Build Status: SUCCESS\n');
+
 				return res.status(200).json(data);
 			})
 			.catch((err: Error) => {
@@ -128,6 +130,9 @@ const saveBuild = async (req: Request, res: Response, next: NextFunction) => {
 		const validationError = ValidateHelper.findValidationErrorAndReturn(
 			validationsCollection
 		);
+
+		logger.error('Create Build Status: FAILED');
+		logger.error(`Reason: ${validationError.errorType}\n`);
 
 		return res.status(400).json({
 			message: validationError.errorType,

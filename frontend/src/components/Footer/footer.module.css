@@ -21,3 +21,8 @@
 	color: rgb(255, 255, 255, 60%);
 	margin: 0;
 }
+
+.footerHiglight {
+	color: rgb(255, 255, 255, 77%) !important;
+	font-weight: 600;
+}

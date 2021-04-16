@@ -3,27 +3,6 @@
 	padding: 20px;
 }
 
-.itemContainer {
-	display: inline-block;
-	margin: 0px 3px;
-}
-
-.itemImageContainer {
-	display: flex;
-	justify-content: center;
-}
-
-.itemImage {
-	width: 55px;
-}
-
-.itemImage:hover {
-	cursor: pointer;
-	-webkit-box-shadow: 11px 10px 14px -8px rgba(54, 57, 65, 1);
-	-moz-box-shadow: 11px 10px 14px -8px rgba(54, 57, 65, 1);
-	box-shadow: 11px 10px 14px -8px rgba(54, 57, 65, 1);
-}
-
 .itemsSelectedHeader {
 	margin: 5px 0 12px 0;
 	color: rgb(255, 255, 255, 87%);

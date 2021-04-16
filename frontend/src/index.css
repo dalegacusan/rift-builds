@@ -1,0 +1,36 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 960px) {
+	.buildBoxDateContainer {
+		display: none !important;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.buildBoxContainer {
+		padding: 10px 15px !important;
+	}
+
+	.buildBoxContainer {
+		padding: 15px 0;
+	}
+
+	.buildPatchText,
+	.buildDateSubmittedText {
+		display: inline-block;
+		margin-right: 10px;
+	}
+
+	.playerBuildHeaderMiscDataContainer {
+		text-align: center;
+		background-color: #20242c !important;
+		padding: 5px !important;
+	}
+
+	.playerBuildHeaderMiscDataGrid {
+		padding-left: 0 !important;
+	}
+
+	.playerBuildBuildInformationContainer {
+		padding-bottom: 30px;
+	}
+}

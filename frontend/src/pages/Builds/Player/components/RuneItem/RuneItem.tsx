@@ -67,7 +67,9 @@ const RuneItem = (props: RuneItemProps) => {
 			</Box>
 			{reason ? (
 				<Box p={1} className={styles.runeReasonContainer}>
-					<span className={styles.runeReason}>{reason ? reason : ''}</span>
+					<span className={styles.runeReason}>
+						{reason ? reason.toString() : ''}
+					</span>
 				</Box>
 			) : null}
 		</Box>

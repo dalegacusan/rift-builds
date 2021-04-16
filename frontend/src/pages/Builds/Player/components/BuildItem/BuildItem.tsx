@@ -80,7 +80,7 @@ const BuildItem = (props: BuildItemProps) => {
 			</Box>
 			{reason ? (
 				<Box p={1} className={styles.itemReasonContainer}>
-					<span className={styles.itemReason}>{reason}</span>
+					<span className={styles.itemReason}>{reason.toString()}</span>
 				</Box>
 			) : null}
 		</Box>

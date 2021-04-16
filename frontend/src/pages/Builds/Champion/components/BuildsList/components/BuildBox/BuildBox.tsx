@@ -64,97 +64,91 @@ const BuildBox = (props: BuildBoxProps) => {
 
 	return (
 		<>
-			<Grid
-				container
-				direction='row'
-				justify='center'
-				alignItems='center'
-				className={styles.buildBoxContainer}
+			<a
+				href={`/build/${buildId}`}
+				target='_blank'
+				rel='noreferrer'
+				style={{ textDecoration: 'none' }}
 			>
-				{/* Date Submitted */}
-				<Grid item xs={2} sm={2}>
-					<BuildDate dateSubmitted={dateSubmitted} />
-				</Grid>
-
-				{/* Champion Icon */}
 				<Grid
 					container
-					item
-					direction='row'
-					justify='center'
-					alignItems='center'
-					xs={1}
-					sm={1}
+					spacing={1}
+					className={`${styles.buildBoxContainer} buildBoxContainer`}
 				>
-					<img
-						alt={championName}
-						title={championName}
-						src={`/images/wildriftchampions/${championId}.jpg`}
-						className={styles.championImage}
-					/>
-				</Grid>
+					{/* Date Submitted */}
+					<Grid item xs sm className='buildBoxDateContainer'>
+						<BuildDate dateSubmitted={dateSubmitted} />
+					</Grid>
+					{/* Champion Icon */}
+					<Grid
+						item
+						container
+						alignItems='center'
+						xs={2}
+						sm={1}
+						className='buildBoxChampionImageContainer'
+					>
+						<img
+							alt={championName}
+							title={championName}
+							src={`/images/wildriftchampions/${championId}.jpg`}
+							className={styles.championImage}
+						/>
+					</Grid>
 
-				{/* Items */}
-				<Grid
-					container
-					item
-					direction='row'
-					justify='center'
-					alignItems='center'
-					xs={3}
-					sm={3}
-				>
-					{buildItemsToDisplay().map((item, index) => {
-						return <BuildItem key={index} item={item} />;
-					})}
-				</Grid>
+					{/* Items */}
+					<Grid
+						item
+						container
+						alignItems='center'
+						xs={10}
+						sm={4}
+						className='buildBoxItemsContainer'
+					>
+						{buildItemsToDisplay().map((item, index) => {
+							return <BuildItem key={index} item={item} />;
+						})}
+					</Grid>
 
-				{/* Spells */}
-				<Grid
-					container
-					item
-					direction='row'
-					justify='center'
-					alignItems='center'
-					xs={1}
-					sm={1}
-				>
-					<BuildSpell spell={spellOne} />
-					<BuildSpell spell={spellTwo} />
-				</Grid>
+					{/* Rune */}
+					<Grid
+						item
+						container
+						alignItems='center'
+						xs={2}
+						sm={1}
+						className='buildBoxRuneContainer'
+					>
+						<BuildRune runes={runes} />
+					</Grid>
 
-				{/* Rune */}
-				<Grid
-					container
-					item
-					direction='row'
-					justify='center'
-					alignItems='center'
-					xs={1}
-					sm={1}
-				>
-					<BuildRune runes={runes} />
-				</Grid>
+					{/* Spells  */}
+					<Grid
+						item
+						container
+						alignItems='center'
+						xs={4}
+						sm
+						className='buildBoxSpellContainer'
+					>
+						<BuildSpell spell={spellOne} />
+						<BuildSpell spell={spellTwo} />
+					</Grid>
 
-				{/* Rank and Username */}
-				<Grid item xs={2} sm={2}>
-					<BuildRankUser username={username} rank={rank} />
+					{/* Rank and Username */}
+					<Grid
+						item
+						container
+						alignItems='center'
+						xs
+						sm
+						className='buildBoxRankUsernameContainer'
+					>
+						<BuildRankUser username={username} rank={rank} />
+					</Grid>
 				</Grid>
-
-				{/* Learn more Button */}
-				<Grid
-					container
-					item
-					direction='row'
-					justify='flex-start'
-					alignItems='center'
-					xs={2}
-					sm={2}
-				>
-					<BuildLearnMoreButton buildId={buildId} />
-				</Grid>
-			</Grid>
-			<Divider className={styles.divider} />
+				<Divider variant='fullWidth' className={styles.divider} />
+			</a>
 		</>
 	);
 };

@@ -9,7 +9,7 @@ export const GamePatch = {
 };
 
 export const TierList = {
-	VERSION: '2.2a',
+	VERSION: '2.2',
 	CREATOR_NAME: 'HellsDevil Wild Rift',
 	CREATOR_URL: 'https://www.youtube.com/channel/UCVl23bJtVvs5LZjrzamIbpQ',
 	URL: 'https://youtu.be/0qQ5ZJyeE38',

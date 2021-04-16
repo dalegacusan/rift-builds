@@ -1,17 +1,17 @@
 .BuildChipContainer {
 	background-color: #20242c;
 	border-radius: 4px;
+	margin: 4px 6px 0 0 !important;
+	display: inline-flex;
+	box-sizing: border-box;
+}
+
+.buildChipValue {
 	color: rgb(255, 255, 255, 60%);
 	font-size: 14px;
-	margin-right: 6px;
 	padding: 3px 10px;
 }
 
 .chipValue {
 	color: #13aaff;
-}
-
-.chipHighlight {
-	background-color: #13aaff;
-	color: rgb(0, 0, 0) !important;
 }

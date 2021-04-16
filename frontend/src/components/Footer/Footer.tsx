@@ -33,14 +33,23 @@ const Footer = () => {
 					<Grid item xs>
 						<Box className={styles.footerContainer}>
 							<Box className={styles.footerLinksContainer}>
+								<a href='/about' className={styles.footerLink}>
+									About Us
+								</a>
 								<a href='/faq' className={styles.footerLink}>
 									FAQ
+								</a>
+								<a
+									href={'/privacypolicy'}
+									className={`${styles.footerLink} ${styles.footerHiglight}`}
+								>
+									Privacy Policy
 								</a>
 								<a
 									href={`mailto:${Contact.EMAIL_ADDRESS}`}
 									className={styles.footerLink}
 								>
-									Feedback
+									Contact Us
 								</a>
 								<a
 									href={`mailto:${Contact.EMAIL_ADDRESS}`}

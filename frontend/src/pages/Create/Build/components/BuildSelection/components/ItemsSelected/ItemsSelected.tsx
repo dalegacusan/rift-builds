@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-// @ts-ignore - No types for this module
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { ItemType } from '../../../../../../../shared/constants/constants';
 import { RequiredLength } from '../../../../../../../shared/constants/requiredLength';
@@ -14,11 +12,11 @@ import actionTypes from '../../../../../../../store/actions';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Grow from '@material-ui/core/Grow';
+
 import InfoIcon from '@material-ui/icons/Info';
 import Tooltip from '@material-ui/core/Tooltip';
 // Components
-import ItemPopover from '../../../../../../../components/Popover/ItemPopover';
+import BuildItem from './components/BuildItem/BuildItem';
 // Types
 import {
 	ItemInterface,
@@ -147,32 +145,17 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 							</Box>
 						</Box>
 
+						{/* TYPE: PRIMARY */}
 						<Grid item xs={12}>
 							{itemsConfirmed
-								.filter(
-									(item: ItemInterface) => item.type !== ItemType.OPTIONAL
-								)
-								.map((currentItem, index) => {
+								.filter((item: ItemInterface) => item.type === ItemType.PRIMARY)
+								.map((item: ItemInterface, index: number) => {
 									return (
-										<Grow
+										<BuildItem
 											key={index}
-											in={true}
-											style={{ transformOrigin: '0 0 0' }}
-											{...(true ? { timeout: 200 } : {})}
-										>
-											<Box className={styles.itemContainer}>
-												<Box className={styles.itemImageContainer}>
-													<LazyLoadImage
-														title={currentItem.itemName}
-														className={styles.itemImage}
-														src={`/images/wildriftitems/${currentItem.id}.png`}
-														onClick={() =>
-															handleDeleteItemClick(currentItem.id)
-														}
-													/>
-												</Box>
-											</Box>
-										</Grow>
+											item={item}
+											handleDeleteItemClick={handleDeleteItemClick}
+										/>
 									);
 								})}
 						</Grid>
@@ -181,28 +164,16 @@ const ItemsSelected = (props: ItemsSelectedProps) => {
 						<p className={styles.itemsSelectedHeader}>Optional Items</p>
 						<Grid item xs={12}>
 							{itemsConfirmed
-								.filter((item: ItemInterface) => item.type !== ItemType.PRIMARY)
-								.map((currentItem: ItemInterface, index) => {
+								.filter(
+									(item: ItemInterface) => item.type === ItemType.OPTIONAL
+								)
+								.map((item: ItemInterface, index: number) => {
 									return (
-										<Grow
+										<BuildItem
 											key={index}
-											in={true}
-											style={{ transformOrigin: '0 0 0' }}
-											{...(true ? { timeout: 200 } : {})}
-										>
-											<Box className={styles.itemContainer}>
-												<Box className={styles.itemImageContainer}>
-													<LazyLoadImage
-														title={currentItem.itemName}
-														className={styles.itemImage}
-														src={`/images/wildriftitems/${currentItem.id}.png`}
-														onClick={() =>
-															handleDeleteItemClick(currentItem.id)
-														}
-													/>
-												</Box>
-											</Box>
-										</Grow>
+											item={item}
+											handleDeleteItemClick={handleDeleteItemClick}
+										/>
 									);
 								})}
 						</Grid>

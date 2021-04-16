@@ -10,20 +10,16 @@ import styles from './createbuildheader.module.css';
 
 const CreateBuildHeader = () => {
 	return (
-		<Box>
-			<Box className={styles.createBuildHeaderContainer}>
-				<p className={styles.createBuildHeader}>Create your build</p>
-				<Typography
-					variant='body2'
-					className={styles.createBuildSubHeader}
-					gutterBottom
-				>
-					You can only create up to&nbsp;
-					<span className={styles.textHighlight}>
-						6 builds every 30 minutes
-					</span>
-				</Typography>
-			</Box>
+		<Box className={styles.createBuildHeaderContainer}>
+			<p className={styles.createBuildHeader}>Create your build</p>
+			<Typography
+				variant='body2'
+				className={styles.createBuildSubHeader}
+				gutterBottom
+			>
+				You can only create up to&nbsp;
+				<span className={styles.textHighlight}>6 builds every 30 minutes</span>
+			</Typography>
 		</Box>
 	);
 };

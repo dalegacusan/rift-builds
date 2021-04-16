@@ -53,7 +53,7 @@ const BuildDescription = (props: BuildDescriptionProps) => {
 				<Typography className={classes.heading}>Build Description</Typography>
 			</AccordionSummary>
 			<AccordionDetails className={styles.accordionAnswerContainer}>
-				<p>{description}</p>
+				<p>{description.toString()}</p>
 			</AccordionDetails>
 		</Accordion>
 	);

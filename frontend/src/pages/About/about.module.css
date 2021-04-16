@@ -1,0 +1,43 @@
+.headerImage {
+	width: 100%;
+	margin-top: 50px;
+}
+
+.aboutContainer {
+	display: inline-block;
+}
+
+.aboutTextContainer {
+	color: rgb(255, 255, 255, 87%);
+	font-size: 15px;
+	padding: 40px 20px;
+}
+
+.aboutTextContainer h2 {
+	color: #ffffff;
+}
+
+.aboutTextContainer h4 {
+	color: rgb(255, 255, 255, 60%);
+}
+
+.aboutTextContainer p {
+	margin: 34px 0 0 0;
+}
+
+.aboutTextContainer a {
+	color: #00a3fe;
+}
+
+.textHighlight {
+	font-weight: 700;
+}
+
+.aboutNoteText {
+	color: rgb(255, 255, 255, 60%);
+	font-size: 14px;
+}
+
+.aboutNoteText a {
+	color: rgb(255, 255, 255, 65%);
+}

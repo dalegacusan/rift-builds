@@ -8,8 +8,9 @@ import { connect, ConnectedProps } from 'react-redux';
 // MaterialUI
 import Box from '@material-ui/core/Box';
 // Components
-import FilterBy from './components/FilterBy/FilterBy';
 import Champions from './components/Champions/Champions';
+import FilterBy from './components/FilterBy/FilterBy';
+import LoadingCircle from '../../components/Loading/Circle';
 // CSS
 import styles from './landing.module.css';
 // Types
@@ -87,7 +88,7 @@ const Landing = (props: LandingProps) => {
 				{champions.length !== 0 ? (
 					<Champions filteredChampions={filteredChampions} />
 				) : (
-					<p>Loading champions...</p>
+					<LoadingCircle />
 				)}
 			</Box>
 		</>

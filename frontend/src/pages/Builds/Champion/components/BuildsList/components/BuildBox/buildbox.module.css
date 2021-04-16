@@ -1,7 +1,14 @@
 .buildBoxContainer {
 	background-color: #121212;
+	border: 1px solid #121212;
 	color: rgb(255, 255, 255, 80%) !important;
-	padding: 3px 0 !important;
+	margin: 0 !important;
+	padding: 0 15px;
+}
+
+.buildBoxContainer:hover {
+	background-color: #181818;
+	border: 1px solid #20242c;
 }
 
 .championImage {
@@ -13,5 +20,5 @@
 }
 
 .divider {
-	background-color: #20242c;
+	background-color: #20242c !important;
 }

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
 // Components
+import SpellPopover from '../../../../../../../../components/Popover/SpellPopover';
 // CSS
 import globalstyles from '../../../../../createbuild.module.css';
 import styles from './spell.module.css';
@@ -32,6 +33,20 @@ const Spell = (props: SpellProps) => {
 	} = props;
 	const { spellOne, spellTwo } = spellsSelected;
 
+	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+	const handlePopoverOpen = (
+		event: React.MouseEvent<HTMLElement, MouseEvent>
+	) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handlePopoverClose = () => {
+		setAnchorEl(null);
+	};
+
+	const open = Boolean(anchorEl);
+
 	return (
 		<Grid item xs={12} sm={3} style={{ marginTop: '10px' }}>
 			<LazyLoadImage
@@ -40,6 +55,14 @@ const Spell = (props: SpellProps) => {
 				}.jpg`}
 				style={{ width: '90px' }}
 				className={styles.spellImage}
+				onMouseEnter={handlePopoverOpen}
+				onMouseLeave={handlePopoverClose}
+			/>
+			<SpellPopover
+				spell={spellNumber === 1 ? spellOne : spellTwo}
+				anchorEl={anchorEl}
+				open={open}
+				handlePopoverClose={handlePopoverClose}
 			/>
 
 			<select

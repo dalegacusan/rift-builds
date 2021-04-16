@@ -10,13 +10,13 @@ import { URL } from '../../../shared/config/config';
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 // Components
+import BuildDescription from './components/BuildDescription/BuildDescription';
 import BuildItem from './components/BuildItem/BuildItem';
+import LoadingCircle from '../../../components/Loading/Circle';
 import RuneItem from './components/RuneItem/RuneItem';
 import SpellItem from './components/Spellitem/SpellItem';
-import BuildDescription from './components/BuildDescription/BuildDescription';
 import PageNotFound from '../../../components/Error/404/PageNotFound';
 import PlayerBuildHeader from './components/PlayerBuildHeader/PlayerBuildHeader';
 import PlayerBuildFooter from './components/PlayerBuildFooter/PlayerBuildFooter';
@@ -150,7 +150,7 @@ const PlayerBuild = (props: any) => {
 				</>
 			) : null}
 
-			{isLoading ? <p>Loading...</p> : null}
+			{isLoading ? <LoadingCircle /> : null}
 		</div>
 	);
 };

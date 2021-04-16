@@ -1,0 +1,26 @@
+.headerImage {
+	width: 100%;
+}
+
+.privacyPolicyContainer {
+	color: rgb(255, 255, 255, 60%);
+	margin: 50px 0 60px 0;
+	word-wrap: break-word;
+	font-size: 15px;
+}
+
+.privacyPolicyContainer h1,
+.privacyPolicyContainer h2,
+.privacyPolicyContainer h3,
+.privacyPolicyContainer h4 {
+	color: rgb(255, 255, 255, 87%);
+}
+
+.privacyPolicyContainer a {
+	color: #00a3fe;
+}
+
+.policyTextContainer {
+	font-size: 15px;
+	padding: 40px 20px;
+}

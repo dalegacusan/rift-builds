@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 // @ts-ignore - No types for this module
@@ -26,6 +26,7 @@ import PlayerInformation from './components/PlayerInformation/PlayerInformation'
 import styles from './createbuild.module.css';
 // Types
 import {
+	ChampionInterface,
 	RootState,
 	snackbarControlsInterface,
 	ValidationResult,
@@ -36,7 +37,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 	const { gameData } = props;
 	const { roles, champions, items, runes, spells, ranks } = gameData;
 	// Build PROPS
-	const { completeBuild, resetState } = props;
+	const { completeBuild, resetState, setChampionSelected } = props;
 	// ReCaptcha PROPS
 	const { recaptcha } = props;
 	const { recaptchaRef, recaptchaToken } = recaptcha;
@@ -194,6 +195,20 @@ const CreateBuild = (props: CreateBuildProps) => {
 		}
 	};
 
+	useEffect(() => {
+		// Retrieve session data for the champion a user will create a build for
+		// This session item is set in NoBuilds.tsx
+		// This one is used if there are no builds for a champion and a user wants to create a build for that champion
+		const championToCreateBuild: string | null = sessionStorage.getItem(
+			'championToCreateBuild'
+		);
+		if (championToCreateBuild) {
+			setChampionSelected(JSON.parse(championToCreateBuild));
+		}
+
+		return sessionStorage.removeItem('championToCreateBuild');
+	}, []);
+
 	if (hasSubmittedBuild) {
 		return <Redirect to={`/build/${savedBuild.id}`} />;
 	}
@@ -239,6 +254,11 @@ const mapDispatchToProps = (dispatch: any) => {
 			dispatch({
 				type: actionTypes.SNACKBAR_SET_CONTROLS,
 				data: newControls.snackbarControls,
+			}),
+		setChampionSelected: (newChampionSelected: ChampionInterface) =>
+			dispatch({
+				type: actionTypes.BUILD_SET_CHAMPIONSELECTED,
+				data: newChampionSelected,
 			}),
 	};
 };

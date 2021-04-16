@@ -9,7 +9,6 @@
 
 .championImage {
 	float: left;
-	width: 100%;
 }
 
 .buildChampionContainer {
@@ -48,7 +47,8 @@
 }
 
 .buildChipsContainer {
-	margin-top: 10px;
+	margin-top: 6px;
+	width: 100%;
 }
 
 .buildInformationContainer {
@@ -70,6 +70,7 @@
 .patchText {
 	color: #5893d4;
 	text-align: right;
+	margin-top: 0;
 }
 
 .buildDateSubmitted {
@@ -78,5 +79,5 @@
 }
 
 .miscellaneousDataContainer {
-	padding-top: 0 !important;
+	padding-right: 10px;
 }

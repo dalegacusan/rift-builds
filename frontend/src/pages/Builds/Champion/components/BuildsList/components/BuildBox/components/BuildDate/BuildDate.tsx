@@ -23,7 +23,11 @@ const BuildDate = (props: BuildDateProps) => {
 		buildDateToDisplay = `${dateDifference} days ago`;
 	}
 
-	return <p style={{ textAlign: 'center' }}>{buildDateToDisplay}</p>;
+	return (
+		<p style={{ textAlign: 'center' }} className='buildBoxDateText'>
+			{buildDateToDisplay}
+		</p>
+	);
 };
 
 export default BuildDate;

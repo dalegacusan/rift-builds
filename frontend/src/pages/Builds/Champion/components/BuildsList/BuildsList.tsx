@@ -8,13 +8,17 @@ import NoBuilds from './components/NoBuilds/NoBuilds';
 // CSS
 import styles from './buildslist.module.css';
 // Types
-import { BuildInterface } from '../../../../../shared/interfaces/interfaces';
+import {
+	BuildInterface,
+	ChampionInterface,
+} from '../../../../../shared/interfaces/interfaces';
 type BuildsListProps = {
 	builds: Array<BuildInterface>;
+	championData: ChampionInterface;
 };
 
 const BuildsList = (props: BuildsListProps) => {
-	const { builds } = props;
+	const { builds, championData } = props;
 
 	return (
 		<Box className={styles.buildsListContainer}>
@@ -25,7 +29,7 @@ const BuildsList = (props: BuildsListProps) => {
 					})}
 				</>
 			) : (
-				<NoBuilds />
+				<NoBuilds championData={championData} />
 			)}
 		</Box>
 	);

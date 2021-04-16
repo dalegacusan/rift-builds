@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const BackdropLoading = (props: { openBackdrop: boolean }) => {
+const LoadingBackdrop = (props: { openBackdrop: boolean }) => {
 	const classes = useStyles();
 	const { openBackdrop } = props;
 
@@ -22,4 +22,4 @@ const BackdropLoading = (props: { openBackdrop: boolean }) => {
 	);
 };
 
-export default BackdropLoading;
+export default LoadingBackdrop;

@@ -44,12 +44,7 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 	}
 
 	return (
-		<Grid
-			container
-			wrap='nowrap'
-			spacing={2}
-			className={styles.playerBuildHeaderContainer}
-		>
+		<Grid container spacing={2} className={styles.playerBuildHeaderContainer}>
 			{/* Champion Image */}
 			<Grid item>
 				<Box className={styles.championImageContainer}>
@@ -76,14 +71,16 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 			</Grid>
 
 			{/* Champion Name, Build Title, and Username */}
-			<Grid item xs>
-				<Box className={styles.buildInformationContainer}>
-					<p className={styles.buildTitleText}>{buildTitle}&nbsp;</p>
+			<Grid item xs={12} sm>
+				<Box
+					className={`${styles.buildInformationContainer} playerBuildBuildInformationContainer`}
+				>
+					<p className={styles.buildTitleText}>{buildTitle.toString()}&nbsp;</p>
 					<Box>
 						<Box>
 							<p className={styles.usernameText}>Build by {username}</p>
 						</Box>
-						<Box display='flex' className={styles.buildChipsContainer}>
+						<Box className={styles.buildChipsContainer}>
 							{/* Capitalize first letter of Game Mode */}
 							<BuildChip property='Mode' value={gameModeToDisplay} />
 							<BuildChip property='Lane' value={buildRole.roleName} />
@@ -94,16 +91,18 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 				</Box>
 			</Grid>
 
-			<Box
-				p={2}
-				flexDirection='row-reverse'
-				className={styles.miscellaneousDataContainer}
-			>
-				<p className={styles.patchText}>Patch {patchVersion}</p>
-				<span className={styles.buildDateSubmitted}>
-					{moment(dateSubmitted).format('MM/DD/YYYY')}
-				</span>
-			</Box>
+			<Grid item xs={12} sm className='playerBuildHeaderMiscDataGrid'>
+				<Box
+					className={`${styles.miscellaneousDataContainer} playerBuildHeaderMiscDataContainer`}
+				>
+					<p className={`${styles.patchText} buildPatchText`}>
+						Patch {patchVersion}
+					</p>
+					<p className={`${styles.buildDateSubmitted} buildDateSubmittedText`}>
+						{moment(dateSubmitted).format('MM/DD/YYYY')}
+					</p>
+				</Box>
+			</Grid>
 		</Grid>
 	);
 };
