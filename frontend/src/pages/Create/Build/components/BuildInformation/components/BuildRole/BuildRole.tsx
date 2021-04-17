@@ -36,11 +36,11 @@ const BuildRole = (props: BuildRoleProps) => {
 			{/* TOP */}
 			<img
 				src={`/images/wildriftroles/53f90d2a-d970-41ec-8d5c-f8775580ad7e.png`}
-				className={styles.roleImage}
-				style={{
-					opacity:
-						buildRole.id === '53f90d2a-d970-41ec-8d5c-f8775580ad7e' ? 1 : 0.4,
-				}}
+				className={`${styles.roleImage} ${
+					buildRole.id === '53f90d2a-d970-41ec-8d5c-f8775580ad7e'
+						? styles.isSelected
+						: null
+				}`}
 				onClick={() =>
 					handleBuildRoleChange({
 						id: '53f90d2a-d970-41ec-8d5c-f8775580ad7e',
@@ -54,11 +54,11 @@ const BuildRole = (props: BuildRoleProps) => {
 			{/* JUNGLE */}
 			<img
 				src={`/images/wildriftroles/e4cbdb64-7118-436b-b0c6-89388731aeb5.png`}
-				className={styles.roleImage}
-				style={{
-					opacity:
-						buildRole.id === 'e4cbdb64-7118-436b-b0c6-89388731aeb5' ? 1 : 0.4,
-				}}
+				className={`${styles.roleImage} ${
+					buildRole.id === 'e4cbdb64-7118-436b-b0c6-89388731aeb5'
+						? styles.isSelected
+						: null
+				}`}
 				onClick={() =>
 					handleBuildRoleChange({
 						id: 'e4cbdb64-7118-436b-b0c6-89388731aeb5',
@@ -72,11 +72,11 @@ const BuildRole = (props: BuildRoleProps) => {
 			{/* MIDDLE */}
 			<img
 				src={`/images/wildriftroles/6b7ca1d8-872a-4c54-b685-720e14251941.png`}
-				className={styles.roleImage}
-				style={{
-					opacity:
-						buildRole.id === '6b7ca1d8-872a-4c54-b685-720e14251941' ? 1 : 0.4,
-				}}
+				className={`${styles.roleImage} ${
+					buildRole.id === '6b7ca1d8-872a-4c54-b685-720e14251941'
+						? styles.isSelected
+						: null
+				}`}
 				onClick={() =>
 					handleBuildRoleChange({
 						id: '6b7ca1d8-872a-4c54-b685-720e14251941',
@@ -90,11 +90,11 @@ const BuildRole = (props: BuildRoleProps) => {
 			{/* BOTTOM */}
 			<img
 				src={`/images/wildriftroles/e3f90603-6452-4c33-afe6-466a69b6095b.png`}
-				className={styles.roleImage}
-				style={{
-					opacity:
-						buildRole.id === 'e3f90603-6452-4c33-afe6-466a69b6095b' ? 1 : 0.4,
-				}}
+				className={`${styles.roleImage} ${
+					buildRole.id === 'e3f90603-6452-4c33-afe6-466a69b6095b'
+						? styles.isSelected
+						: null
+				}`}
 				onClick={() =>
 					handleBuildRoleChange({
 						id: 'e3f90603-6452-4c33-afe6-466a69b6095b',
@@ -108,11 +108,11 @@ const BuildRole = (props: BuildRoleProps) => {
 			{/* SUPPORT */}
 			<img
 				src={`/images/wildriftroles/35b924df-6d60-4cc5-82a8-4e5dc85272a0.png`}
-				className={styles.roleImage}
-				style={{
-					opacity:
-						buildRole.id === '35b924df-6d60-4cc5-82a8-4e5dc85272a0' ? 1 : 0.4,
-				}}
+				className={`${styles.roleImage} ${
+					buildRole.id === '35b924df-6d60-4cc5-82a8-4e5dc85272a0'
+						? styles.isSelected
+						: null
+				}`}
 				onClick={() =>
 					handleBuildRoleChange({
 						id: '35b924df-6d60-4cc5-82a8-4e5dc85272a0',

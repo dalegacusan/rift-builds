@@ -1,9 +1,16 @@
 .roleImage {
 	width: 40px;
 	margin-right: 10px;
+	opacity: 0.35;
+}
+
+.isSelected {
+	opacity: 1 !important;
+	filter: brightness(2);
 }
 
 .roleImage:hover {
 	cursor: pointer;
 	opacity: 1 !important;
+	filter: brightness(2);
 }

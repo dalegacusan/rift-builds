@@ -17,7 +17,8 @@ const CreateBuildHeader = () => {
 				className={styles.createBuildSubHeader}
 				gutterBottom
 			>
-				You can only create up to&nbsp;
+				To prevent an unnecessary amount of builds, we added a restriction that
+				you can only create&nbsp;
 				<span className={styles.textHighlight}>6 builds every 30 minutes</span>
 			</Typography>
 		</Box>
