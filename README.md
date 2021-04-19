@@ -2,6 +2,9 @@
 
 **Rift Builds** is a platform to help you get easy access to builds across all regions for League of Legends: Wild Rift. Get started by creating a build for your favorite champion and share them across the community.
 
+
+
+
 <p align="center"> 
   <b>
   Check out the site live at:
@@ -10,6 +13,10 @@
 </p>
 
 <img src="https://imgur.com/XIXTb2x.png" alt="sample" title="sample"/>
+
+[![Stars](https://img.shields.io/github/stars/dalegacusan/wildriftcommunitybuilds?color=orange&style=for-the-badge)](https://img.shields.io/github/stars/dalegacusan/wildriftcommunitybuilds?color=orange&style=for-the-badge)
+[![Version](https://img.shields.io/badge/version-1.0-blue?style=for-the-badge)](https://img.shields.io/badge/version-1.0-blue?style=for-the-badge)
+
 
 ## Table of Contents
 * [Features](#features)
