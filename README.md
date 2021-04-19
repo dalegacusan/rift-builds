@@ -5,7 +5,7 @@
 <p align="center"> 
   <b>
   Check out the site live at:
-  <a href="https://riftbuilds.netlify.app/" target="_blank">https://riftbuilds.netlify.app/</a> 
+  <a href="https://riftbuilds.net/" target="_blank">https://riftbuilds.net/</a> 
   </b>
 </p>
 
@@ -64,7 +64,7 @@ $ npm run dev
 
 ## FAQ
 
-Frequently Asked Questions: <a href="https://riftbuilds.netlify.app/faq" target="_blank">https://riftbuilds.netlify.app/faq</a>
+Frequently Asked Questions: <a href="https://riftbuilds.net/faq" target="_blank">https://riftbuilds.net/faq</a>
 
 ## Contributing
 
