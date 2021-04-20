@@ -2,14 +2,11 @@
 
 **Rift Builds** is a platform to help you get easy access to builds across all regions for League of Legends: Wild Rift. Get started by creating a build for your favorite champion and share them across the community.
 
-
-
-
 <p align="center"> 
-  <b>
+  <strong>
   Check out the site live at:
   <a href="https://riftbuilds.net/" target="_blank">https://riftbuilds.net/</a> 
-  </b>
+  </strong>
 </p>
 
 <img src="https://imgur.com/XIXTb2x.png" alt="sample" title="sample"/>
@@ -21,7 +18,8 @@
 ## Table of Contents
 * [Features](#features)
 * [Technologies](#technologies)
-* [Setup](#setup)
+* [Installation](#installation)
+* [Versions](#versions)
 * [FAQ](#faq)
 * [Feedback](#feedback)
 * [Contributing](#contributing)
@@ -43,7 +41,7 @@
 |     Redux     |   Express.js  |
 |  Material-UI  |    Mongoose   |
 
-## Setup
+## Installation
 
 To run this project, you need to have the `/data` folder where data is stored. If you wish to contribute, [create an issue](https://github.com/dalegacusan/wildriftcommunitybuilds/issues/new) requesting access to that folder.
 
@@ -68,6 +66,13 @@ $ npm install
 $ cd ../
 $ npm run dev
 ```
+
+## Versions
+
+|    Version    |   Release Date    |          Description         |
+| ------------- | ----------------- | ---------------------------- |
+|      1.0      |   April 17, 2021  |    Create and view builds    |
+
 
 ## FAQ
 
