@@ -12,7 +12,7 @@ import Lanes from './components/Lanes/Lanes';
 // CSS
 import styles from './championdata.module.css';
 // Types
-import { ChampionInterface } from '../../../../../shared/interfaces/interfaces';
+import { ChampionInterface } from '../../../../../shared/interfaces/Build';
 type ChampionDataProps = {
 	championData: ChampionInterface;
 	buildsCount: number;

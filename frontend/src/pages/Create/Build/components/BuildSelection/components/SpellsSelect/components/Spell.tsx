@@ -10,7 +10,7 @@ import SpellPopover from '../../../../../../../../shared/components/Popover/Spel
 import globalstyles from '../../../../../createbuild.module.css';
 import styles from './spell.module.css';
 // Types
-import { SpellInterface } from '../../../../../../../../shared/interfaces/interfaces';
+import { SpellInterface } from '../../../../../../../../shared/interfaces/Build';
 type SpellProps = {
 	spells: Array<SpellInterface>;
 	spellNumber: number;

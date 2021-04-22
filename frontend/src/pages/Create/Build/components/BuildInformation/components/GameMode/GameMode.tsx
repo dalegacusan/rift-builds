@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button';
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './gamemode.module.css';
 // Types
-import { RootState } from '../../../../../../../shared/interfaces/interfaces';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 
 const GameModeComponent = (props: GameModeComponentProps) => {
 	// Build PROPS

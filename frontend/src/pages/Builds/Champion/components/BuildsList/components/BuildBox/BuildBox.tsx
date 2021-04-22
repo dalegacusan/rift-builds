@@ -16,7 +16,7 @@ import Divider from '@material-ui/core/Divider';
 import {
 	BuildInterface,
 	ItemInterface,
-} from '../../../../../../../shared/interfaces/interfaces';
+} from '../../../../../../../shared/interfaces/Build';
 // CSS
 import styles from './buildbox.module.css';
 

@@ -7,7 +7,7 @@ import ItemPopover from '../../../../../../../../../shared/components/Popover/It
 // CSS
 import styles from './builditem.module.css';
 // Types
-import { ItemInterface } from '../../../../../../../../../shared/interfaces/interfaces';
+import { ItemInterface } from '../../../../../../../../../shared/interfaces/Build';
 type BuildItemsProps = {
 	item: ItemInterface;
 };

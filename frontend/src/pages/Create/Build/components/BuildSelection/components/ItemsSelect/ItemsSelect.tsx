@@ -26,10 +26,8 @@ import ItemsSelected from '../ItemsSelected/ItemsSelected';
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './itemsselect.module.css';
 // Types
-import {
-	ItemInterface,
-	RootState,
-} from '../../../../../../../shared/interfaces/interfaces';
+import { ItemInterface } from '../../../../../../../shared/interfaces/Build';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 
 const ItemsSelect = (props: ItemsSelectProps) => {
 	// Game Data PROPS

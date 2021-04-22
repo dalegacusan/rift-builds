@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 // Components
 import RunePopover from '../../../../../shared/components/Popover/RunePopover';
 // Types
-import { RuneInterface } from '../../../../../shared/interfaces/interfaces';
+import { RuneInterface } from '../../../../../shared/interfaces/Build';
 // CSS
 import styles from './runeitem.module.css';
 const useStyles = makeStyles((theme) => ({

@@ -5,7 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 // CSS
 import styles from './buildrankuser.module.css';
 // Types
-import { RankInterface } from '../../../../../../../../../shared/interfaces/interfaces';
+import { RankInterface } from '../../../../../../../../../shared/interfaces/Build';
 type BuildRankUserProps = {
 	username: string;
 	rank: RankInterface;

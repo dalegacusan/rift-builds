@@ -12,7 +12,7 @@ import Box from '@material-ui/core/Box';
 // CSS
 import globalstyles from '../../../../createbuild.module.css';
 // Types
-import { RootState } from '../../../../../../../shared/interfaces/interfaces';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 
 const BuildTitle = (props: BuildTitleProps) => {
 	// Build PROPS

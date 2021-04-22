@@ -14,10 +14,8 @@ import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
 // CSS
 import styles from './landing.module.css';
 // Types
-import {
-	ChampionInterface,
-	RootState,
-} from '../../shared/interfaces/interfaces';
+import { ChampionInterface } from '../../shared/interfaces/Build';
+import { RootState } from '../../shared/interfaces/GlobalStore';
 
 const Landing = (props: LandingProps) => {
 	// Game Data PROPS

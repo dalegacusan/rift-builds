@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 // CSS
 import styles from './nobuilds.module.css';
 // Types
-import { ChampionInterface } from '../../../../../../../shared/interfaces/interfaces';
+import { ChampionInterface } from '../../../../../../../shared/interfaces/Build';
 type NoBuildsProps = {
 	championData: ChampionInterface;
 };
@@ -39,7 +39,7 @@ export default function NoBuilds(props: NoBuildsProps) {
 					title='no builds'
 				/>
 				<Typography gutterBottom>
-					There are no builds for this champion yet.{' '}
+					There are no builds for this champion yet.&nbsp;
 					<a
 						href='/build/create'
 						onClick={handleCreateBuildClick}

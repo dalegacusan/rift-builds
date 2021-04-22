@@ -19,10 +19,8 @@ import Spell from './components/Spell';
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './spellsselect.module.css';
 // Types
-import {
-	SpellInterface,
-	RootState,
-} from '../../../../../../../shared/interfaces/interfaces';
+import { SpellInterface } from '../../../../../../../shared/interfaces/Build';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 
 const SpellsSelect = (props: SpellsSelectProps) => {
 	// Game Data PROPS

@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 
 import { URL } from '../../../shared/config/config';
 import { Message } from '../../../shared/constants/validationMessages';
-import { ValidateHelper } from '../../../shared/utils/validations';
+import { BuildValidationHelper } from '../../../shared/utils/buildValidationHelpers';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -26,11 +26,11 @@ import PlayerInformation from './components/PlayerInformation/PlayerInformation'
 import styles from './createbuild.module.css';
 // Types
 import {
-	ChampionInterface,
-	RootState,
 	snackbarControlsInterface,
 	ValidationResult,
 } from '../../../shared/interfaces/interfaces';
+import { ChampionInterface } from '../../../shared/interfaces/Build';
+import { RootState } from '../../../shared/interfaces/GlobalStore';
 
 const CreateBuild = (props: CreateBuildProps) => {
 	// Game Data PROPS
@@ -77,7 +77,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 	const validateStep = () => {
 		// Validations for EACH step
 		// isValidStep returns ValidationResult Interface
-		const isValidStep: ValidationResult = ValidateHelper.validateStep(
+		const isValidStep: ValidationResult = BuildValidationHelper.validateStep(
 			activeStep,
 			completeBuild,
 			champions,
@@ -108,7 +108,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 	const submitBuild = async () => {
 		// Validations for WHOLE build
 		// isValidBuild returns ValidationResult Interface
-		const isValidBuild: ValidationResult = ValidateHelper.validateBuild(
+		const isValidBuild: ValidationResult = BuildValidationHelper.validateBuild(
 			completeBuild,
 			champions,
 			items,
@@ -130,7 +130,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 			const saveToDatabase = await axios
 				.post(`${URL.SERVER}/api/build/save`, {
 					build: {
-						...ValidateHelper.sanitizeBuildTexts(completeBuild),
+						...BuildValidationHelper.sanitizeBuildTextInputs(completeBuild),
 						dateSubmitted: new Date(),
 					},
 					recaptchaToken,

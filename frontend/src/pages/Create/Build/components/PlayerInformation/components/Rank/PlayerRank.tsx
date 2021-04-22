@@ -10,10 +10,8 @@ import actionTypes from '../../../../../../../store/actions';
 import Box from '@material-ui/core/Box';
 // Components
 // Types
-import {
-	RankInterface,
-	RootState,
-} from '../../../../../../../shared/interfaces/interfaces';
+import { RankInterface } from '../../../../../../../shared/interfaces/Build';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 // CSS
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './playerrank.module.css';

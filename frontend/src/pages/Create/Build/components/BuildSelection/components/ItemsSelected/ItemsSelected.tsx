@@ -18,11 +18,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 // Components
 import BuildItem from './components/BuildItem/BuildItem';
 // Types
-import {
-	ItemInterface,
-	snackbarControlsInterface,
-	RootState,
-} from '../../../../../../../shared/interfaces/interfaces';
+import { ItemInterface } from '../../../../../../../shared/interfaces/Build';
+import { snackbarControlsInterface } from '../../../../../../../shared/interfaces/interfaces';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 // CSS
 import styles from './itemsselected.module.css';
 const useStylesBootstrap = makeStyles((theme: Theme) => ({

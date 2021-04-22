@@ -11,10 +11,8 @@ import Box from '@material-ui/core/Box';
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './buildrole.module.css';
 // Types
-import {
-	RootState,
-	RoleInterface,
-} from '../../../../../../../shared/interfaces/interfaces';
+import { RoleInterface } from '../../../../../../../shared/interfaces/Build';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 
 const BuildRole = (props: BuildRoleProps) => {
 	// Build PROPS

@@ -1,3 +1,5 @@
+// Start IMPORTANT
+// - These are mostly used and updated
 export const Contact = {
 	EMAIL_ADDRESS: 'contactriftbuilds@gmail.com',
 };
@@ -15,13 +17,22 @@ export const TierList = {
 	URL: 'https://youtu.be/0qQ5ZJyeE38',
 };
 
-export const RoleFilter = {
-	ALL: 'all',
-	TOP: 'top',
-	JUNGLE: 'jungle',
-	MIDDLE: 'middle',
-	BOTTOM: 'bottom',
-	SUPPORT: 'support',
+// End IMPORTANT
+
+export const Maps = {
+	WILD_RIFT: 'wild_rift',
+	HOWLING_ABYSS: 'howling_abyss',
+};
+
+export const GameMode = {
+	ARAM: 'aram',
+	NORMAL: 'normal',
+};
+
+export const GameRegion = {
+	SEA: 'sea',
+	NA: 'na',
+	EUW: 'euw',
 };
 
 export const ItemType = {
@@ -32,6 +43,15 @@ export const ItemType = {
 export const ItemStatus = {
 	ACTIVE: 'active',
 	REMOVED: 'removed',
+};
+
+export const RoleFilter = {
+	ALL: 'all',
+	TOP: 'top',
+	JUNGLE: 'jungle',
+	MIDDLE: 'middle',
+	BOTTOM: 'bottom',
+	SUPPORT: 'support',
 };
 
 export const Rune = {
@@ -49,20 +69,4 @@ export const Rune = {
 export const SpellNumber = {
 	SPELL_ONE: 'spellOne',
 	SPELL_TWO: 'spellTwo',
-};
-
-export const GameMode = {
-	ARAM: 'aram',
-	NORMAL: 'normal',
-};
-
-export const GameRegion = {
-	SEA: 'sea',
-	NA: 'na',
-	EUW: 'euw',
-};
-
-export const Maps = {
-	WILD_RIFT: 'wild_rift',
-	HOWLING_ABYSS: 'howling_abyss',
 };

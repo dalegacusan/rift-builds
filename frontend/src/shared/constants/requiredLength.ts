@@ -12,7 +12,7 @@ export const RequiredLength = {
 		MAX_LENGTH: 8000,
 	},
 	ITEMS: {
-		MAX_LENGTH: 42, // ?
+		MAX_LENGTH: 42,
 		PRIMARY: {
 			MIN_LENGTH: 3,
 			MAX_LENGTH: 6,

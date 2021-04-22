@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 // Components
 import SpellPopover from '../../../../../shared/components/Popover/SpellPopover';
 // Types
-import { SpellInterface } from '../../../../../shared/interfaces/interfaces';
+import { SpellInterface } from '../../../../../shared/interfaces/Build';
 // CSS
 import styles from './spellitem.module.css';
 const useStyles = makeStyles((theme) => ({

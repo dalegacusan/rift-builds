@@ -7,7 +7,7 @@ import SpellPopover from '../../../../../../../../../shared/components/Popover/S
 // CSS
 import styles from './buildspell.module.css';
 // Types
-import { SpellInterface } from '../../../../../../../../../shared/interfaces/interfaces';
+import { SpellInterface } from '../../../../../../../../../shared/interfaces/Build';
 type BuildSpellProps = {
 	spell: SpellInterface;
 };

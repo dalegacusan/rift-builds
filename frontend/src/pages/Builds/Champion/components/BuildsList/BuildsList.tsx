@@ -11,7 +11,7 @@ import styles from './buildslist.module.css';
 import {
 	BuildInterface,
 	ChampionInterface,
-} from '../../../../../shared/interfaces/interfaces';
+} from '../../../../../shared/interfaces/Build';
 type BuildsListProps = {
 	builds: Array<BuildInterface>;
 	championData: ChampionInterface;

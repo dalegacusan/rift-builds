@@ -8,7 +8,7 @@ import Grow from '@material-ui/core/Grow';
 // Components
 import ItemPopover from '../../../../../../../../../shared/components/Popover/ItemPopover';
 // Types
-import { ItemInterface } from '../../../../../../../../../shared/interfaces/interfaces';
+import { ItemInterface } from '../../../../../../../../../shared/interfaces/Build';
 // CSS
 import styles from './builditem.module.css';
 

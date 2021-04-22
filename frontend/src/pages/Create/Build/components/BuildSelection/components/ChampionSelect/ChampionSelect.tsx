@@ -13,10 +13,8 @@ import Box from '@material-ui/core/Box';
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './championselect.module.css';
 // Types
-import {
-	ChampionInterface,
-	RootState,
-} from '../../../../../../../shared/interfaces/interfaces';
+import { ChampionInterface } from '../../../../../../../shared/interfaces/Build';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 
 const ChampionSelect = (props: ChampionSelectProps) => {
 	// Game Data PROPS

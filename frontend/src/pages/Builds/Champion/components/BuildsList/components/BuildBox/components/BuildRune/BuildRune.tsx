@@ -9,7 +9,7 @@ import RunePopover from '../../../../../../../../../shared/components/Popover/Ru
 // CSS
 import styles from './buildrune.module.css';
 // Types
-import { RuneInterface } from '../../../../../../../../../shared/interfaces/interfaces';
+import { RuneInterface } from '../../../../../../../../../shared/interfaces/Build';
 type BuildRuneProps = {
 	runes: {
 		keystone: RuneInterface;

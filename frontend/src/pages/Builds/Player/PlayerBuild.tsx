@@ -25,7 +25,7 @@ import PlayerBuildFooter from './components/PlayerBuildFooter/PlayerBuildFooter'
 import {
 	BuildInterface,
 	ItemInterface,
-} from '../../../shared/interfaces/interfaces';
+} from '../../../shared/interfaces/Build';
 // CSS
 import styles from './playerbuild.module.css';
 const useStyles = makeStyles((theme) => ({

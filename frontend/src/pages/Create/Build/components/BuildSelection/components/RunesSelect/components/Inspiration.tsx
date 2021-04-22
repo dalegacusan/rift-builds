@@ -16,10 +16,8 @@ import RunePopover from '../../../../../../../../shared/components/Popover/RuneP
 import globalstyles from '../../../../../createbuild.module.css';
 import styles from './rune.module.css';
 // Types
-import {
-	RuneInterface,
-	RootState,
-} from '../../../../../../../../shared/interfaces/interfaces';
+import { RuneInterface } from '../../../../../../../../shared/interfaces/Build';
+import { RootState } from '../../../../../../../../shared/interfaces/GlobalStore';
 
 const Inspiration = (props: InspirationProps) => {
 	const { handleRuneSelectChange, handleRuneExplanationChange } = props;

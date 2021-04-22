@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './description.module.css';
 // Types
-import { RootState } from '../../../../../../../shared/interfaces/interfaces';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 
 const BuildDescription = (props: BuildDescriptionProps) => {
 	// Build PROPS

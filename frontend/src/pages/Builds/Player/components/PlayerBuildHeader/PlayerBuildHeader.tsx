@@ -13,7 +13,7 @@ import BuildChip from './components/BuildChip/BuildChip';
 // CSS
 import styles from './playerbuildheader.module.css';
 // Types
-import { BuildInterface } from '../../../../../shared/interfaces/interfaces';
+import { BuildInterface } from '../../../../../shared/interfaces/Build';
 type PlayerBuildHeaderProps = {
 	build: BuildInterface;
 };

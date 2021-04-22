@@ -18,10 +18,8 @@ import Resolve from './components/Resolve';
 import globalstyles from '../../../../createbuild.module.css';
 import styles from './runesselect.module.css';
 // Types
-import {
-	RuneInterface,
-	RootState,
-} from '../../../../../../../shared/interfaces/interfaces';
+import { RuneInterface } from '../../../../../../../shared/interfaces/Build';
+import { RootState } from '../../../../../../../shared/interfaces/GlobalStore';
 
 const RunesSelect = (props: RunesSelectProps) => {
 	// Game Data PROPS
