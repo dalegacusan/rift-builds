@@ -3,18 +3,23 @@
 **Rift Builds** is a platform to help you get easy access to builds across all regions for League of Legends: Wild Rift. Get started by creating a build for your favorite champion and share them across the community.
 
 <p align="center"> 
-  <b>
+  <strong>
   Check out the site live at:
-  <a href="https://riftbuilds.netlify.app/" target="_blank">https://riftbuilds.netlify.app/</a> 
-  </b>
+  <a href="https://riftbuilds.net/" target="_blank">https://riftbuilds.net/</a> 
+  </strong>
 </p>
 
 <img src="https://imgur.com/XIXTb2x.png" alt="sample" title="sample"/>
 
+[![Stars](https://img.shields.io/github/stars/dalegacusan/wildriftcommunitybuilds?color=orange&style=for-the-badge)](https://img.shields.io/github/stars/dalegacusan/wildriftcommunitybuilds?color=orange&style=for-the-badge)
+[![Version](https://img.shields.io/badge/version-1.0-blue?style=for-the-badge)](https://img.shields.io/badge/version-1.0-blue?style=for-the-badge)
+
+
 ## Table of Contents
 * [Features](#features)
 * [Technologies](#technologies)
-* [Setup](#setup)
+* [Installation](#installation)
+* [Versions](#versions)
 * [FAQ](#faq)
 * [Feedback](#feedback)
 * [Contributing](#contributing)
@@ -36,7 +41,7 @@
 |     Redux     |   Express.js  |
 |  Material-UI  |    Mongoose   |
 
-## Setup
+## Installation
 
 To run this project, you need to have the `/data` folder where data is stored. If you wish to contribute, [create an issue](https://github.com/dalegacusan/wildriftcommunitybuilds/issues/new) requesting access to that folder.
 
@@ -62,9 +67,16 @@ $ cd ../
 $ npm run dev
 ```
 
+## Versions
+
+|    Version    |   Release Date    |          Description         |
+| ------------- | ----------------- | ---------------------------- |
+|      1.0      |   April 17, 2021  |    Create and view builds    |
+
+
 ## FAQ
 
-Frequently Asked Questions: <a href="https://riftbuilds.netlify.app/faq" target="_blank">https://riftbuilds.netlify.app/faq</a>
+Frequently Asked Questions: <a href="https://riftbuilds.net/faq" target="_blank">https://riftbuilds.net/faq</a>
 
 ## Contributing
 
