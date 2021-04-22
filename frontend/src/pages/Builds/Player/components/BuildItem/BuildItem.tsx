@@ -7,7 +7,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 // Components
-import ItemPopover from '../../../../../components/Popover/ItemPopover';
+import ItemPopover from '../../../../../shared/components/Popover/ItemPopover';
 // Types
 import { ItemInterface } from '../../../../../shared/interfaces/interfaces';
 // CSS

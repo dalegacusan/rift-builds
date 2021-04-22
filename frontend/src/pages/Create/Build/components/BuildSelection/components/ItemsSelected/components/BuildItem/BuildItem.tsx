@@ -6,7 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Box from '@material-ui/core/Box';
 import Grow from '@material-ui/core/Grow';
 // Components
-import ItemPopover from '../../../../../../../../../components/Popover/ItemPopover';
+import ItemPopover from '../../../../../../../../../shared/components/Popover/ItemPopover';
 // Types
 import { ItemInterface } from '../../../../../../../../../shared/interfaces/interfaces';
 // CSS

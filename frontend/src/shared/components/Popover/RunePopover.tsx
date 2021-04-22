@@ -1,14 +1,12 @@
 import React from 'react';
 
-import { Maps } from '../../shared/constants/constants';
-
 // MaterialUI
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 // Types
-import { SpellInterface } from '../../shared/interfaces/interfaces';
+import { RuneInterface } from '../../interfaces/interfaces';
 // CSS
 import styles from './popover.module.css';
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,16 +25,16 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-type SpellPopoverProps = {
+type RunePopoverProps = {
 	anchorEl: HTMLElement | null;
 	handlePopoverClose: () => void;
-	spell: SpellInterface;
+	rune: RuneInterface;
 	open: boolean;
 };
 
-const SpellPopover = (props: SpellPopoverProps) => {
-	const { anchorEl, handlePopoverClose, spell, open } = props;
-	const { cooldown, description, spellName, applicableMaps } = spell;
+const RunePopover = (props: RunePopoverProps) => {
+	const { anchorEl, handlePopoverClose, rune, open } = props;
+	const { description, runeName } = rune;
 
 	const classes = useStyles();
 
@@ -61,30 +59,10 @@ const SpellPopover = (props: SpellPopoverProps) => {
 			disableRestoreFocus
 			disableScrollLock
 		>
-			<Typography className={styles.popoverSpellName}>{spellName}</Typography>
+			<Typography className={styles.popoverRuneName}>{runeName}</Typography>
 
 			{/* === Description === */}
 			<Box className={styles.popoverSectionContainer}>
-				<Box className={styles.applicableMapsContainer}>
-					<span>Applicable Maps: </span>
-					<span>
-						{/* Turn array into string and join replace commas with a comma + space */}
-						{applicableMaps
-							.map((map) => {
-								const mapToDisplay =
-									map === Maps.WILD_RIFT ? 'Wild Rift' : 'Howling Abyss';
-
-								return mapToDisplay;
-							})
-							.join()
-							.replace(/,/g, ', ')}
-					</span>
-				</Box>
-
-				<br />
-
-				<span className={styles.cooldown}>Cooldown: {cooldown} second(s)</span>
-
 				{description &&
 					description.map((desc, index) => {
 						const indexOfColon = desc.indexOf(':');
@@ -92,7 +70,7 @@ const SpellPopover = (props: SpellPopoverProps) => {
 						const descDescription = desc.slice(indexOfColon, desc.length);
 
 						return (
-							<Box key={index} className={styles.popoverSpellDescContainer}>
+							<Box key={index} className={styles.popoverRuneDescContainer}>
 								{indexOfColon < 0 ? (
 									<span>{desc}</span>
 								) : (
@@ -115,4 +93,4 @@ const SpellPopover = (props: SpellPopoverProps) => {
 	);
 };
 
-export default SpellPopover;
+export default RunePopover;

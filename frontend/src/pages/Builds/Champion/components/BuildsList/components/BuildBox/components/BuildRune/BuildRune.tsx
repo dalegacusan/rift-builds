@@ -5,7 +5,7 @@ import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
 import { Theme, withStyles, createStyles } from '@material-ui/core/styles';
 // Components
-import RunePopover from '../../../../../../../../../components/Popover/RunePopover';
+import RunePopover from '../../../../../../../../../shared/components/Popover/RunePopover';
 // CSS
 import styles from './buildrune.module.css';
 // Types

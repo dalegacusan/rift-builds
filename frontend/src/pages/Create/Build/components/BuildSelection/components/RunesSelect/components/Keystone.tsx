@@ -11,7 +11,7 @@ import { connect, ConnectedProps } from 'react-redux';
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
 // Components
-import RunePopover from '../../../../../../../../components/Popover/RunePopover';
+import RunePopover from '../../../../../../../../shared/components/Popover/RunePopover';
 // CSS
 import globalstyles from '../../../../../createbuild.module.css';
 import styles from './rune.module.css';

@@ -68,7 +68,6 @@ const getAllBuildsForChampion = async (
 				return {
 					builds: result.docs,
 					buildsCount: result.totalDocs,
-					nextPage: result.nextPage,
 					hasNextPage: result.hasNextPage,
 				};
 			}

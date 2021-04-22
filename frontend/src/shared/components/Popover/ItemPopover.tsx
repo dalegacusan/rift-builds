@@ -1,4 +1,6 @@
 import React from 'react';
+// @ts-ignore - No types for this module
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // MaterialUI
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -6,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 // Types
-import { RuneInterface } from '../../shared/interfaces/interfaces';
+import { ItemInterface } from '../../interfaces/interfaces';
 // CSS
 import styles from './popover.module.css';
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,16 +27,16 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-type RunePopoverProps = {
+type ItemPopoverProps = {
 	anchorEl: HTMLElement | null;
 	handlePopoverClose: () => void;
-	rune: RuneInterface;
+	item: ItemInterface;
 	open: boolean;
 };
 
-const RunePopover = (props: RunePopoverProps) => {
-	const { anchorEl, handlePopoverClose, rune, open } = props;
-	const { description, runeName } = rune;
+const ItemPopover = (props: ItemPopoverProps) => {
+	const { anchorEl, handlePopoverClose, item, open } = props;
+	const { description, itemName, price, statistics } = item;
 
 	const classes = useStyles();
 
@@ -59,7 +61,23 @@ const RunePopover = (props: RunePopoverProps) => {
 			disableRestoreFocus
 			disableScrollLock
 		>
-			<Typography className={styles.popoverRuneName}>{runeName}</Typography>
+			<Typography className={styles.popoverItemName}>{itemName}</Typography>
+			<LazyLoadImage
+				src='/images/coin.png'
+				className={styles.popoverCoinImage}
+			/>
+			<Typography className={styles.popoverItemPrice}>{price}</Typography>
+
+			{/* === Statistics === */}
+			<Box className={styles.popoverSectionContainer}>
+				{statistics.map((stat, index) => {
+					return (
+						<p key={index} className={styles.popoverStatText}>
+							{stat}
+						</p>
+					);
+				})}
+			</Box>
 
 			{/* === Description === */}
 			<Box className={styles.popoverSectionContainer}>
@@ -70,21 +88,13 @@ const RunePopover = (props: RunePopoverProps) => {
 						const descDescription = desc.slice(indexOfColon, desc.length);
 
 						return (
-							<Box key={index} className={styles.popoverRuneDescContainer}>
-								{indexOfColon < 0 ? (
-									<span>{desc}</span>
-								) : (
-									<>
-										<span
-											style={{
-												color: indexOfColon < 0 ? '#CFCFCF' : '#ffb84d',
-											}}
-										>
-											{descTitle}
-										</span>
-										<span>{descDescription}</span>
-									</>
-								)}
+							<Box key={index} className={styles.popoverItemDescContainer}>
+								<span
+									style={{ color: indexOfColon < 0 ? '#CFCFCF' : '#ffb84d' }}
+								>
+									{descTitle}
+								</span>
+								<span>{descDescription}</span>
 							</Box>
 						);
 					})}
@@ -93,4 +103,4 @@ const RunePopover = (props: RunePopoverProps) => {
 	);
 };
 
-export default RunePopover;
+export default ItemPopover;

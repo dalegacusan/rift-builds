@@ -15,14 +15,22 @@ const middleware = require('./shared/utils/middleware');
 
 const app: express.Application = express();
 
-let DATABASE_URI = config.MONGODB_URI;
+let DATABASE_URI;
 
-if (config.NODE_ENV === 'test') {
-	DATABASE_URI = config.TEST_MONGODB_URI;
+switch (config.NODE_ENV) {
+	case 'production':
+		DATABASE_URI = config.PROD_MONGODB_URI;
+		break;
+	case 'development':
+		DATABASE_URI = config.DEV_MONGODB_URI;
+		break;
+	case 'test':
+		DATABASE_URI = config.TEST_MONGODB_URI;
+		break;
 }
 
 mongoose
-	.connect(`${DATABASE_URI}`, {
+	.connect(DATABASE_URI, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: false,

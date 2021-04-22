@@ -8,7 +8,6 @@ import Grid from '@material-ui/core/Grid';
 // Components
 import BuildDate from './components/BuildDate/BuildDate';
 import BuildItem from './components/BuildItem/BuildItem';
-import BuildLearnMoreButton from './components/BuildLearnMoreButton/BuildLearnMoreButton';
 import BuildRankUser from './components/BuildRankUser/BuildRankUser';
 import BuildRune from './components/BuildRune/BuildRune';
 import BuildSpell from './components/BuildSpell/BuildSpell';

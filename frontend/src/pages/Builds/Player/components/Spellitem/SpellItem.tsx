@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 // Components
-import SpellPopover from '../../../../../components/Popover/SpellPopover';
+import SpellPopover from '../../../../../shared/components/Popover/SpellPopover';
 // Types
 import { SpellInterface } from '../../../../../shared/interfaces/interfaces';
 // CSS

@@ -16,8 +16,8 @@ import actionTypes from '../../../store/actions';
 import Box from '@material-ui/core/Box';
 // Components
 import Stepper from './components/Stepper/Stepper';
-import Snackbars from '../../../components/Snackbars/Snackbars';
-import BackdropLoading from '../../../components/Loading/Backdrop';
+import Snackbars from '../../../shared/components/Snackbars/Snackbars';
+import BackdropLoading from '../../../shared/components/Loading/Backdrop';
 import BuildInformation from './components/BuildInformation/BuildInformation';
 import BuildSelection from './components/BuildSelection/BuildSelection';
 import CreateBuildHeader from './components/CreateBuildHeader/CreateBuildHeader';

@@ -15,30 +15,30 @@ export const DefaultSelectedState = {
 		counters: {
 			weakAgainst: [
 				{
-					championName: 'Twisted Fate',
-					id: '85f2909d-e3c1-425b-8398-5c8b9c145633',
-				},
-				{
-					championName: 'Fizz',
-					id: '96a64b1c-5a70-4b6c-a8ba-cf82d474a928',
+					championName: 'Diana',
+					id: '18b6e1ed-ac12-4d68-9a63-23dae586573d',
 				},
 				{
 					championName: 'Yasuo',
 					id: 'e9759479-e2b8-45d4-84ce-6711c7371591',
 				},
+				{
+					championName: 'Annie',
+					id: '1288001a-15b1-4ab9-b78e-c70eaac4ac57',
+				},
 			],
 			strongAgainst: [
 				{
-					championName: 'Akali',
-					id: '5a05e0d6-9c06-44af-9df9-a1fad5a2e427',
+					championName: 'Orianna',
+					id: '15d2e7a9-c27c-491e-8d3f-888fd05b6cca',
 				},
 				{
 					championName: 'Twisted Fate',
 					id: '85f2909d-e3c1-425b-8398-5c8b9c145633',
 				},
 				{
-					championName: 'Lux',
-					id: 'fd23d139-1fb4-4dd7-860b-ef261bf13431',
+					championName: 'Katarina',
+					id: '9e6cb903-c70b-49c7-84e3-8015d7ef3488',
 				},
 			],
 		},

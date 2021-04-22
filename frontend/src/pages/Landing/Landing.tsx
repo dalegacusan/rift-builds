@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 // Components
 import Champions from './components/Champions/Champions';
 import FilterBy from './components/FilterBy/FilterBy';
-import LoadingCircle from '../../components/Loading/Circle';
+import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
 // CSS
 import styles from './landing.module.css';
 // Types
@@ -88,7 +88,7 @@ const Landing = (props: LandingProps) => {
 				{champions.length !== 0 ? (
 					<Champions filteredChampions={filteredChampions} />
 				) : (
-					<LoadingCircle />
+					<ComponentLoading />
 				)}
 			</Box>
 		</>

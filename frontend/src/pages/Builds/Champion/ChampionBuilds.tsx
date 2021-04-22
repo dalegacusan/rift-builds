@@ -12,8 +12,8 @@ import Box from '@material-ui/core/Box';
 import BuildsList from './components/BuildsList/BuildsList';
 import Button from '@material-ui/core/Button';
 import ChampionData from './components/ChampionData/ChampionData';
-import PageNotFound from '../../../components/Error/404/PageNotFound';
-import LoadingCircle from '../../../components/Loading/Circle';
+import PageNotFound from '../../../shared/components/PageError/PageNotFound/PageNotFound';
+import ComponentLoading from '../../../shared/components/Loading/ComponentLoading';
 // CSS
 import styles from './championbuilds.module.css';
 // Types
@@ -66,7 +66,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 
 		const moreBuildsRequest = await getBuildsForChampion();
 		const { data } = moreBuildsRequest;
-		const { nextPage, hasNextPage, builds: newBuilds } = data;
+		const { hasNextPage, builds: newBuilds } = data;
 
 		setIsLoadingMoreBuilds(false);
 
@@ -147,7 +147,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 				</>
 			) : null}
 
-			{isLoading ? <LoadingCircle /> : null}
+			{isLoading ? <ComponentLoading /> : null}
 		</>
 	);
 };

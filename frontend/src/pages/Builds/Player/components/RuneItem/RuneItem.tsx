@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 // Components
-import RunePopover from '../../../../../components/Popover/RunePopover';
+import RunePopover from '../../../../../shared/components/Popover/RunePopover';
 // Types
 import { RuneInterface } from '../../../../../shared/interfaces/interfaces';
 // CSS

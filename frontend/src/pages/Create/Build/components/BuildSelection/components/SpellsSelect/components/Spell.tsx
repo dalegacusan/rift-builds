@@ -5,7 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
 // Components
-import SpellPopover from '../../../../../../../../components/Popover/SpellPopover';
+import SpellPopover from '../../../../../../../../shared/components/Popover/SpellPopover';
 // CSS
 import globalstyles from '../../../../../createbuild.module.css';
 import styles from './spell.module.css';

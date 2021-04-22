@@ -2,7 +2,7 @@ import React from 'react';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
-import actionTypes from '../../store/actions';
+import actionTypes from '../../../store/actions';
 
 // MaterialUI
 import Snackbar from '@material-ui/core/Snackbar';
@@ -12,7 +12,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import {
 	snackbarControlsInterface,
 	RootState,
-} from '../../shared/interfaces/interfaces';
+} from '../../interfaces/interfaces';
 
 function Alert(props: AlertProps) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // Components
-import ItemPopover from '../../../../../../../../../components/Popover/ItemPopover';
+import ItemPopover from '../../../../../../../../../shared/components/Popover/ItemPopover';
 // CSS
 import styles from './builditem.module.css';
 // Types

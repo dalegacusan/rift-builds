@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // Components
-import SpellPopover from '../../../../../../../../../components/Popover/SpellPopover';
+import SpellPopover from '../../../../../../../../../shared/components/Popover/SpellPopover';
 // CSS
 import styles from './buildspell.module.css';
 // Types

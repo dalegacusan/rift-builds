@@ -14,13 +14,13 @@ import Grid from '@material-ui/core/Grid';
 // Components
 import BuildDescription from './components/BuildDescription/BuildDescription';
 import BuildItem from './components/BuildItem/BuildItem';
-import LoadingCircle from '../../../components/Loading/Circle';
+import LoadingCircle from '../../../shared/components/Loading/ComponentLoading';
 import RuneItem from './components/RuneItem/RuneItem';
+import SectionDivider from './components/SectionDivider/SectionDivider';
 import SpellItem from './components/Spellitem/SpellItem';
-import PageNotFound from '../../../components/Error/404/PageNotFound';
+import PageNotFound from '../../../shared/components/PageError/PageNotFound/PageNotFound';
 import PlayerBuildHeader from './components/PlayerBuildHeader/PlayerBuildHeader';
 import PlayerBuildFooter from './components/PlayerBuildFooter/PlayerBuildFooter';
-import SectionDivider from './components/SectionDivider/SectionDivider';
 // Types
 import {
 	BuildInterface,

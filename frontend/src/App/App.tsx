@@ -16,9 +16,9 @@ import About from '../pages/About/About';
 import ChampionBuilds from '../pages/Builds/Champion/ChampionBuilds';
 import CreateBuild from '../pages/Create/Build/CreateBuild';
 import FAQ from '../pages/FAQ/FAQ';
-import Layout from '../components/Layout';
+import Layout from '../shared/components/Layout';
 import Landing from '../pages/Landing/Landing';
-import PageNotFound from '../components/Error/404/PageNotFound';
+import PageNotFound from '../shared/components/PageError/PageNotFound/PageNotFound';
 import PlayerBuild from '../pages/Builds/Player/PlayerBuild';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 // Types

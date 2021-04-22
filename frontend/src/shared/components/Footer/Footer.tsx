@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import { Contact } from '../../shared/constants/constants';
+import { Contact } from '../../constants/constants';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
