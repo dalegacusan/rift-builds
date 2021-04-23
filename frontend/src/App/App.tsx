@@ -12,15 +12,15 @@ import actionTypes from '../store/actions';
 // MaterialUI
 import CssBaseline from '@material-ui/core/CssBaseline';
 // Components
-import About from '../pages/About/About';
-import ChampionBuilds from '../pages/Builds/Champion/ChampionBuilds';
-import CreateBuild from '../pages/Create/Build/CreateBuild';
-import FAQ from '../pages/FAQ/FAQ';
-import Layout from '../shared/components/Layout';
-import Landing from '../pages/Landing/Landing';
+import AboutPage from '../pages/AboutPage/AboutPage';
+import ChampionBuildsPage from '../pages/ChampionBuildsPage/ChampionBuildsPage';
+import CreateBuildPage from '../pages/Create/Build/CreateBuildPage';
+import FAQPage from '../pages/FAQPage/FAQPage';
+import Layout from '../shared/components/PageLayout/Layout';
+import LandingPage from '../pages/LandingPage/LandingPage';
 import PageNotFound from '../shared/components/PageError/PageNotFound/PageNotFound';
-import PlayerBuild from '../pages/Builds/Player/PlayerBuild';
-import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
+import PlayerBuildPage from '../pages/PlayerBuildPage/PlayerBuildPage';
+import PrivacyPolicyPage from '../pages/PrivacyPolicyPage/PrivacyPolicyPage';
 // Types
 import {
 	ChampionInterface,
@@ -29,7 +29,7 @@ import {
 	RoleInterface,
 	RuneInterface,
 	SpellInterface,
-} from '../shared/interfaces/Build';
+} from '../shared/interfaces/GameData';
 // CSS
 import styles from './app.module.css';
 const theme = createMuiTheme({
@@ -173,25 +173,25 @@ const App = (props: AppProps) => {
 					<Router>
 						<Switch>
 							<Route exact path='/'>
-								<Landing />
+								<LandingPage />
 							</Route>
 							<Route exact path='/build/create'>
-								<CreateBuild />
+								<CreateBuildPage />
 							</Route>
 							<Route exact path='/builds/champion/:championName'>
-								<ChampionBuilds />
+								<ChampionBuildsPage />
 							</Route>
 							<Route exact path='/build/:buildId'>
-								<PlayerBuild />
+								<PlayerBuildPage />
 							</Route>
 							<Route exact path='/faq'>
-								<FAQ />
+								<FAQPage />
 							</Route>
 							<Route exact path='/privacypolicy'>
-								<PrivacyPolicy />
+								<PrivacyPolicyPage />
 							</Route>
 							<Route exact path='/about'>
-								<About />
+								<AboutPage />
 							</Route>
 
 							{/* 404 - Page not found */}
