@@ -1,6 +1,8 @@
 import React from 'react';
 import { Contact } from '../../shared/constants/constants';
 
+import AboutBanner from './assets/about_banner.png';
+
 // CSS
 import styles from './Styles.module.css';
 
@@ -8,7 +10,7 @@ const About = () => {
 	return (
 		<div className={styles.aboutContainer}>
 			<img
-				src='/images/about_banner.png'
+				src={AboutBanner}
 				alt='About Banner'
 				className={styles.headerImage}
 			/>

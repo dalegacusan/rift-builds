@@ -1,5 +1,7 @@
 import React from 'react';
 
+import RiftBuildsTextImage from '../assets/rift_builds_text.png';
+
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -57,7 +59,7 @@ const AppBarComponent = (props: any) => {
 					<Toolbar>
 						<a href='/' className={classes.title}>
 							<img
-								src='/images/riftbuilds.png'
+								src={RiftBuildsTextImage}
 								className={styles.headerLogo}
 								alt='Rift Builds Logo'
 							/>

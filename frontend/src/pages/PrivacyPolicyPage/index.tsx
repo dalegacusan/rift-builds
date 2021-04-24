@@ -1,6 +1,8 @@
 import React from 'react';
 import { Contact } from '../../shared/constants/constants';
 
+import PrivacyPolicyBanner from './assets/privacy_policy_banner.png';
+
 // CSS
 import styles from './Styles.module.css';
 
@@ -8,8 +10,8 @@ const PrivacyPolicy = () => {
 	return (
 		<div className={styles.privacyPolicyContainer}>
 			<img
-				src='/images/privacy_policy_banner.png'
-				alt='About Banner'
+				src={PrivacyPolicyBanner}
+				alt='Privacy Policy Banner'
 				className={styles.headerImage}
 			/>
 			<div className={styles.policyTextContainer}>

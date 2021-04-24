@@ -1,6 +1,9 @@
 import React from 'react';
 import { Contact, TierList } from '../../../shared/constants/constants';
 
+import StepOneImage from './assets/step1.png';
+import StepTwoImage from './assets/step2.png';
+
 // MaterialUI
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -116,7 +119,7 @@ export default function ControlledAccordions() {
 							<span className={styles.textHighlight}>page of your build</span>
 						</p>
 						<img
-							src='/images/faq/step1.png'
+							src={StepOneImage}
 							style={{ width: '80%' }}
 							alt='How to share a build'
 						/>
@@ -128,7 +131,7 @@ export default function ControlledAccordions() {
 							and it will <i>copy the link to your clipboard</i>.
 						</p>
 						<img
-							src='/images/faq/step2.png'
+							src={StepTwoImage}
 							style={{ width: '80%' }}
 							alt='How to share a build'
 						/>

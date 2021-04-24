@@ -1,6 +1,6 @@
 import React from 'react';
-// @ts-ignore - No types for this module
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import CoinImage from './assets/coin.png';
 
 // MaterialUI
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -62,10 +62,7 @@ const ItemPopover = (props: ItemPopoverProps) => {
 			disableScrollLock
 		>
 			<Typography className={styles.popoverItemName}>{itemName}</Typography>
-			<LazyLoadImage
-				src='/images/coin.png'
-				className={styles.popoverCoinImage}
-			/>
+			<img src={CoinImage} className={styles.popoverCoinImage} alt='coin' />
 			<Typography className={styles.popoverItemPrice}>{price}</Typography>
 
 			{/* === Statistics === */}

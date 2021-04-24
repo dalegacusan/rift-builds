@@ -2,6 +2,8 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 
+import PageNotFoundMascot from '../assets/page_not_found_mascot.png';
+
 // MaterialUI
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -56,8 +58,8 @@ const PageNotFound = () => {
 							justifyContent='center'
 						>
 							<img
-								src='/images/error/teemo_404.png'
-								alt='Teemo 404'
+								src={PageNotFoundMascot}
+								alt='Page Not Found Mascot'
 								className={styles.errorImage}
 							/>
 						</Box>

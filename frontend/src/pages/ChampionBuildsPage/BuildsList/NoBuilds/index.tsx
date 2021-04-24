@@ -1,5 +1,7 @@
 import React from 'react';
 
+import NoBuildsImage from './assets/no_builds.svg';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -33,7 +35,7 @@ export default function NoBuilds(props: NoBuildsProps) {
 		>
 			<Box>
 				<img
-					src='/images/empty.svg'
+					src={NoBuildsImage}
 					className={styles.noBuildImage}
 					alt='no builds'
 					title='no builds'
