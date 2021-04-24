@@ -2,37 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Redux
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-import storage from 'redux-persist/lib/storage';
-import buildReducer from './store/reducers/build';
-import gameDataReducer from './store/reducers/gameData';
-import recaptchaReducer from './store/reducers/reCaptcha';
-import snackbarControlsReducer from './store/reducers/snackbarControls';
+import { Provider } from 'react-redux';
+import { store, persistor } from './shared/store/index';
 
 import './index.css';
 import App from './App/App';
 import reportWebVitals from './reportWebVitals';
-
-const persistConfig = {
-	key: 'root',
-	storage: storage,
-};
-
-const rootReducer = combineReducers({
-	build: buildReducer,
-	gameData: gameDataReducer,
-	recaptcha: recaptchaReducer,
-	snackbarControls: snackbarControlsReducer,
-});
-
-const pReducer = persistReducer(persistConfig, rootReducer);
-
-const store = createStore(rootReducer);
-
-const persistor = persistStore(store);
 
 ReactDOM.render(
 	<React.StrictMode>

@@ -1,12 +1,12 @@
 import {
-	BuildInterface,
 	ChampionInterface,
 	ItemInterface,
 	RankInterface,
 	RoleInterface,
 	RuneInterface,
 	SpellInterface,
-} from '../interfaces/Build';
+} from '../interfaces/GameData';
+import { BuildInterface } from '../interfaces/Build';
 import { ValidationResult } from '../interfaces/interfaces';
 import { BuildValidation } from './buildValidation';
 import { RequiredLength } from '../constants/requiredLength';

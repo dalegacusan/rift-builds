@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { URL } from '../shared/config/config';
@@ -7,20 +6,14 @@ import axios from 'axios';
 
 // Redux
 import { connect } from 'react-redux';
-import actionTypes from '../store/actions';
+import actionTypes from '../shared/store/actions';
 
 // MaterialUI
 import CssBaseline from '@material-ui/core/CssBaseline';
 // Components
-import AboutPage from '../pages/AboutPage/AboutPage';
-import ChampionBuildsPage from '../pages/ChampionBuildsPage/ChampionBuildsPage';
-import CreateBuildPage from '../pages/Create/Build/CreateBuildPage';
-import FAQPage from '../pages/FAQPage/FAQPage';
 import Layout from '../shared/components/PageLayout/Layout';
-import LandingPage from '../pages/LandingPage/LandingPage';
-import PageNotFound from '../shared/components/PageError/PageNotFound/PageNotFound';
-import PlayerBuildPage from '../pages/PlayerBuildPage/PlayerBuildPage';
-import PrivacyPolicyPage from '../pages/PrivacyPolicyPage/PrivacyPolicyPage';
+import Routes from './Routes';
+
 // Types
 import {
 	ChampionInterface,
@@ -170,34 +163,7 @@ const App = (props: AppProps) => {
 			<div className={`App ${styles.appContainer}`}>
 				<CssBaseline />
 				<Layout>
-					<Router>
-						<Switch>
-							<Route exact path='/'>
-								<LandingPage />
-							</Route>
-							<Route exact path='/build/create'>
-								<CreateBuildPage />
-							</Route>
-							<Route exact path='/builds/champion/:championName'>
-								<ChampionBuildsPage />
-							</Route>
-							<Route exact path='/build/:buildId'>
-								<PlayerBuildPage />
-							</Route>
-							<Route exact path='/faq'>
-								<FAQPage />
-							</Route>
-							<Route exact path='/privacypolicy'>
-								<PrivacyPolicyPage />
-							</Route>
-							<Route exact path='/about'>
-								<AboutPage />
-							</Route>
-
-							{/* 404 - Page not found */}
-							<Route component={PageNotFound} />
-						</Switch>
-					</Router>
+					<Routes />
 				</Layout>
 			</div>
 		</ThemeProvider>

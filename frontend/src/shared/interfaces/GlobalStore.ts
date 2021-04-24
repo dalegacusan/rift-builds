@@ -1,14 +1,14 @@
 import { RefObject } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {
-	BuildInterface,
 	ChampionInterface,
 	ItemInterface,
 	RankInterface,
 	RoleInterface,
 	RuneInterface,
 	SpellInterface,
-} from './Build';
+} from './GameData';
+import { BuildInterface } from './Build';
 import { snackbarControlsInterface } from './interfaces';
 
 export interface recaptchaInterface {
