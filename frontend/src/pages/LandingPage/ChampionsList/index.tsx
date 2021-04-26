@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { ImagePath } from '../../../shared/utils/imagePath';
+import { championNameToUrlString } from '../../../shared/utils/championNameToUrlString';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -27,13 +27,7 @@ const Champions: FunctionComponent<ChampionsProps> = (props) => {
 				return (
 					<Box key={index} className={styles.championImageContainer}>
 						<a
-							href={`/builds/champion/${championName
-								.toLocaleLowerCase()
-								.split(' ')
-								.filter((char) => char !== '.' && char !== "'")
-								.join('')
-								.replace('.', '')
-								.replace("'", '')}`}
+							href={`/builds/champion/${championNameToUrlString(championName)}`}
 							className={styles.championLink}
 						>
 							<LazyLoadImage

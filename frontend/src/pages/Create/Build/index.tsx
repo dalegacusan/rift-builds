@@ -4,6 +4,10 @@ import { Redirect } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 
+import {
+	getItemFromSession,
+	removeItemFromSession,
+} from '../../../shared/utils/sessionStorage';
 import { URL } from '../../../shared/config/config';
 import { Message } from '../../../shared/constants/validationMessages';
 import { BuildValidationHelper } from '../../../shared/utils/buildValidationHelpers';
@@ -199,14 +203,16 @@ const CreateBuild = (props: CreateBuildProps) => {
 		// Retrieve session data for the champion a user will create a build for
 		// This session item is set in NoBuilds.tsx
 		// This one is used if there are no builds for a champion and a user wants to create a build for that champion
-		const championToCreateBuild: string | null = sessionStorage.getItem(
-			'championToCreateBuild'
-		);
-		if (championToCreateBuild) {
-			setChampionSelected(JSON.parse(championToCreateBuild));
+		const championToCreateFirstBuild:
+			| string
+			| null
+			| undefined = getItemFromSession('championToCreateFirstBuild');
+
+		if (championToCreateFirstBuild) {
+			setChampionSelected(JSON.parse(championToCreateFirstBuild));
 		}
 
-		return sessionStorage.removeItem('championToCreateBuild');
+		return removeItemFromSession('championToCreateFirstBuild');
 	}, []);
 
 	if (hasSubmittedBuild) {

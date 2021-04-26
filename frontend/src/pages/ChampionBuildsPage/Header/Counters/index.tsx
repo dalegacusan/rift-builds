@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import { ImagePath } from '../../../../shared/utils/imagePath';
+import { championNameToUrlString } from '../../../../shared/utils/championNameToUrlString';
 
 // MaterialUI
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -27,17 +28,6 @@ type CountersProps = {
 const Counters = (props: CountersProps) => {
 	const { counters } = props;
 	const { strongAgainst, weakAgainst } = counters;
-
-	// For path='/builds/champion/:championName'
-	const convertChampionNameToAlphabet = (champName: string) => {
-		return champName
-			.toLocaleLowerCase()
-			.split(' ')
-			.filter((char) => char !== '.' && char !== "'")
-			.join('')
-			.replace('.', '')
-			.replace("'", '');
-	};
 
 	return (
 		<div
@@ -84,15 +74,11 @@ const Counters = (props: CountersProps) => {
 				<TabPanel style={{ marginTop: '20px', padding: '0 15px' }}>
 					{weakAgainst.map((champ, index) => {
 						const { id: championId, championName } = champ;
-						const allAlphabetChampionName = convertChampionNameToAlphabet(
-							championName
-						);
 
 						return (
 							<CounterContent
 								key={index}
 								championId={championId}
-								allAlphabetChampionName={allAlphabetChampionName}
 								championName={championName}
 							/>
 						);
@@ -103,15 +89,11 @@ const Counters = (props: CountersProps) => {
 				<TabPanel style={{ marginTop: '20px', padding: '0 15px' }}>
 					{strongAgainst.map((champ, index) => {
 						const { id: championId, championName } = champ;
-						const allAlphabetChampionName = convertChampionNameToAlphabet(
-							championName
-						);
 
 						return (
 							<CounterContent
 								key={index}
 								championId={championId}
-								allAlphabetChampionName={allAlphabetChampionName}
 								championName={championName}
 							/>
 						);
@@ -124,14 +106,13 @@ const Counters = (props: CountersProps) => {
 
 const CounterContent = (props: {
 	championId: string;
-	allAlphabetChampionName: string;
 	championName: string;
 }) => {
-	const { championId, allAlphabetChampionName, championName } = props;
+	const { championId, championName } = props;
 
 	return (
 		<a
-			href={`/builds/champion/${allAlphabetChampionName}`}
+			href={`/builds/champion/${championNameToUrlString(championName)}`}
 			className={styles.championCounterLink}
 			title={championName}
 		>
