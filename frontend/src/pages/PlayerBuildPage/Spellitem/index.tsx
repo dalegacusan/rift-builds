@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../shared/utils/imagePath';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -51,7 +52,7 @@ const SpellItem = (props: SpellItemProps) => {
 				onMouseLeave={handlePopoverClose}
 			>
 				<LazyLoadImage
-					src={`/images/wildriftspells/${spellId}.jpg`}
+					src={ImagePath.Spell(spellId)}
 					className={styles.spellImage}
 					title={spellName}
 					alt={spellName}

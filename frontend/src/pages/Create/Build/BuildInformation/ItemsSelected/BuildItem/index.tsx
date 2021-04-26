@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../../../../shared/utils/imagePath';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -46,7 +47,7 @@ const BuildItem = (props: BuildItemProps) => {
 					<LazyLoadImage
 						title={itemName}
 						className={styles.itemImage}
-						src={`/images/wildriftitems/${itemId}.png`}
+						src={ImagePath.Item(itemId)}
 						onClick={() => handleDeleteItemClick(itemId)}
 						onMouseEnter={handlePopoverOpen}
 						onMouseLeave={handlePopoverClose}

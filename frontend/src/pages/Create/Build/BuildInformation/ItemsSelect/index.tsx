@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { ImagePath } from '../../../../../shared/utils/imagePath';
 import {
 	ItemType,
 	ItemStatus,
@@ -96,7 +96,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 						<Box>
 							{/* ITEM IMAGE */}
 							<LazyLoadImage
-								src={`/images/wildriftitems/${itemSelected.id}.png`}
+								src={ImagePath.Item(itemSelected.id)}
 								className={styles.itemImage}
 							/>
 

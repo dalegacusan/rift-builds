@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../../../shared/utils/imagePath';
 
 // Components
 import ItemPopover from '../../../../../shared/components/Popover/ItemPopover';
@@ -32,7 +33,7 @@ const BuildItems = (props: BuildItemsProps) => {
 	return (
 		<>
 			<LazyLoadImage
-				src={`/images/wildriftitems/${item.id}.png`}
+				src={ImagePath.Item(item.id)}
 				className={styles.itemImage}
 				onMouseEnter={handlePopoverOpen}
 				onMouseLeave={handlePopoverClose}

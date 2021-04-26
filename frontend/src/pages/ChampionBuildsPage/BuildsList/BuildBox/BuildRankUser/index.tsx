@@ -1,6 +1,7 @@
 import React from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../../../shared/utils/imagePath';
 
 // CSS
 import styles from './Styles.module.css';
@@ -20,7 +21,7 @@ const BuildRankUser = (props: BuildRankUserProps) => {
 			<LazyLoadImage
 				alt={rankName}
 				title={rankName}
-				src={`/images/wildriftranks/${rankId}.png`}
+				src={ImagePath.Rank(rankId)}
 				className={styles.rankImage}
 			/>
 			<span className={`${styles.usernameText} buildBoxUsername`}>

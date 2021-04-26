@@ -1,9 +1,9 @@
 import React from 'react';
-// @ts-ignore - No types for this module
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-
-// react-tabs
 import 'react-tabs/style/react-tabs.css';
+
+import { ImagePath } from '../../../../shared/utils/imagePath';
+
 // MaterialUI
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Avatar from '@material-ui/core/Avatar';
@@ -139,7 +139,7 @@ const CounterContent = (props: {
 				<Box display='flex' flexGrow={1}>
 					<Avatar
 						variant='square'
-						src={`/images/wildriftchampions/${championId}.jpg`}
+						src={ImagePath.Champion(championId)}
 						className={styles.championCounterImage}
 					/>
 					<span className={styles.championCounterName}>{championName}</span>

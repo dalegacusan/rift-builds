@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../../../../shared/utils/imagePath';
 
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
@@ -50,9 +51,7 @@ const Spell = (props: SpellProps) => {
 	return (
 		<Grid item xs={12} sm={3} style={{ marginTop: '10px' }}>
 			<LazyLoadImage
-				src={`/images/wildriftspells/${
-					spellNumber === 1 ? spellOne.id : spellTwo.id
-				}.jpg`}
+				src={ImagePath.Spell(spellNumber === 1 ? spellOne.id : spellTwo.id)}
 				style={{ width: '90px' }}
 				className={styles.spellImage}
 				onMouseEnter={handlePopoverOpen}

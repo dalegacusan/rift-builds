@@ -2,6 +2,8 @@ import React, { FunctionComponent } from 'react';
 // @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { ImagePath } from '../../../shared/utils/imagePath';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
 // Components
@@ -35,7 +37,7 @@ const Champions: FunctionComponent<ChampionsProps> = (props) => {
 							className={styles.championLink}
 						>
 							<LazyLoadImage
-								src={`/images/wildriftchampions/${championId}.jpg`}
+								src={ImagePath.Champion(championId)}
 								className={styles.championImage}
 								title={championName}
 								alt={championName}

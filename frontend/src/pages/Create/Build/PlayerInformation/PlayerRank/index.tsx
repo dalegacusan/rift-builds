@@ -1,6 +1,7 @@
 import React from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../../../shared/utils/imagePath';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -44,7 +45,7 @@ const PlayerRank = (props: PlayerRankProps) => {
 
 			<Box>
 				<LazyLoadImage
-					src={`/images/wildriftranks/${rankSelected.id}.png`}
+					src={ImagePath.Rank(rankSelected.id)}
 					className={styles.rankImage}
 				/>
 

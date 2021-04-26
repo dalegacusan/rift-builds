@@ -1,8 +1,8 @@
 import React from 'react';
 import moment from 'moment';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { ImagePath } from '../../../shared/utils/imagePath';
 import { GameMode } from '../../../shared/constants/constants';
 
 // MaterialUI
@@ -49,7 +49,7 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 			<Grid item>
 				<Box className={styles.championImageContainer}>
 					<LazyLoadImage
-						src={`/images/wildriftchampions/${champion.id}.jpg`}
+						src={ImagePath.Champion(champion.id)}
 						className={styles.championImage}
 						title={champion.championName}
 					/>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ImagePath } from '../../../../../shared/utils/imagePath';
+
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../shared/store/actions';
@@ -13,6 +15,14 @@ import styles from './Styles.module.css';
 // Types
 import { RoleInterface } from '../../../../../shared/interfaces/GameData';
 import { RootState } from '../../../../../shared/interfaces/GlobalStore';
+
+const RoleID = {
+	TOP: '53f90d2a-d970-41ec-8d5c-f8775580ad7e',
+	JUNGLE: 'e4cbdb64-7118-436b-b0c6-89388731aeb5',
+	MIDDLE: '6b7ca1d8-872a-4c54-b685-720e14251941',
+	BOTTOM: 'e3f90603-6452-4c33-afe6-466a69b6095b',
+	SUPPORT: '35b924df-6d60-4cc5-82a8-4e5dc85272a0',
+};
 
 const BuildRole = (props: BuildRoleProps) => {
 	// Build PROPS
@@ -33,15 +43,13 @@ const BuildRole = (props: BuildRoleProps) => {
 
 			{/* TOP */}
 			<img
-				src={`/images/wildriftroles/53f90d2a-d970-41ec-8d5c-f8775580ad7e.png`}
+				src={ImagePath.Role(RoleID.TOP)}
 				className={`${styles.roleImage} ${
-					buildRole.id === '53f90d2a-d970-41ec-8d5c-f8775580ad7e'
-						? styles.isSelected
-						: null
+					buildRole.id === RoleID.TOP ? styles.isSelected : null
 				}`}
 				onClick={() =>
 					handleBuildRoleChange({
-						id: '53f90d2a-d970-41ec-8d5c-f8775580ad7e',
+						id: RoleID.TOP,
 						roleName: 'Top',
 					})
 				}
@@ -51,15 +59,13 @@ const BuildRole = (props: BuildRoleProps) => {
 
 			{/* JUNGLE */}
 			<img
-				src={`/images/wildriftroles/e4cbdb64-7118-436b-b0c6-89388731aeb5.png`}
+				src={ImagePath.Role(RoleID.JUNGLE)}
 				className={`${styles.roleImage} ${
-					buildRole.id === 'e4cbdb64-7118-436b-b0c6-89388731aeb5'
-						? styles.isSelected
-						: null
+					buildRole.id === RoleID.JUNGLE ? styles.isSelected : null
 				}`}
 				onClick={() =>
 					handleBuildRoleChange({
-						id: 'e4cbdb64-7118-436b-b0c6-89388731aeb5',
+						id: RoleID.JUNGLE,
 						roleName: 'Jungle',
 					})
 				}
@@ -69,15 +75,13 @@ const BuildRole = (props: BuildRoleProps) => {
 
 			{/* MIDDLE */}
 			<img
-				src={`/images/wildriftroles/6b7ca1d8-872a-4c54-b685-720e14251941.png`}
+				src={ImagePath.Role(RoleID.MIDDLE)}
 				className={`${styles.roleImage} ${
-					buildRole.id === '6b7ca1d8-872a-4c54-b685-720e14251941'
-						? styles.isSelected
-						: null
+					buildRole.id === RoleID.MIDDLE ? styles.isSelected : null
 				}`}
 				onClick={() =>
 					handleBuildRoleChange({
-						id: '6b7ca1d8-872a-4c54-b685-720e14251941',
+						id: RoleID.MIDDLE,
 						roleName: 'Middle',
 					})
 				}
@@ -87,15 +91,13 @@ const BuildRole = (props: BuildRoleProps) => {
 
 			{/* BOTTOM */}
 			<img
-				src={`/images/wildriftroles/e3f90603-6452-4c33-afe6-466a69b6095b.png`}
+				src={ImagePath.Role(RoleID.BOTTOM)}
 				className={`${styles.roleImage} ${
-					buildRole.id === 'e3f90603-6452-4c33-afe6-466a69b6095b'
-						? styles.isSelected
-						: null
+					buildRole.id === RoleID.BOTTOM ? styles.isSelected : null
 				}`}
 				onClick={() =>
 					handleBuildRoleChange({
-						id: 'e3f90603-6452-4c33-afe6-466a69b6095b',
+						id: RoleID.BOTTOM,
 						roleName: 'Bottom',
 					})
 				}
@@ -105,15 +107,13 @@ const BuildRole = (props: BuildRoleProps) => {
 
 			{/* SUPPORT */}
 			<img
-				src={`/images/wildriftroles/35b924df-6d60-4cc5-82a8-4e5dc85272a0.png`}
+				src={ImagePath.Role(RoleID.SUPPORT)}
 				className={`${styles.roleImage} ${
-					buildRole.id === '35b924df-6d60-4cc5-82a8-4e5dc85272a0'
-						? styles.isSelected
-						: null
+					buildRole.id === RoleID.SUPPORT ? styles.isSelected : null
 				}`}
 				onClick={() =>
 					handleBuildRoleChange({
-						id: '35b924df-6d60-4cc5-82a8-4e5dc85272a0',
+						id: RoleID.SUPPORT,
 						roleName: 'Support',
 					})
 				}

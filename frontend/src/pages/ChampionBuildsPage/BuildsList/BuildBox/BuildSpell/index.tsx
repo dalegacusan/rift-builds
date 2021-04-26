@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../../../shared/utils/imagePath';
 
 // Components
 import SpellPopover from '../../../../../shared/components/Popover/SpellPopover';
@@ -32,7 +33,7 @@ const BuildSpell = (props: BuildSpellProps) => {
 	return (
 		<>
 			<LazyLoadImage
-				src={`/images/wildriftspells/${spell.id}.jpg`}
+				src={ImagePath.Spell(spell.id)}
 				className={styles.spellImage}
 				onMouseEnter={handlePopoverOpen}
 				onMouseLeave={handlePopoverClose}

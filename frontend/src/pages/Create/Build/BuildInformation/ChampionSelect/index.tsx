@@ -1,6 +1,7 @@
 import React from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../../../shared/utils/imagePath';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -42,7 +43,7 @@ const ChampionSelect = (props: ChampionSelectProps) => {
 			<Box className={styles.championSelectContainer}>
 				{/* Display Champion Image */}
 				<LazyLoadImage
-					src={`/images/wildriftchampions/${championSelected.id}.jpg`}
+					src={ImagePath.Champion(championSelected.id)}
 					className={styles.championImage}
 				/>
 

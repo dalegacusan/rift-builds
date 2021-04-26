@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ImagePath } from '../../../../shared/utils/imagePath';
 import { ItemType } from '../../../../shared/constants/constants';
 import { RequiredLength } from '../../../../shared/constants/requiredLength';
 
@@ -88,7 +89,7 @@ const BuildBox = (props: BuildBoxProps) => {
 						<img
 							alt={championName}
 							title={championName}
-							src={`/images/wildriftchampions/${championId}.jpg`}
+							src={ImagePath.Champion(championId)}
 							className={styles.championImage}
 						/>
 					</Grid>

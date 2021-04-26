@@ -1,6 +1,7 @@
 import React from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../shared/utils/imagePath';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
@@ -34,7 +35,7 @@ const BuildCountHeader = (props: ChampionDataProps) => {
 				<Grid item>
 					<Box className={styles.championImageContainer}>
 						<LazyLoadImage
-							src={`/images/wildriftchampions/${championId}.jpg`}
+							src={ImagePath.Champion(championId)}
 							alt={championName}
 							title={championName}
 							className={styles.championImage}

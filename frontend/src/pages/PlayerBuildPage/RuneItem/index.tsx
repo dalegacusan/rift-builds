@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { ImagePath } from '../../../shared/utils/imagePath';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -51,7 +52,7 @@ const RuneItem = (props: RuneItemProps) => {
 					onMouseLeave={handlePopoverClose}
 				>
 					<LazyLoadImage
-						src={`/images/wildriftrunes/${runeId}.jpg`}
+						src={ImagePath.Rune(runeId)}
 						className={styles.runeImage}
 						title={runeName}
 						alt={runeName}

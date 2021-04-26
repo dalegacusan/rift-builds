@@ -1,5 +1,6 @@
 import React from 'react';
 import { Contact } from '../../shared/constants/constants';
+import { URL } from '../../shared/config/config';
 
 import PrivacyPolicyBanner from './assets/privacy_policy_banner.png';
 
@@ -20,9 +21,8 @@ const PrivacyPolicy = () => {
 					Your privacy is important to us. It is Rift Builds&#39; policy to
 					respect your privacy and comply with any applicable law and regulation
 					regarding any personal information we may collect about you, including
-					across our website,{' '}
-					<a href='https://riftbuilds.net/'>https://riftbuilds.net/</a>, and
-					other sites we own and operate.{' '}
+					across our website, <a href={URL.CLIENT}>{URL.CLIENT}</a>, and other
+					sites we own and operate.{' '}
 				</p>
 				<p>
 					This policy is effective as of 15 April 2021 and was last updated on
@@ -108,7 +108,7 @@ const PrivacyPolicy = () => {
 				<p>
 					Rift Builds
 					<br />
-					{Contact.EMAIL_ADDRESS}{' '}
+					{Contact.EMAIL_ADDRESS}
 				</p>
 			</div>
 		</div>

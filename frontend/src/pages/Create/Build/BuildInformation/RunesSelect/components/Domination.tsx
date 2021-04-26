@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// @ts-ignore - No types for this module
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { ImagePath } from '../../../../../../shared/utils/imagePath';
 import { RequiredLength } from '../../../../../../shared/constants/requiredLength';
 import { Rune } from '../../../../../../shared/constants/constants';
 
@@ -44,7 +44,7 @@ const Domination = (props: DominationProps) => {
 		<>
 			<Grid item xs={12} sm={6}>
 				<LazyLoadImage
-					src={`/images/wildriftrunes/${runeDomination.id}.jpg`}
+					src={ImagePath.Rune(runeDomination.id)}
 					className={styles.runeImage}
 					onMouseEnter={handlePopoverOpen}
 					onMouseLeave={handlePopoverClose}

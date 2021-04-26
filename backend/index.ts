@@ -1,4 +1,6 @@
-if (process.env.NODE_ENV !== 'production') {
+import { Process } from './shared/constants/Process';
+
+if (process.env.NODE_ENV !== Process.PRODUCTION) {
 	require('dotenv').config();
 }
 
@@ -18,13 +20,13 @@ const app: express.Application = express();
 let DATABASE_URI;
 
 switch (config.NODE_ENV) {
-	case 'production':
+	case Process.PRODUCTION:
 		DATABASE_URI = config.PROD_MONGODB_URI;
 		break;
-	case 'development':
+	case Process.DEVELOPMENT:
 		DATABASE_URI = config.DEV_MONGODB_URI;
 		break;
-	case 'test':
+	case Process.TEST:
 		DATABASE_URI = config.TEST_MONGODB_URI;
 		break;
 }
@@ -37,6 +39,7 @@ mongoose
 		useCreateIndex: true,
 	})
 	.then(() => {
+		logger.info(`${config.NODE_ENV} Mode`);
 		logger.info('Successfully connected to MongoDB!');
 	})
 	.catch((err: Error) => {

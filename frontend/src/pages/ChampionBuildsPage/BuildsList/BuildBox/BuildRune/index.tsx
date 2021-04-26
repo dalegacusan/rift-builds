@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { ImagePath } from '../../../../../shared/utils/imagePath';
+
 // MaterialUI
 import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
@@ -57,7 +59,7 @@ const BuildRune = (props: BuildRuneProps) => {
 				badgeContent={
 					<SmallAvatar
 						alt={domination.runeName}
-						src={`/images/wildriftrunes/${domination.id}.jpg`}
+						src={ImagePath.Rune(domination.id)}
 					/>
 				}
 				onMouseEnter={handlePopoverOpen}
@@ -65,7 +67,7 @@ const BuildRune = (props: BuildRuneProps) => {
 			>
 				<Avatar
 					alt={keystone.runeName}
-					src={`/images/wildriftrunes/${keystone.id}.jpg`}
+					src={ImagePath.Rune(keystone.id)}
 					className={styles.runeImage}
 				/>
 			</Badge>

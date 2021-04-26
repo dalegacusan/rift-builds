@@ -5,9 +5,8 @@ const {
 } = process.env;
 
 export const URL = {
-	// SERVER: REACT_APP_SERVER_URL, // PROD
-	SERVER: '', // DEV
 	CLIENT: REACT_APP_CLIENT_URL,
+	SERVER: REACT_APP_SERVER_URL,
 };
 
 export const ReCaptcha = {

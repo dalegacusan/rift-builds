@@ -16,7 +16,6 @@ export const TierList = {
 	CREATOR_URL: 'https://www.youtube.com/channel/UCVl23bJtVvs5LZjrzamIbpQ',
 	URL: 'https://youtu.be/0qQ5ZJyeE38',
 };
-
 // End IMPORTANT
 
 export const Maps = {
