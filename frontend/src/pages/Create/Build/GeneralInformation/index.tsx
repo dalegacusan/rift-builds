@@ -11,7 +11,6 @@ import BuildDescription from './BuildDescription';
 
 // CSS
 import globalstyles from '../Styles.module.css';
-import styles from './Styles.module.css';
 
 const BuildInformation = () => {
 	return (

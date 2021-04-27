@@ -9,7 +9,6 @@ import ReCaptcha from '../ReCaptcha';
 import StepperButtons from './StepperButtons';
 
 // CSS
-import globalstyles from '../../Styles.module.css';
 
 // Types
 type StepperProps = {

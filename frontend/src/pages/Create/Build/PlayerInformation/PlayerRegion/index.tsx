@@ -17,7 +17,6 @@ import { RootState } from '../../../../../shared/interfaces/GlobalStore';
 
 // CSS
 import globalstyles from '../../Styles.module.css';
-import styles from './Styles.module.css';
 
 const PlayerRegion = (props: PlayerRegionProps) => {
 	// Build PROPS

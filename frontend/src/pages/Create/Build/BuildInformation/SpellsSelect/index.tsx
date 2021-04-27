@@ -20,7 +20,6 @@ import Spell from './Spell/index';
 
 // CSS
 import globalstyles from '../../Styles.module.css';
-import styles from './Styles.module.css';
 
 // Types
 import { SpellInterface } from '../../../../../shared/interfaces/GameData';

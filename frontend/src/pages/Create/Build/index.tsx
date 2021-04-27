@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
@@ -13,7 +12,7 @@ import {
 	getItemFromSession,
 	removeItemFromSession,
 } from '../../../shared/utils/sessionStorage';
-import { URL } from '../../../shared/config/config';
+import { saveBuild } from '../../../shared/services/buildsRequests';
 import { Message } from '../../../shared/constants/validationMessages';
 import { BuildValidationHelper } from '../../../shared/utils/buildValidationHelpers';
 
@@ -30,7 +29,6 @@ import Stepper from './Stepper';
 import Snackbars from '../../../shared/components/AlertPopup/AlertPopup';
 
 // CSS
-import styles from './Styles.module.css';
 
 // Types
 import {
@@ -135,14 +133,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 
 			setOpenBackdrop(true);
 
-			const saveToDatabase = await axios
-				.post(`${URL.SERVER}/api/build/save`, {
-					build: {
-						...BuildValidationHelper.sanitizeBuildTextInputs(completeBuild),
-						dateSubmitted: new Date(),
-					},
-					recaptchaToken,
-				})
+			const saveToDatabase = await saveBuild(completeBuild, recaptchaToken)
 				.then((res) => {
 					setSavedBuild(res.data);
 					setHasSubmittedBuild(true);

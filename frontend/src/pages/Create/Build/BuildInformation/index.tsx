@@ -11,7 +11,6 @@ import SpellsSelect from './SpellsSelect';
 
 // CSS
 import globalstyles from '../Styles.module.css';
-import styles from './buildselection.module.css';
 
 // Types
 type BuildSelectionProps = {};

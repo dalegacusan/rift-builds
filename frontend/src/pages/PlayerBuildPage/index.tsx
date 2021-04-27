@@ -30,7 +30,6 @@ import { BuildInterface } from '../../shared/interfaces/Build';
 import { ItemInterface } from '../../shared/interfaces/GameData';
 
 // CSS
-import styles from './Styles.module.css';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

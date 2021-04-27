@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import axios from 'axios';
 
 // Shared
-import { URL } from '../../shared/config/config';
+import { getOneChampion } from '../../shared/services/gameDataRequests';
+import { getBuildsForChampion } from '../../shared/services/buildsRequests';
 
 // MaterialUI
 
@@ -58,18 +58,15 @@ const ChampionBuildsPage = (props: ChampionBuildsProps) => {
 	// For pagination
 	const page = useRef(1);
 
-	// Returns 5 builds every time
-	const getBuildsForChampion = () => {
-		return axios.post(`${URL.SERVER}/api/build/all/${championName}`, {
-			page: page.current,
-		});
-	};
 	const getMoreBuilds = async () => {
 		setIsLoadingMoreBuilds(true);
 
 		page.current = page.current + 1;
 
-		const moreBuildsRequest = await getBuildsForChampion();
+		const moreBuildsRequest = await getBuildsForChampion(
+			championName,
+			page.current
+		);
 		const { data } = moreBuildsRequest;
 		const { hasNextPage, builds: newBuilds } = data;
 
@@ -81,7 +78,7 @@ const ChampionBuildsPage = (props: ChampionBuildsProps) => {
 			setDisableLoadMoreBuilds(true);
 		}
 
-		// but still display the remaining builds on the previous page
+		// but still display the remaining builds from the previous pages
 		setChampionBuilds((prev: Array<BuildInterface>) => {
 			return [...prev, ...newBuilds];
 		});
@@ -89,11 +86,10 @@ const ChampionBuildsPage = (props: ChampionBuildsProps) => {
 
 	// Load builds and champion data
 	useEffect(() => {
-		const getOneChampion = axios.get(
-			`${URL.SERVER}/api/champion/${championName}`
-		);
-
-		Promise.all([getBuildsForChampion(), getOneChampion])
+		Promise.all([
+			getBuildsForChampion(championName, page.current),
+			getOneChampion(championName),
+		])
 			.then((values) => {
 				const [{ data: buildsForChampion }, { data: dataForChampion }] = values;
 				const { buildsCount, builds } = buildsForChampion;

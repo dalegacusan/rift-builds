@@ -1,15 +1,29 @@
 import React, { useEffect } from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { URL } from '../shared/config/config';
-import axios from 'axios';
 
 // Redux
 import { connect } from 'react-redux';
 import actionTypes from '../shared/store/actions';
 
+// Shared
+
+import {
+	getChampions,
+	getItems,
+	getRunes,
+	getSpells,
+	getRanks,
+	getRoles,
+	sortChampionsAlphabetically,
+	sortItemsAlphabetically,
+	sortRunesAlphabetically,
+	sortSpellsAlphabetically,
+} from '../shared/services/gameDataRequests';
+
 // MaterialUI
 import CssBaseline from '@material-ui/core/CssBaseline';
+
 // Components
 import Layout from '../shared/components/PageLayout/Layout';
 import Routes from './Routes';
@@ -23,8 +37,10 @@ import {
 	RuneInterface,
 	SpellInterface,
 } from '../shared/interfaces/GameData';
+
 // CSS
 import styles from './app.module.css';
+
 const theme = createMuiTheme({
 	typography: {
 		fontFamily: ['Helvetica Neue', 'Helvetica', 'Arial', 'Tahoma'].join(','),
@@ -42,6 +58,7 @@ const theme = createMuiTheme({
 		},
 	},
 });
+
 type AppProps = {
 	setChampions: (newChampions: Array<ChampionInterface>) => void;
 	setItems: (newItems: Array<ItemInterface>) => void;
@@ -61,15 +78,8 @@ const App = (props: AppProps) => {
 		setSpells,
 	} = props;
 
-	// Get DATA
+	// Get Game Data
 	useEffect(() => {
-		const getChampions = axios.get(`${URL.SERVER}/api/champion/all`);
-		const getItems = axios.get(`${URL.SERVER}/api/item/all`);
-		const getRunes = axios.get(`${URL.SERVER}/api/rune/all`);
-		const getSpells = axios.get(`${URL.SERVER}/api/spell/all`);
-		const getRanks = axios.get(`${URL.SERVER}/api/rank/all`);
-		const getRoles = axios.get(`${URL.SERVER}/api/role/all`);
-
 		Promise.all([
 			getChampions,
 			getItems,
@@ -79,7 +89,7 @@ const App = (props: AppProps) => {
 			getRoles,
 		])
 			.then((values) => {
-				const [
+				let [
 					{ data: championsArray },
 					{ data: itemsArray },
 					{ data: runesArray },
@@ -88,62 +98,17 @@ const App = (props: AppProps) => {
 					{ data: rolesArray },
 				] = values;
 
-				// const sortArray = (arrName, interface) => {
+				// Sort Champions
+				championsArray = sortChampionsAlphabetically(championsArray);
 
-				// 	switch(arrName){
-				// 		case 'championsArray':
-				// 			return
-				// 	}
-
-				// 	return
-				// }
-
-				// Sort Champions Alphabetically
-				championsArray.sort(function (
-					a: ChampionInterface,
-					b: ChampionInterface
-				) {
-					if (a.championName < b.championName) {
-						return -1;
-					}
-					if (a.championName > b.championName) {
-						return 1;
-					}
-					return 0;
-				});
-
-				// Sort Items Alphabetically
-				itemsArray.sort(function (a: ItemInterface, b: ItemInterface) {
-					if (a.itemName < b.itemName) {
-						return -1;
-					}
-					if (a.itemName > b.itemName) {
-						return 1;
-					}
-					return 0;
-				});
+				// Sort Items
+				itemsArray = sortItemsAlphabetically(itemsArray);
 
 				// Sort Runes
-				runesArray.sort(function (a: RuneInterface, b: RuneInterface) {
-					if (a.runeName < b.runeName) {
-						return -1;
-					}
-					if (a.runeName > b.runeName) {
-						return 1;
-					}
-					return 0;
-				});
+				runesArray = sortRunesAlphabetically(runesArray);
 
 				// Sort Spells
-				spellsArray.sort(function (a: SpellInterface, b: SpellInterface) {
-					if (a.spellName < b.spellName) {
-						return -1;
-					}
-					if (a.spellName > b.spellName) {
-						return 1;
-					}
-					return 0;
-				});
+				spellsArray = sortSpellsAlphabetically(spellsArray);
 
 				setItems(itemsArray);
 				setChampions(championsArray);
@@ -153,7 +118,6 @@ const App = (props: AppProps) => {
 				setRoles(rolesArray);
 			})
 			.catch((err) => {
-				console.error('Something went wrong');
 				console.error(err);
 			});
 	}, []);

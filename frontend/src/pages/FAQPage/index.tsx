@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import AccordionFAQ from './Accordion';
 
 // CSS
-import styles from './Styles.module.css';
 
 const FAQ = () => {
 	return (

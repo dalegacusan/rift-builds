@@ -15,7 +15,6 @@ import FilterBy from './FilterChampions';
 import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
 
 // CSS
-import styles from './Styles.module.css';
 
 // Types
 import { ChampionInterface } from '../../shared/interfaces/GameData';

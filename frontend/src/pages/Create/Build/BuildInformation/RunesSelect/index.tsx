@@ -19,7 +19,6 @@ import Resolve from './components/Resolve';
 
 // CSS
 import globalstyles from '../../Styles.module.css';
-import styles from './runesselect.module.css';
 
 // Types
 import { RuneInterface } from '../../../../../shared/interfaces/GameData';
