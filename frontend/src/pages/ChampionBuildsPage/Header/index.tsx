@@ -26,11 +26,7 @@ const BuildCountHeader = (props: ChampionDataProps) => {
 	const { lane } = championData; // Arrays
 
 	return (
-		<Box
-			style={{
-				margin: '40px 0 0 0',
-			}}
-		>
+		<Box>
 			<Grid container spacing={2}>
 				<Grid item>
 					<Box className={styles.championImageContainer}>
@@ -42,7 +38,7 @@ const BuildCountHeader = (props: ChampionDataProps) => {
 						/>
 					</Box>
 
-					<Box className={styles.buildsCountContainer}>
+					<Box className={`{styles.buildsCountContainer} text-white-secondary`}>
 						<p style={{ textAlign: 'center', margin: 0 }}>
 							{buildsCount} {buildsCount === 1 ? 'Build' : 'Builds'}
 						</p>
@@ -54,7 +50,7 @@ const BuildCountHeader = (props: ChampionDataProps) => {
 							<span className={styles.championNameText}>{championName}</span>
 						</Typography>
 						<Typography variant='body1'>
-							<span className={styles.championTitle}>The {title}</span>
+							<span className='text-white-secondary'>The {title}</span>
 						</Typography>
 					</Box>
 

@@ -32,7 +32,6 @@
 
 .buildSelectInput:focus {
 	border: 1px solid rgb(255, 255, 255, 60%);
-	outline: none;
 }
 
 .buildSelectOption {
@@ -49,7 +48,6 @@
 
 .buildInput:focus {
 	border: 1px solid rgb(255, 255, 255, 60%);
-	outline: none;
 }
 
 .requiredInput {

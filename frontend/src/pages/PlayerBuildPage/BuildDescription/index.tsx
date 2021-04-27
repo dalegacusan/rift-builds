@@ -42,10 +42,14 @@ const BuildDescription = (props: BuildDescriptionProps) => {
 		<Accordion
 			expanded={expanded === 'panel1'}
 			onChange={handleChange('panel1')}
-			className={styles.accordionContainer}
+			className={`${styles.accordionContainer} text-white-secondary`}
 		>
 			<AccordionSummary
-				expandIcon={<ExpandMoreIcon className={styles.expandMoreIcon} />}
+				expandIcon={
+					<ExpandMoreIcon
+						className={`${styles.expandMoreIcon} text-white-disabled`}
+					/>
+				}
 				aria-controls='panel1bh-content'
 				id='panel1bh-header'
 				className={styles.accordionQuestionContainer}

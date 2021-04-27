@@ -14,11 +14,6 @@
 }
 
 .runeName {
-	color: #ffffff;
 	display: inline-block;
 	margin-top: 15px;
-}
-
-.runeReason {
-	color: rgb(255, 255, 255, 87%);
 }

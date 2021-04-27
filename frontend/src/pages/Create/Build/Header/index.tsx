@@ -11,12 +11,10 @@ import styles from './Styles.module.css';
 const CreateBuildHeader = () => {
 	return (
 		<Box className={styles.createBuildHeaderContainer}>
-			<p className={styles.createBuildHeader}>Create your build</p>
-			<Typography
-				variant='body2'
-				className={styles.createBuildSubHeader}
-				gutterBottom
-			>
+			<p className={`${styles.createBuildHeader} text-bold text-white-pure`}>
+				Create your build
+			</p>
+			<Typography variant='body2' className='text-white-primary' gutterBottom>
 				To prevent an unnecessary amount of builds, we added a restriction that
 				you can only create&nbsp;
 				<span className={styles.textHighlight}>6 builds every 30 minutes</span>

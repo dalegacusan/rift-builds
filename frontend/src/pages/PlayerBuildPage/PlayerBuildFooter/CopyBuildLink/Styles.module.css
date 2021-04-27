@@ -4,20 +4,16 @@
 
 .copyTitle {
 	font-size: 18px;
-	font-weight: bold;
-	color: rgb(255, 255, 255, 87%);
 	margin: 0;
 }
 
 .copyDescription {
-	color: rgb(255, 255, 255, 60%);
 	margin: 4px 0 25px 0;
 }
 
 .copyInput {
 	border: none;
 	border-radius: 0 3px 3px 0;
-	color: rgb(0, 0, 0, 87%);
 	padding: 10.1px 15px;
 	width: 50%;
 	position: relative;
@@ -34,5 +30,4 @@
 
 .copyIcon {
 	width: 18px !important;
-	color: rgb(255, 255, 255, 87%);
 }

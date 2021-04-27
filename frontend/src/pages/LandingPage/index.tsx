@@ -75,7 +75,7 @@ const Landing = (props: LandingProps) => {
 
 	return (
 		<>
-			<Box className={styles.landingContainer}>
+			<Box className='page-container'>
 				<FilterBy
 					championSearch={championSearch}
 					handleChampionSearchChange={handleChampionSearchChange}

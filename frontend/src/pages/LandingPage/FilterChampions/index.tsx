@@ -29,7 +29,7 @@ const FilterBy = (props: FilterByProps) => {
 			<Grid container>
 				<Grid item xs={12} sm={10}>
 					<Box className={styles.rolesListContainer}>
-						<ul className={styles.rolesList}>
+						<ul className={`${styles.rolesList} text-white-primary`}>
 							<li>
 								<span
 									onClick={() => setRoleFilter(RoleFilter.ALL)}
@@ -112,7 +112,7 @@ const FilterBy = (props: FilterByProps) => {
 							value={championSearch}
 							onChange={handleChampionSearchChange}
 							placeholder='Search a Champion'
-							className={styles.searchForChampionInput}
+							className={`${styles.searchForChampionInput} text-white-secondary`}
 						/>
 					</Box>
 				</Grid>

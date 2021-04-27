@@ -19,7 +19,6 @@
 
 .patchText a {
 	text-decoration: none;
-	color: rgb(255, 255, 255, 30%);
 	margin-left: 5px;
 }
 
@@ -28,7 +27,6 @@
 }
 
 .helpIcon {
-	color: rgb(255, 255, 255, 30%);
 	width: 18px !important;
 	position: relative;
 	top: 6px;

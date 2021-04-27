@@ -1,5 +1,5 @@
 .playerBuildHeaderContainer {
-	margin: 20px 0 !important;
+	margin: 0 0 20px 0 !important;
 }
 
 .championImageContainer {
@@ -25,21 +25,17 @@
 }
 
 .buildChampionText {
-	color: rgb(255, 255, 255, 87%);
 	font-size: 13px;
 	letter-spacing: -0.9px;
 	line-height: 15px;
 }
 
 .buildTitleText {
-	color: rgb(255, 255, 255, 60%);
-	font-weight: bold;
 	font-size: 22px;
 	margin: 3px 0;
 }
 
 .usernameText {
-	color: rgb(255, 255, 255, 87%);
 	display: inline-block;
 	font-weight: normal;
 	font-size: 16px;
@@ -52,13 +48,8 @@
 }
 
 .buildInformationContainer {
-	color: rgb(255, 255, 255, 87%);
 	margin-left: 10px;
 	margin-top: 8px;
-}
-
-.buildInformationTitle {
-	color: rgb(255, 255, 255, 60%);
 }
 
 .laneImage {
@@ -74,7 +65,6 @@
 }
 
 .buildDateSubmitted {
-	color: rgb(255, 255, 255, 60%);
 	text-align: right;
 }
 

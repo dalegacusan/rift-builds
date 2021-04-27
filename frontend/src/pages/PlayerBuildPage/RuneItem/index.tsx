@@ -64,11 +64,11 @@ const RuneItem = (props: RuneItemProps) => {
 					open={open}
 					handlePopoverClose={handlePopoverClose}
 				/>
-				<span className={styles.runeName}>{runeName}</span>
+				<span className={`${styles.runeName} text-white-pure`}>{runeName}</span>
 			</Box>
 			{reason ? (
 				<Box p={1} className={styles.runeReasonContainer}>
-					<span className={styles.runeReason}>
+					<span className='text-white-primary'>
 						{reason ? reason.toString() : ''}
 					</span>
 				</Box>

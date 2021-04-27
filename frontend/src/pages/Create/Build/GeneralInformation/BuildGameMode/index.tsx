@@ -45,7 +45,9 @@ const GameModeComponent = (props: GameModeComponentProps) => {
 				// If gamemode is disabled, add line-through, change text color, and disable button
 				className={`${styles.gamemodeButton} ${
 					gameMode === GameMode.NORMAL ? styles.selected : null
-				} ${disabledGameMode === GameMode.NORMAL ? styles.notAvailable : null}`}
+				} ${
+					disabledGameMode === GameMode.NORMAL ? styles.notAvailable : null
+				} text-white-primary`}
 				disabled={disabledGameMode === GameMode.NORMAL ? true : false}
 				onClick={() => handleGameModeChange(GameMode.NORMAL)}
 			>
@@ -57,7 +59,9 @@ const GameModeComponent = (props: GameModeComponentProps) => {
 				// If gamemode is disabled, add line-through, change text color, and disable button
 				className={`${styles.gamemodeButton} ${
 					gameMode === GameMode.ARAM ? styles.selected : null
-				} ${disabledGameMode === GameMode.ARAM ? styles.notAvailable : null}`}
+				} ${
+					disabledGameMode === GameMode.ARAM ? styles.notAvailable : null
+				} text-white-primary`}
 				disabled={disabledGameMode === GameMode.ARAM ? true : false}
 				onClick={() => handleGameModeChange(GameMode.ARAM)}
 			>
@@ -67,7 +71,6 @@ const GameModeComponent = (props: GameModeComponentProps) => {
 	);
 };
 
-// https://redux.js.org/recipes/usage-with-typescript
 const mapStateToProps = (state: RootState) => {
 	return {
 		gameMode: state.build.gameMode,

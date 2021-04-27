@@ -133,18 +133,14 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								>
 									<FormControlLabel
 										value={ItemType.PRIMARY}
-										control={
-											<Radio color='primary' className={styles.radioButton} />
-										}
+										control={<Radio color='primary' />}
 										label='Primary'
 										labelPlacement='end'
 										className={styles.radioButtonContainer}
 									/>
 									<FormControlLabel
 										value={ItemType.OPTIONAL}
-										control={
-											<Radio color='primary' className={styles.radioButton} />
-										}
+										control={<Radio color='primary' />}
 										label='Optional'
 										labelPlacement='end'
 										className={styles.radioButtonContainer}
@@ -163,7 +159,7 @@ const ItemsSelect = (props: ItemsSelectProps) => {
 								rows={5}
 								value={itemReason}
 								placeholder='Explanation'
-								className={styles.explanationTextArea}
+								className={`${styles.explanationTextArea} text-white-disabled`}
 								maxLength={RequiredLength.REASON.MAX_LENGTH}
 								onChange={(e) => handleItemExplanationChange(e)}
 							/>

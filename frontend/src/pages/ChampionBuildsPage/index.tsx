@@ -49,9 +49,10 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 	const [isLoadingMoreBuilds, setIsLoadingMoreBuilds] = useState(false);
 	const [disableLoadMoreBuilds, setDisableLoadMoreBuilds] = useState(false);
 
+	// For pagination
 	const page = useRef(1);
 
-	// Returns 5 builds every time.
+	// Returns 5 builds every time
 	const getBuildsForChampion = () => {
 		return axios.post(`${URL.SERVER}/api/build/all/${championName}`, {
 			page: page.current,
@@ -106,7 +107,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 	}, []);
 
 	return (
-		<>
+		<div className='page-container'>
 			{renderErrorComponent ? <PageNotFound /> : null}
 
 			{!isLoading && !renderErrorComponent ? (
@@ -135,7 +136,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 							<Button
 								onClick={getMoreBuilds}
 								variant='contained'
-								className={styles.loadMoreButton}
+								className={`${styles.loadMoreButton} text-white-primary`}
 								disabled={disableLoadMoreBuilds}
 							>
 								{isLoadingMoreBuilds ? 'Loading...' : 'Load more builds'}
@@ -146,7 +147,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 			) : null}
 
 			{isLoading ? <ComponentLoading /> : null}
-		</>
+		</div>
 	);
 };
 

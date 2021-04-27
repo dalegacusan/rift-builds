@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 
-import PageNotFoundMascot from '../assets/page_not_found_mascot.png';
+import PageNotFoundMascot from './assets/page_not_found_mascot.png';
 
 // MaterialUI
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';

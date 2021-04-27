@@ -14,13 +14,13 @@ import Grid from '@material-ui/core/Grid';
 // Components
 import BuildDescription from './BuildDescription';
 import BuildItem from './BuildItem';
-import LoadingCircle from '../../shared/components/Loading/ComponentLoading';
-import RuneItem from './RuneItem';
-import SectionDivider from './SectionDivider';
-import SpellItem from './Spellitem';
+import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
 import PageNotFound from '../../shared/components/PageError/PageNotFound/PageNotFound';
 import PlayerBuildHeader from './PlayerBuildHeader';
 import PlayerBuildFooter from './PlayerBuildFooter';
+import RuneItem from './RuneItem';
+import SectionDivider from './SectionDivider';
+import SpellItem from './Spellitem';
 // Types
 import { BuildInterface } from '../../shared/interfaces/Build';
 import { ItemInterface } from '../../shared/interfaces/GameData';
@@ -29,7 +29,6 @@ import styles from './Styles.module.css';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
-		overflow: 'hidden',
 	},
 	large: {
 		width: theme.spacing(7),
@@ -65,7 +64,7 @@ const PlayerBuild = (props: any) => {
 	}, []);
 
 	return (
-		<div className={classes.root}>
+		<div className={`${classes.root} page-container`}>
 			{renderErrorComponent ? <PageNotFound /> : null}
 
 			{!isLoading && !renderErrorComponent && build ? (
@@ -76,7 +75,7 @@ const PlayerBuild = (props: any) => {
 							&nbsp;| Rift Builds
 						</title>
 					</Helmet>
-					<Box className={styles.playerBuildContainer}>
+					<Box className='text-white-pure'>
 						{/* Display Build ID */}
 						<PlayerBuildHeader build={build} />
 
@@ -148,7 +147,7 @@ const PlayerBuild = (props: any) => {
 				</>
 			) : null}
 
-			{isLoading ? <LoadingCircle /> : null}
+			{isLoading ? <ComponentLoading /> : null}
 		</div>
 	);
 };

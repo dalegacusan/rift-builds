@@ -14,11 +14,6 @@
 }
 
 .itemName {
-	color: #ffffff;
 	display: inline-block;
 	margin-top: 15px;
-}
-
-.itemReason {
-	color: rgb(255, 255, 255, 87%);
 }

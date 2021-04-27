@@ -1,24 +1,5 @@
-.headerImage {
-	width: 100%;
-	margin-top: 50px;
-}
-
-.aboutContainer {
-	display: inline-block;
-}
-
 .aboutTextContainer {
-	color: rgb(255, 255, 255, 87%);
-	font-size: 15px;
-	padding: 40px 20px;
-}
-
-.aboutTextContainer h2 {
-	color: #ffffff;
-}
-
-.aboutTextContainer h4 {
-	color: rgb(255, 255, 255, 60%);
+	padding: 33px 20px;
 }
 
 .aboutTextContainer p {
@@ -26,18 +7,11 @@
 }
 
 .aboutTextContainer a {
-	color: #00a3fe;
+	color: #13aaff;
 }
 
-.textHighlight {
-	font-weight: 700;
-}
-
-.aboutNoteText {
-	color: rgb(255, 255, 255, 60%);
-	font-size: 14px;
-}
-
-.aboutNoteText a {
-	color: rgb(255, 255, 255, 65%);
+.textDivider {
+	background-color: rgb(255, 255, 255, 30%) !important;
+	height: 2px;
+	border: none;
 }

@@ -1,34 +1,34 @@
 import React from 'react';
+
+// Shared
 import { Contact } from '../../shared/constants/constants';
 
+// Images
 import AboutBanner from './assets/about_banner.png';
 
 // CSS
 import styles from './Styles.module.css';
 
-const About = () => {
+const AboutPage = () => {
 	return (
-		<div className={styles.aboutContainer}>
+		<div
+			className={`${styles.aboutContainer} page-container text-white-primary`}
+		>
 			<img
 				src={AboutBanner}
 				alt='About Banner'
 				className={styles.headerImage}
 			/>
 			<div className={styles.aboutTextContainer}>
-				<h2>Finding the right build has never been this easy</h2>
-				<h4>
-					<span className={styles.textHighlight}>Rift Builds</span> is a
-					platform to help you get easy access to builds across all regions for
-					League of Legends: Wild Rift.
+				<h2 className='text-white-pure'>
+					Finding the right build has never been this easy
+				</h2>
+				<h4 className='text-white-disabled'>
+					Rift Builds is a platform to help you get easy access to builds across
+					all regions for League of Legends: Wild Rift.
 				</h4>
 
-				<hr
-					style={{
-						backgroundColor: 'rgb(255,255,255, 30%)',
-						height: '2px',
-						border: 'none',
-					}}
-				/>
+				<hr className={styles.textDivider} />
 
 				<p>
 					We offer access to builds for all champions of League of Legends: Wild
@@ -62,13 +62,14 @@ const About = () => {
 					.
 				</p>
 
-				<p className={styles.aboutNoteText}>
+				<p className='text-white-disabled'>
 					If you're a developer and wish to contribute to this project, head
 					over to this&nbsp;
 					<a
 						href='https://github.com/dalegacusan/wildriftcommunitybuilds'
 						target='_blank'
 						rel='noreferrer'
+						className='text-white-secondary'
 					>
 						repository
 					</a>
@@ -79,4 +80,4 @@ const About = () => {
 	);
 };
 
-export default About;
+export default AboutPage;

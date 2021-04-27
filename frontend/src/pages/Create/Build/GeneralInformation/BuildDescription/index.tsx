@@ -39,7 +39,7 @@ const BuildDescription = (props: BuildDescriptionProps) => {
 				rows={10}
 				value={buildDescription}
 				placeholder='Describe your build'
-				className={styles.explanationTextArea}
+				className={`${styles.explanationTextArea} text-white-disabled`}
 				maxLength={RequiredLength.REASON.MAX_LENGTH}
 				onChange={(e) => handleBuildDescriptionChange(e)}
 			/>

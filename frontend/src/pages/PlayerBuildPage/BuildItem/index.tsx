@@ -77,11 +77,11 @@ const BuildItem = (props: BuildItemProps) => {
 					open={open}
 					handlePopoverClose={handlePopoverClose}
 				/>
-				<span className={styles.itemName}>{itemName}</span>
+				<span className={`${styles.itemName} text-white-pure`}>{itemName}</span>
 			</Box>
 			{reason ? (
 				<Box p={1} className={styles.itemReasonContainer}>
-					<span className={styles.itemReason}>{reason.toString()}</span>
+					<span className='text-white-primary'>{reason.toString()}</span>
 				</Box>
 			) : null}
 		</Box>

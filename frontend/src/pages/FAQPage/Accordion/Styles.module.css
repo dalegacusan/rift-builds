@@ -1,10 +1,4 @@
-.contactEmailAddress {
-	color: #5893d4;
-	font-style: italic;
-}
-
 .accordionContainer {
-	color: rgb(255, 255, 255, 60%) !important;
 	border: none none solid none;
 }
 
@@ -16,12 +10,7 @@
 	background-color: #292e38 !important;
 }
 
-.reportBuildText {
-	color: #b00020;
-}
-
 .tierListReference a {
-	color: #5893d4;
 	text-decoration: none;
 }
 
@@ -29,10 +18,3 @@
 	text-decoration: underline;
 }
 
-.expandMoreIcon {
-	color: rgb(255, 255, 255, 30%);
-}
-
-.textHighlight {
-	color: #5893d4;
-}

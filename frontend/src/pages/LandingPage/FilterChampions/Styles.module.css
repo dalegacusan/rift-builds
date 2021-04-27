@@ -18,7 +18,6 @@
 	display: inline-block;
 	margin-right: 12px;
 	font-size: 16px;
-	color: rgb(255, 255, 255, 87%);
 }
 
 .rolesList li:hover {
@@ -35,12 +34,10 @@
 	padding: 10px;
 	background: rgb(41, 46, 56, 30%);
 	border: 1px solid rgb(255, 255, 255, 30%);
-	color: rgb(255, 255, 255, 30%);
 }
 
 .searchForChampionInput:focus {
 	border: 1px solid rgb(255, 255, 255, 60%);
-	outline: none;
 }
 
 .selectedFilter {

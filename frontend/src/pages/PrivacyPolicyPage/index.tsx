@@ -9,11 +9,13 @@ import styles from './Styles.module.css';
 
 const PrivacyPolicy = () => {
 	return (
-		<div className={styles.privacyPolicyContainer}>
+		<div
+			className={`${styles.privacyPolicyContainer} page-container text-white-secondary`}
+		>
 			<img
 				src={PrivacyPolicyBanner}
 				alt='Privacy Policy Banner'
-				className={styles.headerImage}
+				className='banner'
 			/>
 			<div className={styles.policyTextContainer}>
 				<h2>Privacy Policy</h2>

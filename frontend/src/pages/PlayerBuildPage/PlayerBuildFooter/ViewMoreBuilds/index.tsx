@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Shared
+import { championNameToUrlString } from '../../../../shared/utils/championNameToUrlString';
+
 // MaterialUI
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import Box from '@material-ui/core/Box';
@@ -23,18 +26,11 @@ const ViewMoreBuilds = (props: ViewMoreBuildsProps) => {
 		>
 			<Box>
 				<a
-					href={`/builds/champion/${championName
-						.toLocaleLowerCase()
-						.split(' ')
-						.filter((char) => char !== '.' && char !== "'")
-						.join('')
-						.replace('.', '')
-						.replace("'", '')}`}
-					style={{ textDecoration: 'none' }}
+					href={`/builds/champion/${championNameToUrlString(championName)}`}
+					className={styles.viewMoreBuildsLink}
 				>
 					<Button
 						variant='contained'
-						// color='secondary'
 						className={styles.viewMoreBuildsButton}
 						endIcon={<KeyboardArrowRightIcon />}
 					>

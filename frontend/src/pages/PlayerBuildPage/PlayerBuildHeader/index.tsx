@@ -63,7 +63,7 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 							className={styles.buildRoleImage}
 							title={roleName}
 						/>
-						<span className={styles.buildChampionText}>
+						<span className={`${styles.buildChampionText} text-white-primary`}>
 							{champion.championName}
 						</span>
 					</Box> */}
@@ -73,12 +73,18 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 			{/* Champion Name, Build Title, and Username */}
 			<Grid item xs={12} sm>
 				<Box
-					className={`${styles.buildInformationContainer} playerBuildBuildInformationContainer`}
+					className={`${styles.buildInformationContainer} text-white-primary playerBuildBuildInformationContainer`}
 				>
-					<p className={styles.buildTitleText}>{buildTitle.toString()}&nbsp;</p>
+					<p
+						className={`${styles.buildTitleText} text-white-secondary text-bold`}
+					>
+						{buildTitle.toString()}&nbsp;
+					</p>
 					<Box>
 						<Box>
-							<p className={styles.usernameText}>Build by {username}</p>
+							<p className={`${styles.usernameText} text-white-primary`}>
+								Build by {username}
+							</p>
 						</Box>
 						<Box className={styles.buildChipsContainer}>
 							{/* Capitalize first letter of Game Mode */}
@@ -98,7 +104,9 @@ const PlayerBuildHeader = (props: PlayerBuildHeaderProps) => {
 					<p className={`${styles.patchText} buildPatchText`}>
 						Patch {patchVersion}
 					</p>
-					<p className={`${styles.buildDateSubmitted} buildDateSubmittedText`}>
+					<p
+						className={`${styles.buildDateSubmitted} text-white-secondary buildDateSubmittedText`}
+					>
 						{moment(dateSubmitted).format('MM/DD/YYYY')}
 					</p>
 				</Box>

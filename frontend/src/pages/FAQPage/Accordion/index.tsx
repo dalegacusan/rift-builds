@@ -45,10 +45,10 @@ export default function ControlledAccordions() {
 			<Accordion
 				expanded={expanded === 'panel1'}
 				onChange={handleChange('panel1')}
-				className={styles.accordionContainer}
+				className={`${styles.accordionContainer} text-white-secondary`}
 			>
 				<AccordionSummary
-					expandIcon={<ExpandMoreIcon className={styles.expandMoreIcon} />}
+					expandIcon={<ExpandMoreIcon className='text-white-secondary' />}
 					aria-controls='panel1bh-content'
 					id='panel1bh-header'
 					className={styles.accordionQuestionContainer}
@@ -71,10 +71,10 @@ export default function ControlledAccordions() {
 			<Accordion
 				expanded={expanded === 'panel2'}
 				onChange={handleChange('panel2')}
-				className={styles.accordionContainer}
+				className={`${styles.accordionContainer} text-white-secondary`}
 			>
 				<AccordionSummary
-					expandIcon={<ExpandMoreIcon className={styles.expandMoreIcon} />}
+					expandIcon={<ExpandMoreIcon className='text-white-secondary' />}
 					aria-controls='panel2bh-content'
 					id='panel2bh-header'
 					className={styles.accordionQuestionContainer}
@@ -86,9 +86,7 @@ export default function ControlledAccordions() {
 				<AccordionDetails className={styles.accordionAnswerContainer}>
 					<p>
 						You can create up to&nbsp;
-						<span className={styles.textHighlight}>
-							6 builds every 30 minutes
-						</span>
+						<span className='text-secondary'>6 builds every 30 minutes</span>
 					</p>
 				</AccordionDetails>
 			</Accordion>
@@ -100,10 +98,10 @@ export default function ControlledAccordions() {
 			<Accordion
 				expanded={expanded === 'panel3'}
 				onChange={handleChange('panel3')}
-				className={styles.accordionContainer}
+				className={`${styles.accordionContainer} text-white-secondary`}
 			>
 				<AccordionSummary
-					expandIcon={<ExpandMoreIcon className={styles.expandMoreIcon} />}
+					expandIcon={<ExpandMoreIcon className='text-white-secondary' />}
 					aria-controls='panel3bh-content'
 					id='panel3bh-header'
 					className={styles.accordionQuestionContainer}
@@ -116,7 +114,7 @@ export default function ControlledAccordions() {
 					<Box>
 						<p>
 							You can share a build you created by heading over to the&nbsp;
-							<span className={styles.textHighlight}>page of your build</span>
+							<span className='text-secondary'>page of your build</span>
 						</p>
 						<img
 							src={StepOneImage}
@@ -125,10 +123,8 @@ export default function ControlledAccordions() {
 						/>
 						<p>
 							then scroll to the very bottom of the page,&nbsp;
-							<span className={styles.textHighlight}>
-								click the copy button
-							</span>{' '}
-							and it will <i>copy the link to your clipboard</i>.
+							<span className='text-secondary'>click the copy button</span> and
+							it will <i>copy the link to your clipboard</i>.
 						</p>
 						<img
 							src={StepTwoImage}
@@ -146,10 +142,10 @@ export default function ControlledAccordions() {
 			<Accordion
 				expanded={expanded === 'panel4'}
 				onChange={handleChange('panel4')}
-				className={styles.accordionContainer}
+				className={`${styles.accordionContainer} text-white-secondary`}
 			>
 				<AccordionSummary
-					expandIcon={<ExpandMoreIcon className={styles.expandMoreIcon} />}
+					expandIcon={<ExpandMoreIcon className='text-white-secondary' />}
 					aria-controls='panel4bh-content'
 					id='panel4bh-header'
 					className={styles.accordionQuestionContainer}
@@ -161,9 +157,13 @@ export default function ControlledAccordions() {
 				<AccordionDetails className={styles.accordionAnswerContainer}>
 					<p className={styles.tierListReference}>
 						Our current tier list is referenced from&nbsp;
-						<a href={TierList.CREATOR_URL}>{TierList.CREATOR_NAME}</a>
+						<a href={TierList.CREATOR_URL} className='text-secondary'>
+							{TierList.CREATOR_NAME}
+						</a>
 						's Patch {TierList.VERSION}&nbsp;
-						<a href={TierList.URL}>Tier List</a>
+						<a href={TierList.URL} className='text-secondary'>
+							Tier List
+						</a>
 					</p>
 				</AccordionDetails>
 			</Accordion>
@@ -175,10 +175,10 @@ export default function ControlledAccordions() {
 			<Accordion
 				expanded={expanded === 'panel5'}
 				onChange={handleChange('panel5')}
-				className={styles.accordionContainer}
+				className={`${styles.accordionContainer} text-white-secondary`}
 			>
 				<AccordionSummary
-					expandIcon={<ExpandMoreIcon className={styles.expandMoreIcon} />}
+					expandIcon={<ExpandMoreIcon className='text-white-secondary' />}
 					aria-controls='panel5bh-content'
 					id='panel5bh-header'
 					className={styles.accordionQuestionContainer}
@@ -190,7 +190,7 @@ export default function ControlledAccordions() {
 				<AccordionDetails className={styles.accordionAnswerContainer}>
 					<p>
 						We would love to hear from you! Send us an email at&nbsp;
-						<span className={styles.contactEmailAddress}>
+						<span className='text-secondary text-italic'>
 							{Contact.EMAIL_ADDRESS}
 						</span>
 					</p>

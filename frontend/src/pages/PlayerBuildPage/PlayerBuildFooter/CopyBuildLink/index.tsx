@@ -19,8 +19,10 @@ const CopyBuildLink = (props: CopyLinkProps) => {
 	return (
 		<Grid container className={styles.copyBuildLinkContainer}>
 			<Grid item xs={12}>
-				<p className={styles.copyTitle}>Get sharable link</p>
-				<p className={styles.copyDescription}>
+				<p className={`${styles.copyTitle} text-bold text-white-primary`}>
+					Get sharable link
+				</p>
+				<p className={`${styles.copyDescription} text-white-secondary`}>
 					Copy and paste the link below into chat rooms or browsers.
 				</p>
 			</Grid>
@@ -38,13 +40,13 @@ const CopyBuildLink = (props: CopyLinkProps) => {
 						className={styles.copyButton}
 						color='secondary'
 					>
-						<FileCopyIcon className={styles.copyIcon} />
+						<FileCopyIcon className={`${styles.copyIcon} text-white-primary`} />
 					</Button>
 				</Tooltip>
 				<input
 					type='text'
 					value={`${URL.CLIENT}/build/${buildId}`}
-					className={styles.copyInput}
+					className={`${styles.copyInput} text-black-secondary`}
 				/>
 			</Grid>
 		</Grid>

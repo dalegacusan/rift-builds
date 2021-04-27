@@ -123,9 +123,11 @@ const CounterContent = (props: {
 						src={ImagePath.Champion(championId)}
 						className={styles.championCounterImage}
 					/>
-					<span className={styles.championCounterName}>{championName}</span>
+					<span className={`${styles.championCounterName} text-white-primary`}>
+						{championName}
+					</span>
 				</Box>
-				<span className={styles.goToBuildText}>
+				<span className={`${styles.goToBuildText} text-white-secondary`}>
 					Builds
 					<ArrowForwardIosIcon className={styles.goToBuildArrow} />
 				</span>

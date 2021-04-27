@@ -2,11 +2,6 @@
 	padding: 40px;
 }
 
-.viewMoreBuildsTitle {
-	color: rgb(255, 255, 255, 87%);
-	font-weight: bold;
-}
-
 .viewMoreBuildsButton {
 	background-color: #388e3c !important;
 	color: rgba(240, 240, 240, 0.87) !important;
@@ -15,4 +10,8 @@
 
 .viewMoreBuildsButton:hover {
 	background-color: #2e7d32 !important;
+}
+
+.viewMoreBuildsLink {
+	text-decoration: none;
 }

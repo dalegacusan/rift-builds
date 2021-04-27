@@ -55,9 +55,14 @@ const Lanes = (props: LanesProps) => {
 					classes={classes}
 					arrow
 				>
-					<HelpIcon className={styles.helpIcon} />
+					<HelpIcon className={`${styles.helpIcon} text-white-disabled`} />
 				</Tooltip>
-				<a href={GamePatch.URL} target='_blank' rel='noreferrer'>
+				<a
+					href={GamePatch.URL}
+					target='_blank'
+					rel='noreferrer'
+					className='text-white-disabled'
+				>
 					Patch {GamePatch.VERSION}
 				</a>
 			</span>

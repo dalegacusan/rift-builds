@@ -18,35 +18,33 @@ const FAQ = () => {
 			<Helmet>
 				<title>Frequently Asked Questions - Rift Builds</title>
 			</Helmet>
-			<div>
+			<div className='page-container' style={{ textAlign: 'center' }}>
 				<Typography
 					variant='h4'
 					style={{
-						fontWeight: 'bold',
-						color: 'rgb(255,255,255,87%)',
-						textAlign: 'center',
 						margin: '80px 0 60px 0',
 					}}
+					className='text-white-primary text-bold'
 				>
 					Frequently Asked Questions
 				</Typography>
 
 				<AccordionFAQ />
 
-				<Box style={{ textAlign: 'center', color: 'rgb(255,255,255,87%)' }}>
+				<Box className='text-white-primary'>
 					<Typography
 						variant='h6'
 						style={{
-							fontWeight: 'bold',
-							margin: '80px 0 20px 0',
+							margin: '60px 0 0 0',
 						}}
+						className='text-bold'
 					>
 						Still have questions?
 					</Typography>
-					<p style={{ color: 'rgb(255,255,255,60%)' }}>
+					<p className='text-white-disabled'>
 						If you cannot find an answer to your question in our FAQ, you can
 						always contact us at{' '}
-						<span className={styles.contactEmailAddress}>
+						<span className='text-italic text-primary'>
 							{Contact.EMAIL_ADDRESS}
 						</span>
 						. We will get back to you shortly!

@@ -44,7 +44,7 @@ const StepperButtons = (props: StepperButtonsProps) => {
 			{activeStep !== 0 ? (
 				<Button
 					onClick={handleBack}
-					className={`${styles.backButton} ${styles.stepperButton}`}
+					className={`${styles.backButton} ${styles.stepperButton} text-white-secondary`}
 				>
 					<ArrowBackIcon className={styles.backArrowIcon} /> Back
 				</Button>

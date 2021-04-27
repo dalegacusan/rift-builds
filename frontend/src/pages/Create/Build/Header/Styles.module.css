@@ -4,14 +4,8 @@
 }
 
 .createBuildHeader {
-	font-weight: bold !important;
-	color: #ffffff;
 	font-size: 24px;
 	margin: 10px 0;
-}
-
-.createBuildSubHeader {
-	color: rgb(255, 255, 255, 87%);
 }
 
 .textHighlight {
