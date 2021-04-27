@@ -1,17 +1,21 @@
 import React from 'react';
 
-import { ImagePath } from '../../../../../shared/utils/imagePath';
-
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../shared/store/actions';
 
+// Shared
+import { ImagePath } from '../../../../../shared/utils/imagePath';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
+
 // Components
+
 // CSS
 import globalstyles from '../../Styles.module.css';
 import styles from './Styles.module.css';
+
 // Types
 import { RoleInterface } from '../../../../../shared/interfaces/GameData';
 import { RootState } from '../../../../../shared/interfaces/GlobalStore';

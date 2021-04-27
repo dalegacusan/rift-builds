@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../../../shared/utils/imagePath';
 
 // Components
 import ItemPopover from '../../../../../shared/components/Popover/ItemPopover';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { ItemInterface } from '../../../../../shared/interfaces/GameData';
+
 type BuildItemsProps = {
 	item: ItemInterface;
 };

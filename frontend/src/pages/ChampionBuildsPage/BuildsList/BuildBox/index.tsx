@@ -1,11 +1,13 @@
 import React from 'react';
 
+// Shared
 import { ImagePath } from '../../../../shared/utils/imagePath';
 import { ItemType } from '../../../../shared/constants/constants';
 import { RequiredLength } from '../../../../shared/constants/requiredLength';
 
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import BuildDate from './BuildDate';
 import BuildItem from './BuildItem';
@@ -13,11 +15,13 @@ import BuildRankUser from './BuildRankUser';
 import BuildRune from './BuildRune';
 import BuildSpell from './BuildSpell';
 import Divider from '@material-ui/core/Divider';
+
+// CSS
+import styles from './Styles.module.css';
+
 // Types
 import { BuildInterface } from '../../../../shared/interfaces/Build';
 import { ItemInterface } from '../../../../shared/interfaces/GameData';
-// CSS
-import styles from './Styles.module.css';
 
 type BuildBoxProps = {
 	build: BuildInterface;

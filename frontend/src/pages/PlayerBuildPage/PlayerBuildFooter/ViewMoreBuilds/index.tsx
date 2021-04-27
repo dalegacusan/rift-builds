@@ -4,12 +4,15 @@ import React from 'react';
 import { championNameToUrlString } from '../../../../shared/utils/championNameToUrlString';
 
 // MaterialUI
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+
 // Components
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 type ViewMoreBuildsProps = {
 	championName: string;

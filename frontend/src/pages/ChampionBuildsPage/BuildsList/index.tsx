@@ -2,14 +2,18 @@ import React from 'react';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
+
 // Components
 import BuildBox from './BuildBox';
 import NoBuilds from './NoBuilds';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { ChampionInterface } from '../../../shared/interfaces/GameData';
 import { BuildInterface } from '../../../shared/interfaces/Build';
+
 type BuildsListProps = {
 	builds: Array<BuildInterface>;
 	championData: ChampionInterface;

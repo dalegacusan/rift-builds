@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
+// Shared
 import { ImagePath } from '../../../../shared/utils/imagePath';
 import { championNameToUrlString } from '../../../../shared/utils/championNameToUrlString';
 
@@ -9,9 +10,12 @@ import { championNameToUrlString } from '../../../../shared/utils/championNameTo
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
+
 // Components
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 type ChampionCounterType = {
 	id: string;

@@ -2,11 +2,13 @@ import React from 'react';
 
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import BuildRole from './BuildRole';
 import BuildTitle from './BuildTitle';
 import BuildGameMode from './BuildGameMode';
 import BuildDescription from './BuildDescription';
+
 // CSS
 import globalstyles from '../Styles.module.css';
 import styles from './Styles.module.css';

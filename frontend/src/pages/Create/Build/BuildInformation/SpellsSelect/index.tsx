@@ -1,23 +1,27 @@
 import React from 'react';
 
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../../../../shared/store/actions';
+
+// Shared
 import {
 	GameMode,
 	Maps,
 	SpellNumber,
 } from '../../../../../shared/constants/constants';
 
-// Redux
-import { connect, ConnectedProps } from 'react-redux';
-import actionTypes from '../../../../../shared/store/actions';
-
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import Spell from './Spell/index';
+
 // CSS
 import globalstyles from '../../Styles.module.css';
 import styles from './Styles.module.css';
+
 // Types
 import { SpellInterface } from '../../../../../shared/interfaces/GameData';
 import { RootState } from '../../../../../shared/interfaces/GlobalStore';

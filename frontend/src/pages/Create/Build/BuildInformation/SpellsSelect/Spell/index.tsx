@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../../../../shared/utils/imagePath';
 
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import SpellPopover from '../../../../../../shared/components/Popover/SpellPopover';
+
 // CSS
 import globalstyles from '../../../Styles.module.css';
 import styles from './Styles.module.css';
+
 // Types
 import { SpellInterface } from '../../../../../../shared/interfaces/GameData';
+
 type SpellProps = {
 	spells: Array<SpellInterface>;
 	spellNumber: number;

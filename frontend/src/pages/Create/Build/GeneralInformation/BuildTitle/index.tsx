@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 
-import { RequiredLength } from '../../../../../shared/constants/requiredLength';
-
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../shared/store/actions';
 
+// Shared
+import { RequiredLength } from '../../../../../shared/constants/requiredLength';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
+
 // Components
+
 // CSS
 import globalstyles from '../../Styles.module.css';
+
 // Types
 import { RootState } from '../../../../../shared/interfaces/GlobalStore';
 

@@ -3,11 +3,14 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
+
 // Components
 import ReCaptcha from '../ReCaptcha';
 import StepperButtons from './StepperButtons';
+
 // CSS
 import globalstyles from '../../Styles.module.css';
+
 // Types
 type StepperProps = {
 	activeStep: number;

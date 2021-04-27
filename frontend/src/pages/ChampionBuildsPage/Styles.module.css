@@ -5,6 +5,7 @@
 .loadMoreButton {
 	background-color: #000000 !important;
 	text-transform: none !important;
+	min-width: 140px !important;
 }
 
 .loadMoreButton:hover {

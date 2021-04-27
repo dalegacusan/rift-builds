@@ -2,13 +2,16 @@ import React from 'react';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 
+// Shared
 import { Contact } from '../../shared/constants/constants';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+
 // Components
 import AccordionFAQ from './Accordion';
+
 // CSS
 import styles from './Styles.module.css';
 

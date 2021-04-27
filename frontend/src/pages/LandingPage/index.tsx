@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
-import { RoleFilter } from '../../shared/constants/constants';
-
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 
+// Shared
+import { RoleFilter } from '../../shared/constants/constants';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
+
 // Components
 import Champions from './ChampionsList';
 import FilterBy from './FilterChampions';
 import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { ChampionInterface } from '../../shared/interfaces/GameData';
 import { RootState } from '../../shared/interfaces/GlobalStore';

@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../shared/utils/imagePath';
 
 // MaterialUI
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+
 // Components
 import ItemPopover from '../../../shared/components/Popover/ItemPopover';
+
 // Types
 import { ItemInterface } from '../../../shared/interfaces/GameData';
+
 // CSS
 import styles from './Styles.module.css';
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		large: {

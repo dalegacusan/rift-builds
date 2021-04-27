@@ -4,6 +4,11 @@ import { Redirect } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../../shared/store/actions';
+
+// Shared
 import {
 	getItemFromSession,
 	removeItemFromSession,
@@ -12,12 +17,9 @@ import { URL } from '../../../shared/config/config';
 import { Message } from '../../../shared/constants/validationMessages';
 import { BuildValidationHelper } from '../../../shared/utils/buildValidationHelpers';
 
-// Redux
-import { connect, ConnectedProps } from 'react-redux';
-import actionTypes from '../../../shared/store/actions';
-
 // MaterialUI
 import Box from '@material-ui/core/Box';
+
 // Components
 import BackdropLoading from '../../../shared/components/Loading/Backdrop';
 import BuildInformation from './BuildInformation';
@@ -26,8 +28,10 @@ import GeneralInformation from './GeneralInformation';
 import PlayerInformation from './PlayerInformation';
 import Stepper from './Stepper';
 import Snackbars from '../../../shared/components/AlertPopup/AlertPopup';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import {
 	snackbarControlsInterface,

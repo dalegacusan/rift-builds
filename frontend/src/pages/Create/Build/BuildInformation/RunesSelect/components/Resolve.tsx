@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+
+// Shared
 import { ImagePath } from '../../../../../../shared/utils/imagePath';
 import { RequiredLength } from '../../../../../../shared/constants/requiredLength';
 import { Rune } from '../../../../../../shared/constants/constants';
 
-// Redux
-import { connect, ConnectedProps } from 'react-redux';
-
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import RunePopover from '../../../../../../shared/components/Popover/RunePopover';
+
 // CSS
 import globalstyles from '../../../Styles.module.css';
 import styles from './rune.module.css';
+
 // Types
 import { RuneInterface } from '../../../../../../shared/interfaces/GameData';
 import { RootState } from '../../../../../../shared/interfaces/GlobalStore';

@@ -2,18 +2,23 @@ import React from 'react';
 import moment from 'moment';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../shared/utils/imagePath';
 import { GameMode } from '../../../shared/constants/constants';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import BuildChip from './BuildChip';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { BuildInterface } from '../../../shared/interfaces/Build';
+
 type PlayerBuildHeaderProps = {
 	build: BuildInterface;
 };

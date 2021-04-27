@@ -1,25 +1,30 @@
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../shared/utils/imagePath';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+
 // Components
 import Counters from './Counters';
 import Lanes from './Lanes';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { ChampionInterface } from '../../../shared/interfaces/GameData';
-type ChampionDataProps = {
+
+type ChampionBuildsProps = {
 	championData: ChampionInterface;
 	buildsCount: number;
 };
 
-const BuildCountHeader = (props: ChampionDataProps) => {
+const ChampionBuildsHeader = (props: ChampionBuildsProps) => {
 	const { championData, buildsCount } = props;
 	const { id: championId, championName, title } = championData; // Strings
 	const { counters, tier } = championData; // Object
@@ -38,7 +43,9 @@ const BuildCountHeader = (props: ChampionDataProps) => {
 						/>
 					</Box>
 
-					<Box className={`{styles.buildsCountContainer} text-white-secondary`}>
+					<Box
+						className={`${styles.buildsCountContainer} text-white-secondary`}
+					>
 						<p style={{ textAlign: 'center', margin: 0 }}>
 							{buildsCount} {buildsCount === 1 ? 'Build' : 'Builds'}
 						</p>
@@ -64,4 +71,4 @@ const BuildCountHeader = (props: ChampionDataProps) => {
 	);
 };
 
-export default BuildCountHeader;
+export default ChampionBuildsHeader;

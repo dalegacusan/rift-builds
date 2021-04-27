@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Redux
+import { connect, ConnectedProps } from 'react-redux';
+import actionTypes from '../../../../../shared/store/actions';
+
+// Shared
 import { ImagePath } from '../../../../../shared/utils/imagePath';
 import {
 	ItemType,
@@ -9,10 +14,6 @@ import {
 import { DefaultSelectedState } from '../../../../../shared/constants/defaultSelectedState';
 import { RequiredLength } from '../../../../../shared/constants/requiredLength';
 
-// Redux
-import { connect, ConnectedProps } from 'react-redux';
-import actionTypes from '../../../../../shared/store/actions';
-
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -20,11 +21,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+
 // Components
 import ItemsSelected from '../ItemsSelected';
+
 // CSS
 import globalstyles from '../../Styles.module.css';
 import styles from './Styles.module.css';
+
 // Types
 import { ItemInterface } from '../../../../../shared/interfaces/GameData';
 import { RootState } from '../../../../../shared/interfaces/GlobalStore';

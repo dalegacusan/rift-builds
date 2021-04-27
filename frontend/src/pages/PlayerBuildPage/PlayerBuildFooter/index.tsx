@@ -2,11 +2,14 @@ import React from 'react';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
+
 // Components
 import CopyBuildLink from './CopyBuildLink';
 import ViewMoreBuilds from './ViewMoreBuilds';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 type PlayerBuildFooterProps = {
 	buildId: string | undefined;

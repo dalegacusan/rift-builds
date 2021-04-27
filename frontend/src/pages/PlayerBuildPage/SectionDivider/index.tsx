@@ -3,10 +3,16 @@ import React from 'react';
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-// css
+
+// CSS
 import styles from './Styles.module.css';
 
-const SectionDivider = (props: { title: string }) => {
+// Types
+type SectionDividerProps = {
+	title: string;
+};
+
+const SectionDivider = (props: SectionDividerProps) => {
 	const { title } = props;
 
 	return (

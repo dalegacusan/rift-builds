@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../shared/utils/imagePath';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+
 // Components
 import RunePopover from '../../../shared/components/Popover/RunePopover';
+
 // Types
 import { RuneInterface } from '../../../shared/interfaces/GameData';
+
 // CSS
 import styles from './Styles.module.css';
+
 const useStyles = makeStyles((theme) => ({
 	large: {
 		width: theme.spacing(7),

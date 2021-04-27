@@ -3,7 +3,9 @@ import { withRouter } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
+import { RouteComponentProps } from 'react-router';
 
+// Shared
 import { ItemType } from '../../shared/constants/constants';
 import { URL } from '../../shared/config/config';
 
@@ -11,6 +13,7 @@ import { URL } from '../../shared/config/config';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import BuildDescription from './BuildDescription';
 import BuildItem from './BuildItem';
@@ -21,11 +24,14 @@ import PlayerBuildFooter from './PlayerBuildFooter';
 import RuneItem from './RuneItem';
 import SectionDivider from './SectionDivider';
 import SpellItem from './Spellitem';
+
 // Types
 import { BuildInterface } from '../../shared/interfaces/Build';
 import { ItemInterface } from '../../shared/interfaces/GameData';
+
 // CSS
 import styles from './Styles.module.css';
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -36,8 +42,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-// === CHANGE PROPS TYPE === //
-const PlayerBuild = (props: any) => {
+interface MatchParams {
+	buildId: string;
+}
+
+interface PlayerBuildProps extends RouteComponentProps<MatchParams> {}
+
+const PlayerBuild = (props: PlayerBuildProps) => {
 	const { match } = props;
 	const classes = useStyles();
 

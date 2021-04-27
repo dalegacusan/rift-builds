@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Shared
 import { URL } from '../../../../shared/config/config';
 
 // MaterialUI
@@ -6,8 +8,10 @@ import Button from '@material-ui/core/Button';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 type CopyLinkProps = {
 	buildId: string | undefined;

@@ -1,22 +1,26 @@
 import React from 'react';
 
-import { Rune } from '../../../../../shared/constants/constants';
-
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../shared/store/actions';
 
+// Shared
+import { Rune } from '../../../../../shared/constants/constants';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import Domination from './components/Domination';
 import Inspiration from './components/Inspiration';
 import Keystone from './components/Keystone';
 import Resolve from './components/Resolve';
+
 // CSS
 import globalstyles from '../../Styles.module.css';
 import styles from './runesselect.module.css';
+
 // Types
 import { RuneInterface } from '../../../../../shared/interfaces/GameData';
 import { RootState } from '../../../../../shared/interfaces/GlobalStore';

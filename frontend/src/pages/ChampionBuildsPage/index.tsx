@@ -3,10 +3,13 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import { URL } from '../../shared/config/config';
 import axios from 'axios';
 
+// Shared
+import { URL } from '../../shared/config/config';
+
 // MaterialUI
+
 // Components
 import Box from '@material-ui/core/Box';
 import BuildsList from './BuildsList';
@@ -14,17 +17,20 @@ import Button from '@material-ui/core/Button';
 import ChampionData from './Header/index';
 import PageNotFound from '../../shared/components/PageError/PageNotFound/PageNotFound';
 import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { ChampionInterface } from '../../shared/interfaces/GameData';
 import { BuildInterface } from '../../shared/interfaces/Build';
+
 type PathParamsType = {
 	championName: string;
 };
-type HeroBuildsProps = RouteComponentProps<PathParamsType> & {};
+type ChampionBuildsProps = RouteComponentProps<PathParamsType> & {};
 
-const HeroBuilds = (props: HeroBuildsProps) => {
+const ChampionBuildsPage = (props: ChampionBuildsProps) => {
 	const { match } = props;
 	const { championName } = match.params;
 
@@ -45,7 +51,7 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 	});
 
 	const [renderErrorComponent, setRenderErrorComponent] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoadingPage, setIsLoadingPage] = useState(true);
 	const [isLoadingMoreBuilds, setIsLoadingMoreBuilds] = useState(false);
 	const [disableLoadMoreBuilds, setDisableLoadMoreBuilds] = useState(false);
 
@@ -97,10 +103,10 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 
 				setChampionData(dataForChampion[0]);
 
-				setIsLoading(!isLoading);
+				setIsLoadingPage(!isLoadingPage);
 			})
 			.catch((err) => {
-				setIsLoading(!isLoading);
+				setIsLoadingPage(!isLoadingPage);
 
 				setRenderErrorComponent(true);
 			});
@@ -110,7 +116,9 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 		<div className='page-container'>
 			{renderErrorComponent ? <PageNotFound /> : null}
 
-			{!isLoading && !renderErrorComponent ? (
+			{isLoadingPage ? <ComponentLoading /> : null}
+
+			{!isLoadingPage && !renderErrorComponent ? (
 				<>
 					<Helmet>
 						<title>
@@ -126,7 +134,11 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 					{/* Builds */}
 					<BuildsList builds={championBuilds} championData={championData} />
 
-					{/* Load More Button */}
+					{/* 
+							Load More Button 
+								- Display button if length of builds is greater than or equal to five
+								  which is the number of items per load AND haven't viewed all the builds yet
+						*/}
 					{championBuilds.length >= 5 && !disableLoadMoreBuilds ? (
 						<Box
 							display='flex'
@@ -145,10 +157,8 @@ const HeroBuilds = (props: HeroBuildsProps) => {
 					) : null}
 				</>
 			) : null}
-
-			{isLoading ? <ComponentLoading /> : null}
 		</div>
 	);
 };
 
-export default withRouter(HeroBuilds);
+export default withRouter(ChampionBuildsPage);

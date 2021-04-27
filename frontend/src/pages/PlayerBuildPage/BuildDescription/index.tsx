@@ -5,10 +5,12 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from '@material-ui/core/Typography';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 type BuildDescriptionProps = {
 	description: string;

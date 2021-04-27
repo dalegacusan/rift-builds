@@ -1,13 +1,17 @@
 import React from 'react';
 
+// Shared
 import { RoleFilter } from '../../../shared/constants/constants';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+
 // Components
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 type FilterByProps = {
 	championSearch: string;

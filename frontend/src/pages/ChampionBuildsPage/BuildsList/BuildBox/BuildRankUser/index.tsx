@@ -1,12 +1,15 @@
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../../../shared/utils/imagePath';
 
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { RankInterface } from '../../../../../shared/interfaces/GameData';
+
 type BuildRankUserProps = {
 	username: string;
 	rank: RankInterface;

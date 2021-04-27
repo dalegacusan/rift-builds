@@ -1,15 +1,20 @@
 import React from 'react';
 
-import NoBuildsImage from './assets/no_builds.svg';
-
+// Shared
 import { storeItem } from '../../../../shared/utils/sessionStorage';
+
+// Images
+import NoBuildsImage from './assets/no_builds.svg';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+
 // Components
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { ChampionInterface } from '../../../../shared/interfaces/GameData';
 type NoBuildsProps = {

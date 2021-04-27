@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 
+// Shared
 import { ImagePath } from '../../../../../shared/utils/imagePath';
 
 // MaterialUI
+import { Theme, withStyles, createStyles } from '@material-ui/core/styles';
 import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
-import { Theme, withStyles, createStyles } from '@material-ui/core/styles';
+
 // Components
 import RunePopover from '../../../../../shared/components/Popover/RunePopover';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { RuneInterface } from '../../../../../shared/interfaces/GameData';
+
 type BuildRuneProps = {
 	runes: {
 		keystone: RuneInterface;

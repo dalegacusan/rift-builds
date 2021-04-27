@@ -2,14 +2,17 @@ import React from 'react';
 
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import ChampionSelect from './ChampionSelect';
 import ItemsSelect from './ItemsSelect';
 import RunesSelect from './RunesSelect';
 import SpellsSelect from './SpellsSelect';
+
 // CSS
 import globalstyles from '../Styles.module.css';
 import styles from './buildselection.module.css';
+
 // Types
 type BuildSelectionProps = {};
 

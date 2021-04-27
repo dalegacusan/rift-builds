@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 
-import { ItemType } from '../../../../../shared/constants/constants';
-import { RequiredLength } from '../../../../../shared/constants/requiredLength';
-import { Message } from '../../../../../shared/constants/validationMessages';
-
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../shared/store/actions';
+
+// Shared
+import { ItemType } from '../../../../../shared/constants/constants';
+import { RequiredLength } from '../../../../../shared/constants/requiredLength';
+import { Message } from '../../../../../shared/constants/validationMessages';
 
 // MaterialUI
 import { Theme, makeStyles } from '@material-ui/core/styles';
@@ -15,14 +16,18 @@ import Grid from '@material-ui/core/Grid';
 
 import InfoIcon from '@material-ui/icons/Info';
 import Tooltip from '@material-ui/core/Tooltip';
+
 // Components
 import BuildItem from './BuildItem';
+
 // Types
 import { ItemInterface } from '../../../../../shared/interfaces/GameData';
 import { snackbarControlsInterface } from '../../../../../shared/interfaces/interfaces';
 import { RootState } from '../../../../../shared/interfaces/GlobalStore';
+
 // CSS
 import styles from './Styles.module.css';
+
 const useStylesBootstrap = makeStyles((theme: Theme) => ({
 	tooltip: {
 		letterSpacing: '0.1px',

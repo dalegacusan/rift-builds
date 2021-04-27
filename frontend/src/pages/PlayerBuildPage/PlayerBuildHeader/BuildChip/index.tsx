@@ -2,8 +2,10 @@ import React from 'react';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 type BuildChipProps = {
 	property: string;

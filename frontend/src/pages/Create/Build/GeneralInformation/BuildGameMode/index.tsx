@@ -1,18 +1,22 @@
 import React from 'react';
 
-import { GameMode } from '../../../../../shared/constants/constants';
-
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../../../../../shared/store/actions';
 
+// Shared
+import { GameMode } from '../../../../../shared/constants/constants';
+
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+
 // Components
+
 // CSS
 import globalstyles from '../../Styles.module.css';
 import styles from './Styles.module.css';
+
 // Types
 import { RootState } from '../../../../../shared/interfaces/GlobalStore';
 

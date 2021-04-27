@@ -1,16 +1,20 @@
 import React, { FunctionComponent } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../shared/utils/imagePath';
 import { championNameToUrlString } from '../../../shared/utils/championNameToUrlString';
 
 // MaterialUI
 import Box from '@material-ui/core/Box';
+
 // Components
-// Types
-import { ChampionInterface } from '../../../shared/interfaces/GameData';
+
 // CSS
 import styles from './Styles.module.css';
+
+// Types
+import { ChampionInterface } from '../../../shared/interfaces/GameData';
 
 type ChampionsProps = {
 	filteredChampions: Array<ChampionInterface>;

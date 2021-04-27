@@ -1,6 +1,9 @@
 import React from 'react';
+
+// Shared
 import { Contact, TierList } from '../../../shared/constants/constants';
 
+// Images
 import StepOneImage from './assets/step1.png';
 import StepTwoImage from './assets/step2.png';
 
@@ -12,8 +15,10 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Box from '@material-ui/core/Box';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
+
 // CSS
 import styles from './Styles.module.css';
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {

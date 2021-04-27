@@ -3,8 +3,10 @@ import React from 'react';
 // MaterialUI
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 type StepperButtonsProps = {
 	activeStep: number;

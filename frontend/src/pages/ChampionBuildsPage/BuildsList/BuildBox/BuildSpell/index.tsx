@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../../../shared/utils/imagePath';
 
 // Components
 import SpellPopover from '../../../../../shared/components/Popover/SpellPopover';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 import { SpellInterface } from '../../../../../shared/interfaces/GameData';
+
 type BuildSpellProps = {
 	spell: SpellInterface;
 };

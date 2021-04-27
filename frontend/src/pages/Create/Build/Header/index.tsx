@@ -3,8 +3,11 @@ import React from 'react';
 // MaterialUI
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+
 // Components
+
 // Types
+
 // CSS
 import styles from './Styles.module.css';
 

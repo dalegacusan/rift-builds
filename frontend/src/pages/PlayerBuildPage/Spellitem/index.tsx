@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// Shared
 import { ImagePath } from '../../../shared/utils/imagePath';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
+
 // Components
 import SpellPopover from '../../../shared/components/Popover/SpellPopover';
+
 // Types
 import { SpellInterface } from '../../../shared/interfaces/GameData';
+
 // CSS
 import styles from './Styles.module.css';
 const useStyles = makeStyles((theme) => ({

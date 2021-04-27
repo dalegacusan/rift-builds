@@ -1,5 +1,7 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
+
+// Shared
 import { GamePatch } from '../../../../shared/constants/constants';
 
 // MaterialUI
@@ -8,8 +10,10 @@ import Box from '@material-ui/core/Box';
 import Chip from '@material-ui/core/Chip';
 import HelpIcon from '@material-ui/icons/Help';
 import Tooltip from '@material-ui/core/Tooltip';
+
 // CSS
 import styles from './Styles.module.css';
+
 // Types
 type LanesProps = {
 	lane: Array<string>;

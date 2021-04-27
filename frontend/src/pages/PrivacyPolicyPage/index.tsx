@@ -1,7 +1,10 @@
 import React from 'react';
+
+// Shared
 import { Contact } from '../../shared/constants/constants';
 import { URL } from '../../shared/config/config';
 
+// Images
 import PrivacyPolicyBanner from './assets/privacy_policy_banner.png';
 
 // CSS

@@ -2,10 +2,12 @@ import React from 'react';
 
 // MaterialUI
 import Grid from '@material-ui/core/Grid';
+
 // Components
 import PlayerUsername from './PlayerUsername';
 import PlayerRank from './PlayerRank';
 import PlayerServer from './PlayerRegion';
+
 // Types
 // CSS
 
