@@ -51,6 +51,7 @@ const CopyBuildLink = (props: CopyLinkProps) => {
 					type='text'
 					value={`${URL.CLIENT}/build/${buildId}`}
 					className={`${styles.copyInput} text-black-secondary`}
+					readOnly
 				/>
 			</Grid>
 		</Grid>

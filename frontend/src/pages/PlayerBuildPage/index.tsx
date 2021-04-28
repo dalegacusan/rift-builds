@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 import { RouteComponentProps } from 'react-router';
+import { useQuery, useQueryClient } from 'react-query';
 
 // Shared
 import { getPlayerBuild } from '../../shared/services/buildsRequests';
@@ -50,32 +51,29 @@ const PlayerBuild = (props: PlayerBuildProps) => {
 	const { match } = props;
 	const classes = useStyles();
 
+	// Access the query client
+	const queryClient = useQueryClient();
+
+	const { data, status, error, isError } = useQuery('playerBuild', () =>
+		getPlayerBuild(match.params.buildId)
+	);
+
 	const [build, setBuild] = useState<BuildInterface>();
 
 	const [renderErrorComponent, setRenderErrorComponent] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		getPlayerBuild(match.params.buildId)
-			.then((res) => {
-				const { data } = res;
-
-				setIsLoading(!isLoading);
-
-				setBuild(data);
-			})
-			.catch((err) => {
-				setIsLoading(!isLoading);
-
-				setRenderErrorComponent(true);
-			});
-	}, []);
+		// "&& data" to get rid of "data.data is possibly undefined"
+		if (status === 'success' && data) {
+			setBuild(data.data);
+		} else if (isError && error) {
+			setRenderErrorComponent(true);
+		}
+	}, [status]);
 
 	return (
 		<div className={`${classes.root} page-container`}>
-			{renderErrorComponent ? <PageNotFound /> : null}
-
-			{!isLoading && !renderErrorComponent && build ? (
+			{!queryClient.isFetching() && !renderErrorComponent && build ? (
 				<>
 					<Helmet>
 						<title>
@@ -153,9 +151,9 @@ const PlayerBuild = (props: PlayerBuildProps) => {
 						/>
 					</Box>
 				</>
-			) : null}
-
-			{isLoading ? <ComponentLoading /> : null}
+			) : (
+				<ComponentLoading />
+			)}
 		</div>
 	);
 };

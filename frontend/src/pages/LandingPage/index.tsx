@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useQueryClient } from 'react-query';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -23,6 +24,9 @@ import { RootState } from '../../shared/interfaces/GlobalStore';
 const Landing = (props: LandingProps) => {
 	// Game Data PROPS
 	const { champions } = props;
+
+	// Access the query client
+	const queryClient = useQueryClient();
 
 	const [championSearch, setChampionSearch] = useState('');
 	const [filteredChampions, setFilteredChampions] = useState<
@@ -86,7 +90,8 @@ const Landing = (props: LandingProps) => {
 					setRoleFilter={setRoleFilter}
 				/>
 
-				{champions.length !== 0 ? (
+				{/* Display champions if query is not fetching and champions array is not empty */}
+				{!queryClient.isFetching() && champions.length !== 0 ? (
 					<Champions filteredChampions={filteredChampions} />
 				) : (
 					<ComponentLoading />

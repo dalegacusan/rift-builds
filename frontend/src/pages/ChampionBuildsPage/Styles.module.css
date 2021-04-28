@@ -11,3 +11,8 @@
 .loadMoreButton:hover {
 	background-color: rgb(0, 0, 0, 60%) !important;
 }
+
+.noMoreBuildsCTA {
+	text-align: center;
+	margin-top: 60px;
+}

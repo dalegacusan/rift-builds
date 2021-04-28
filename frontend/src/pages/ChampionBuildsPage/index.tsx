@@ -3,10 +3,13 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
+import { useQuery } from 'react-query';
 
 // Shared
+import { useQueriesTyped } from '../../shared/services/useQueriesTyped';
 import { getOneChampion } from '../../shared/services/gameDataRequests';
 import { getBuildsForChampion } from '../../shared/services/buildsRequests';
+import { storeItem } from '../../shared/utils/sessionStorage';
 
 // MaterialUI
 
@@ -34,108 +37,155 @@ const ChampionBuildsPage = (props: ChampionBuildsProps) => {
 	const { match } = props;
 	const { championName } = match.params;
 
-	const [championBuilds, setChampionBuilds] = useState<Array<BuildInterface>>(
-		[]
-	);
-	const [championBuildsCount, setChampionBuildsCount] = useState(0);
-	const [championData, setChampionData] = useState<ChampionInterface>({
-		id: '',
-		championName: '',
-		counters: {
-			weakAgainst: [],
-			strongAgainst: [],
+	const [championInformation, setChampionInformation] = useState({
+		championBuilds: [],
+		championBuildsCount: 0,
+		championData: {
+			id: '',
+			championName: '',
+			counters: {
+				weakAgainst: [],
+				strongAgainst: [],
+			},
+			lane: [],
+			tier: {
+				Top: '',
+				Jungle: '',
+				Middle: '',
+				Bottom: '',
+				Support: '',
+			},
+			title: '',
 		},
-		lane: [],
-		tier: {},
-		title: '',
 	});
-
 	const [renderErrorComponent, setRenderErrorComponent] = useState(false);
-	const [isLoadingPage, setIsLoadingPage] = useState(true);
-	const [isLoadingMoreBuilds, setIsLoadingMoreBuilds] = useState(false);
+	const [getMoreBuildsClick, setGetMoreBuildsClick] = useState(false);
 	const [disableLoadMoreBuilds, setDisableLoadMoreBuilds] = useState(false);
 
 	// For pagination
 	const page = useRef(1);
 
-	const getMoreBuilds = async () => {
-		setIsLoadingMoreBuilds(true);
+	const getMoreBuilds = () => {
+		setGetMoreBuildsClick(true);
 
-		page.current = page.current + 1;
+		console.log(page.current);
 
-		const moreBuildsRequest = await getBuildsForChampion(
-			championName,
-			page.current
-		);
-		const { data } = moreBuildsRequest;
-		const { hasNextPage, builds: newBuilds } = data;
-
-		setIsLoadingMoreBuilds(false);
-
-		// REMOVES LOAD MORE BUTTON
-		// If there is no more next page
-		if (!hasNextPage) {
-			setDisableLoadMoreBuilds(true);
-		}
-
-		// but still display the remaining builds from the previous pages
-		setChampionBuilds((prev: Array<BuildInterface>) => {
-			return [...prev, ...newBuilds];
-		});
+		return getBuildsForChampion(championName, page.current);
 	};
 
-	// Load builds and champion data
+	const handleCreateMoreBuildsForChampion = () => {
+		storeItem('championToCreateBuild', championInformation.championData);
+	};
+
+	const championBuildsQueries = useQueriesTyped([
+		{
+			queryKey: 'championBuilds',
+			queryFn: () => getBuildsForChampion(championName, page.current),
+			onError: () => setRenderErrorComponent(true),
+		},
+		{
+			queryKey: 'championData',
+			queryFn: () => getOneChampion(championName),
+			onError: () => setRenderErrorComponent(true),
+		},
+	]);
+
+	const eachQueryHasLoaded = championBuildsQueries.every(
+		(query) => query.isFetched && query.isSuccess
+	);
+
+	// Query to get more builds
+	const { data: newBuildsRetrieved, status, error, isError } = useQuery(
+		'moreBuilds',
+		getMoreBuilds,
+		{
+			enabled: getMoreBuildsClick,
+		}
+	);
+
 	useEffect(() => {
-		Promise.all([
-			getBuildsForChampion(championName, page.current),
-			getOneChampion(championName),
-		])
-			.then((values) => {
-				const [{ data: buildsForChampion }, { data: dataForChampion }] = values;
-				const { buildsCount, builds } = buildsForChampion;
+		if (
+			championBuildsQueries[0].data && // Champion Builds
+			championBuildsQueries[1].data && // Champion Data
+			eachQueryHasLoaded
+		) {
+			const [
+				{ data: championBuilds },
+				{ data: championData },
+			] = championBuildsQueries;
+			const { buildsCount, builds } = championBuilds.data;
 
-				setChampionBuilds([...builds]);
-				setChampionBuildsCount(buildsCount);
-
-				setChampionData(dataForChampion[0]);
-
-				setIsLoadingPage(!isLoadingPage);
-			})
-			.catch((err) => {
-				setIsLoadingPage(!isLoadingPage);
-
-				setRenderErrorComponent(true);
+			setChampionInformation({
+				championBuilds: builds,
+				championBuildsCount: buildsCount,
+				championData: championData.data[0],
 			});
-	}, []);
+		}
+	}, [eachQueryHasLoaded]);
+
+	useEffect(() => {
+		if (newBuildsRetrieved) {
+			const { data } = newBuildsRetrieved;
+			const { hasNextPage, builds: newBuilds } = data;
+
+			// REMOVES LOAD MORE BUTTON
+			// If there is no more next page
+			if (!hasNextPage) {
+				setDisableLoadMoreBuilds(true);
+			}
+
+			// but still display the remaining builds from the previous pages
+			setChampionInformation((prev: any) => {
+				return {
+					...prev,
+					championBuilds: [...prev.championBuilds, ...newBuilds],
+				};
+			});
+		}
+	}, [newBuildsRetrieved]);
+
+	useEffect(() => {
+		page.current = page.current + 1;
+		if (getMoreBuildsClick) {
+			setGetMoreBuildsClick(false);
+		}
+	}, [getMoreBuildsClick]);
 
 	return (
 		<div className='page-container'>
+			<Helmet>
+				<title>
+					{championInformation.championData.championName} Builds and Guides -
+					League of Legends: Wild Rift | Rift Builds
+				</title>
+			</Helmet>
+
 			{renderErrorComponent ? <PageNotFound /> : null}
 
-			{isLoadingPage ? <ComponentLoading /> : null}
+			{!eachQueryHasLoaded && !renderErrorComponent ? (
+				<ComponentLoading />
+			) : null}
 
-			{!isLoadingPage && !renderErrorComponent ? (
+			{eachQueryHasLoaded && !renderErrorComponent ? (
 				<>
-					<Helmet>
-						<title>
-							{championData.championName} Builds and Guides - League of Legends:
-							Wild Rift | Rift Builds
-						</title>
-					</Helmet>
 					{/* Champion Data */}
 					<ChampionData
-						championData={championData}
-						buildsCount={championBuildsCount}
+						championData={championInformation.championData}
+						buildsCount={championInformation.championBuildsCount}
 					/>
 					{/* Builds */}
-					<BuildsList builds={championBuilds} championData={championData} />
+					<BuildsList
+						builds={championInformation.championBuilds}
+						championData={championInformation.championData}
+					/>
 
 					{/* 
 							Load More Button 
 								- Display button if length of builds is greater than or equal to five
 								  which is the number of items per load AND haven't viewed all the builds yet
 						*/}
-					{championBuilds.length >= 5 && !disableLoadMoreBuilds ? (
+					{championInformation.championBuilds.length >= 5 &&
+					!disableLoadMoreBuilds ? (
 						<Box
 							display='flex'
 							justifyContent='center'
@@ -147,10 +197,27 @@ const ChampionBuildsPage = (props: ChampionBuildsProps) => {
 								className={`${styles.loadMoreButton} text-white-primary`}
 								disabled={disableLoadMoreBuilds}
 							>
-								{isLoadingMoreBuilds ? 'Loading...' : 'Load more builds'}
+								{status === 'loading' ? 'Loading...' : 'Load more builds'}
 							</Button>
 						</Box>
 					) : null}
+
+					{disableLoadMoreBuilds && (
+						<p className={`${styles.noMoreBuildsCTA} text-white-secondary`}>
+							There are no more builds available.{' '}
+							<span className='text-primary'>
+								<a
+									href='/build/create'
+									onClick={handleCreateMoreBuildsForChampion}
+									className='text-primary'
+								>
+									Create a build for&nbsp;
+									{championInformation.championData.championName}
+								</a>
+							</span>
+							&nbsp;instead.
+						</p>
+					)}
 				</>
 			) : null}
 		</div>

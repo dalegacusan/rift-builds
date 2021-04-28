@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -91,55 +91,57 @@ const App = (props: AppProps) => {
 		(query) => query.isFetched && query.isSuccess
 	);
 
-	if (
-		gameDataQueries[0].data && // Champions
-		gameDataQueries[1].data && // Items
-		gameDataQueries[2].data && // Runes
-		gameDataQueries[3].data && // Spells
-		gameDataQueries[4].data && // Ranks
-		gameDataQueries[5].data && // Roles
-		eachQueryHasLoaded
-	) {
-		const [
-			{ data: champions },
-			{ data: items },
-			{ data: runes },
-			{ data: spells },
-			{ data: ranks },
-			{ data: roles },
-		] = gameDataQueries;
+	useEffect(() => {
+		if (
+			gameDataQueries[0].data && // Champions
+			gameDataQueries[1].data && // Items
+			gameDataQueries[2].data && // Runes
+			gameDataQueries[3].data && // Spells
+			gameDataQueries[4].data && // Ranks
+			gameDataQueries[5].data && // Roles
+			eachQueryHasLoaded
+		) {
+			const [
+				{ data: champions },
+				{ data: items },
+				{ data: runes },
+				{ data: spells },
+				{ data: ranks },
+				{ data: roles },
+			] = gameDataQueries;
 
-		// Sort Champions
-		const championsArray: Array<ChampionInterface> = sortChampionsAlphabetically(
-			champions.data
-		);
+			// Sort Champions
+			const championsArray: Array<ChampionInterface> = sortChampionsAlphabetically(
+				champions.data
+			);
 
-		// Sort Items
-		const itemsArray: Array<ItemInterface> = sortItemsAlphabetically(
-			items.data
-		);
+			// Sort Items
+			const itemsArray: Array<ItemInterface> = sortItemsAlphabetically(
+				items.data
+			);
 
-		// Sort Runes
-		const runesArray: Array<RuneInterface> = sortRunesAlphabetically(
-			runes.data
-		);
+			// Sort Runes
+			const runesArray: Array<RuneInterface> = sortRunesAlphabetically(
+				runes.data
+			);
 
-		// Sort Spells
-		const spellsArray: Array<SpellInterface> = sortSpellsAlphabetically(
-			spells.data
-		);
+			// Sort Spells
+			const spellsArray: Array<SpellInterface> = sortSpellsAlphabetically(
+				spells.data
+			);
 
-		const ranksArray: Array<RankInterface> = ranks.data;
+			const ranksArray: Array<RankInterface> = ranks.data;
 
-		const rolesArray: Array<RoleInterface> = roles.data;
+			const rolesArray: Array<RoleInterface> = roles.data;
 
-		setChampions(championsArray);
-		setItems(itemsArray);
-		setRanks(ranksArray);
-		setRunes(runesArray);
-		setSpells(spellsArray);
-		setRoles(rolesArray);
-	}
+			setChampions(championsArray);
+			setItems(itemsArray);
+			setRanks(ranksArray);
+			setRunes(runesArray);
+			setSpells(spellsArray);
+			setRoles(rolesArray);
+		}
+	}, [eachQueryHasLoaded]);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -155,7 +157,6 @@ const App = (props: AppProps) => {
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		// === SETTER Champions === //
 		setChampions: (champions: Array<ChampionInterface>) =>
 			dispatch({ type: actionTypes.GAMEDATA_SET_CHAMPIONS, data: champions }),
 		setItems: (items: Array<ItemInterface>) =>

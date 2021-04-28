@@ -198,16 +198,16 @@ const CreateBuild = (props: CreateBuildProps) => {
 		// Retrieve session data for the champion a user will create a build for
 		// This session item is set in NoBuilds.tsx
 		// This one is used if there are no builds for a champion and a user wants to create a build for that champion
-		const championToCreateFirstBuild:
+		const championSelectedToCreateBuild:
 			| string
 			| null
-			| undefined = getItemFromSession('championToCreateFirstBuild');
+			| undefined = getItemFromSession('championToCreateBuild');
 
-		if (championToCreateFirstBuild) {
-			setChampionSelected(JSON.parse(championToCreateFirstBuild));
+		if (championSelectedToCreateBuild) {
+			setChampionSelected(JSON.parse(championSelectedToCreateBuild));
 		}
 
-		return removeItemFromSession('championToCreateFirstBuild');
+		return removeItemFromSession('championToCreateBuild');
 	}, []);
 
 	if (hasSubmittedBuild) {

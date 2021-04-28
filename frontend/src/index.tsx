@@ -13,7 +13,13 @@ import App from './App/App';
 import reportWebVitals from './reportWebVitals';
 
 // Create a client
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+		},
+	},
+});
 
 ReactDOM.render(
 	<React.StrictMode>

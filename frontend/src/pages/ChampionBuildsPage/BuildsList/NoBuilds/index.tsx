@@ -28,7 +28,7 @@ export default function NoBuilds(props: NoBuildsProps) {
 	// This session data gets used in CreateBuild.tsx to automatically set the selected champion to the current champion a user will create a build for
 	// This one is used if there are no builds for a champion and a user wants to create a build for that champion
 	const handleCreateFirstBuildClick = () => {
-		storeItem('championToCreateFirstBuild', championData);
+		storeItem('championToCreateBuild', championData);
 	};
 
 	return (
