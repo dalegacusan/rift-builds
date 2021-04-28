@@ -67,6 +67,8 @@ $ cd ../
 $ npm run dev
 ```
 
+The client is hosted at *localhost:3000* and the server is hosted at *localhost:8080*
+
 ## Versions
 
 |    Version    |   Release Date    |          Description         |
