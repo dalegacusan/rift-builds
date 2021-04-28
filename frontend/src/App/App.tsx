@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import actionTypes from '../shared/store/actions';
 
 // Shared
-
 import {
 	getChampions,
 	getItems,
@@ -20,6 +19,7 @@ import {
 	sortRunesAlphabetically,
 	sortSpellsAlphabetically,
 } from '../shared/services/gameDataRequests';
+import { useQueriesTyped } from '../shared/services/useQueriesTyped';
 
 // MaterialUI
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -78,49 +78,68 @@ const App = (props: AppProps) => {
 		setSpells,
 	} = props;
 
-	// Get Game Data
-	useEffect(() => {
-		Promise.all([
-			getChampions,
-			getItems,
-			getRunes,
-			getSpells,
-			getRanks,
-			getRoles,
-		])
-			.then((values) => {
-				let [
-					{ data: championsArray },
-					{ data: itemsArray },
-					{ data: runesArray },
-					{ data: spellsArray },
-					{ data: ranksArray },
-					{ data: rolesArray },
-				] = values;
+	const gameDataQueries = useQueriesTyped([
+		{ queryKey: 'champions', queryFn: () => getChampions },
+		{ queryKey: 'items', queryFn: () => getItems },
+		{ queryKey: 'runes', queryFn: () => getRunes },
+		{ queryKey: 'spells', queryFn: () => getSpells },
+		{ queryKey: 'ranks', queryFn: () => getRanks },
+		{ queryKey: 'roles', queryFn: () => getRoles },
+	]);
 
-				// Sort Champions
-				championsArray = sortChampionsAlphabetically(championsArray);
+	const eachQueryHasLoaded = gameDataQueries.every(
+		(query) => query.isFetched && query.isSuccess
+	);
 
-				// Sort Items
-				itemsArray = sortItemsAlphabetically(itemsArray);
+	if (
+		gameDataQueries[0].data && // Champions
+		gameDataQueries[1].data && // Items
+		gameDataQueries[2].data && // Runes
+		gameDataQueries[3].data && // Spells
+		gameDataQueries[4].data && // Ranks
+		gameDataQueries[5].data && // Roles
+		eachQueryHasLoaded
+	) {
+		const [
+			{ data: champions },
+			{ data: items },
+			{ data: runes },
+			{ data: spells },
+			{ data: ranks },
+			{ data: roles },
+		] = gameDataQueries;
 
-				// Sort Runes
-				runesArray = sortRunesAlphabetically(runesArray);
+		// Sort Champions
+		const championsArray: Array<ChampionInterface> = sortChampionsAlphabetically(
+			champions.data
+		);
 
-				// Sort Spells
-				spellsArray = sortSpellsAlphabetically(spellsArray);
+		// Sort Items
+		const itemsArray: Array<ItemInterface> = sortItemsAlphabetically(
+			items.data
+		);
 
-				setItems(itemsArray);
-				setChampions(championsArray);
-				setRanks(ranksArray);
-				setRunes(runesArray);
-				setSpells(spellsArray);
-				setRoles(rolesArray);
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-	}, []);
+		// Sort Runes
+		const runesArray: Array<RuneInterface> = sortRunesAlphabetically(
+			runes.data
+		);
+
+		// Sort Spells
+		const spellsArray: Array<SpellInterface> = sortSpellsAlphabetically(
+			spells.data
+		);
+
+		const ranksArray: Array<RankInterface> = ranks.data;
+
+		const rolesArray: Array<RoleInterface> = roles.data;
+
+		setChampions(championsArray);
+		setItems(itemsArray);
+		setRanks(ranksArray);
+		setRunes(runesArray);
+		setSpells(spellsArray);
+		setRoles(rolesArray);
+	}
 
 	return (
 		<ThemeProvider theme={theme}>

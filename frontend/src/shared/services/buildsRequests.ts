@@ -14,15 +14,17 @@ export const getBuildsForChampion = (
 		page: pageNumber,
 	});
 
+export const getPlayerBuild = (buildId: string) =>
+	axios.get(`${URL.SERVER}/api/build/${buildId}`);
+
 export const saveBuild = (
 	completeBuild: BuildInterface,
 	recaptchaToken: string
-) => {
-	return axios.post(`${URL.SERVER}/api/build/save`, {
+) =>
+	axios.post(`${URL.SERVER}/api/build/save`, {
 		build: {
 			...BuildValidationHelper.sanitizeBuildTextInputs(completeBuild),
 			dateSubmitted: new Date(),
 		},
 		recaptchaToken,
 	});
-};

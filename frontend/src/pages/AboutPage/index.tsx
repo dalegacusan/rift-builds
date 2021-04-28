@@ -14,11 +14,7 @@ const AboutPage = () => {
 		<div
 			className={`${styles.aboutContainer} page-container text-white-primary`}
 		>
-			<img
-				src={AboutBanner}
-				alt='About Banner'
-				className={styles.headerImage}
-			/>
+			<img src={AboutBanner} alt='About Banner' className='banner' />
 			<div className={styles.aboutTextContainer}>
 				<h2 className='text-white-pure'>
 					Finding the right build has never been this easy

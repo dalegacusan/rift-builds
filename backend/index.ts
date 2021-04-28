@@ -31,8 +31,9 @@ switch (config.NODE_ENV) {
 		break;
 }
 
+// Needs to be a template literal or you get undefined
 mongoose
-	.connect(DATABASE_URI, {
+	.connect(`${DATABASE_URI}`, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: false,

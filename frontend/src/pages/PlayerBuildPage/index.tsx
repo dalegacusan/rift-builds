@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
-import axios from 'axios';
 import { RouteComponentProps } from 'react-router';
 
 // Shared
+import { getPlayerBuild } from '../../shared/services/buildsRequests';
 import { ItemType } from '../../shared/constants/constants';
-import { URL } from '../../shared/config/config';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -57,8 +56,7 @@ const PlayerBuild = (props: PlayerBuildProps) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		axios
-			.get(`${URL.SERVER}/api/build/${match.params.buildId}`)
+		getPlayerBuild(match.params.buildId)
 			.then((res) => {
 				const { data } = res;
 

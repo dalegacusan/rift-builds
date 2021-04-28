@@ -43,7 +43,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 	const { gameData } = props;
 	const { roles, champions, items, runes, spells, ranks } = gameData;
 	// Build PROPS
-	const { completeBuild, resetState, setChampionSelected } = props;
+	const { completeBuild, resetBuild, setChampionSelected } = props;
 	// ReCaptcha PROPS
 	const { recaptcha } = props;
 	const { recaptchaRef, recaptchaToken } = recaptcha;
@@ -137,7 +137,7 @@ const CreateBuild = (props: CreateBuildProps) => {
 				.then((res) => {
 					setSavedBuild(res.data);
 					setHasSubmittedBuild(true);
-					resetState();
+					resetBuild();
 				})
 				.catch((err) => {
 					setOpenBackdrop(false);
@@ -248,7 +248,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		resetState: () => dispatch({ type: actionTypes.BUILD_RESET }),
+		resetBuild: () => dispatch({ type: actionTypes.BUILD_RESET }),
 		resetRecaptchToken: (token: string) =>
 			dispatch({ type: actionTypes.RECAPTCHA_SET_TOKEN, data: token }),
 		setSnackbarControls: (newControls: snackbarControlsInterface) =>
