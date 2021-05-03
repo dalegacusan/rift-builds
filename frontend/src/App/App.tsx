@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import { BrowserRouter } from 'react-router-dom';
 
 // Redux
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import actionTypes from '../shared/store/actions';
 
 // Shared
@@ -22,6 +21,8 @@ import {
 import { useQueriesTyped } from '../shared/services/useQueriesTyped';
 
 // MaterialUI
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 // Components
@@ -37,6 +38,7 @@ import {
 	RuneInterface,
 	SpellInterface,
 } from '../shared/interfaces/GameData';
+import { RootState } from '../shared/interfaces/GlobalStore';
 
 // CSS
 import styles from './app.module.css';
@@ -59,17 +61,9 @@ const theme = createMuiTheme({
 	},
 });
 
-type AppProps = {
-	setChampions: (newChampions: Array<ChampionInterface>) => void;
-	setItems: (newItems: Array<ItemInterface>) => void;
-	setRanks: (newRanks: Array<RankInterface>) => void;
-	setRoles: (newRoles: Array<RoleInterface>) => void;
-	setRunes: (newRunes: Array<RuneInterface>) => void;
-	setSpells: (newSpells: Array<SpellInterface>) => void;
-};
-
 const App = (props: AppProps) => {
 	const {
+		user,
 		setChampions,
 		setItems,
 		setRanks,
@@ -77,6 +71,8 @@ const App = (props: AppProps) => {
 		setRoles,
 		setSpells,
 	} = props;
+
+	// console.log(user);
 
 	const gameDataQueries = useQueriesTyped([
 		{ queryKey: 'champions', queryFn: () => getChampions },
@@ -147,12 +143,20 @@ const App = (props: AppProps) => {
 		<ThemeProvider theme={theme}>
 			<div className={`App ${styles.appContainer}`}>
 				<CssBaseline />
-				<Layout>
-					<Routes />
-				</Layout>
+				<BrowserRouter>
+					<Layout>
+						<Routes />
+					</Layout>
+				</BrowserRouter>
 			</div>
 		</ThemeProvider>
 	);
+};
+
+const mapStateToProps = (state: RootState) => {
+	return {
+		user: state.user,
+	};
 };
 
 const mapDispatchToProps = (dispatch: any) => {
@@ -172,4 +176,17 @@ const mapDispatchToProps = (dispatch: any) => {
 	};
 };
 
-export default connect(null, mapDispatchToProps)(App);
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type AppProps = PropsFromRedux & {
+	setChampions: (newChampions: Array<ChampionInterface>) => void;
+	setItems: (newItems: Array<ItemInterface>) => void;
+	setRanks: (newRanks: Array<RankInterface>) => void;
+	setRoles: (newRoles: Array<RoleInterface>) => void;
+	setRunes: (newRunes: Array<RuneInterface>) => void;
+	setSpells: (newSpells: Array<SpellInterface>) => void;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

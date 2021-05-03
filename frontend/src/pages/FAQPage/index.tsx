@@ -14,7 +14,7 @@ import AccordionFAQ from './Accordion';
 
 // CSS
 
-const FAQ = () => {
+const FAQ: React.FC = () => {
 	return (
 		<>
 			<Helmet>

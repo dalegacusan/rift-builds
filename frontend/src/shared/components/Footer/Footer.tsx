@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import { Contact } from '../../constants/constants';
 
@@ -33,18 +34,21 @@ const Footer = () => {
 					<Grid item xs>
 						<Box className={styles.footerContainer}>
 							<Box className={styles.footerLinksContainer}>
-								<a href='/about' className={styles.footerLink}>
+								<Link to='/about' className={styles.footerLink}>
 									About Us
-								</a>
-								<a href='/faq' className={styles.footerLink}>
+								</Link>
+
+								<Link to='/faq' className={styles.footerLink}>
 									FAQ
-								</a>
-								<a
-									href={'/privacypolicy'}
+								</Link>
+
+								<Link
+									to={'/privacypolicy'}
 									className={`${styles.footerLink} ${styles.footerHiglight}`}
 								>
 									Privacy Policy
-								</a>
+								</Link>
+
 								<a
 									href={`mailto:${Contact.EMAIL_ADDRESS}`}
 									className={styles.footerLink}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter, RouteComponentProps } from 'react-router-dom';
 // @ts-ignore - No types for this module
 import { Helmet } from 'react-helmet';
 
@@ -24,6 +24,7 @@ import BackdropLoading from '../../../shared/components/Loading/Backdrop';
 import BuildInformation from './BuildInformation';
 import CreateBuildHeader from './Header';
 import GeneralInformation from './GeneralInformation';
+import GoogleAd from '../../../shared/components/GoogleAd/GoogleAd';
 import PlayerInformation from './PlayerInformation';
 import Stepper from './Stepper';
 import Snackbars from '../../../shared/components/AlertPopup/AlertPopup';
@@ -38,7 +39,7 @@ import {
 import { ChampionInterface } from '../../../shared/interfaces/GameData';
 import { RootState } from '../../../shared/interfaces/GlobalStore';
 
-const CreateBuild = (props: CreateBuildProps) => {
+const CreateBuild: React.FC<CreateBuildProps> = (props) => {
 	// Game Data PROPS
 	const { gameData } = props;
 	const { roles, champions, items, runes, spells, ranks } = gameData;
@@ -196,7 +197,6 @@ const CreateBuild = (props: CreateBuildProps) => {
 
 	useEffect(() => {
 		// Retrieve session data for the champion a user will create a build for
-		// This session item is set in NoBuilds.tsx
 		// This one is used if there are no builds for a champion and a user wants to create a build for that champion
 		const championSelectedToCreateBuild:
 			| string
@@ -211,7 +211,14 @@ const CreateBuild = (props: CreateBuildProps) => {
 	}, []);
 
 	if (hasSubmittedBuild) {
-		return <Redirect to={`/build/${savedBuild.id}`} />;
+		return (
+			<Redirect
+				to={{
+					pathname: `/build/${savedBuild.id}`,
+					state: { from: props.location },
+				}}
+			/>
+		);
 	}
 
 	return (
@@ -220,6 +227,8 @@ const CreateBuild = (props: CreateBuildProps) => {
 				<title>Create a build - Rift Builds</title>
 			</Helmet>
 			<Box>
+				<GoogleAd slot='2632263898' />
+
 				<BackdropLoading openBackdrop={openBackdrop} />
 				<Snackbars />
 				<CreateBuildHeader />
@@ -233,6 +242,8 @@ const CreateBuild = (props: CreateBuildProps) => {
 					submitBuild={submitBuild}
 					validateStep={validateStep}
 				/>
+
+				<GoogleAd slot='8493312270' />
 			</Box>
 		</>
 	);
@@ -268,6 +279,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type CreateBuildProps = PropsFromRedux;
+type CreateBuildProps = PropsFromRedux & RouteComponentProps;
 
-export default connector(CreateBuild);
+export default connector(withRouter(CreateBuild));

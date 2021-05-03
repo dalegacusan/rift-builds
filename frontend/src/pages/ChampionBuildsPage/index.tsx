@@ -18,22 +18,19 @@ import Box from '@material-ui/core/Box';
 import BuildsList from './BuildsList';
 import Button from '@material-ui/core/Button';
 import ChampionData from './Header/index';
-import PageNotFound from '../../shared/components/PageError/PageNotFound/PageNotFound';
 import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
+import GoogleAd from '../../shared/components/GoogleAd/GoogleAd';
+import PageNotFound from '../../shared/components/PageError/PageNotFound/PageNotFound';
 
 // CSS
 import styles from './Styles.module.css';
 
 // Types
-import { ChampionInterface } from '../../shared/interfaces/GameData';
-import { BuildInterface } from '../../shared/interfaces/Build';
 
-type PathParamsType = {
-	championName: string;
-};
-type ChampionBuildsProps = RouteComponentProps<PathParamsType> & {};
+interface ChampionBuildsProps
+	extends RouteComponentProps<{ championName: string }> {}
 
-const ChampionBuildsPage = (props: ChampionBuildsProps) => {
+const ChampionBuildsPage: React.FC<ChampionBuildsProps> = (props) => {
 	const { match } = props;
 	const { championName } = match.params;
 
@@ -67,8 +64,6 @@ const ChampionBuildsPage = (props: ChampionBuildsProps) => {
 
 	const getMoreBuilds = () => {
 		setGetMoreBuildsClick(true);
-
-		console.log(page.current);
 
 		return getBuildsForChampion(championName, page.current);
 	};
@@ -146,13 +141,14 @@ const ChampionBuildsPage = (props: ChampionBuildsProps) => {
 
 	useEffect(() => {
 		page.current = page.current + 1;
+
 		if (getMoreBuildsClick) {
 			setGetMoreBuildsClick(false);
 		}
 	}, [getMoreBuildsClick]);
 
 	return (
-		<div className='page-container'>
+		<>
 			<Helmet>
 				<title>
 					{championInformation.championData.championName} Builds and Guides -
@@ -160,67 +156,73 @@ const ChampionBuildsPage = (props: ChampionBuildsProps) => {
 				</title>
 			</Helmet>
 
-			{renderErrorComponent ? <PageNotFound /> : null}
+			<div className='page-container'>
+				<GoogleAd slot='2632263898' />
 
-			{!eachQueryHasLoaded && !renderErrorComponent ? (
-				<ComponentLoading />
-			) : null}
+				{renderErrorComponent ? <PageNotFound /> : null}
 
-			{eachQueryHasLoaded && !renderErrorComponent ? (
-				<>
-					{/* Champion Data */}
-					<ChampionData
-						championData={championInformation.championData}
-						buildsCount={championInformation.championBuildsCount}
-					/>
-					{/* Builds */}
-					<BuildsList
-						builds={championInformation.championBuilds}
-						championData={championInformation.championData}
-					/>
+				{!eachQueryHasLoaded && !renderErrorComponent ? (
+					<ComponentLoading />
+				) : null}
 
-					{/* 
+				{eachQueryHasLoaded && !renderErrorComponent ? (
+					<>
+						{/* Champion Data */}
+						<ChampionData
+							championData={championInformation.championData}
+							buildsCount={championInformation.championBuildsCount}
+						/>
+						{/* Builds */}
+						<BuildsList
+							builds={championInformation.championBuilds}
+							championData={championInformation.championData}
+						/>
+
+						{/* 
 							Load More Button 
 								- Display button if length of builds is greater than or equal to five
 								  which is the number of items per load AND haven't viewed all the builds yet
 						*/}
-					{championInformation.championBuilds.length >= 5 &&
-					!disableLoadMoreBuilds ? (
-						<Box
-							display='flex'
-							justifyContent='center'
-							className={styles.loadMoreContainer}
-						>
-							<Button
-								onClick={getMoreBuilds}
-								variant='contained'
-								className={`${styles.loadMoreButton} text-white-primary`}
-								disabled={disableLoadMoreBuilds}
+						{championInformation.championBuilds.length >= 5 &&
+						!disableLoadMoreBuilds ? (
+							<Box
+								display='flex'
+								justifyContent='center'
+								className={styles.loadMoreContainer}
 							>
-								{status === 'loading' ? 'Loading...' : 'Load more builds'}
-							</Button>
-						</Box>
-					) : null}
-
-					{disableLoadMoreBuilds && (
-						<p className={`${styles.noMoreBuildsCTA} text-white-secondary`}>
-							There are no more builds available.{' '}
-							<span className='text-primary'>
-								<a
-									href='/build/create'
-									onClick={handleCreateMoreBuildsForChampion}
-									className='text-primary'
+								<Button
+									onClick={getMoreBuilds}
+									variant='contained'
+									className={`${styles.loadMoreButton} text-white-primary`}
+									disabled={disableLoadMoreBuilds}
 								>
-									Create a build for&nbsp;
-									{championInformation.championData.championName}
-								</a>
-							</span>
-							&nbsp;instead.
-						</p>
-					)}
-				</>
-			) : null}
-		</div>
+									{status === 'loading' ? 'Loading...' : 'Load more builds'}
+								</Button>
+							</Box>
+						) : null}
+
+						{disableLoadMoreBuilds && (
+							<p className={`${styles.noMoreBuildsCTA} text-white-secondary`}>
+								There are no more builds available.{' '}
+								<span className='text-primary'>
+									<a
+										href='/build/create'
+										onClick={handleCreateMoreBuildsForChampion}
+										className='text-primary'
+									>
+										Create a build for&nbsp;
+										{championInformation.championData.championName}
+									</a>
+								</span>
+								&nbsp;instead.
+							</p>
+						)}
+					</>
+				) : null}
+
+				<GoogleAd slot='8493312270' />
+			</div>
+		</>
 	);
 };
 

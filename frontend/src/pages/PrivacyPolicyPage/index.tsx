@@ -10,7 +10,7 @@ import PrivacyPolicyBanner from './assets/privacy_policy_banner.png';
 // CSS
 import styles from './Styles.module.css';
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy: React.FC = () => {
 	return (
 		<div
 			className={`${styles.privacyPolicyContainer} page-container text-white-secondary`}

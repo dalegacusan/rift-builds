@@ -2,13 +2,14 @@
 	background-color: #171717 !important;
 }
 
-.headerLink {
+.headerItem {
 	color: rgb(255, 255, 255, 87%);
 	text-decoration: none;
 }
 
-.headerLink:hover {
+.headerItem:hover {
 	color: rgb(255, 255, 255, 60%);
+	cursor: pointer;
 }
 
 .headerLogo {

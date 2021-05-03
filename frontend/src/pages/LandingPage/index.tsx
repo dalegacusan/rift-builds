@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
+// @ts-ignore - No types for this module
+import { Helmet } from 'react-helmet';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -12,8 +14,9 @@ import Box from '@material-ui/core/Box';
 
 // Components
 import Champions from './ChampionsList';
-import FilterBy from './FilterChampions';
 import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
+import FilterBy from './FilterChampions';
+import GoogleAd from '../../shared/components/GoogleAd/GoogleAd';
 
 // CSS
 
@@ -21,7 +24,7 @@ import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
 import { ChampionInterface } from '../../shared/interfaces/GameData';
 import { RootState } from '../../shared/interfaces/GlobalStore';
 
-const Landing = (props: LandingProps) => {
+const Landing: React.FC<LandingProps> = (props) => {
 	// Game Data PROPS
 	const { champions } = props;
 
@@ -82,7 +85,14 @@ const Landing = (props: LandingProps) => {
 
 	return (
 		<>
+			<Helmet>
+				<title>
+					Rift Builds - League of Legends: Wild Rift Champion Builds and Guides
+				</title>
+			</Helmet>
 			<Box className='page-container'>
+				<GoogleAd slot='2632263898' />
+
 				<FilterBy
 					championSearch={championSearch}
 					handleChampionSearchChange={handleChampionSearchChange}
@@ -96,6 +106,7 @@ const Landing = (props: LandingProps) => {
 				) : (
 					<ComponentLoading />
 				)}
+				<GoogleAd slot='8493312270' />
 			</Box>
 		</>
 	);

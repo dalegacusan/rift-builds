@@ -29,6 +29,9 @@ const RECAPTCHA_SET_TOKEN = 'RECAPTCHA_SET_TOKEN';
 // === SNACKBAR === //
 const SNACKBAR_SET_CONTROLS = 'SNACKBAR_SET_CONTROLS';
 
+// === USER === //
+const SET_USER = 'SET_USER';
+
 const actionTypes = {
 	// Game Data
 	GAMEDATA_SET_CHAMPIONS,
@@ -56,6 +59,8 @@ const actionTypes = {
 	RECAPTCHA_SET_REF,
 	RECAPTCHA_SET_TOKEN,
 	SNACKBAR_SET_CONTROLS,
+	// User
+	SET_USER,
 };
 
 export default actionTypes;

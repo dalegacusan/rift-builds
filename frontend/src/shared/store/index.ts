@@ -7,6 +7,7 @@ import buildReducer from './reducers/build';
 import gameDataReducer from './reducers/gameData';
 import recaptchaReducer from './reducers/reCaptcha';
 import snackbarControlsReducer from './reducers/snackbarControls';
+import userReducer from './reducers/user';
 
 const persistConfig = {
 	key: 'root',
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
 	gameData: gameDataReducer,
 	recaptcha: recaptchaReducer,
 	snackbarControls: snackbarControlsReducer,
+	user: userReducer,
 });
 
 const pReducer = persistReducer(persistConfig, rootReducer);

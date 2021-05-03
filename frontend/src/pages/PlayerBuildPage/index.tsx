@@ -18,6 +18,7 @@ import Grid from '@material-ui/core/Grid';
 import BuildDescription from './BuildDescription';
 import BuildItem from './BuildItem';
 import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
+import GoogleAd from '../../shared/components/GoogleAd/GoogleAd';
 import PageNotFound from '../../shared/components/PageError/PageNotFound/PageNotFound';
 import PlayerBuildHeader from './PlayerBuildHeader';
 import PlayerBuildFooter from './PlayerBuildFooter';
@@ -41,21 +42,18 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-interface MatchParams {
-	buildId: string;
-}
+interface PlayerBuildProps extends RouteComponentProps<{ buildId: string }> {}
 
-interface PlayerBuildProps extends RouteComponentProps<MatchParams> {}
-
-const PlayerBuild = (props: PlayerBuildProps) => {
+const PlayerBuild: React.FC<PlayerBuildProps> = (props) => {
 	const { match } = props;
 	const classes = useStyles();
 
 	// Access the query client
 	const queryClient = useQueryClient();
 
-	const { data, status, error, isError } = useQuery('playerBuild', () =>
-		getPlayerBuild(match.params.buildId)
+	const { data, status, error, isError, isLoading } = useQuery(
+		'playerBuild',
+		() => getPlayerBuild(match.params.buildId)
 	);
 
 	const [build, setBuild] = useState<BuildInterface>();
@@ -72,89 +70,98 @@ const PlayerBuild = (props: PlayerBuildProps) => {
 	}, [status]);
 
 	return (
-		<div className={`${classes.root} page-container`}>
-			{!queryClient.isFetching() && !renderErrorComponent && build ? (
-				<>
-					<Helmet>
-						<title>
-							{build.champion.championName} Build and Guide by {build.username}
-							&nbsp;| Rift Builds
-						</title>
-					</Helmet>
-					<Box className='text-white-pure'>
-						{/* Display Build ID */}
-						<PlayerBuildHeader build={build} />
+		<>
+			<div className={`${classes.root} page-container`}>
+				<GoogleAd slot='2632263898' />
 
-						<BuildDescription description={build.description} />
+				{!queryClient.isFetching() && !renderErrorComponent && build ? (
+					<>
+						<Helmet>
+							<title>
+								{build.champion.championName} Build and Guide by{' '}
+								{build.username}
+								&nbsp;| Rift Builds
+							</title>
+						</Helmet>
 
-						{/* PRIMARY ITEMS */}
-						<SectionDivider title='Primary Items' />
-						<Grid container spacing={3}>
-							<Grid item xs={12}>
-								{build.itemsConfirmed
-									.filter(
-										(item: ItemInterface) => item.type !== ItemType.OPTIONAL
-									)
-									.map((item: ItemInterface, index) => {
-										return <BuildItem key={index} item={item} />;
-									})}
-							</Grid>
-						</Grid>
+						<div>
+							<Box className='text-white-pure'>
+								<PlayerBuildHeader build={build} />
 
-						{/* OPTIONAL ITEMS */}
-						<SectionDivider title='Optional Items' />
-						<Grid container spacing={3}>
-							<Grid item xs={12}>
-								{build.itemsConfirmed
-									.filter(
-										(item: ItemInterface) => item.type !== ItemType.PRIMARY
-									)
-									.map((item: ItemInterface, index) => {
-										return <BuildItem key={index} item={item} />;
-									})}
-							</Grid>
-						</Grid>
+								<BuildDescription description={build.description} />
 
-						{/* RUNES */}
-						<SectionDivider title='Runes' />
-						<Grid container spacing={3}>
-							<Grid item xs={12}>
-								{/* KEYSTONE RUNE */}
-								<RuneItem rune={build.runes.keystone} />
+								{/* PRIMARY ITEMS */}
+								<SectionDivider title='Primary Items' />
+								<Grid container spacing={3}>
+									<Grid item xs={12}>
+										{build.itemsConfirmed
+											.filter(
+												(item: ItemInterface) => item.type !== ItemType.OPTIONAL
+											)
+											.map((item: ItemInterface, index) => {
+												return <BuildItem key={index} item={item} />;
+											})}
+									</Grid>
+								</Grid>
 
-								{/* DOMINATION RUNE */}
-								<RuneItem rune={build.runes.domination} />
+								{/* OPTIONAL ITEMS */}
+								<SectionDivider title='Optional Items' />
+								<Grid container spacing={3}>
+									<Grid item xs={12}>
+										{build.itemsConfirmed
+											.filter(
+												(item: ItemInterface) => item.type !== ItemType.PRIMARY
+											)
+											.map((item: ItemInterface, index) => {
+												return <BuildItem key={index} item={item} />;
+											})}
+									</Grid>
+								</Grid>
 
-								{/* RESOLVE RUNE */}
-								<RuneItem rune={build.runes.resolve} />
+								{/* RUNES */}
+								<SectionDivider title='Runes' />
+								<Grid container spacing={3}>
+									<Grid item xs={12}>
+										{/* KEYSTONE RUNE */}
+										<RuneItem rune={build.runes.keystone} />
 
-								{/* INSPIRATION RUNE BOX */}
-								<RuneItem rune={build.runes.inspiration} />
-							</Grid>
-						</Grid>
+										{/* DOMINATION RUNE */}
+										<RuneItem rune={build.runes.domination} />
 
-						{/* SPELLS */}
-						<SectionDivider title='Summoner Spells' />
-						<Grid container spacing={3}>
-							<Grid item xs={12}>
-								<Box p={1}>
-									<SpellItem spell={build.spells.spellOne} />
-									<SpellItem spell={build.spells.spellTwo} />
-								</Box>
-							</Grid>
-						</Grid>
+										{/* RESOLVE RUNE */}
+										<RuneItem rune={build.runes.resolve} />
 
-						{/* FOOTER*/}
-						<PlayerBuildFooter
-							buildId={build.id}
-							championName={build.champion.championName}
-						/>
-					</Box>
-				</>
-			) : (
-				<ComponentLoading />
-			)}
-		</div>
+										{/* INSPIRATION RUNE BOX */}
+										<RuneItem rune={build.runes.inspiration} />
+									</Grid>
+								</Grid>
+
+								{/* SPELLS */}
+								<SectionDivider title='Summoner Spells' />
+								<Grid container spacing={3}>
+									<Grid item xs={12}>
+										<Box p={1}>
+											<SpellItem spell={build.spells.spellOne} />
+											<SpellItem spell={build.spells.spellTwo} />
+										</Box>
+									</Grid>
+								</Grid>
+
+								{/* FOOTER*/}
+								<PlayerBuildFooter
+									buildId={build.id}
+									championName={build.champion.championName}
+								/>
+							</Box>
+						</div>
+					</>
+				) : (
+					<ComponentLoading />
+				)}
+
+				<GoogleAd slot='8493312270' />
+			</div>
+		</>
 	);
 };
 

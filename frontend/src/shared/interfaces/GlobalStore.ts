@@ -1,4 +1,5 @@
 import { RefObject } from 'react';
+import firebase from 'firebase/app';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {
 	ChampionInterface,
@@ -29,9 +30,14 @@ export interface gameDataInterface {
 	};
 }
 
+export interface UserInterface {
+	user: any | null;
+}
+
 export interface RootState
 	extends gameDataInterface,
 		recaptchaInterface,
-		snackbarControlsInterface {
+		snackbarControlsInterface,
+		UserInterface {
 	build: BuildInterface;
 }

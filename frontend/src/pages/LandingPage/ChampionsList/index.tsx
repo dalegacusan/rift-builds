@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link } from 'react-router-dom';
 
 // Shared
 import { ImagePath } from '../../../shared/utils/imagePath';
@@ -25,13 +26,13 @@ const Champions: FunctionComponent<ChampionsProps> = (props) => {
 
 	return (
 		<Box display='flex' flexWrap='wrap' className={styles.championsContainer}>
-			{filteredChampions.map((champion: ChampionInterface, index) => {
+			{filteredChampions.map((champion: ChampionInterface, index: number) => {
 				const { id: championId, championName } = champion;
 
 				return (
-					<Box key={index} className={styles.championImageContainer}>
-						<a
-							href={`/builds/champion/${championNameToUrlString(championName)}`}
+					<Box key={championId} className={styles.championImageContainer}>
+						<Link
+							to={`/builds/champion/${championNameToUrlString(championName)}`}
 							className={styles.championLink}
 						>
 							<LazyLoadImage
@@ -41,7 +42,7 @@ const Champions: FunctionComponent<ChampionsProps> = (props) => {
 								alt={championName}
 							/>
 							<p className={styles.championName}>{championName}</p>
-						</a>
+						</Link>
 					</Box>
 				);
 			})}

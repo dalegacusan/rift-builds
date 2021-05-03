@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 // Components
 import AboutPage from '../pages/AboutPage';
@@ -13,34 +13,32 @@ import PrivacyPolicyPage from '../pages/PrivacyPolicyPage';
 
 const Routes = () => {
 	return (
-		<Router>
-			<Switch>
-				<Route exact path='/'>
-					<LandingPage />
-				</Route>
-				<Route exact path='/build/create'>
-					<CreateBuildPage />
-				</Route>
-				<Route exact path='/builds/champion/:championName'>
-					<ChampionBuildsPage />
-				</Route>
-				<Route exact path='/build/:buildId'>
-					<PlayerBuildPage />
-				</Route>
-				<Route exact path='/faq'>
-					<FAQPage />
-				</Route>
-				<Route exact path='/privacypolicy'>
-					<PrivacyPolicyPage />
-				</Route>
-				<Route exact path='/about'>
-					<AboutPage />
-				</Route>
+		<Switch>
+			<Route path='/' exact>
+				<LandingPage />
+			</Route>
+			<Route path='/build/create' exact>
+				<CreateBuildPage />
+			</Route>
+			<Route path='/builds/champion/:championName' exact>
+				<ChampionBuildsPage />
+			</Route>
+			<Route path='/build/:buildId' exact>
+				<PlayerBuildPage />
+			</Route>
+			<Route path='/faq' exact>
+				<FAQPage />
+			</Route>
+			<Route path='/privacypolicy' exact>
+				<PrivacyPolicyPage />
+			</Route>
+			<Route path='/about' exact>
+				<AboutPage />
+			</Route>
 
-				{/* 404 - Page not found */}
-				<Route component={PageNotFound} />
-			</Switch>
-		</Router>
+			{/* 404 - Page not found */}
+			<Route path='/' component={PageNotFound} />
+		</Switch>
 	);
 };
 
