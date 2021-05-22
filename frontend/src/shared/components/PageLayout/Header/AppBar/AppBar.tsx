@@ -5,8 +5,8 @@ import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 
 // Shared
-import { signInWithGoogle, logout } from '../../../services/firebaseApp';
-import { isValidUser } from '../../../utils/isValidUser';
+import { signInWithGoogle, logout } from '../../../../services/firebaseApp';
+import { isValidUser } from '../../../../utils/isValidUser';
 
 // Images
 import RiftBuildsTextImage from '../assets/rift_builds_text.png';
@@ -23,7 +23,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 // Components
 
 //Types
-import { RootState } from '../../../../shared/interfaces/GlobalStore';
+import { RootState } from '../../../../interfaces/GlobalStore';
 
 // CSS
 import styles from './appbar.module.css';
@@ -70,8 +70,6 @@ const AppBarComponent: React.FC<AppBarProps> = (props) => {
 
 	const classes = useStyles();
 
-	console.log(user);
-
 	return (
 		<div className={classes.root}>
 			<HideOnScroll {...props}>
@@ -102,7 +100,7 @@ const AppBarComponent: React.FC<AppBarProps> = (props) => {
 								>
 									Logout
 								</p>
-								<img src={user.photoURL} alt={user.displayName} />
+								<img src={user?.photoURL || ''} alt={user?.displayName || ''} />
 							</>
 						) : (
 							<p

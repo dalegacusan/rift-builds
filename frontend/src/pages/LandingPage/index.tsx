@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
-// @ts-ignore - No types for this module
-import { Helmet } from 'react-helmet';
 
 // Redux
 import { connect, ConnectedProps } from 'react-redux';
@@ -14,9 +12,10 @@ import Box from '@material-ui/core/Box';
 
 // Components
 import Champions from './ChampionsList';
-import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
-import FilterBy from './FilterChampions';
+import FilterChampionsBy from './FilterChampionsBy/index';
 import GoogleAd from '../../shared/components/GoogleAd/GoogleAd';
+import PageHelmet from '../../shared/components/PageHelmet/index';
+import PageLoading from '../../shared/components/Loading/PageLoading';
 
 // CSS
 
@@ -31,27 +30,28 @@ const Landing: React.FC<LandingProps> = (props) => {
 	// Access the query client
 	const queryClient = useQueryClient();
 
-	const [championSearch, setChampionSearch] = useState('');
+	const [championSearched, setChampionSearched] = useState('');
 	const [filteredChampions, setFilteredChampions] = useState<
 		Array<ChampionInterface>
 	>([]);
 	const [roleFilter, setRoleFilter] = useState(RoleFilter.ALL);
 
-	// HANDLER for "Search for a champion" input
-	const handleChampionSearchChange = (
+	// Handler for "Search for a champion" input
+	const handleChampionSearchedChange = (
 		e: React.ChangeEvent<HTMLInputElement> // ChangeEvent more suitable for typing form events.
 	) => {
 		const { value } = e.target;
-		setChampionSearch(value);
+		setChampionSearched(value);
 	};
 
+	// When champions array change, reflect the same change to filteredChampions array
 	useEffect(() => {
 		setFilteredChampions(champions);
 	}, [champions]);
 
 	// Change state based on "All, Top, Jungle, Middle, Bottom, Support"
 	useEffect(() => {
-		const filterRoles = champions.filter((champion: ChampionInterface) => {
+		const filteredByRole = champions.filter((champion: ChampionInterface) => {
 			const { lane } = champion;
 
 			// Check if champion has "lane" property
@@ -69,7 +69,7 @@ const Landing: React.FC<LandingProps> = (props) => {
 			}
 		});
 
-		setFilteredChampions(filterRoles);
+		setFilteredChampions(filteredByRole);
 	}, [roleFilter]);
 
 	// Change state based on "Search for a champion"
@@ -77,25 +77,22 @@ const Landing: React.FC<LandingProps> = (props) => {
 		const filterChampions = champions.filter((champion: ChampionInterface) =>
 			champion.championName
 				.toLocaleLowerCase()
-				.includes(championSearch.toLocaleLowerCase())
+				.includes(championSearched.toLocaleLowerCase())
 		);
 
 		setFilteredChampions(filterChampions);
-	}, [championSearch]);
+	}, [championSearched]);
 
 	return (
 		<>
-			<Helmet>
-				<title>
-					Rift Builds - League of Legends: Wild Rift Champion Builds and Guides
-				</title>
-			</Helmet>
+			<PageHelmet pageTitle='Rift Builds - League of Legends: Wild Rift Champion Builds and Guides' />
+
 			<Box className='page-container'>
 				<GoogleAd slot='2632263898' />
 
-				<FilterBy
-					championSearch={championSearch}
-					handleChampionSearchChange={handleChampionSearchChange}
+				<FilterChampionsBy
+					championSearched={championSearched}
+					handleChampionSearchedChange={handleChampionSearchedChange}
 					roleFilter={roleFilter}
 					setRoleFilter={setRoleFilter}
 				/>
@@ -104,8 +101,9 @@ const Landing: React.FC<LandingProps> = (props) => {
 				{!queryClient.isFetching() && champions.length !== 0 ? (
 					<Champions filteredChampions={filteredChampions} />
 				) : (
-					<ComponentLoading />
+					<PageLoading />
 				)}
+
 				<GoogleAd slot='8493312270' />
 			</Box>
 		</>

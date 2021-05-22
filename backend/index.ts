@@ -5,10 +5,9 @@ if (process.env.NODE_ENV !== Process.PRODUCTION) {
 }
 
 import express, { Request, Response } from 'express';
-import { CorsOptions } from 'cors';
+import cors, { CorsOptions } from 'cors';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import cors from 'cors';
 import helmet from 'helmet';
 
 const config = require('./shared/config/config');
@@ -64,8 +63,8 @@ var corsOptions: CorsOptions = {
 
 app.use(helmet());
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.set('trust proxy', 1); // For express-rate-limit
 app.use(middleware.requestLogger);
 

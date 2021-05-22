@@ -17,16 +17,16 @@ import styles from './Styles.module.css';
 // Types
 import { ChampionInterface } from '../../../shared/interfaces/GameData';
 
-type ChampionsProps = {
+type ChampionListProps = {
 	filteredChampions: Array<ChampionInterface>;
 };
 
-const Champions: FunctionComponent<ChampionsProps> = (props) => {
+const ChampionList: FunctionComponent<ChampionListProps> = (props) => {
 	const { filteredChampions } = props;
 
 	return (
 		<Box display='flex' flexWrap='wrap' className={styles.championsContainer}>
-			{filteredChampions.map((champion: ChampionInterface, index: number) => {
+			{filteredChampions.map((champion: ChampionInterface) => {
 				const { id: championId, championName } = champion;
 
 				return (
@@ -50,4 +50,4 @@ const Champions: FunctionComponent<ChampionsProps> = (props) => {
 	);
 };
 
-export default Champions;
+export default ChampionList;

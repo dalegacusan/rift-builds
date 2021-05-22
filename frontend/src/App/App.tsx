@@ -38,7 +38,6 @@ import {
 	RuneInterface,
 	SpellInterface,
 } from '../shared/interfaces/GameData';
-import { RootState } from '../shared/interfaces/GlobalStore';
 
 // CSS
 import styles from './app.module.css';
@@ -62,17 +61,8 @@ const theme = createMuiTheme({
 });
 
 const App = (props: AppProps) => {
-	const {
-		user,
-		setChampions,
-		setItems,
-		setRanks,
-		setRunes,
-		setRoles,
-		setSpells,
-	} = props;
-
-	// console.log(user);
+	const { setChampions, setItems, setRanks, setRunes, setRoles, setSpells } =
+		props;
 
 	const gameDataQueries = useQueriesTyped([
 		{ queryKey: 'champions', queryFn: () => getChampions },
@@ -84,19 +74,11 @@ const App = (props: AppProps) => {
 	]);
 
 	const eachQueryHasLoaded = gameDataQueries.every(
-		(query) => query.isFetched && query.isSuccess
+		(query) => !query.isLoading && query.isSuccess
 	);
 
 	useEffect(() => {
-		if (
-			gameDataQueries[0].data && // Champions
-			gameDataQueries[1].data && // Items
-			gameDataQueries[2].data && // Runes
-			gameDataQueries[3].data && // Spells
-			gameDataQueries[4].data && // Ranks
-			gameDataQueries[5].data && // Roles
-			eachQueryHasLoaded
-		) {
+		if (eachQueryHasLoaded) {
 			const [
 				{ data: champions },
 				{ data: items },
@@ -107,28 +89,27 @@ const App = (props: AppProps) => {
 			] = gameDataQueries;
 
 			// Sort Champions
-			const championsArray: Array<ChampionInterface> = sortChampionsAlphabetically(
-				champions.data
-			);
+			const championsArray: Array<ChampionInterface> =
+				sortChampionsAlphabetically(champions?.data);
 
 			// Sort Items
 			const itemsArray: Array<ItemInterface> = sortItemsAlphabetically(
-				items.data
+				items?.data
 			);
 
 			// Sort Runes
 			const runesArray: Array<RuneInterface> = sortRunesAlphabetically(
-				runes.data
+				runes?.data
 			);
 
 			// Sort Spells
 			const spellsArray: Array<SpellInterface> = sortSpellsAlphabetically(
-				spells.data
+				spells?.data
 			);
 
-			const ranksArray: Array<RankInterface> = ranks.data;
+			const ranksArray: Array<RankInterface> = ranks?.data;
 
-			const rolesArray: Array<RoleInterface> = roles.data;
+			const rolesArray: Array<RoleInterface> = roles?.data;
 
 			setChampions(championsArray);
 			setItems(itemsArray);
@@ -153,12 +134,6 @@ const App = (props: AppProps) => {
 	);
 };
 
-const mapStateToProps = (state: RootState) => {
-	return {
-		user: state.user,
-	};
-};
-
 const mapDispatchToProps = (dispatch: any) => {
 	return {
 		setChampions: (champions: Array<ChampionInterface>) =>
@@ -176,7 +151,7 @@ const mapDispatchToProps = (dispatch: any) => {
 	};
 };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
@@ -189,4 +164,4 @@ type AppProps = PropsFromRedux & {
 	setSpells: (newSpells: Array<SpellInterface>) => void;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

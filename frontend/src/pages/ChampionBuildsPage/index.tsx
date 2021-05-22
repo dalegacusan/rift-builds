@@ -18,7 +18,7 @@ import Box from '@material-ui/core/Box';
 import BuildsList from './BuildsList';
 import Button from '@material-ui/core/Button';
 import ChampionData from './Header/index';
-import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
+import ComponentLoading from '../../shared/components/Loading/PageLoading';
 import GoogleAd from '../../shared/components/GoogleAd/GoogleAd';
 import PageNotFound from '../../shared/components/PageError/PageNotFound/PageNotFound';
 

@@ -31,7 +31,7 @@ export interface gameDataInterface {
 }
 
 export interface UserInterface {
-	user: any | null;
+	user: firebase.User | null;
 }
 
 export interface RootState

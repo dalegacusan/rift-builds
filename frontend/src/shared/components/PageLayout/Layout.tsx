@@ -5,8 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 // Components
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import Footer from './Footer/Footer';
+import Header from './Header/Header';
 
 // CSS
 import styles from './layout.module.css';

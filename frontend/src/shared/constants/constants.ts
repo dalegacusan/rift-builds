@@ -5,8 +5,7 @@ export const Contact = {
 };
 
 export const GamePatch = {
-	URL:
-		'https://wildrift.leagueoflegends.com/en-sg/news/game-updates/wild-rift-patch-notes-2-2a/',
+	URL: 'https://wildrift.leagueoflegends.com/en-sg/news/game-updates/wild-rift-patch-notes-2-2a/',
 	VERSION: '2.2a',
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-import { Contact } from '../../constants/constants';
+import { Contact } from '../../../constants/constants';
 
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';

@@ -17,7 +17,7 @@ import Grid from '@material-ui/core/Grid';
 // Components
 import BuildDescription from './BuildDescription';
 import BuildItem from './BuildItem';
-import ComponentLoading from '../../shared/components/Loading/ComponentLoading';
+import ComponentLoading from '../../shared/components/Loading/PageLoading';
 import GoogleAd from '../../shared/components/GoogleAd/GoogleAd';
 import PageNotFound from '../../shared/components/PageError/PageNotFound/PageNotFound';
 import PlayerBuildHeader from './PlayerBuildHeader';
